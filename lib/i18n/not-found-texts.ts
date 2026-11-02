@@ -8,7 +8,7 @@ export async function notFoundTexts(): Promise<Record<Locale, NotFoundTexts>> {
   const entries = await Promise.all(
     LOCALES.map(async (l) => {
       const d = await getDictionary(l);
-      return [l, { ...d.notFound, explore: d.nav.explore, support: d.footer.support }] as const;
+      return [l, { ...d.notFound, explore: d.nav.categories, support: d.footer.support }] as const;
     }),
   );
   return Object.fromEntries(entries) as Record<Locale, NotFoundTexts>;

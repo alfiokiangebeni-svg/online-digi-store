@@ -170,7 +170,27 @@
   "header": {
     "cart": "Cart",
     "cartCount": "{count} items in cart",
-    "currency": "Display currency"
+    "currency": "Display currency",
+    "notifications": "Notifications",
+    "notificationsTitle": "Notifications",
+    "notificationsDemo": "Demo: sample notifications.",
+    "notificationsList": [
+      {
+        "title": "Flash sales up to −40%",
+        "body": "Deals end on Friday.",
+        "href": "explorer?tri=priceAsc"
+      },
+      {
+        "title": "Your welcome coupon is waiting",
+        "body": "Claim it on the home screen, it applies to your cart automatically.",
+        "href": "#coupons"
+      },
+      {
+        "title": "New in Music",
+        "body": "“Rumba douce”: listen to a free preview.",
+        "href": "produit/rumba-douce"
+      }
+    ]
   },
   "search": {
     "label": "Search the catalogue",
@@ -211,7 +231,28 @@
     "forYou": "Recommended for you",
     "trustDelivery": "Instant delivery",
     "trustPay": "Mobile Money",
-    "trustSupport": "WhatsApp support"
+    "trustSupport": "WhatsApp support",
+    "banners": [
+      {
+        "kicker": "Back to school",
+        "title": "3 learning apps for ages 4–8",
+        "cta": "See the pack"
+      },
+      {
+        "kicker": "Flash sales",
+        "title": "Up to −40% on books and music",
+        "cta": "See the deals"
+      },
+      {
+        "kicker": "Sellers",
+        "title": "Post your listing, get paid with Mobile Money",
+        "cta": "Get started"
+      }
+    ],
+    "bannersLabel": "Featured",
+    "allCategories": "All",
+    "newCategories": "New categories",
+    "newCategoriesBody": "The first listings are coming: be the first to post."
   },
   "product": {
     "kinds": {
@@ -392,7 +433,7 @@
     "pinConfirm": "Confirm"
   },
   "library": {
-    "title": "Library",
+    "title": "My purchases",
     "banner": "Payment confirmed",
     "bannerBody": "Your purchases are ready. A receipt and the links were also sent by SMS.",
     "close": "Dismiss message",
@@ -453,7 +494,9 @@
     "help": "Help and contact on WhatsApp",
     "favoritesTitle": "My favourites",
     "favoritesEmpty": "Tap the heart on a product page to find it here.",
-    "soon": "Soon"
+    "soon": "Soon",
+    "purchases": "My purchases",
+    "purchasesBody": "Your bought and free content, available offline"
   },
   "common": {
     "demo": "Demo"
@@ -520,5 +563,31 @@
     "open": "Enlarge preview {n}",
     "prev": "Previous preview",
     "next": "Next preview"
+  },
+  "categoriesPage": {
+    "title": "Categories",
+    "count": "{count} items",
+    "soon": "New",
+    "emptyTitle": "No listings here yet",
+    "emptyBody": "The first listings are coming soon. Post yours or browse the other categories.",
+    "publish": "Post a listing",
+    "others": "See other categories",
+    "shortcuts": "Shortcuts",
+    "free": "Free content",
+    "deals": "Deals"
+  },
+  "sell": {
+    "title": "Sell or post",
+    "intro": "Books, apps, music, images, and also housing, job offers and tenders.",
+    "choose": "What do you want to post?",
+    "stepsTitle": "How it works",
+    "steps": [
+      "Pick the category and send your listing.",
+      "We review your listing within 24 h.",
+      "You receive your payments with Mobile Money."
+    ],
+    "whatsappText": "Hello, I want to post on di.si store: {category}",
+    "formSoon": "The posting form is coming soon. Meanwhile, each category opens WhatsApp with your message ready.",
+    "help": "A question? Message support"
   }
 }

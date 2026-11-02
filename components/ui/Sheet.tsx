@@ -14,6 +14,7 @@ export function Sheet({
   triggerVariant = "secondary",
   triggerIcon,
   triggerClassName,
+  triggerIconOnly,
   title,
   closeLabel,
   children,
@@ -22,6 +23,8 @@ export function Sheet({
   triggerVariant?: ButtonVariant;
   triggerIcon?: ReactNode;
   triggerClassName?: string;
+  /** Bouton déclencheur réduit à l'icône (le libellé reste lu par les lecteurs d'écran). */
+  triggerIconOnly?: boolean;
   title: string;
   closeLabel: string;
   /** Contenu, ou fonction recevant `close` pour fermer après une action. */
@@ -42,7 +45,7 @@ export function Sheet({
         onClick={() => ref.current?.showModal()}
       >
         {triggerIcon}
-        {triggerLabel}
+        {triggerIconOnly ? <span className="sr-only">{triggerLabel}</span> : triggerLabel}
       </button>
       <dialog
         ref={ref}

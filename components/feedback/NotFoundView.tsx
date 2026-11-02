@@ -5,7 +5,7 @@ import { useSyncExternalStore } from "react";
 import { SUPPORT_WHATSAPP } from "@/lib/brand";
 import { DEFAULT_LOCALE, isLocale, type Locale } from "@/lib/i18n/config";
 import { buttonClasses } from "@/components/ui/buttonStyles";
-import { IconChat, IconHome, IconSearch } from "@/components/ui/icons";
+import { IconChat, IconHome, IconGrid } from "@/components/ui/icons";
 import { Logo } from "@/components/ui/Logo";
 
 export interface NotFoundTexts {
@@ -48,10 +48,10 @@ export function NotFoundView({ texts }: { texts: Record<Locale, NotFoundTexts> }
           {t.cta}
         </Link>
         <Link
-          href={`/${locale}/explorer/`}
+          href={`/${locale}/categories/`}
           className={buttonClasses({ variant: "outline", size: "lg", block: true })}
         >
-          <IconSearch size={18} />
+          <IconGrid size={18} />
           {t.explore}
         </Link>
         <a

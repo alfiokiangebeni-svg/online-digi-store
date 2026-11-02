@@ -170,7 +170,27 @@
   "header": {
     "cart": "Panier",
     "cartCount": "Biloko {count} na panier",
-    "currency": "Mbongo ya kolakisa"
+    "currency": "Mbongo ya kolakisa",
+    "notifications": "Bansango",
+    "notificationsTitle": "Bansango",
+    "notificationsDemo": "Démo : bansango ya ndakisa.",
+    "notificationsList": [
+      {
+        "title": "Ventes flash kino −40 %",
+        "body": "Ba-offre esilaka mokolo ya mitano.",
+        "href": "explorer?tri=priceAsc"
+      },
+      {
+        "title": "Coupon na yo ya boyei ezali kozela",
+        "body": "Zwa yango na ebandeli, ekotiama yango moko na panier.",
+        "href": "#coupons"
+      },
+      {
+        "title": "Ya sika na Miziki",
+        "body": "« Rumba douce » : yoka moke ofele.",
+        "href": "produit/rumba-douce"
+      }
+    ]
   },
   "search": {
     "label": "Luka na katalóg",
@@ -211,7 +231,28 @@
     "forYou": "Oyo tolingi mpo na yo",
     "trustDelivery": "Ekómi mbala moko",
     "trustPay": "Mobile Money",
-    "trustSupport": "Lisalisi na WhatsApp"
+    "trustSupport": "Lisalisi na WhatsApp",
+    "banners": [
+      {
+        "kicker": "Pack ya kelasi",
+        "title": "Ba-application 3 ya koyekola mpo na bana ya mibu 4–8",
+        "cta": "Tala pack"
+      },
+      {
+        "kicker": "Ventes flash",
+        "title": "Kino −40 % na babuku mpe miziki",
+        "cta": "Tala ba-offre"
+      },
+      {
+        "kicker": "Bateki",
+        "title": "Tia annonce na yo, zwa mbongo na Mobile Money",
+        "cta": "Banda"
+      }
+    ],
+    "bannersLabel": "Na liboso",
+    "allCategories": "Nyonso",
+    "newCategories": "Mitindo ya sika",
+    "newCategoriesBody": "Ba-annonce ya liboso ezali koya : zala moto ya liboso kotia."
   },
   "product": {
     "kinds": {
@@ -392,7 +433,7 @@
     "pinConfirm": "Ndima"
   },
   "library": {
-    "title": "Babuku na ngai",
+    "title": "Biloko nasombi",
     "banner": "Kofuta endimami",
     "bannerBody": "Bisombi na yo ezali prêt. Reçu mpe ba-lien etindami pe na SMS.",
     "close": "Kanga sango",
@@ -453,7 +494,9 @@
     "help": "Lisalisi na WhatsApp",
     "favoritesTitle": "Oyo nalingi",
     "favoritesEmpty": "Simba motema na lokasa ya eloko mpo na kozwa yango awa.",
-    "soon": "Kala te"
+    "soon": "Kala te",
+    "purchases": "Biloko nasombi",
+    "purchasesBody": "Biloko osombi mpe ya ofele, ezali hors-ligne"
   },
   "common": {
     "demo": "Ndakisa"
@@ -520,5 +563,31 @@
     "open": "Kómisa monene elilí {n}",
     "prev": "Elilí ya liboso",
     "next": "Elilí oyo elandi"
+  },
+  "categoriesPage": {
+    "title": "Mitindo",
+    "count": "Biloko {count}",
+    "soon": "Ya sika",
+    "emptyTitle": "Annonce moko te awa",
+    "emptyBody": "Ba-annonce ya liboso ekoya noki. Tia oyo na yo to luka na mitindo mosusu.",
+    "publish": "Tia annonce",
+    "others": "Tala mitindo mosusu",
+    "shortcuts": "Banzela ya mokuse",
+    "free": "Biloko ya ofele",
+    "deals": "Ba-promotion"
+  },
+  "sell": {
+    "title": "Teka to tia annonce",
+    "intro": "Babuku, ba-application, miziki, bilili, mpe ndako, mosala mpe ba-appel d'offres.",
+    "choose": "Olingi kotia nini ?",
+    "stepsTitle": "Ndenge esalemaka",
+    "steps": [
+      "Pona motindo mpe tinda annonce na yo.",
+      "Totali annonce na yo na ngonga 24.",
+      "Ozwaka mbongo na yo na Mobile Money."
+    ],
+    "whatsappText": "Mbote, nalingi kotia na di.si store : {category}",
+    "formSoon": "Formulaire ya kotia ekoya noki. Sikoyo, motindo moko na moko efungolaka WhatsApp na message na yo ya kobongama.",
+    "help": "Motuna ? Komela support"
   }
 }

@@ -170,7 +170,27 @@
   "header": {
     "cart": "Panier",
     "cartCount": "{count} articles dans le panier",
-    "currency": "Devise d'affichage"
+    "currency": "Devise d'affichage",
+    "notifications": "Notifications",
+    "notificationsTitle": "Notifications",
+    "notificationsDemo": "Démo : notifications d'exemple.",
+    "notificationsList": [
+      {
+        "title": "Ventes flash jusqu'à −40 %",
+        "body": "Les offres se terminent vendredi.",
+        "href": "explorer?tri=priceAsc"
+      },
+      {
+        "title": "Ton coupon de bienvenue t'attend",
+        "body": "Récupère-le sur l'accueil, il s'applique tout seul au panier.",
+        "href": "#coupons"
+      },
+      {
+        "title": "Nouveau en Musique",
+        "body": "« Rumba douce » : écoute un extrait gratuit.",
+        "href": "produit/rumba-douce"
+      }
+    ]
   },
   "search": {
     "label": "Rechercher dans le catalogue",
@@ -211,7 +231,28 @@
     "forYou": "Recommandé pour vous",
     "trustDelivery": "Livraison instantanée",
     "trustPay": "Mobile Money",
-    "trustSupport": "Support WhatsApp"
+    "trustSupport": "Support WhatsApp",
+    "banners": [
+      {
+        "kicker": "Pack rentrée",
+        "title": "3 applis éducatives pour les 4–8 ans",
+        "cta": "Voir le pack"
+      },
+      {
+        "kicker": "Ventes flash",
+        "title": "Jusqu'à −40 % sur les livres et la musique",
+        "cta": "Voir les offres"
+      },
+      {
+        "kicker": "Vendeurs",
+        "title": "Publie ton annonce, reçois ton argent en Mobile Money",
+        "cta": "Commencer"
+      }
+    ],
+    "bannersLabel": "À la une",
+    "allCategories": "Toutes",
+    "newCategories": "Nouvelles catégories",
+    "newCategoriesBody": "Les premières annonces arrivent : sois le premier à publier."
   },
   "product": {
     "kinds": {
@@ -392,7 +433,7 @@
     "pinConfirm": "Valider"
   },
   "library": {
-    "title": "Bibliothèque",
+    "title": "Mes achats",
     "banner": "Paiement confirmé",
     "bannerBody": "Tes achats sont prêts. Un reçu et les liens ont aussi été envoyés par SMS.",
     "close": "Fermer le message",
@@ -453,7 +494,9 @@
     "help": "Aide et contact sur WhatsApp",
     "favoritesTitle": "Mes favoris",
     "favoritesEmpty": "Touche le cœur sur une fiche produit pour la retrouver ici.",
-    "soon": "Bientôt"
+    "soon": "Bientôt",
+    "purchases": "Mes achats",
+    "purchasesBody": "Tes contenus achetés et gratuits, disponibles hors-ligne"
   },
   "common": {
     "demo": "Démo"
@@ -520,5 +563,31 @@
     "open": "Agrandir l'aperçu {n}",
     "prev": "Aperçu précédent",
     "next": "Aperçu suivant"
+  },
+  "categoriesPage": {
+    "title": "Catégories",
+    "count": "{count} contenus",
+    "soon": "Nouveau",
+    "emptyTitle": "Pas encore d'annonce ici",
+    "emptyBody": "Les premières annonces arrivent bientôt. Publie la tienne ou explore les autres catégories.",
+    "publish": "Publier une annonce",
+    "others": "Voir les autres catégories",
+    "shortcuts": "Raccourcis",
+    "free": "Contenus gratuits",
+    "deals": "Promotions"
+  },
+  "sell": {
+    "title": "Vendre ou publier",
+    "intro": "Livres, applis, musique, images, mais aussi logements, offres d'emploi et appels d'offres.",
+    "choose": "Que veux-tu publier ?",
+    "stepsTitle": "Comment ça marche",
+    "steps": [
+      "Choisis la catégorie et envoie ton annonce.",
+      "On vérifie ton annonce sous 24 h.",
+      "Tu reçois tes paiements en Mobile Money."
+    ],
+    "whatsappText": "Bonjour, je veux publier sur di.si store : {category}",
+    "formSoon": "Le formulaire de publication arrive bientôt. En attendant, chaque catégorie ouvre WhatsApp avec ton message prêt.",
+    "help": "Une question ? Écris au support"
   }
 }
