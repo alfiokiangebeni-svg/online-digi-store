@@ -17,7 +17,7 @@ export function PlatformPicker({
   const cur = options[index];
   return (
     <fieldset className="flex flex-col gap-2">
-      <legend className="mb-2 text-sm font-medium">
+      <legend className="mb-2 text-sm font-semibold">
         {label} <span className="font-normal text-muted">{cur.name}</span>
       </legend>
       <div className="flex gap-2">
@@ -28,16 +28,16 @@ export function PlatformPicker({
             aria-pressed={i === index}
             onClick={() => setIndex(i)}
             className={cn(
-              "min-h-11 flex-1 border-2 px-2 text-sm font-medium rounded-[var(--radius-control)]",
-              i === index ? "border-fg bg-fg text-bg" : "border-line hover:border-fg",
+              "min-h-10 flex-1 rounded-[6px] bg-surface px-2 text-[13px] font-medium",
+              i === index ? "border-2 border-fg" : "border border-steel hover:border-fg",
             )}
           >
             {o.label}
           </button>
         ))}
       </div>
-      <p className="text-sm text-muted">
-        {sizeLabel} : <span className="font-mono text-fg">{cur.size}</span>
+      <p className="text-xs text-muted">
+        {sizeLabel} : <span className="font-semibold text-fg">{cur.size}</span>
       </p>
     </fieldset>
   );

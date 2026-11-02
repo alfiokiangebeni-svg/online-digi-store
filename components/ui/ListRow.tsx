@@ -27,7 +27,7 @@ export function ListRow({
     <>
       <span className="row-title">{title}</span>
       {meta ? <span className="row-meta">{meta}</span> : null}
-      {extra ? <span className="ticket-sub">{extra}</span> : null}
+      {extra ? <span className="row-extra">{extra}</span> : null}
     </>
   );
   return (

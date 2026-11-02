@@ -39,8 +39,8 @@ export type Theme = "dark" | "light";
 export function useTheme(): Theme {
   return useSyncExternalStore(
     subscribe,
-    () => (document.documentElement.dataset.theme === "light" ? "light" : "dark"),
-    () => "dark" as Theme,
+    () => (document.documentElement.dataset.theme === "dark" ? "dark" : "light"),
+    () => "light" as Theme,
   );
 }
 export function setTheme(t: Theme) {

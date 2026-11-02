@@ -82,26 +82,26 @@ export function LibraryView({
   const showBanner = lastOrder !== null && now - lastOrder.at < 30 * 60 * 1000;
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-3">
       {showBanner ? (
-        <div role="status" className="flex items-start gap-3 border-l-4 border-fleuve bg-surface p-4">
-          <span className="grid size-8 shrink-0 place-items-center rounded-full bg-fleuve text-paper">
-            <IconCheck size={16} />
+        <div role="status" className="flex items-start gap-3 rounded-[10px] bg-ink p-3.5">
+          <span className="grid size-7 shrink-0 place-items-center rounded-full bg-lime-strong text-ink">
+            <IconCheck size={15} />
           </span>
           <div className="flex-1">
-            <p className="font-bold">
+            <p className="text-[15px] font-semibold text-white">
               {t.banner} ·{" "}
               <span className="font-mono">
                 {<Money usdCents={lastOrder.totalUsdCents} locale={locale} />}
               </span>
             </p>
-            <p className="text-sm text-muted">{t.bannerBody}</p>
+            <p className="text-[13px] leading-snug text-steel">{t.bannerBody}</p>
           </div>
           <button
             type="button"
             aria-label={t.close}
             onClick={() => lastOrderStore.set(null)}
-            className="-m-2 grid size-11 shrink-0 place-items-center text-muted hover:text-fg"
+            className="-m-2 grid size-11 shrink-0 place-items-center text-steel hover:text-white"
           >
             <IconClose size={18} />
           </button>
@@ -121,14 +121,17 @@ export function LibraryView({
       </div>
 
       {items.length ? (
-        <ul>
+        <ul className="card overflow-hidden">
           {items.map(({ item, p }) => {
             const pct = progress[item.slug];
             const downloading = pct !== undefined && pct < 100 && !item.downloaded;
-            const tags = [
-              item.paidUsdCents === 0 ? t.freeTag : now - item.at < DAY ? t.newTag : null,
-              format(t.boughtOn, { date: formatDate(item.at, locale) }),
-            ].filter(Boolean);
+            const isNew = item.paidUsdCents > 0 && now - item.at < DAY;
+            const tag =
+              item.paidUsdCents === 0
+                ? t.freeTag
+                : isNew
+                  ? t.newTag
+                  : format(t.boughtOn, { date: formatDate(item.at, locale) });
             return (
               <ListRow
                 key={item.slug}
@@ -144,14 +147,20 @@ export function LibraryView({
                 title={p.title}
                 meta={p.meta}
                 extra={
-                  <span className="flex flex-wrap items-center gap-x-2">
+                  <span className="flex flex-wrap items-center gap-x-2 text-[11px] font-semibold">
+                    <span
+                      className={
+                        item.paidUsdCents === 0 ? "text-success" : isNew ? "text-promo" : "text-muted"
+                      }
+                    >
+                      {tag}
+                    </span>
                     {item.downloaded ? (
                       <span className="inline-flex items-center gap-1 text-success">
-                        <IconCheck size={12} />
+                        <IconCheck size={11} />
                         {t.offline}
                       </span>
                     ) : null}
-                    <span>{tags.join(" · ")}</span>
                   </span>
                 }
                 action={
@@ -159,7 +168,7 @@ export function LibraryView({
                     <Link
                       href={p.href}
                       prefetch={false}
-                      className={cn(buttonClasses({ variant: "secondary" }), "min-h-11 px-3 text-sm")}
+                      className="inline-flex h-9 w-[110px] items-center justify-center rounded-[6px] border border-steel bg-surface text-[13px] font-semibold"
                     >
                       {t.open}
                     </Link>
@@ -170,8 +179,8 @@ export function LibraryView({
                       disabled={downloading}
                       aria-label={downloading ? undefined : `${t.download} — ${p.title}`}
                       className={cn(
-                        buttonClasses({ variant: downloading ? "ghost" : "secondary" }),
-                        "relative min-h-11 w-32 overflow-hidden px-3 text-sm disabled:opacity-100",
+                        "relative inline-flex h-9 w-[110px] items-center justify-center overflow-hidden rounded-[6px] text-[13px] font-semibold",
+                        downloading ? "border border-steel bg-surface" : "btn-primary",
                       )}
                     >
                       {downloading ? (
@@ -181,7 +190,7 @@ export function LibraryView({
                             className="absolute inset-y-0 left-0 bg-fleuve/30"
                             style={{ width: `${pct}%` }}
                           />
-                          <span aria-hidden="true" className="relative font-mono">
+                          <span aria-hidden="true" className="relative">
                             {pct} %
                           </span>
                           <span className="sr-only" aria-live="polite">
@@ -199,15 +208,15 @@ export function LibraryView({
           })}
         </ul>
       ) : (
-        <div className="flex flex-col items-start gap-3 bg-surface p-5">
-          <p>{t.empty}</p>
+        <div className="card flex flex-col items-center gap-3 px-4 py-8 text-center">
+          <p className="text-sm text-muted">{t.empty}</p>
           <Link href={freeHref} className={buttonClasses({ variant: "secondary" })}>
             {t.emptyCta}
           </Link>
         </div>
       )}
 
-      <p className="text-sm text-muted">{t.note}</p>
+      <p className="text-xs leading-relaxed text-[#3a3f47] dark:text-muted">{t.note}</p>
     </div>
   );
 }

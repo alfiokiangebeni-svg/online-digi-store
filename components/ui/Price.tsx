@@ -3,7 +3,7 @@ import type { Locale } from "@/lib/i18n/config";
 import { cn } from "./cn";
 
 /**
- * Prix : étiquette jaune taxi, chiffres en Space Mono.
+ * Prix : montant en gras, ancien prix barré en gris (maquette).
  * Sans `currency`, les deux devises sont rendues et le CSS affiche celle choisie
  * (attribut data-currency de <html>) : bascule USD / FC sans JavaScript.
  */
@@ -35,11 +35,7 @@ export function Price({
   if (current === 0 && freeLabel) {
     return (
       <span
-        className={cn(
-          "inline-block border-2 border-fleuve font-medium text-success rounded-[calc(var(--radius-control)/2)]",
-          size === "lg" ? "px-2.5 py-0.5 text-lg" : "px-1.5 text-sm",
-          className,
-        )}
+        className={cn("font-semibold text-success", size === "lg" ? "text-[26px]" : "text-[13px]", className)}
       >
         {freeLabel}
       </span>

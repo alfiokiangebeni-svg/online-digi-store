@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import type { ReactNode } from "react";
 import { AppShell } from "@/components/shell/AppShell";
 import { ChipDemo, StampDemo, ToastDemo } from "@/components/design/Demos";
@@ -20,7 +19,6 @@ import {
   Rating,
   SearchField,
   Thumb,
-  KubaDivider,
   Price,
   Skeleton,
   Story,
@@ -39,7 +37,6 @@ import { SegmentedDemo, SwitchDemo } from "@/components/design/Demos";
 import { CurrencyToggle } from "@/components/ui/CurrencyToggle";
 import { format, getDictionary } from "@/lib/i18n";
 import { resolveLocale } from "@/lib/i18n/params";
-import duotoneSample from "@/public/demo/marche.jpg";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/design">): Promise<Metadata> {
   const dict = await getDictionary(await resolveLocale(params));
@@ -48,8 +45,8 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/design">
 
 function Section({ id, title, children }: { id: string; title: string; children: ReactNode }) {
   return (
-    <section aria-labelledby={id} className="mt-12">
-      <h2 id={id} className="mb-5 text-3xl font-bold">
+    <section aria-labelledby={id} className="mt-8">
+      <h2 id={id} className="mb-3 text-lg font-bold">
         {title}
       </h2>
       {children}
@@ -58,12 +55,12 @@ function Section({ id, title, children }: { id: string; title: string; children:
 }
 
 const SWATCHES = [
-  { key: "ink", hex: BRAND_COLORS.ink, className: "bg-ink text-paper" },
-  { key: "paper", hex: BRAND_COLORS.paper, className: "bg-paper text-ink" },
-  { key: "taxi", hex: BRAND_COLORS.taxi, className: "bg-taxi text-ink" },
-  { key: "laterite", hex: BRAND_COLORS.laterite, className: "bg-laterite text-ink" },
-  { key: "fleuve", hex: BRAND_COLORS.fleuve, className: "bg-fleuve text-paper" },
-  { key: "cendre", hex: BRAND_COLORS.cendre, className: "bg-cendre text-ink" },
+  { key: "lime", hex: BRAND_COLORS.lime, className: "bg-lime text-ink" },
+  { key: "ink", hex: BRAND_COLORS.ink, className: "bg-ink text-white" },
+  { key: "white", hex: BRAND_COLORS.white, className: "bg-white text-ink" },
+  { key: "leaf", hex: BRAND_COLORS.leaf, className: "bg-leaf text-white" },
+  { key: "promo", hex: BRAND_COLORS.promo, className: "bg-promo text-white" },
+  { key: "limeStrong", hex: BRAND_COLORS.limeStrong, className: "bg-lime-strong text-ink" },
 ] as const;
 
 export default async function DesignPage({ params }: PageProps<"/[locale]/design">) {
@@ -80,33 +77,28 @@ export default async function DesignPage({ params }: PageProps<"/[locale]/design
 
   return (
     <AppShell locale={locale} dict={dict} tab={null} path="design">
-      <header className="pt-8">
-        <h1 className="text-5xl font-bold">{d.title}</h1>
-        <p className="mt-3 max-w-prose text-lg text-muted">{d.intro}</p>
+      <header className="pt-2">
+        <h1 className="text-[28px] font-bold">{d.title}</h1>
+        <p className="mt-2 max-w-prose text-sm text-muted">{d.intro}</p>
       </header>
 
       <Section id="colors" title={d.sections.colors}>
         <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3">
           {SWATCHES.map((s) => (
-            <li key={s.key} className="border-2 border-line">
-              <div className={`flex h-24 items-end p-3 font-mono text-xl font-bold ${s.className}`}>
-                {s.hex}
-              </div>
+            <li key={s.key} className="card overflow-hidden">
+              <div className={`flex h-20 items-end p-3 text-base font-bold ${s.className}`}>{s.hex}</div>
               <p className="p-3 text-sm">{d.colorUsage[s.key]}</p>
             </li>
           ))}
         </ul>
-        <p className="mt-3 font-mono text-xs text-muted">
-          AA : {ACCESSIBLE_VARIANTS.lateriteStrong} · {ACCESSIBLE_VARIANTS.fleuveBright} ·{" "}
-          {ACCESSIBLE_VARIANTS.cendreStrong}
-        </p>
+        <p className="mt-3 text-xs text-muted">AA : {Object.values(ACCESSIBLE_VARIANTS).join(" · ")}</p>
       </Section>
 
       <Section id="type" title={d.sections.type}>
         <div className="flex flex-col gap-4">
-          <p className="font-display text-4xl font-bold">{d.typeSamples.display}</p>
-          <p className="max-w-prose text-lg">{d.typeSamples.body}</p>
-          <p className="font-mono text-lg">{d.typeSamples.mono} — TX-8F21-KIN</p>
+          <p className="text-[26px] font-bold">{d.typeSamples.display}</p>
+          <p className="max-w-prose text-[15px]">{d.typeSamples.body}</p>
+          <p className="text-lg font-semibold tabular-nums">{d.typeSamples.mono} — TX-8F21-KIN</p>
         </div>
       </Section>
 
@@ -326,7 +318,7 @@ export default async function DesignPage({ params }: PageProps<"/[locale]/design
                 label: dict.nav.cart,
                 icon: <IconCart />,
                 badge: (
-                  <span className="absolute -right-1 -top-1 grid min-w-5 place-items-center rounded-full bg-taxi px-1 font-mono text-[11px] font-bold leading-5 text-ink">
+                  <span className="absolute -right-2 -top-1.5 grid h-[18px] min-w-[18px] place-items-center rounded-full bg-fg px-1 text-[11px] font-bold leading-none text-surface">
                     2
                   </span>
                 ),
@@ -344,20 +336,7 @@ export default async function DesignPage({ params }: PageProps<"/[locale]/design
               <Story key={p.slug} title={p.title} tone={p.tone} seen={i === 2} />
             ))}
           </div>
-          <figure className="w-60">
-            <div className="duotone aspect-[4/3] w-full">
-              <Image
-                src={duotoneSample}
-                alt=""
-                sizes="240px"
-                placeholder="blur"
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <figcaption className="mt-2 text-sm text-muted">{d.duotoneCaption}</figcaption>
-          </figure>
         </div>
-        <KubaDivider id="kuba-design" />
       </Section>
     </AppShell>
   );

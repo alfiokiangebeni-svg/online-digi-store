@@ -79,7 +79,7 @@ export function ExplorerView({
 
   return (
     <div className="flex flex-col gap-3">
-      <label className="flex min-h-12 items-center gap-2 border-2 border-line bg-surface px-3 focus-within:border-fg rounded-[var(--radius-control)]">
+      <label className="flex h-[46px] items-center gap-2 rounded-[8px] border border-fg/8 bg-surface px-3 focus-within:border-fg">
         <IconSearch size={18} className="text-muted" />
         <span className="sr-only">{t.searchLabel}</span>
         <input
@@ -89,7 +89,7 @@ export function ExplorerView({
           placeholder={t.searchPlaceholder}
           enterKeyHint="search"
           autoComplete="off"
-          className="min-w-0 flex-1 bg-transparent py-2 text-base text-fg outline-none placeholder:text-muted"
+          className="min-w-0 flex-1 bg-transparent py-2 text-sm text-fg outline-none placeholder:text-muted"
         />
       </label>
 
@@ -120,7 +120,7 @@ export function ExplorerView({
         <button
           type="button"
           onClick={() => setSearchParams({ tri: SORTS[(SORTS.indexOf(sort) + 1) % SORTS.length] })}
-          className="min-h-11 border-2 border-line px-3 text-sm font-medium rounded-[var(--radius-control)] hover:border-fg"
+          className="ml-auto min-h-[38px] rounded-[6px] border border-fg/12 bg-surface px-2.5 text-[13px] hover:border-fg/40"
         >
           {format(t.sortButton, { sort: t.sort[sort] })}
         </button>
@@ -132,12 +132,12 @@ export function ExplorerView({
         </p>
       ) : null}
 
-      <p className="text-sm text-muted" aria-live="polite">
+      <p className="text-[13px] text-[#3a3f47] dark:text-muted" aria-live="polite">
         {format(t.count, { count: list.length })}
       </p>
 
       {list.length ? (
-        <ul>
+        <ul className="card overflow-hidden">
           {list.map((p) => (
             <ListRow
               key={p.slug}
@@ -152,7 +152,9 @@ export function ExplorerView({
               }
               title={p.title}
               meta={p.meta}
-              extra={<Rating value={p.rating} label={format(t.rating, { rating: p.rating })} />}
+              extra={
+                <Rating value={p.rating} locale={locale} label={format(t.rating, { rating: p.rating })} />
+              }
               action={
                 <Price
                   usdCents={p.priceUsdCents}
@@ -166,13 +168,13 @@ export function ExplorerView({
           ))}
         </ul>
       ) : (
-        <div className="flex flex-col items-start gap-3 bg-surface p-5">
-          <p>{t.none}</p>
+        <div className="card flex flex-col items-center gap-3 px-4 py-8 text-center">
+          <p className="text-sm text-muted">{t.none}</p>
           {filtered ? (
             <button
               type="button"
               onClick={() => setSearchParams({ q: null, type: null, prix: null })}
-              className="min-h-11 border-2 border-fg px-4 text-sm font-medium rounded-[var(--radius-control)]"
+              className="min-h-10 rounded-[6px] border border-fg px-4 text-sm font-semibold"
             >
               {t.reset}
             </button>

@@ -16,7 +16,7 @@ export function SearchField({
 }) {
   return (
     <form action={action} method="get" role="search" className="flex">
-      <label className="flex min-h-12 flex-1 items-center gap-2 border-2 border-line bg-surface px-3 focus-within:border-fg rounded-l-[var(--radius-control)]">
+      <label className="flex h-[46px] flex-1 items-center gap-2 rounded-[8px] border border-fg/8 bg-surface px-3 focus-within:border-fg">
         <IconSearch size={18} className="text-muted" />
         <span className="sr-only">{label}</span>
         <input
@@ -26,15 +26,12 @@ export function SearchField({
           placeholder={placeholder}
           enterKeyHint="search"
           autoComplete="off"
-          className="min-w-0 flex-1 bg-transparent py-2 text-base text-fg outline-none placeholder:text-muted"
+          className="min-w-0 flex-1 bg-transparent py-2 text-sm text-fg outline-none placeholder:text-muted"
         />
+        <button type="submit" className="sr-only">
+          {submitLabel}
+        </button>
       </label>
-      <button
-        type="submit"
-        className="min-h-12 bg-fg px-4 text-sm font-medium text-bg rounded-r-[var(--radius-control)]"
-      >
-        {submitLabel}
-      </button>
     </form>
   );
 }

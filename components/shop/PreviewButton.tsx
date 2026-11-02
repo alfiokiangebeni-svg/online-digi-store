@@ -104,11 +104,11 @@ export function PreviewButton({
       aria-label={playing ? pauseLabel : playLabel}
       aria-pressed={playing}
       className={cn(
-        "relative grid size-12 shrink-0 place-items-center rounded-[var(--radius-control)] transition-colors",
-        playing ? "bg-fleuve text-paper" : "bg-fg text-bg",
+        "relative grid size-11 shrink-0 place-items-center rounded-[6px] transition-colors",
+        playing ? "bg-leaf text-white" : "btn-primary",
       )}
     >
-      {playing ? <IconPause size={18} /> : <IconPlay size={18} />}
+      {playing ? <IconPause size={16} /> : <IconPlay size={16} />}
       {playing ? (
         <span aria-hidden="true" className="absolute -bottom-1 left-1/2 flex -translate-x-1/2 gap-0.5">
           {[0, 1, 2].map((i) => (

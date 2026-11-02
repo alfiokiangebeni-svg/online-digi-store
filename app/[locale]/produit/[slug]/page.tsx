@@ -11,7 +11,6 @@ import {
   IconCheck,
   IconShare,
   IconStar,
-  KubaDivider,
   Price,
   Rail,
   Thumb,
@@ -19,7 +18,15 @@ import {
   buttonClasses,
 } from "@/components/ui";
 import { Countdown } from "@/components/ui/Countdown";
-import { CATALOG, getProduct, isFree, isKids, type Platform, type Product } from "@/lib/catalog";
+import {
+  CATALOG,
+  effectivePrice,
+  getProduct,
+  isFree,
+  isKids,
+  type Platform,
+  type Product,
+} from "@/lib/catalog";
 import { discountPercent } from "@/lib/currency";
 import { localePath } from "@/lib/i18n/config";
 import { formatDate } from "@/lib/i18n/dates";
@@ -72,8 +79,8 @@ export default async function ProductPage({ params }: PageProps<"/[locale]/produ
   const priceProps = { locale, oldPriceLabel: dict.product.oldPrice, freeLabel: dict.product.free };
   const stats = [
     {
-      value: p.rating.toFixed(1),
-      unit: <IconStar size={14} className="text-taxi" />,
+      value: p.rating.toLocaleString(locale === "en" ? "en-US" : "fr-CD", { minimumFractionDigits: 1 }),
+      unit: <IconStar size={13} className="text-star" />,
       label: format(dict.product.reviews, { count: p.reviews }),
     },
     p.age
@@ -94,44 +101,47 @@ export default async function ProductPage({ params }: PageProps<"/[locale]/produ
 
   return (
     <AppShell locale={locale} dict={dict} tab={null} path={`produit/${p.slug}`} back={base} hideNav>
-      <article className={kids ? "kids" : undefined}>
-        {/* En-tête produit */}
-        <header className="mt-4 flex gap-4">
-          <Thumb id={`hero-${p.slug}`} title={p.title} tone={p.tone} size={88} round={kids} />
-          <div className="flex min-w-0 flex-col gap-1">
-            <h1 className="text-[1.7rem] font-bold">{p.title}</h1>
-            <p className="text-sm">
-              {format(dict.product.by, { seller: p.seller })}
-              {p.verified ? (
-                <Badge tone="verified" icon={<IconCheck size={12} />} className="ml-2 align-middle">
-                  {dict.product.verifiedSeller}
-                </Badge>
-              ) : null}
-            </p>
-            <p className="text-sm text-muted">
-              {dict.product.kinds[p.kind]} · {dict.product.licenseValues[p.license]}
-            </p>
-          </div>
-        </header>
-
-        {/* Chiffres clés */}
-        <dl className="mt-5 grid grid-cols-4 border-y-2 border-line py-3 text-center">
-          {stats.map((s, i) => (
-            <div key={i} className={i ? "border-l-2 border-line px-1" : "px-1"}>
-              <dt className="sr-only">{s.label}</dt>
-              <dd className="flex items-center justify-center gap-1 text-[15px] font-bold">
-                {s.value}
-                {"unit" in s ? s.unit : null}
-              </dd>
-              <dd aria-hidden="true" className="text-xs text-muted">
-                {s.label}
-              </dd>
+      <article className="mt-1 flex flex-col gap-3">
+        {/* Carte principale */}
+        <section className="card flex flex-col gap-3.5 p-4">
+          <header className="flex gap-3.5">
+            <Thumb title={p.title} tone={p.tone} size={84} round={kids} />
+            <div className="flex min-w-0 flex-col gap-0.5">
+              <h1 className="text-[19px] leading-tight font-bold">{p.title}</h1>
+              <p className="text-[13px] font-medium text-accent">
+                {p.seller}
+                {p.verified ? (
+                  <Badge
+                    tone="verified"
+                    icon={<IconCheck size={12} />}
+                    className="ml-1.5 align-middle text-[11px]"
+                  >
+                    {dict.product.verifiedSeller}
+                  </Badge>
+                ) : null}
+              </p>
+              <p className="text-xs text-muted">
+                {dict.product.kinds[p.kind]} · {dict.product.licenseValues[p.license]}
+              </p>
             </div>
-          ))}
-        </dl>
+          </header>
 
-        {p.platforms ? (
-          <div className="mt-5">
+          <dl className="grid grid-cols-4 border-y border-line py-2.5 text-center">
+            {stats.map((s, i) => (
+              <div key={i} className={i ? "border-l border-line px-1" : "px-1"}>
+                <dt className="sr-only">{s.label}</dt>
+                <dd className="flex items-center justify-center gap-1 text-sm font-bold">
+                  {s.value}
+                  {"unit" in s ? s.unit : null}
+                </dd>
+                <dd aria-hidden="true" className="text-[11px] text-muted">
+                  {s.label}
+                </dd>
+              </div>
+            ))}
+          </dl>
+
+          {p.platforms ? (
             <PlatformPicker
               label={dict.product.platformLabel}
               sizeLabel={dict.product.size}
@@ -142,33 +152,28 @@ export default async function ProductPage({ params }: PageProps<"/[locale]/produ
                 size: fmtSize(mb),
               }))}
             />
-          </div>
-        ) : null}
+          ) : null}
 
-        {/* Prix */}
-        <div className="mt-5 flex flex-col gap-2">
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
             <Price usdCents={p.priceUsdCents} promoUsdCents={p.promoUsdCents} size="lg" {...priceProps} />
-            {percent > 0 ? <Badge tone="promo">{format(dict.product.discount, { percent })}</Badge> : null}
+            {percent > 0 ? (
+              <span className="text-xs font-bold text-promo">
+                {format(dict.product.discount, { percent })} · {dict.product.promoUntil}
+              </span>
+            ) : null}
           </div>
           {percent > 0 ? (
-            <div className="flex flex-wrap items-center gap-2 text-sm text-muted">
-              <span>{dict.product.promoUntil}</span>
-              <Countdown until="friday" label={dict.commerce.endsIn} endedLabel={dict.commerce.flashEnded} />
-            </div>
+            <Countdown until="friday" label={dict.commerce.endsIn} endedLabel={dict.commerce.flashEnded} />
           ) : null}
-        </div>
+        </section>
 
         {/* Aperçus */}
-        <section aria-labelledby="previews" className="mt-6">
-          <div className="mb-2 flex items-center justify-between gap-3">
-            <h2 id="previews" className="text-xl font-bold">
-              {dict.product.previews}
-            </h2>
-            <Badge>{dict.product.previewFree}</Badge>
-          </div>
+        <section aria-labelledby="previews">
+          <h2 id="previews" className="sr-only">
+            {dict.product.previews}
+          </h2>
           {p.kind === "music" ? (
-            <div className="flex items-center gap-3 bg-surface p-3">
+            <div className="card flex items-center gap-3 p-3.5">
               <PreviewButton
                 id={p.slug}
                 title={p.title}
@@ -179,14 +184,12 @@ export default async function ProductPage({ params }: PageProps<"/[locale]/produ
             </div>
           ) : (
             <ul className="scroll-rail -mx-4 flex gap-2 overflow-x-auto px-4">
-              {(["ink", p.tone, "cendre"] as const).map((tone, i) => (
-                <li key={i} className="w-32 shrink-0 overflow-hidden rounded-[var(--radius-ticket)]">
+              {(["cendre", p.tone, "paper"] as const).map((tone, i) => (
+                <li key={i} className="w-[132px] shrink-0 overflow-hidden rounded-[8px] [&_.cover]:h-[236px]">
                   <span className="sr-only">{format(dict.product.previewItem, { n: i + 1, total: 3 })}</span>
                   <TicketCover
-                    id={`prev-${p.slug}-${i}`}
                     tone={tone}
-                    title={i === 0 ? p.title : `${i + 1} / 3`}
-                    kids={kids}
+                    title={i === 0 ? p.title : `${dict.product.previews} ${i + 1}/3`}
                   />
                 </li>
               ))}
@@ -195,11 +198,14 @@ export default async function ProductPage({ params }: PageProps<"/[locale]/produ
         </section>
 
         {/* Avantages */}
-        <ul className="mt-6 flex flex-col">
+        <ul className="card px-4 py-1.5">
           {perks(p, dict).map((perk) => (
-            <li key={perk} className="flex min-h-12 items-center gap-3 border-b-2 border-line">
-              <span className="grid size-6 shrink-0 place-items-center rounded-full bg-fleuve text-paper">
-                <IconCheck size={14} />
+            <li
+              key={perk}
+              className="flex min-h-12 items-center gap-3 border-b border-surface-2 text-sm last:border-b-0"
+            >
+              <span className="grid size-[22px] shrink-0 place-items-center rounded-full bg-lime text-leaf-strong">
+                <IconCheck size={13} />
               </span>
               {perk}
             </li>
@@ -207,7 +213,7 @@ export default async function ProductPage({ params }: PageProps<"/[locale]/produ
         </ul>
 
         {/* Offrir / partager */}
-        <div className="mt-4 flex flex-wrap items-center gap-2">
+        <div className="card flex flex-wrap items-center gap-1 px-2 py-1">
           {!free ? (
             <GiftSheet
               slug={p.slug}
@@ -237,22 +243,23 @@ export default async function ProductPage({ params }: PageProps<"/[locale]/produ
           </a>
         </div>
 
-        <KubaDivider id={`kuba-${p.slug}`} />
-
-        <section aria-labelledby="about">
-          <h2 id="about" className="text-xl font-bold">
+        <section aria-labelledby="about" className="card flex flex-col gap-2 p-4">
+          <h2 id="about" className="text-base font-bold">
             {dict.product.about}
           </h2>
-          <p className="mt-2 max-w-prose leading-relaxed">{p.description}</p>
+          <p className="text-sm leading-relaxed text-[#3a3f47] dark:text-muted">{p.description}</p>
         </section>
 
-        <section aria-labelledby="details" className="mt-6">
-          <h2 id="details" className="text-xl font-bold">
+        <section aria-labelledby="details" className="card px-4 py-1">
+          <h2 id="details" className="sr-only">
             {dict.product.details}
           </h2>
-          <dl className="mt-2">
+          <dl>
             {infos.map(([k, v]) => (
-              <div key={k} className="flex justify-between gap-4 border-b-2 border-line py-3 text-sm">
+              <div
+                key={k}
+                className="flex justify-between gap-3 border-b border-surface-2 py-3 text-sm last:border-b-0"
+              >
                 <dt className="text-muted">{k}</dt>
                 <dd className="text-right">{v}</dd>
               </div>
@@ -260,16 +267,20 @@ export default async function ProductPage({ params }: PageProps<"/[locale]/produ
           </dl>
         </section>
 
-        <section aria-labelledby="reviews" className="mt-6">
-          <h2 id="reviews" className="text-xl font-bold">
+        <section aria-labelledby="reviews" className="card flex flex-col gap-2 p-4">
+          <h2 id="reviews" className="text-base font-bold">
             {dict.product.reviewsTitle}
           </h2>
-          <p className="mt-2 flex items-center gap-2">
-            <IconStar size={18} className="text-taxi" />
-            <span className="font-mono text-lg font-bold">{p.rating.toFixed(1)}</span>
-            <span className="text-sm text-muted">{format(dict.product.reviews, { count: p.reviews })}</span>
+          <p className="flex items-center gap-2">
+            <IconStar size={16} className="text-star" />
+            <span className="font-bold">
+              {p.rating.toLocaleString(locale === "en" ? "en-US" : "fr-CD", { minimumFractionDigits: 1 })}
+            </span>
+            <span className="text-[13px] text-muted">
+              {format(dict.product.reviews, { count: p.reviews })}
+            </span>
           </p>
-          <p className="mt-2 max-w-prose text-sm text-muted">{dict.product.reviewsEmpty}</p>
+          <p className="text-[13px] leading-relaxed text-muted">{dict.product.reviewsEmpty}</p>
         </section>
       </article>
 
@@ -284,7 +295,7 @@ export default async function ProductPage({ params }: PageProps<"/[locale]/produ
       <BuyBar
         slug={p.slug}
         free={free}
-        price={<Price usdCents={p.priceUsdCents} promoUsdCents={p.promoUsdCents} {...priceProps} />}
+        price={<Price usdCents={effectivePrice(p)} {...priceProps} />}
         cartHref={localePath(locale, "panier")}
         libraryHref={localePath(locale, "bibliotheque")}
         labels={{

@@ -3,7 +3,7 @@ export { BottomNav, type NavItem } from "./BottomNav";
 export { Button, buttonClasses, type ButtonVariant } from "./Button";
 export { Chip } from "./Chip";
 export { Field } from "./Field";
-export { KubaDivider, KubaPattern } from "./Kuba";
+export { KubaDivider } from "./Kuba";
 export { ListRow } from "./ListRow";
 export { Money, Price } from "./Price";
 export { Rail } from "./Rail";

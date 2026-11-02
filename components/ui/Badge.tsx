@@ -4,12 +4,12 @@ import { cn } from "./cn";
 export type BadgeTone = "promo" | "flash" | "new" | "success" | "neutral" | "verified";
 
 const TONES: Record<BadgeTone, string> = {
-  promo: "bg-taxi text-ink",
-  flash: "bg-laterite-strong text-paper",
-  new: "border-2 border-laterite text-fg",
-  success: "bg-fleuve text-paper",
+  promo: "bg-promo text-white",
+  flash: "bg-promo text-white",
+  new: "bg-ink text-lime-strong",
+  success: "bg-leaf text-white",
   neutral: "bg-surface-2 text-fg",
-  verified: "border-2 border-fleuve text-success",
+  verified: "px-0 text-accent",
 };
 
 export function Badge({

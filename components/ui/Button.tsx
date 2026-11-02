@@ -6,16 +6,16 @@ export type ButtonVariant = "sell" | "secondary" | "ghost" | "danger";
 export type ButtonSize = "md" | "lg";
 
 const VARIANTS: Record<ButtonVariant, string> = {
-  // Jaune taxi : réservé aux actions de vente (payer, acheter).
-  sell: "bg-taxi text-ink hover:brightness-105 active:brightness-95",
-  secondary: "bg-transparent text-fg border-2 border-fg hover:bg-fg hover:text-bg",
+  // Action principale (acheter, payer) : bouton plein noir, comme la maquette.
+  sell: "btn-primary hover:opacity-90 active:opacity-80",
+  secondary: "bg-surface text-fg border border-fg hover:bg-surface-2",
   ghost: "bg-transparent text-fg underline-offset-4 hover:underline",
-  danger: "bg-laterite-strong text-paper hover:brightness-110",
+  danger: "bg-promo text-white hover:brightness-110",
 };
 
 const SIZES: Record<ButtonSize, string> = {
-  md: "min-h-12 px-5 text-base",
-  lg: "min-h-14 px-6 text-lg",
+  md: "min-h-11 px-4 text-sm",
+  lg: "min-h-12 px-5 text-[15px]",
 };
 
 interface CommonProps {
@@ -42,8 +42,8 @@ export function buttonClasses({
   className,
 }: Pick<CommonProps, "variant" | "size" | "block" | "className">) {
   return cn(
-    "inline-flex select-none items-center justify-center gap-2 font-sans font-medium",
-    "rounded-[var(--radius-control)] transition-[filter,background-color,color] duration-150",
+    "inline-flex select-none items-center justify-center gap-2 font-sans font-semibold",
+    "rounded-[8px] transition-[filter,opacity,background-color,color] duration-150",
     "disabled:cursor-not-allowed disabled:opacity-45 aria-disabled:opacity-45",
     VARIANTS[variant],
     SIZES[size],

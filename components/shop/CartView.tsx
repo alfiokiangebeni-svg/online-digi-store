@@ -12,11 +12,10 @@ import { parsePhone } from "@/lib/operators";
 import { Button, buttonClasses } from "@/components/ui/Button";
 import { cn } from "@/components/ui/cn";
 import { Field } from "@/components/ui/Field";
-import { ListRow } from "@/components/ui/ListRow";
 import { PhoneField } from "@/components/ui/PhoneField";
 import { Money, Price } from "@/components/ui/Price";
 import { Thumb } from "@/components/ui/Thumb";
-import { IconBolt, IconClose, IconGift } from "@/components/ui/icons";
+import { IconDownload, IconGift } from "@/components/ui/icons";
 import { PaymentFlow, type PaymentLabels } from "./PaymentFlow";
 
 export interface CartLabels {
@@ -24,6 +23,7 @@ export interface CartLabels {
   empty: string;
   emptyCta: string;
   remove: string;
+  removeShort: string;
   delivery: string;
   coupon: string;
   couponPlaceholder: string;
@@ -55,6 +55,7 @@ export interface CartLabels {
   detected: string;
   unknown: string;
   demo: string;
+  andDownload: string;
 }
 
 export function CartView({
@@ -109,12 +110,12 @@ export function CartView({
 
   // Paiement réussi : le panier est vide, seul le dialogue reste affiché.
   // Même conteneur et même clé que le rendu complet : le dialogue n'est pas remonté.
-  if (lines.length === 0 && paying) return <div className="flex flex-col gap-6">{flow}</div>;
+  if (lines.length === 0 && paying) return <div className="flex flex-col gap-3">{flow}</div>;
 
   if (lines.length === 0) {
     return (
-      <div className="flex flex-col items-start gap-4 bg-surface p-5">
-        <p className="text-lg">{t.empty}</p>
+      <div className="card flex flex-col items-center gap-3 px-4 py-8 text-center">
+        <p className="text-[15px] font-semibold">{t.empty}</p>
         <Link href={exploreHref} className={buttonClasses({ variant: "secondary" })}>
           {t.emptyCta}
         </Link>
@@ -140,82 +141,83 @@ export function CartView({
     }
     if (!phone) {
       setPhoneError(t.phoneInvalid);
+      document.getElementById("pay-phone")?.focus();
       return;
     }
     setPaying(true);
   }
 
   return (
-    <div className="flex flex-col gap-6">
-      <section aria-label={t.title}>
+    <div className="flex flex-col gap-3">
+      {/* Articles */}
+      <section aria-label={t.title} className="card overflow-hidden">
         <ul>
           {lines.map(({ line, index, product: p }) => (
-            <ListRow
+            <li
               key={`${line.slug}-${line.giftTo ?? ""}`}
-              href={p.href}
-              media={
-                <Thumb
-                  id={`c-${index}`}
-                  title={p.title}
-                  tone={p.tone}
-                  round={p.kind === "game" || p.kind === "edu"}
-                />
-              }
-              title={p.title}
-              meta={
-                line.giftTo ? (
-                  <span className="inline-flex items-center gap-1 text-fg">
-                    <IconGift size={14} />
-                    {format(t.giftLine, { phone: parsePhone(line.giftTo)?.display ?? line.giftTo })}
-                  </span>
-                ) : (
-                  p.meta
-                )
-              }
-              extra={
-                <Price
-                  usdCents={p.priceUsdCents}
-                  promoUsdCents={p.promoUsdCents}
-                  locale={locale}
-                  oldPriceLabel={t.oldPrice}
-                  freeLabel={t.free}
-                />
-              }
-              action={
+              className="flex items-center gap-3 border-b border-surface-2 p-3.5"
+            >
+              <Thumb title={p.title} tone={p.tone} round={p.kind === "game" || p.kind === "edu"} />
+              <div className="flex min-w-0 flex-1 flex-col gap-0.5">
+                <Link href={p.href} prefetch={false} className="truncate text-sm font-semibold">
+                  {p.title}
+                </Link>
+                <span className="truncate text-xs text-muted">
+                  {line.giftTo ? (
+                    <span className="inline-flex items-center gap-1 text-fg">
+                      <IconGift size={13} />
+                      {format(t.giftLine, { phone: parsePhone(line.giftTo)?.display ?? line.giftTo })}
+                    </span>
+                  ) : (
+                    p.meta
+                  )}
+                </span>
                 <button
                   type="button"
                   onClick={() => removeFromCart(index)}
                   aria-label={format(t.remove, { title: p.title })}
-                  className="grid size-11 place-items-center text-muted hover:text-fg"
+                  className="self-start py-1 text-xs text-muted underline underline-offset-2 hover:text-fg"
                 >
-                  <IconClose size={18} />
+                  {t.removeShort}
                 </button>
-              }
-            />
+              </div>
+              <Price
+                usdCents={p.priceUsdCents}
+                promoUsdCents={p.promoUsdCents}
+                locale={locale}
+                oldPriceLabel={t.oldPrice}
+                freeLabel={t.free}
+                className="flex-col items-end"
+              />
+            </li>
           ))}
         </ul>
-        <p className="mt-2 text-sm text-muted">{t.delivery}</p>
+        <p className="flex items-center gap-2.5 bg-mint px-3.5 py-3 text-xs text-leaf-strong dark:bg-surface-2 dark:text-success">
+          <IconDownload size={16} />
+          {t.delivery}
+        </p>
       </section>
 
+      {/* Code promo */}
       {total > 0 || couponCode ? (
-        <section aria-labelledby="coupon-title" className="flex flex-col gap-2">
-          <h2 id="coupon-title" className="text-xl font-bold">
+        <section aria-labelledby="coupon-title" className="card flex flex-col gap-2.5 p-3.5">
+          <h2 id="coupon-title" className="text-[15px] font-bold">
             {t.coupon}
           </h2>
           {coupon?.ok ? (
-            <div className="flex items-center justify-between gap-3 border-2 border-fleuve px-3 py-2">
-              <span className="font-mono">{format(t.couponApplied, { code: coupon.code })}</span>
+            <div className="flex items-center justify-between gap-3 rounded-[6px] bg-mint px-3 py-2.5 text-sm text-leaf-strong dark:bg-surface-2 dark:text-success">
+              <span className="font-semibold">{format(t.couponApplied, { code: coupon.code })}</span>
               <button
                 type="button"
                 onClick={() => setCouponCode(null)}
-                className="min-h-11 text-sm underline underline-offset-4"
+                className="min-h-9 text-xs underline underline-offset-2"
               >
                 {t.couponRemove}
               </button>
             </div>
           ) : (
             <form
-              className="flex items-end gap-2"
+              className="flex items-start gap-2"
               onSubmit={(e) => {
                 e.preventDefault();
                 const r = applyCoupon(couponInput, subtotal);
@@ -230,7 +232,6 @@ export function CartView({
                 label={t.coupon}
                 className="flex-1 [&>label]:sr-only"
                 placeholder={t.couponPlaceholder}
-                mono
                 autoCapitalize="characters"
                 value={couponInput}
                 onChange={(e) => {
@@ -239,24 +240,25 @@ export function CartView({
                 }}
                 error={couponError}
               />
-              <Button type="submit" variant="secondary" className={couponError ? "mb-7" : undefined}>
+              <Button type="submit" variant="secondary">
                 {t.couponApply}
               </Button>
             </form>
           )}
-          <p className="text-xs text-muted">
-            <span className="mr-1 font-medium uppercase">{t.demo}</span>
+          <p className="text-[11px] text-muted">
+            <span className="mr-1 font-semibold uppercase">{t.demo}</span>
             {t.couponHint}
           </p>
         </section>
       ) : null}
 
+      {/* Moyen de paiement */}
       {total > 0 ? (
-        <section aria-labelledby="method-title" className="flex flex-col gap-3">
-          <h2 id="method-title" className="text-xl font-bold">
+        <section aria-labelledby="method-title" className="card px-3.5 pb-1 pt-3.5">
+          <h2 id="method-title" className="mb-1 text-[15px] font-bold">
             {t.payWith}
           </h2>
-          <div role="radiogroup" aria-labelledby="method-title" className="grid gap-2">
+          <div role="radiogroup" aria-labelledby="method-title">
             {(
               [
                 ["mobile", t.mobileMoney, t.mobileMoneyHint],
@@ -269,86 +271,80 @@ export function CartView({
                 role="radio"
                 aria-checked={method === id}
                 onClick={() => setMethod(id)}
-                className={cn(
-                  "flex min-h-14 items-center gap-3 border-2 px-3 text-left rounded-[var(--radius-control)]",
-                  method === id ? "border-fg" : "border-line",
-                )}
+                className="flex min-h-14 w-full items-center gap-3 border-b border-surface-2 text-left"
               >
                 <span
                   aria-hidden="true"
                   className={cn(
-                    "size-5 shrink-0 rounded-full border-2",
-                    method === id ? "border-[6px] border-fg" : "border-muted",
+                    "size-5 shrink-0 rounded-full",
+                    method === id ? "border-[6px] border-fg" : "border-[1.5px] border-hint",
                   )}
                 />
                 <span className="flex flex-col">
-                  <span className="font-medium">{label}</span>
-                  <span className="text-sm text-muted">{hint}</span>
+                  <span className="text-sm font-medium">{label}</span>
+                  <span className="text-xs text-muted">{hint}</span>
                 </span>
               </button>
             ))}
           </div>
-          {method === "mobile" ? (
-            <PhoneField
-              id="pay-phone"
-              label={t.phoneLabel}
-              placeholder={t.phonePlaceholder}
-              hint={t.phoneHint}
-              detectedTemplate={t.detected}
-              unknownText={t.unknown}
-              onValueChange={(v) => {
-                setPhoneValue(v);
-                setPhoneError(undefined);
-              }}
-              error={phoneError}
-            />
-          ) : (
-            <p className="border-l-4 border-cendre bg-surface px-3 py-2 text-sm">{t.cardSoon}</p>
-          )}
+          <div className="py-3">
+            {method === "mobile" ? (
+              <PhoneField
+                id="pay-phone"
+                label={t.phoneLabel}
+                placeholder={t.phonePlaceholder}
+                hint={t.phoneHint}
+                detectedTemplate={t.detected}
+                unknownText={t.unknown}
+                onValueChange={(v) => {
+                  setPhoneValue(v);
+                  setPhoneError(undefined);
+                }}
+                error={phoneError}
+              />
+            ) : (
+              <p className="text-sm text-muted">{t.cardSoon}</p>
+            )}
+          </div>
         </section>
       ) : null}
 
-      <section className="flex flex-col gap-1 border-y-2 border-line py-3">
-        <div className="flex justify-between text-sm">
+      {/* Totaux */}
+      <section className="card flex flex-col gap-2 p-3.5 text-sm">
+        <div className="flex justify-between">
           <span className="text-muted">{t.subtotal}</span>
-          <span className="font-mono">
-            <Money usdCents={subtotal} locale={locale} />
-          </span>
+          <Money usdCents={subtotal} locale={locale} />
         </div>
         {discount ? (
-          <div className="flex justify-between text-sm">
+          <div className="flex justify-between">
             <span className="text-muted">{t.discount}</span>
-            <span className="font-mono text-success">
+            <span className="text-promo">
               −<Money usdCents={discount} locale={locale} />
             </span>
           </div>
         ) : null}
-        <div className="flex justify-between text-lg font-bold">
+        <div className="flex justify-between border-t border-surface-2 pt-2 text-base font-bold">
           <span>{t.total}</span>
-          <span className="font-mono">
-            <Money usdCents={total} locale={locale} />
-          </span>
+          <Money usdCents={total} locale={locale} />
         </div>
       </section>
 
-      <div className="flex flex-col gap-2">
-        <Button
-          size="lg"
-          block
-          onClick={pay}
-          disabled={total > 0 && method === "card"}
-          icon={<IconBolt size={20} />}
-        >
-          {total > 0 ? (
-            <>
-              {t.pay} <span className="font-mono">{<Money usdCents={total} locale={locale} />}</span>
-            </>
-          ) : (
-            t.getFree
-          )}
-        </Button>
-        <p className="text-center text-xs text-muted">{t.secure}</p>
-        {total > 0 ? <p className="bg-surface px-3 py-2 text-xs text-muted">{t.demoNotice}</p> : null}
+      {total > 0 ? <p className="px-1 text-[11px] leading-relaxed text-muted">{t.demoNotice}</p> : null}
+
+      {/* Barre de paiement fixe */}
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-[#e5e7eb] bg-surface px-3 pb-[calc(1rem+env(safe-area-inset-bottom))] pt-2.5 dark:border-line">
+        <div className="mx-auto flex max-w-xl flex-col gap-1.5">
+          <Button size="lg" block onClick={pay} disabled={total > 0 && method === "card"}>
+            {total > 0 ? (
+              <>
+                {t.pay} <Money usdCents={total} locale={locale} /> {t.andDownload}
+              </>
+            ) : (
+              t.getFree
+            )}
+          </Button>
+          <p className="text-center text-[11px] text-muted">{t.secure}</p>
+        </div>
       </div>
 
       {flow}

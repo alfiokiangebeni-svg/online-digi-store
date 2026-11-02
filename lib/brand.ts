@@ -4,20 +4,21 @@ export const SUPPORT_WHATSAPP = {
   href: "https://wa.me/243824176729",
 } as const;
 
+/** Palette de la maquette mobile (docs/DESIGN.md). */
 export const BRAND_COLORS = {
-  ink: "#14110F",
-  paper: "#F4EEE3",
-  taxi: "#F2B705",
-  laterite: "#C2502E",
-  fleuve: "#1F6F5C",
-  cendre: "#8C8279",
+  lime: "#E8F5C0",
+  ink: "#14161A",
+  white: "#FFFFFF",
+  leaf: "#4D7C0F",
+  promo: "#D92D20",
+  limeStrong: "#C5E86C",
 } as const;
 
-/** Variantes utilisées pour garantir un contraste AA sur le texte. */
+/** Teintes secondaires utilisées pour le texte et les visuels (contraste AA vérifié). */
 export const ACCESSIBLE_VARIANTS = {
-  lateriteStrong: "#A8432A",
-  fleuveBright: "#5CC0A5",
-  cendreStrong: "#645B53",
-  surfaceDark: "#1E1A17",
-  surfaceLight: "#FBF8F2",
+  slate: "#565B63",
+  leafStrong: "#3F6212",
+  steel: "#C9CDD3",
+  cloud: "#F2F3F5",
+  mint: "#F7FBEA",
 } as const;

@@ -66,7 +66,7 @@
   },
   "design": {
     "title": "Design system",
-    "intro": "Tous les composants de Digi Store, dans tous leurs états. Chaque écran de la boutique est construit uniquement avec ces pièces.",
+    "intro": "Tous les composants de l'application, d'après la maquette mobile. Chaque écran est construit uniquement avec ces pièces.",
     "sections": {
       "colors": "Couleurs",
       "type": "Typographie",
@@ -80,24 +80,24 @@
       "sheet": "Feuille modale",
       "skeleton": "Chargement",
       "nav": "Barre de navigation",
-      "patterns": "Motifs et photos",
+      "patterns": "Stories et visuels",
       "lists": "Listes, recherche et réglages"
     },
     "colorUsage": {
-      "ink": "Fond du mode sombre (par défaut)",
-      "paper": "Fond du mode clair, reçus",
-      "taxi": "Uniquement ce qui fait vendre : payer, prix, promo",
-      "laterite": "Ventes flash, nouveautés",
-      "fleuve": "Confirmations, « Livré », confiance",
-      "cendre": "Texte secondaire"
+      "lime": "Fond de l'application",
+      "ink": "Texte, boutons principaux, bandeaux",
+      "white": "Cartes",
+      "leaf": "Liens, vendeur, confirmations",
+      "promo": "Remises, ventes flash",
+      "limeStrong": "Accent sur fond noir"
     },
     "typeSamples": {
-      "display": "Bricolage Grotesque — titres",
-      "body": "Work Sans — texte courant. Les clients lisent sur un petit écran, en plein soleil : phrases courtes, contraste fort.",
-      "mono": "Space Mono — prix et codes"
+      "display": "Inter 700 — titres",
+      "body": "Inter 400 — texte courant. Les clients lisent sur un petit écran, en plein soleil : phrases courtes, contraste fort.",
+      "mono": "Inter 600 — prix et codes"
     },
     "buttons": {
-      "primary": "Bouton de vente (jaune taxi)",
+      "primary": "Bouton principal (noir)",
       "secondary": "Secondaire",
       "ghost": "Discret",
       "danger": "Destructif",
@@ -170,7 +170,9 @@
       "operators": "M-Pesa · Airtel Money · Orange Money · Afrimoney",
       "delivery": "Livraison en moins de 10 secondes",
       "support": "Support WhatsApp en français et en lingala"
-    }
+    },
+    "packPrice": "{price} au lieu de {old}",
+    "trustTitle": "Paiement Mobile Money · livraison immédiate"
   },
   "product": {
     "kinds": {
@@ -315,7 +317,8 @@
     "demoNotice": "Mode démo : aucun argent n'est débité. Un numéro qui finit par 1 simule un PIN refusé, 2 un solde insuffisant, 3 une absence de réponse.",
     "phoneInvalid": "Numéro incomplet ou opérateur inconnu.",
     "giftLine": "Offert à {phone}",
-    "items": "{count} articles"
+    "items": "{count} articles",
+    "andDownload": "et télécharger"
   },
   "payment": {
     "title": "Paiement Mobile Money",

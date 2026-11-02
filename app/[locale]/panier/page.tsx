@@ -23,8 +23,8 @@ export default async function CartPage({ params }: PageProps<"/[locale]/panier">
   );
 
   return (
-    <AppShell locale={locale} dict={dict} tab="cart" path="panier">
-      <h1 className="mb-4 mt-6 text-4xl font-bold">{dict.cart.title}</h1>
+    <AppShell locale={locale} dict={dict} tab="cart" path="panier" back={localePath(locale)} hideNav>
+      <h1 className="mb-3 mt-1 text-[22px] font-bold">{dict.cart.title}</h1>
       <CartView
         products={products}
         locale={locale}

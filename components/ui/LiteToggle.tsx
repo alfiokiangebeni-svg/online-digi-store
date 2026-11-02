@@ -25,12 +25,12 @@ export function LiteToggle({
   return (
     <div className="flex items-center justify-between gap-3">
       <div className="flex items-start gap-3">
-        <IconLeaf size={20} className="mt-0.5 shrink-0 text-success" />
+        <IconLeaf size={18} className="mt-0.5 shrink-0 text-success" />
         <div>
-          <p id="lite-label" className="font-medium">
+          <p id="lite-label" className="text-sm">
             {label}
           </p>
-          {hint ? <p className="text-sm text-muted">{hint}</p> : null}
+          {hint ? <p className="text-xs text-muted">{hint}</p> : null}
         </div>
       </div>
       <Switch

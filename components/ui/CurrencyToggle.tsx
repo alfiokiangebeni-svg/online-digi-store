@@ -20,8 +20,10 @@ export function CurrencyToggle({ label }: { label: string }) {
           aria-checked={currency === c}
           onClick={() => setCurrency(c)}
           className={cn(
-            "min-h-10 min-w-10 px-2 font-mono text-xs font-bold",
-            currency === c ? "bg-fg text-bg" : "text-muted hover:text-fg",
+            "min-h-[38px] min-w-[38px] px-2 text-xs font-bold rounded-[6px]",
+            currency === c
+              ? "bg-surface text-fg shadow-[0_1px_2px_rgb(0_0_0/0.08)]"
+              : "text-muted hover:text-fg",
           )}
         >
           {c === "USD" ? "$" : "FC"}

@@ -15,6 +15,7 @@ import { Price } from "@/components/ui/Price";
 import { Segmented } from "@/components/ui/Segmented";
 import { Switch } from "@/components/ui/Switch";
 import { Thumb } from "@/components/ui/Thumb";
+import { cn } from "@/components/ui/cn";
 import { IconLock } from "@/components/ui/icons";
 
 const AGES = [3, 6, 9, 12];
@@ -73,39 +74,39 @@ export function AccountView({
   ];
 
   return (
-    <div className="flex flex-col gap-8">
-      <section className="flex items-center gap-4">
+    <div className="flex flex-col gap-3">
+      <section className="flex items-center gap-3 pb-1 pt-2">
         <span
           aria-hidden="true"
-          className="grid size-16 shrink-0 place-items-center bg-laterite-strong font-display text-2xl font-bold text-paper rounded-[var(--radius-control)]"
+          className="grid size-[52px] shrink-0 place-items-center rounded-full bg-ink text-lg font-semibold text-lime-strong"
         >
           DS
         </span>
         <div>
-          <h1 className="text-3xl font-bold">{t.guest}</h1>
-          <p className="text-sm text-muted">{t.guestBody}</p>
+          <h1 className="text-lg font-bold">{t.guest}</h1>
+          <p className="text-[13px] leading-snug text-[#3a3f47] dark:text-muted">{t.guestBody}</p>
         </div>
       </section>
 
-      <dl className="grid grid-cols-3 border-y-2 border-line py-3 text-center">
+      <dl className="card grid grid-cols-3 text-center">
         {stats.map((s, i) => (
-          <div key={s.label} className={i ? "border-l-2 border-line" : undefined}>
-            <dd className="font-mono text-2xl font-bold">{s.value}</dd>
+          <div key={s.label} className={cn("py-3", i === 1 && "border-x border-surface-2")}>
+            <dd className="text-[17px] font-bold">{s.value}</dd>
             <dt className="text-xs text-muted">{s.label}</dt>
           </div>
         ))}
       </dl>
 
       {/* Contrôle parental */}
-      <section aria-labelledby="parental-title" className="flex flex-col gap-4 bg-surface p-4">
-        <div className="flex items-start justify-between gap-3">
-          <div className="flex gap-3">
-            <IconLock size={20} className="mt-1 shrink-0" />
+      <section aria-labelledby="parental-title" className="card flex flex-col gap-3 p-3.5">
+        <div className="flex items-center gap-3">
+          <div className="flex flex-1 items-start gap-2.5">
+            <IconLock size={18} className="mt-0.5 shrink-0" />
             <div>
-              <h2 id="parental-title" className="text-xl font-bold">
+              <h2 id="parental-title" className="text-[15px] font-semibold">
                 {t.parental}
               </h2>
-              <p className="text-sm text-muted">
+              <p className="text-xs text-muted">
                 {parental.enabled ? format(t.parentalOn, { age: parental.maxAge }) : t.parentalOff}
               </p>
             </div>
@@ -119,18 +120,28 @@ export function AccountView({
         {parental.enabled ? (
           <>
             <div className="flex flex-col gap-2">
-              <span id="age-label" className="text-sm font-medium">
+              <span id="age-label" className="text-[13px] text-muted">
                 {t.maxAge}
               </span>
-              <Segmented
-                label={t.maxAge}
-                value={String(parental.maxAge)}
-                options={AGES.map((a) => ({ value: String(a), label: format(t.ageOption, { age: a }) }))}
-                onChange={(v) => parentalStore.set({ ...parental, maxAge: Number(v) })}
-              />
+              <div role="group" aria-labelledby="age-label" className="flex gap-2">
+                {AGES.map((a) => (
+                  <button
+                    key={a}
+                    type="button"
+                    aria-pressed={parental.maxAge === a}
+                    onClick={() => parentalStore.set({ ...parental, maxAge: a })}
+                    className={cn(
+                      "h-10 flex-1 rounded-[6px] bg-surface text-[13px]",
+                      parental.maxAge === a ? "border-2 border-fg font-semibold" : "border border-steel",
+                    )}
+                  >
+                    {format(t.ageOption, { age: a })}
+                  </button>
+                ))}
+              </div>
             </div>
             <form
-              className="flex items-end gap-2"
+              className="flex items-start gap-2"
               onSubmit={(e) => {
                 e.preventDefault();
                 if (!/^\d{4}$/.test(pin)) {
@@ -145,12 +156,11 @@ export function AccountView({
               <Field
                 id="pin"
                 label={t.pinLabel}
-                className="flex-1"
+                className="min-w-0 flex-1"
                 type="password"
                 inputMode="numeric"
                 maxLength={4}
                 autoComplete="new-password"
-                mono
                 value={pin}
                 onChange={(e) => {
                   setPin(e.target.value.replace(/\D/g, "").slice(0, 4));
@@ -159,11 +169,7 @@ export function AccountView({
                 hint={pinMsg?.ok ? pinMsg.text : parental.pin ? undefined : t.pinNeeded}
                 error={pinMsg && !pinMsg.ok ? pinMsg.text : undefined}
               />
-              <Button
-                type="submit"
-                variant="secondary"
-                className={pinMsg || !parental.pin ? "mb-7" : undefined}
-              >
+              <Button type="submit" variant="secondary" className="mt-[26px] shrink-0 px-3">
                 {t.pinSave}
               </Button>
             </form>
@@ -172,12 +178,12 @@ export function AccountView({
       </section>
 
       {/* Favoris */}
-      <section aria-labelledby="fav-title">
-        <h2 id="fav-title" className="text-xl font-bold">
+      <section aria-labelledby="fav-title" className="card pt-3">
+        <h2 id="fav-title" className="px-3.5 text-[15px] font-semibold">
           {t.favoritesTitle}
         </h2>
         {favorites.length ? (
-          <ul className="mt-2">
+          <ul className="mt-1">
             {favorites
               .map((slug) => products[slug])
               .filter(Boolean)
@@ -187,9 +193,9 @@ export function AccountView({
                   href={p.href}
                   media={
                     <Thumb
-                      id={`f-${p.slug}`}
                       title={p.title}
                       tone={p.tone}
+                      size={44}
                       round={p.kind === "game" || p.kind === "edu"}
                     />
                   }
@@ -208,17 +214,17 @@ export function AccountView({
               ))}
           </ul>
         ) : (
-          <p className="mt-2 text-sm text-muted">{t.favoritesEmpty}</p>
+          <p className="px-3.5 pb-3.5 pt-1 text-xs text-muted">{t.favoritesEmpty}</p>
         )}
       </section>
 
       {/* Réglages */}
-      <section aria-labelledby="settings-title" className="flex flex-col gap-4">
-        <h2 id="settings-title" className="text-xl font-bold">
+      <section aria-labelledby="settings-title" className="card flex flex-col gap-3 p-3.5">
+        <h2 id="settings-title" className="text-[15px] font-semibold">
           {t.settings}
         </h2>
-        <div className="flex items-center justify-between gap-3">
-          <span className="font-medium">{t.currency}</span>
+        <div className="flex items-center justify-between gap-3 text-sm">
+          <span>{t.currency}</span>
           <Segmented
             label={t.currency}
             value={currency}
@@ -229,14 +235,14 @@ export function AccountView({
             onChange={setCurrency}
           />
         </div>
-        <div className="flex items-center justify-between gap-3">
-          <span className="font-medium">{t.theme}</span>
+        <div className="flex items-center justify-between gap-3 text-sm">
+          <span>{t.theme}</span>
           <Segmented
             label={t.theme}
             value={theme}
             options={[
-              { value: "dark", label: t.themeDark },
               { value: "light", label: t.themeLight },
+              { value: "dark", label: t.themeDark },
             ]}
             onChange={setTheme}
           />

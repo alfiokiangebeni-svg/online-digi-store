@@ -133,7 +133,7 @@ La CI GitHub Actions lance tout cela sur chaque Pull Request. Plan et mesures : 
 
 ## Documentation
 
-- [docs/DESIGN.md](docs/DESIGN.md) — charte « Kinshasa la nuit » : couleurs, polices, formes
+- [docs/DESIGN.md](docs/DESIGN.md) — design de l'application (maquette mobile) : couleurs, police Inter, formes, écrans
 - [docs/PAIEMENT-MOBILE-MONEY.md](docs/PAIEMENT-MOBILE-MONEY.md) — opérateurs, agrégateurs, flux de paiement
 - [docs/ROADMAP.md](docs/ROADMAP.md) — feuille de route
 - [docs/PLAN.md](docs/PLAN.md) — phases de développement, décisions techniques, mesures Lighthouse

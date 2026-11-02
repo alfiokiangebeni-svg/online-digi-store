@@ -23,7 +23,7 @@ export default async function LibraryPage({ params }: PageProps<"/[locale]/bibli
   );
   return (
     <AppShell locale={locale} dict={dict} tab="library" path="bibliotheque">
-      <h1 className="mb-4 mt-6 text-4xl font-bold">{dict.library.title}</h1>
+      <h1 className="mb-3 mt-1 text-[22px] font-bold">{dict.library.title}</h1>
       <LibraryView
         products={products}
         locale={locale}

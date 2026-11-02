@@ -71,3 +71,22 @@ Lighthouse (médiane de 5 passages, mobile Slow 4G simulé, CPU ×4) :
 **Écart au budget** : le score (≥ 95) et le CLS tiennent ; le LCP simulé dépasse 2,0 s sur la fiche produit (et frôle la limite sur l'accueil). En mesure réelle sans bridage, le titre (élément LCP) s'affiche au premier rendu (≈ 140 ms) ; l'écart vient du modèle de Lighthouse, qui compte tout le JavaScript demandé avant ce rendu. Pistes : charger à la demande la feuille « Offrir » et le compte à rebours, passer les fiches en rendu sans hydratation hors barre d'achat.
 
 JavaScript (brotli) : accueil 115 Ko (budget 120), fiche produit 118 Ko, panier 122 Ko.
+
+## Design de la maquette appliqué (remplace « Kinshasa la nuit »)
+
+À la demande du propriétaire, l'application adopte le style visuel complet de la maquette mobile : fond citron `#E8F5C0`, cartes blanches arrondies, Inter, boutons noirs, liens verts, remises rouges, bandeaux noirs à accent citron, barre de navigation blanche. Détails dans `docs/DESIGN.md`.
+
+- Police : Inter variable 400–700 en un seul fichier de 28 Ko (au lieu de trois familles) ; elle contient ɛ et ɔ pour le lingala.
+- Mode clair par défaut ; mode sombre en réglage (Compte).
+- Icônes d'application régénérées (« d. » citron sur noir).
+- Deux couleurs foncées par rapport à la maquette pour le contraste AA (prix barré, liens sur fond citron).
+
+Lighthouse (médiane de 5 passages, mobile Slow 4G simulé, CPU ×4) — **toutes les assertions de la CI passent** :
+
+| Page          | Perf. | Access. | LCP (min–max)             | TBT       | CLS |
+| ------------- | ----- | ------- | ------------------------- | --------- | --- |
+| Accueil       | 96–99 | 100     | 1,7–2,3 s                 | 80–170 ms | 0   |
+| Fiche produit | 98–99 | 100     | 1,1–2,2 s (médiane 1,9 s) | 70–140 ms | 0   |
+| Panier        | 97–99 | 100     | 1,3–1,8 s                 | 95–180 ms | 0   |
+
+JavaScript (brotli) : accueil 115 Ko, fiche produit 117 Ko, panier 121 Ko. Police : 28 Ko.

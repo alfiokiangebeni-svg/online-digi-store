@@ -66,7 +66,7 @@
   },
   "design": {
     "title": "Design system",
-    "intro": "Biteni nyonso ya Digi Store, na ndenge na yango nyonso. Lokasa nyonso ya magazini etongami kaka na biteni oyo.",
+    "intro": "Biteni nyonso ya application, na ndenge ya maquette ya mobile. Lokasa nyonso etongami kaka na biteni oyo.",
     "sections": {
       "colors": "Balangi",
       "type": "Makomi",
@@ -80,24 +80,24 @@
       "sheet": "Lokasa ya nse",
       "skeleton": "Ezali koya",
       "nav": "Nzela ya nse",
-      "patterns": "Bilembo mpe bafoto",
+      "patterns": "Ba-story mpe bililí",
       "lists": "Ba-liste, koluka mpe ba-réglage"
     },
     "colorUsage": {
-      "ink": "Nse ya molili (ya liboso)",
-      "paper": "Nse ya mwinda, ba-reçu",
-      "taxi": "Kaka oyo etekisaka : kofuta, motuya, promo",
-      "laterite": "Promo ya mbangu, biloko ya sika",
-      "fleuve": "Bondimi, « Ekómi », elikya",
-      "cendre": "Makomi ya mibale"
+      "lime": "Nse ya application",
+      "ink": "Makomi, ba-bouton ya liboso",
+      "white": "Ba-carte",
+      "leaf": "Ba-lien, moteki, bondimi",
+      "promo": "Ba-promo, koteka ya mbangu",
+      "limeStrong": "Langi ya kongenga na moindo"
     },
     "typeSamples": {
-      "display": "Bricolage Grotesque — mitó ya makambo",
-      "body": "Work Sans — makomi. Basombi batangaka na telefone moke, na moi makasi : maloba mokuse, langi ekeseni makasi.",
-      "mono": "Space Mono — motuya mpe ba-code"
+      "display": "Inter 700 — mitó ya makambo",
+      "body": "Inter 400 — makomi. Basombi batangaka na telefone moke, na moi makasi : maloba mokuse, langi ekeseni makasi.",
+      "mono": "Inter 600 — motuya mpe ba-code"
     },
     "buttons": {
-      "primary": "Bouton ya koteka (langi ya taxi)",
+      "primary": "Bouton ya liboso (moindo)",
       "secondary": "Ya mibale",
       "ghost": "Ya kimia",
       "danger": "Kolongola",
@@ -170,7 +170,9 @@
       "operators": "M-Pesa · Airtel Money · Orange Money · Afrimoney",
       "delivery": "Ekómi na nse ya basekondi 10",
       "support": "Lisalisi na WhatsApp na lifalansé mpe na lingála"
-    }
+    },
+    "packPrice": "{price} na esika ya {old}",
+    "trustTitle": "Kofuta na Mobile Money · ekómi mbala moko"
   },
   "product": {
     "kinds": {
@@ -315,7 +317,8 @@
     "demoNotice": "Ndakisa : mbongo ebimi te. Nimero oyo esuki na 1 = PIN ya mabe, 2 = mbongo ekoki te, 3 = eyano te.",
     "phoneInvalid": "Nimero ekoki te to opérateur eyebani te.",
     "giftLine": "Kado mpo na {phone}",
-    "items": "Biloko {count}"
+    "items": "Biloko {count}",
+    "andDownload": "mpe kitisa"
   },
   "payment": {
     "title": "Kofuta na Mobile Money",

@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import { cn } from "./cn";
 
 const base =
-  "inline-flex min-h-11 items-center gap-2 whitespace-nowrap border-2 px-4 text-sm font-medium rounded-[var(--radius-control)] transition-colors";
+  "inline-flex min-h-10 items-center gap-2 whitespace-nowrap border px-3.5 text-[13px] font-medium rounded-[6px] transition-colors";
 
 function classes(selected: boolean | undefined) {
   return cn(base, selected ? "border-fg bg-fg text-bg" : "border-line text-fg hover:border-fg");

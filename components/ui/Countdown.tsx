@@ -57,12 +57,12 @@ export function Countdown({
   const [h, m, s] = remaining === null ? ["--", "--", "--"] : split(remaining);
 
   return (
-    <p className="inline-flex items-center gap-2 bg-laterite-strong px-3 py-1.5 text-sm font-medium text-paper">
+    <p className="inline-flex items-center gap-2 rounded-[6px] bg-promo px-2.5 py-1 text-xs font-semibold text-white">
       <span>{ended ? endedLabel : label}</span>
       {!ended ? (
         <time
           dateTime={`PT${h}H${m}M${s}S`}
-          className={cn("inline-block font-mono font-bold tabular-nums", lastMinute && "animate-beat")}
+          className={cn("inline-block font-bold tabular-nums", lastMinute && "animate-beat")}
         >
           {h}:{m}:{s}
         </time>

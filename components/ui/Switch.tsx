@@ -27,14 +27,14 @@ export function Switch({
       <span
         aria-hidden="true"
         className={cn(
-          "relative inline-block h-6 w-11 rounded-full border-2 transition-colors",
-          checked ? "border-fleuve bg-fleuve" : "border-line bg-surface-2",
+          "relative inline-block h-8 w-[52px] rounded-full transition-colors",
+          checked ? "bg-fg" : "bg-steel",
         )}
       >
         <span
           className={cn(
-            "absolute left-0 top-0.5 size-4 rounded-full transition-transform",
-            checked ? "translate-x-5.5 bg-paper" : "translate-x-0.5 bg-fg",
+            "absolute left-0 top-[3px] size-[26px] rounded-full bg-white shadow-[0_1px_2px_rgb(0_0_0/0.2)] transition-transform",
+            checked ? "translate-x-[23px]" : "translate-x-[3px]",
           )}
         />
       </span>

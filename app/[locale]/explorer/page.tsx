@@ -26,7 +26,7 @@ export default async function ExplorePage({ params }: PageProps<"/[locale]/explo
 
   return (
     <AppShell locale={locale} dict={dict} tab="explore" path="explorer">
-      <h1 className="mb-4 mt-6 text-4xl font-bold">{dict.explore.title}</h1>
+      <h1 className="mb-3 mt-1 text-[22px] font-bold">{dict.explore.title}</h1>
       <ExplorerView
         items={items}
         kinds={KINDS}

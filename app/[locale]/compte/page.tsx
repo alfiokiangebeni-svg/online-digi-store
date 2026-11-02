@@ -3,7 +3,7 @@ import Link from "next/link";
 import { AppShell } from "@/components/shell/AppShell";
 import { AccountView } from "@/components/shop/AccountView";
 import { metaLine, productHref } from "@/components/shop/labels";
-import { IconChat, IconChevron, KubaDivider, buttonClasses } from "@/components/ui";
+import { IconChat, IconChevron } from "@/components/ui";
 import { SUPPORT_WHATSAPP } from "@/lib/brand";
 import { CATALOG, summarize } from "@/lib/catalog";
 import { LOCALES, localePath } from "@/lib/i18n/config";
@@ -36,7 +36,7 @@ export default async function AccountPage({ params }: PageProps<"/[locale]/compt
 
   return (
     <AppShell locale={locale} dict={dict} tab="account" path="compte">
-      <div className="mt-6">
+      <div>
         <AccountView
           products={products}
           locale={locale}
@@ -51,11 +51,11 @@ export default async function AccountPage({ params }: PageProps<"/[locale]/compt
         />
       </div>
 
-      <section aria-labelledby="lang-title" className="mt-6">
-        <h2 id="lang-title" className="text-sm font-medium">
+      <section aria-labelledby="lang-title" className="card mt-3 flex flex-col gap-2 p-3.5">
+        <h2 id="lang-title" className="text-[15px] font-semibold">
           {a.language}
         </h2>
-        <div className="mt-2 flex gap-2">
+        <div className="flex gap-2">
           {LOCALES.map((l) => (
             <Link
               key={l}
@@ -63,10 +63,9 @@ export default async function AccountPage({ params }: PageProps<"/[locale]/compt
               hrefLang={l}
               lang={l}
               aria-current={l === locale ? "true" : undefined}
-              className={buttonClasses({
-                variant: l === locale ? "secondary" : "ghost",
-                className: "min-h-11 flex-1 px-2 text-sm",
-              })}
+              className={`inline-flex h-10 flex-1 items-center justify-center rounded-[6px] bg-surface text-[13px] ${
+                l === locale ? "border-2 border-fg font-semibold" : "border border-steel"
+              }`}
             >
               {LANGUAGE_NAMES[l]}
             </Link>
@@ -74,43 +73,55 @@ export default async function AccountPage({ params }: PageProps<"/[locale]/compt
         </div>
       </section>
 
-      <dl className="mt-6">
+      <dl className="card mt-3 px-3.5">
         {rows.map(([k, v]) => (
-          <div key={k} className="flex min-h-12 items-center justify-between gap-4 border-b-2 border-line">
+          <div
+            key={k}
+            className="flex h-[52px] items-center justify-between gap-4 border-b border-surface-2 text-sm last:border-b-0"
+          >
             <dt>{k}</dt>
-            <dd className="flex items-center gap-2 text-sm text-muted">
+            <dd className="flex items-center gap-2 text-[13px] text-muted">
               {v}
-              <span className="border border-line px-1.5 text-[11px] uppercase">{a.soon}</span>
+              <span className="rounded-[4px] bg-surface-2 px-1.5 py-0.5 text-[10px] font-semibold uppercase">
+                {a.soon}
+              </span>
             </dd>
           </div>
         ))}
       </dl>
 
-      <KubaDivider id="kuba-account" />
-
       <section
         aria-labelledby="seller-title"
-        className="ticket flex flex-col items-start gap-3 bg-surface p-5"
+        className="mt-3 flex items-center gap-3 rounded-[10px] bg-ink p-3.5"
       >
-        <h2 id="seller-title" className="text-2xl font-bold">
-          {a.seller}
-        </h2>
-        <p className="text-muted">{a.sellerBody}</p>
-        <p className="text-sm">{a.sellerSoon}</p>
-        <a href={sellerHref} rel="noopener" className={buttonClasses({ variant: "secondary" })}>
+        <div className="flex flex-1 flex-col gap-1">
+          <h2 id="seller-title" className="text-[15px] font-semibold text-white">
+            {a.seller}
+          </h2>
+          <p className="text-xs text-steel">{a.sellerBody}</p>
+        </div>
+        <a
+          href={sellerHref}
+          rel="noopener"
+          className="inline-flex h-[38px] shrink-0 items-center rounded-[6px] bg-lime-strong px-3 text-[13px] font-semibold text-ink"
+        >
           {a.sellerCta}
-          <IconChevron size={18} />
         </a>
       </section>
 
-      <a
-        href={SUPPORT_WHATSAPP.href}
-        rel="noopener"
-        className="mt-6 flex min-h-12 items-center gap-3 border-b-2 border-line font-medium"
-      >
-        <IconChat size={20} />
-        {a.help}
-      </a>
+      <div className="card mt-3 px-3.5">
+        <a
+          href={SUPPORT_WHATSAPP.href}
+          rel="noopener"
+          className="flex h-[52px] items-center justify-between text-sm"
+        >
+          <span className="inline-flex items-center gap-2.5">
+            <IconChat size={18} />
+            {a.help}
+          </span>
+          <IconChevron size={16} className="text-muted" />
+        </a>
+      </div>
     </AppShell>
   );
 }

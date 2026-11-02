@@ -15,7 +15,6 @@ import {
 } from "@/components/ui";
 import { CartBadge } from "@/components/ui/CartBadge";
 import { CurrencyToggle } from "@/components/ui/CurrencyToggle";
-import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 export type Tab = "home" | "explore" | "library" | "cart" | "account" | null;
 
@@ -66,16 +65,16 @@ export function AppShell({
     <>
       <a
         href="#contenu"
-        className="sr-only z-50 bg-taxi px-4 py-3 font-medium text-ink focus:not-sr-only focus:fixed focus:left-2 focus:top-2"
+        className="sr-only z-50 bg-ink px-4 py-3 font-medium text-white focus:not-sr-only focus:fixed focus:left-2 focus:top-2"
       >
         {dict.a11y.skipToContent}
       </a>
-      <header className="mx-auto flex max-w-5xl items-center justify-between gap-2 px-4 pt-3">
+      <header className="mx-auto flex max-w-5xl items-center justify-between gap-2 px-4 pt-2.5">
         {back ? (
           <Link
             href={back}
             aria-label={dict.product.back}
-            className="-ml-2 grid size-11 place-items-center rounded-[var(--radius-control)] hover:bg-surface-2"
+            className="-ml-2 grid size-11 place-items-center rounded-[8px] hover:bg-fg/6"
           >
             <IconBack />
           </Link>
@@ -83,19 +82,18 @@ export function AppShell({
           <Link
             href={localePath(locale)}
             aria-label={dict.a11y.home}
-            className="flex min-h-11 items-center font-display text-xl font-bold uppercase tracking-tight"
+            className="flex min-h-11 items-center text-2xl font-bold tracking-[-0.8px]"
           >
-            Digi<span className="ml-1 border-b-4 border-laterite leading-none">Store</span>
+            digistore<span className="text-accent">.</span>
           </Link>
         )}
         <div role="group" aria-label={dict.a11y.settings} className="flex items-center gap-1">
           <CurrencyToggle label={dict.header.currency} />
-          <ThemeToggle toLight={dict.theme.toLight} toDark={dict.theme.toDark} />
           <Link
             href={localePath(locale, "panier")}
             prefetch={false}
             aria-label={dict.header.cart}
-            className="relative grid size-11 place-items-center rounded-[var(--radius-control)] hover:bg-surface-2"
+            className="relative grid size-11 place-items-center rounded-[8px] hover:bg-fg/6"
           >
             <span className="relative">
               <IconCart size={22} />
@@ -105,17 +103,15 @@ export function AppShell({
         </div>
       </header>
 
-      <main id="contenu" className="mx-auto max-w-5xl px-4 pb-8">
+      <main id="contenu" className="mx-auto max-w-5xl px-4 pb-6">
         {children}
       </main>
 
-      <footer
-        className={`mx-auto max-w-5xl border-t-2 border-line px-4 pt-6 text-sm text-muted ${hideNav ? "pb-32" : "pb-24"}`}
-      >
+      <footer className={`mx-auto max-w-5xl px-4 pt-2 text-xs text-muted ${hideNav ? "pb-36" : "pb-24"}`}>
         <a
           href={SUPPORT_WHATSAPP.href}
           rel="noopener"
-          className="inline-flex min-h-11 items-center gap-2 font-medium text-fg hover:underline"
+          className="inline-flex min-h-11 items-center gap-2 font-semibold text-fg hover:underline"
         >
           <IconChat size={18} />
           {format(dict.footer.support, { phone: SUPPORT_WHATSAPP.display })}

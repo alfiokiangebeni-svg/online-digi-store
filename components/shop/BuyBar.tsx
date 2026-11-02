@@ -6,7 +6,6 @@ import type { ReactNode } from "react";
 import { addToCart, addToLibrary, cartStore, libraryStore } from "@/lib/client/shop";
 import { useStore } from "@/lib/client/store";
 import { buttonClasses } from "@/components/ui/Button";
-import { IconBolt } from "@/components/ui/icons";
 import { FavoriteButton } from "./FavoriteButton";
 
 /** Barre d'achat fixée en bas de la fiche produit (remplace la navigation). */
@@ -20,7 +19,7 @@ export function BuyBar({
 }: {
   slug: string;
   free: boolean;
-  /** Prix déjà formaté côté serveur (deux devises). */
+  /** Prix effectif déjà formaté côté serveur (deux devises), affiché dans « Acheter ». */
   price: ReactNode;
   cartHref: string;
   libraryHref: string;
@@ -42,7 +41,7 @@ export function BuyBar({
   let actions: ReactNode;
   if (owned) {
     actions = (
-      <Link href={libraryHref} className={buttonClasses({ variant: "secondary", block: true })}>
+      <Link href={libraryHref} className={buttonClasses({ variant: "secondary", size: "lg", block: true })}>
         {labels.owned} · {labels.open}
       </Link>
     );
@@ -50,7 +49,7 @@ export function BuyBar({
     actions = (
       <button
         type="button"
-        className={buttonClasses({ variant: "secondary", block: true })}
+        className={buttonClasses({ variant: "sell", size: "lg", block: true })}
         onClick={() => addToLibrary([{ slug, paidUsdCents: 0 }])}
       >
         {labels.get}
@@ -60,13 +59,16 @@ export function BuyBar({
     actions = (
       <>
         {inCart ? (
-          <Link href={cartHref} className={buttonClasses({ variant: "secondary", className: "flex-1 px-3" })}>
+          <Link
+            href={cartHref}
+            className={buttonClasses({ variant: "secondary", size: "lg", className: "flex-1 px-2" })}
+          >
             {labels.inCart}
           </Link>
         ) : (
           <button
             type="button"
-            className={buttonClasses({ variant: "secondary", className: "flex-1 px-3" })}
+            className={buttonClasses({ variant: "secondary", size: "lg", className: "flex-1 px-2" })}
             onClick={() => addToCart({ slug })}
           >
             {labels.addToCart}
@@ -74,23 +76,21 @@ export function BuyBar({
         )}
         <button
           type="button"
-          className={buttonClasses({ variant: "sell", className: "flex-1 px-3" })}
+          className={buttonClasses({ variant: "sell", size: "lg", className: "flex-1 px-2" })}
           onClick={() => {
             addToCart({ slug });
             router.push(cartHref);
           }}
         >
-          <IconBolt size={18} />
-          {labels.buy}
+          {labels.buy} {price}
         </button>
       </>
     );
   }
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 border-t-2 border-line bg-bg px-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-3">
+    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-[#e5e7eb] bg-surface px-3 pb-[calc(1.25rem+env(safe-area-inset-bottom))] pt-2.5 dark:border-line">
       <div className="mx-auto flex max-w-xl flex-col gap-2">
-        {!free && !owned ? <div className="flex justify-end">{price}</div> : null}
         <div className="flex items-center gap-2">
           <FavoriteButton slug={slug} addLabel={labels.favorite} removeLabel={labels.unfavorite} />
           {actions}

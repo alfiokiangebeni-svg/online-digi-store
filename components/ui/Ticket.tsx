@@ -1,59 +1,52 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { cn } from "./cn";
-import { KubaPattern } from "./Kuba";
 
 export type CoverTone = "laterite" | "fleuve" | "ink" | "cendre" | "paper";
 
-const COVER_TONES: Record<CoverTone, string> = {
-  laterite: "bg-laterite text-paper",
-  fleuve: "bg-fleuve text-paper",
-  ink: "bg-ink text-paper",
-  cendre: "bg-cendre text-ink",
-  paper: "bg-paper text-ink",
+/** Teintes douces des visuels (en attendant les images vendeurs). Contraste AA vérifié. */
+export const COVER_TONES: Record<CoverTone, string> = {
+  laterite: "bg-[#fde4da] text-[#9a3412]",
+  fleuve: "bg-[#ddf0c8] text-[#3f6212]",
+  ink: "bg-ink text-lime-strong",
+  cendre: "bg-cloud text-[#3a3f47]",
+  paper: "bg-[#fff4d6] text-[#7a4d00]",
 };
 
-/** Couverture typographique (en attendant les visuels vendeurs, et en mode données légères). */
+/** Visuel typographique d'un produit (zone image de la carte). */
 export function TicketCover({
-  id,
   tone,
   title,
-  kids,
 }: {
-  id: string;
+  id?: string;
   tone: CoverTone;
   title: string;
   kids?: boolean;
 }) {
   return (
     <div aria-hidden="true" className={cn("cover", COVER_TONES[tone])}>
-      <KubaPattern id={`kuba-${id}`} className="kuba-fill" />
-      {kids ? <span className="absolute -right-6 -top-6 size-28 rounded-full bg-current opacity-20" /> : null}
-      <span className={cn("cover-title", kids && "text-2xl")}>{title}</span>
+      <span className="cover-title">{title}</span>
     </div>
   );
 }
 
 /**
- * Ticket produit : coin coupé, perforation entre visuel et prix.
- * `cover` est un nœud pour accepter une couverture typographique ou une photo (next/image).
+ * Carte produit (« Offres de la semaine ») : visuel, remise en coin, nom, type, prix.
+ * `cover` accepte le visuel typographique ou une photo (next/image).
  */
 export function Ticket({
   href,
   title,
   kindLabel,
-  seller,
   cover,
   price,
   badges,
-  meta,
-  kids,
   className,
 }: {
   href?: string;
   title: string;
   kindLabel: string;
-  seller: string;
+  seller?: string;
   cover: ReactNode;
   price: ReactNode;
   badges?: ReactNode;
@@ -69,17 +62,14 @@ export function Ticket({
     title
   );
   return (
-    <article className={cn("ticket ticket-card", kids && "kids", className)}>
+    <article className={cn("ticket ticket-card", className)}>
       <div className="relative">
         {cover}
         {badges ? <div className="ticket-badges">{badges}</div> : null}
       </div>
-      <div className="ticket-perforation" />
       <div className="ticket-body">
-        <p className="ticket-kind">{kindLabel}</p>
         <h3 className="ticket-title">{heading}</h3>
-        <p className="ticket-sub">{seller}</p>
-        {meta ? <div className="ticket-meta">{meta}</div> : null}
+        <p className="ticket-kind">{kindLabel}</p>
         <div className="ticket-price">{price}</div>
       </div>
     </article>

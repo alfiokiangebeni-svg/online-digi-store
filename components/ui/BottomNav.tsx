@@ -25,7 +25,7 @@ export function BottomNav({
     <nav
       aria-label={label}
       className={cn(
-        "z-40 border-t-2 border-line bg-bg pb-[env(safe-area-inset-bottom)]",
+        "z-40 border-t border-[#e5e7eb] bg-surface pb-[env(safe-area-inset-bottom)] dark:border-line",
         fixed && "fixed inset-x-0 bottom-0",
       )}
     >
@@ -40,13 +40,12 @@ export function BottomNav({
               prefetch={false}
               aria-current={item.active ? "page" : undefined}
               className={cn(
-                "relative flex min-h-14 flex-col items-center justify-center gap-0.5 px-0.5 text-[11px] font-medium",
-                item.active ? "text-fg" : "text-muted hover:text-fg",
+                "relative flex min-h-16 flex-col items-center justify-center gap-[3px] px-0.5 text-[11px]",
+                item.active
+                  ? "font-semibold text-fg [&_svg]:stroke-[2.6]"
+                  : "font-medium text-muted hover:text-fg",
               )}
             >
-              {item.active ? (
-                <span aria-hidden="true" className="absolute inset-x-5 top-0 h-[3px] bg-fg" />
-              ) : null}
               <span className="relative">
                 {item.icon}
                 {item.badge}

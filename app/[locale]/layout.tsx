@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Pr
 }
 
 export const viewport: Viewport = {
-  themeColor: "#14110F",
+  themeColor: "#E8F5C0",
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
@@ -35,7 +35,7 @@ export const viewport: Viewport = {
 export default async function RootLayout({ children, params }: LayoutProps<"/[locale]">) {
   const locale = await resolveLocale(params);
   return (
-    <html lang={locale} data-theme="dark" className={fontVariables} suppressHydrationWarning>
+    <html lang={locale} data-theme="light" className={fontVariables} suppressHydrationWarning>
       <head>
         <BootScript />
       </head>

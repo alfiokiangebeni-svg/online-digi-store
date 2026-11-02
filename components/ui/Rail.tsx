@@ -13,14 +13,14 @@ export function Rail({
   children: ReactNode;
 }) {
   return (
-    <section aria-labelledby={id} className="mt-8">
-      <div className="mb-3 flex items-end justify-between gap-4">
-        <h2 id={id} className="text-2xl font-bold">
+    <section aria-labelledby={id} className="mt-4">
+      <div className="mb-2.5 flex items-center justify-between gap-4">
+        <h2 id={id} className="text-base font-bold">
           {title}
         </h2>
         {action}
       </div>
-      <div className="scroll-rail -mx-4 flex gap-3 overflow-x-auto px-4 pb-2">{children}</div>
+      <div className="scroll-rail -mx-4 flex gap-2.5 overflow-x-auto px-4 pb-1">{children}</div>
     </section>
   );
 }

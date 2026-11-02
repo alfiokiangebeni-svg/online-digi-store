@@ -2,14 +2,11 @@
 """
 Génère les polices auto-hébergées de Digi Store (app/fonts/*.woff2).
 
-Pourquoi : Google Fonts sert Work Sans et Bricolage Grotesque en polices variables
-complètes (≈ 50 Ko et 22 Ko préchargés). On fige ici les seules graisses utilisées
-et on garde le latin utile au français et au lingala (ɛ, ɔ, tons).
+Police unique : Inter (design de la maquette mobile). Google Fonts sert Inter en
+police variable complète (100–900, opsz) ; on garde ici 400–700, opsz 14, et le
+latin utile au français et au lingala (ɛ, ɔ, tons) : un seul fichier ≈ 28 Ko.
 
-Sources (licence SIL OFL 1.1) : https://github.com/google/fonts
-  ofl/worksans/WorkSans[wght].ttf
-  ofl/bricolagegrotesque/BricolageGrotesque[opsz,wdth,wght].ttf
-  ofl/spacemono/SpaceMono-Regular.ttf, SpaceMono-Bold.ttf
+Source (licence SIL OFL 1.1) : https://github.com/google/fonts — ofl/inter/Inter[opsz,wght].ttf
 
 Usage : pip install fonttools brotli
         python3 scripts/build-fonts.py <dossier-des-sources>
@@ -33,16 +30,8 @@ UNICODES = (
 )
 
 FONTS = [
-    # (source, sortie, positions des axes à figer)
-    ("WorkSans[wght].ttf", "work-sans-400.woff2", {"wght": 400}),
-    ("WorkSans[wght].ttf", "work-sans-500.woff2", {"wght": 500}),
-    (
-        "BricolageGrotesque[opsz,wdth,wght].ttf",
-        "bricolage-grotesque-700.woff2",
-        {"wght": 700, "opsz": 48, "wdth": 100},
-    ),
-    ("SpaceMono-Regular.ttf", "space-mono-400.woff2", None),
-    ("SpaceMono-Bold.ttf", "space-mono-700.woff2", None),
+    # (source, sortie, positions des axes à figer — un intervalle garde l'axe variable)
+    ("Inter[opsz,wght].ttf", "inter-var.woff2", {"wght": (400, 700), "opsz": 14}),
 ]
 
 
@@ -63,7 +52,6 @@ def build(src: Path, out: Path, axes):
     options.hinting = False
     options.desubroutinize = True
     options.name_IDs = [0, 1, 2, 3, 4, 5, 6]
-    options.notdef_outline = True
     sub = subset.Subsetter(options)
     sub.populate(unicodes=subset.parse_unicodes(UNICODES))
     sub.subset(font)
