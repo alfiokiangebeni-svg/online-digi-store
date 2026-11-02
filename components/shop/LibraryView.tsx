@@ -171,7 +171,7 @@ export function LibraryView({
                       aria-label={downloading ? undefined : `${t.download} — ${p.title}`}
                       className={cn(
                         buttonClasses({ variant: downloading ? "ghost" : "secondary" }),
-                        "relative min-h-11 min-w-28 overflow-hidden px-3 text-sm disabled:opacity-100",
+                        "relative min-h-11 w-32 overflow-hidden px-3 text-sm disabled:opacity-100",
                       )}
                     >
                       {downloading ? (
@@ -181,7 +181,10 @@ export function LibraryView({
                             className="absolute inset-y-0 left-0 bg-fleuve/30"
                             style={{ width: `${pct}%` }}
                           />
-                          <span className="relative font-mono" aria-live="polite">
+                          <span aria-hidden="true" className="relative font-mono">
+                            {pct} %
+                          </span>
+                          <span className="sr-only" aria-live="polite">
                             {format(t.downloading, { percent: pct })}
                           </span>
                         </>
