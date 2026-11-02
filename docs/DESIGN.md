@@ -13,35 +13,35 @@ Le style s'inspire de la ville (jaune des taxis, terre latérite, fleuve Congo) 
 
 ## Couleurs
 
-| Token | Nom | Hex | Usage |
-| --- | --- | --- | --- |
-| `--ink` | Encre de nuit | `#14110F` | Fond mode sombre (mode par défaut) |
-| `--paper` | Papier pagne | `#F4EEE3` | Fond mode clair, reçus |
-| `--taxi` | Jaune taxi | `#F2B705` | Bouton « Payer », prix, badges promo — **uniquement** |
-| `--laterite` | Latérite | `#C2502E` | Ventes flash, nouveautés |
-| `--fleuve` | Vert fleuve | `#1F6F5C` | Confirmations, « Livré », confiance |
-| `--cendre` | Cendre | `#8C8279` | Texte secondaire |
+| Token        | Nom           | Hex       | Usage                                                 |
+| ------------ | ------------- | --------- | ----------------------------------------------------- |
+| `--ink`      | Encre de nuit | `#14110F` | Fond mode sombre (mode par défaut)                    |
+| `--paper`    | Papier pagne  | `#F4EEE3` | Fond mode clair, reçus                                |
+| `--taxi`     | Jaune taxi    | `#F2B705` | Bouton « Payer », prix, badges promo — **uniquement** |
+| `--laterite` | Latérite      | `#C2502E` | Ventes flash, nouveautés                              |
+| `--fleuve`   | Vert fleuve   | `#1F6F5C` | Confirmations, « Livré », confiance                   |
+| `--cendre`   | Cendre        | `#8C8279` | Texte secondaire                                      |
 
 **Règle d'or** : le jaune n'apparaît que sur ce qui fait vendre.
 
 ```css
 :root {
-  --ink: #14110F;
-  --paper: #F4EEE3;
-  --taxi: #F2B705;
-  --laterite: #C2502E;
-  --fleuve: #1F6F5C;
-  --cendre: #8C8279;
+  --ink: #14110f;
+  --paper: #f4eee3;
+  --taxi: #f2b705;
+  --laterite: #c2502e;
+  --fleuve: #1f6f5c;
+  --cendre: #8c8279;
 }
 ```
 
 ## Typographie
 
-| Rôle | Police | Source |
-| --- | --- | --- |
-| Titres | Bricolage Grotesque (700) | Google Fonts |
-| Texte | Work Sans (400, 500) | Google Fonts |
-| Prix, codes de transaction | Space Mono | Google Fonts |
+| Rôle                       | Police                    | Source       |
+| -------------------------- | ------------------------- | ------------ |
+| Titres                     | Bricolage Grotesque (700) | Google Fonts |
+| Texte                      | Work Sans (400, 500)      | Google Fonts |
+| Prix, codes de transaction | Space Mono                | Google Fonts |
 
 ## Formes et signatures
 
@@ -60,3 +60,21 @@ Le style s'inspire de la ville (jaune des taxis, terre latérite, fleuve Congo) 
 
 Barre en bas, 4 onglets : **Découvrir · Chercher · Ma bibliothèque · Moi**.
 Bouton « Payer avec Mobile Money » fixé en bas de la page produit.
+
+## Accessibilité (contraste AA)
+
+Certaines paires de la palette n'atteignent pas 4,5:1 sur du petit texte. Variantes utilisées (vérifiées par `tests/contrast.test.ts`) :
+
+| Token                     | Hex       | Usage                                                                       |
+| ------------------------- | --------- | --------------------------------------------------------------------------- |
+| `--color-laterite-strong` | `#A8432A` | Fond des badges « Vente flash » / « Nouveau » et du compteur (texte papier) |
+| `--color-fleuve-bright`   | `#5CC0A5` | Texte vert sur fond sombre                                                  |
+| `--color-cendre-strong`   | `#645B53` | Texte secondaire en mode clair                                              |
+
+- **Prix** : toujours une étiquette jaune taxi avec chiffres encre en Space Mono (le jaune en texte sur papier est illisible).
+- **Bichromie** : noir + latérite par défaut, le jaune restant réservé à la vente.
+- Cibles tactiles ≥ 44 px, focus visible jaune, `prefers-reduced-motion` respecté.
+
+## Mise en œuvre
+
+Les tokens sont dans `app/globals.css` (Tailwind v4, `@theme`). Les composants sont dans `components/ui/` et tous visibles sur la page `/design`. Mode sombre par défaut, mode clair via `data-theme="light"`, rayon Enfants via la classe `.kids`.

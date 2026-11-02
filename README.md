@@ -8,20 +8,21 @@ Boutique en ligne de **produits digitaux** (formations, ebooks, templates, musiq
 
 ## Pourquoi Digi Store
 
-| Problème des grandes plateformes en RDC | Réponse Digi Store |
-| --- | --- |
-| Carte bancaire obligatoire | M-Pesa, Airtel Money, Orange Money, Afrimoney |
-| Prix en dollars ou euros seulement | Double affichage CDF / USD |
-| Livraison lente ou incertaine | Lien de téléchargement instantané + copie WhatsApp / SMS |
-| Sites lourds | Pages < 1 Mo, mode « données légères », fonctionne en 3G |
-| Pas de vendeurs locaux | Marketplace : les créateurs congolais vendent et sont payés sur leur wallet |
-| Achat à l'aveugle | Aperçu gratuit obligatoire (extrait PDF, 30 s audio, 1 min vidéo) |
+| Problème des grandes plateformes en RDC | Réponse Digi Store                                                          |
+| --------------------------------------- | --------------------------------------------------------------------------- |
+| Carte bancaire obligatoire              | M-Pesa, Airtel Money, Orange Money, Afrimoney                               |
+| Prix en dollars ou euros seulement      | Double affichage CDF / USD                                                  |
+| Livraison lente ou incertaine           | Lien de téléchargement instantané + copie WhatsApp / SMS                    |
+| Sites lourds                            | Pages < 1 Mo, mode « données légères », fonctionne en 3G                    |
+| Pas de vendeurs locaux                  | Marketplace : les créateurs congolais vendent et sont payés sur leur wallet |
+| Achat à l'aveugle                       | Aperçu gratuit obligatoire (extrait PDF, 30 s audio, 1 min vidéo)           |
 
 ---
 
 ## Fonctionnalités
 
 ### V1 — Lancement
+
 - [ ] Catalogue avec rayons : Drops du jour, Tendance à Kinshasa, Moins de 5 $, Créateurs congolais
 - [ ] Page produit avec aperçu gratuit et bascule CDF / USD
 - [ ] Achat sans compte (compte créé automatiquement à partir du numéro)
@@ -34,12 +35,14 @@ Boutique en ligne de **produits digitaux** (formations, ebooks, templates, musiq
 - [ ] Application installable (PWA)
 
 ### V2
+
 - [ ] Espace vendeurs (marketplace) avec reversement Mobile Money
 - [ ] Programme d'affiliation (commission versée en Mobile Money)
 - [ ] Cartes cadeaux envoyées par numéro de téléphone
 - [ ] Abonnement mensuel
 
 ### V3
+
 - [ ] Paiement en 2 fois
 - [ ] Points fidélité
 - [ ] Application Android native
@@ -48,15 +51,15 @@ Boutique en ligne de **produits digitaux** (formations, ebooks, templates, musiq
 
 ## Stack technique
 
-| Couche | Choix |
-| --- | --- |
-| Front + API | [Next.js](https://nextjs.org) (App Router, TypeScript), PWA |
-| Base de données + authentification | [Supabase](https://supabase.com) (Postgres) |
-| Stockage des fichiers | Cloudflare R2 (compatible S3), liens signés |
-| Paiement | Agrégateur Mobile Money RDC (FlexPay, CinetPay, pawaPay ou MaxiCash — voir [docs/PAIEMENT-MOBILE-MONEY.md](docs/PAIEMENT-MOBILE-MONEY.md)) |
-| Notifications | WhatsApp Business API, SMS de secours, e-mail facultatif |
-| Style | Tailwind CSS + tokens de la charte ([docs/DESIGN.md](docs/DESIGN.md)) |
-| Suivi | Google Analytics 4, pixels Meta et TikTok |
+| Couche                             | Choix                                                                                                                                      |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| Front + API                        | [Next.js](https://nextjs.org) (App Router, TypeScript), PWA                                                                                |
+| Base de données + authentification | [Supabase](https://supabase.com) (Postgres)                                                                                                |
+| Stockage des fichiers              | Cloudflare R2 (compatible S3), liens signés                                                                                                |
+| Paiement                           | Agrégateur Mobile Money RDC (FlexPay, CinetPay, pawaPay ou MaxiCash — voir [docs/PAIEMENT-MOBILE-MONEY.md](docs/PAIEMENT-MOBILE-MONEY.md)) |
+| Notifications                      | WhatsApp Business API, SMS de secours, e-mail facultatif                                                                                   |
+| Style                              | Tailwind CSS + tokens de la charte ([docs/DESIGN.md](docs/DESIGN.md))                                                                      |
+| Suivi                              | Google Analytics 4, pixels Meta et TikTok                                                                                                  |
 
 ---
 
@@ -65,19 +68,24 @@ Boutique en ligne de **produits digitaux** (formations, ebooks, templates, musiq
 ```
 digi-store/
 ├── app/                    # Pages et routes Next.js
-│   ├── (shop)/             # Découvrir, Chercher, Produit
-│   ├── bibliotheque/       # Achats de l'utilisateur
-│   ├── vendeur/            # Espace vendeurs (V2)
+│   ├── [locale]/           # fr, ln, en — accueil, design, recherche, bibliothèque, moi, hors-ligne
+│   ├── fonts/              # Polices auto-hébergées (générées par scripts/build-fonts.py)
 │   └── api/
 │       ├── checkout/       # Création d'une demande de paiement
 │       ├── webhooks/       # Confirmation de l'agrégateur
 │       └── download/       # Génération des liens signés
-├── components/             # Composants UI (ticket produit, bouton payer…)
+├── components/
+│   ├── ui/                 # Design system (voir la page /design)
+│   ├── shell/              # Gabarit : en-tête, navigation, pied de page
+│   └── shop/               # Composants métier (ticket produit…)
 ├── lib/
+│   ├── i18n/               # Langues : dictionnaires fr / ln / en
 │   ├── payments/           # Client de l'agrégateur Mobile Money
 │   ├── currency/           # Conversion USD → CDF
 │   ├── operators.ts        # Détection de l'opérateur par préfixe
 │   └── storage/            # Accès R2, liens signés, filigrane PDF
+├── scripts/                # Budget de poids, génération des polices
+├── tests/                  # Tests unitaires (Vitest)
 ├── supabase/migrations/    # Schéma de la base
 ├── public/                 # Logo, motifs Kuba, polices
 └── docs/                   # Design, paiement, feuille de route
@@ -97,7 +105,18 @@ cp .env.example .env.local   # puis remplir les valeurs
 npm run dev
 ```
 
-Le site tourne sur http://localhost:3000.
+Le site tourne sur http://localhost:3000 (la page http://localhost:3000/fr/design montre tous les composants).
+
+| Commande                                                    | Rôle                                                                            |
+| ----------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `npm run dev`                                               | Serveur de développement                                                        |
+| `npm run build` / `npm start`                               | Build de production / serveur de production                                     |
+| `npm run lint`, `npm run typecheck`, `npm run format:check` | Qualité du code                                                                 |
+| `npm test`                                                  | Tests unitaires (opérateurs, devises, langues, contrastes)                      |
+| `npm run budget`                                            | Échoue si le JS ou le poids des pages dépasse le budget (après `npm run build`) |
+| `npm run lighthouse`                                        | Lighthouse CI en mobile Slow 4G (Chrome requis)                                 |
+
+La CI GitHub Actions lance tout cela sur chaque Pull Request. Plan et mesures : [docs/PLAN.md](docs/PLAN.md).
 
 ---
 
@@ -117,6 +136,7 @@ Le site tourne sur http://localhost:3000.
 - [docs/DESIGN.md](docs/DESIGN.md) — charte « Kinshasa la nuit » : couleurs, polices, formes
 - [docs/PAIEMENT-MOBILE-MONEY.md](docs/PAIEMENT-MOBILE-MONEY.md) — opérateurs, agrégateurs, flux de paiement
 - [docs/ROADMAP.md](docs/ROADMAP.md) — feuille de route
+- [docs/PLAN.md](docs/PLAN.md) — phases de développement, décisions techniques, mesures Lighthouse
 - [CONTRIBUTING.md](CONTRIBUTING.md) — règles pour contribuer
 
 ---

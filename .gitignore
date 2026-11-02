@@ -5,6 +5,14 @@ node_modules/
 .next/
 out/
 build/
+next-env.d.ts
+*.tsbuildinfo
+
+# Tests et mesures
+coverage/
+.lighthouseci/
+test-results/
+playwright-report/
 
 # Variables d'environnement (secrets)
 .env
@@ -32,3 +40,4 @@ Thumbs.db
 uploads/
 *.pdf
 *.zip
+*.pem

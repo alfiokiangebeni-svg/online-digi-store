@@ -1,0 +1,179 @@
+{
+  "_meta": {
+    "language": "Français",
+    "status": "reference"
+  },
+  "meta": {
+    "siteName": "Digi Store",
+    "title": "Digi Store — tu paies avec ton téléphone, tu reçois tout de suite",
+    "description": "Livres, formations, apps pour enfants, musique et templates. Paiement M-Pesa, Airtel Money, Orange Money, Afrimoney. Livraison immédiate.",
+    "tagline": "Tu paies avec ton téléphone, tu reçois tout de suite."
+  },
+  "a11y": {
+    "skipToContent": "Aller au contenu",
+    "mainNav": "Navigation principale",
+    "home": "Accueil Digi Store",
+    "settings": "Réglages d'affichage"
+  },
+  "nav": {
+    "discover": "Découvrir",
+    "search": "Chercher",
+    "library": "Ma bibliothèque",
+    "me": "Moi"
+  },
+  "theme": {
+    "toLight": "Passer en mode clair",
+    "toDark": "Passer en mode sombre"
+  },
+  "lite": {
+    "label": "Données légères",
+    "on": "Données légères activées : images réduites, aucune lecture automatique.",
+    "off": "Données légères désactivées."
+  },
+  "product": {
+    "kinds": {
+      "ebook": "Livre",
+      "course": "Formation",
+      "kidsApp": "App enfants",
+      "audio": "Audio",
+      "template": "Template",
+      "giftCard": "Carte cadeau"
+    },
+    "by": "par {seller}",
+    "verifiedSeller": "Vendeur vérifié",
+    "sales": "{count} ventes",
+    "rating": "Note {rating} sur 5",
+    "previewFree": "Aperçu gratuit",
+    "oldPrice": "Ancien prix",
+    "discount": "−{percent} %",
+    "new": "Nouveau",
+    "flash": "Vente flash"
+  },
+  "commerce": {
+    "pay": "Payer",
+    "payMobileMoney": "Payer avec Mobile Money",
+    "addToCart": "Ajouter au panier",
+    "offer": "Offrir",
+    "delivered": "Livré",
+    "retry": "Réessayer",
+    "endsIn": "Se termine dans",
+    "flashEnded": "Vente terminée"
+  },
+  "home": {
+    "kicker": "Drop du jour",
+    "title": "Le savoir de Kinshasa, livré sur ton téléphone.",
+    "body": "Livres, formations et apps pour enfants. Paie en Mobile Money, reçois ton fichier en quelques secondes.",
+    "cta": "Voir le drop du jour",
+    "storiesLabel": "Drops du jour",
+    "seeAll": "Tout voir",
+    "rails": {
+      "trending": "Tendance à Kinshasa",
+      "under5": "Moins de 5 $",
+      "author": "Livres de l'auteur",
+      "kids": "Enfants",
+      "creators": "Créateurs congolais"
+    },
+    "trust": {
+      "operators": "M-Pesa · Airtel Money · Orange Money · Afrimoney",
+      "delivery": "Livraison en moins de 10 secondes",
+      "support": "Support WhatsApp en français et en lingala"
+    }
+  },
+  "field": {
+    "phoneLabel": "Numéro Mobile Money",
+    "phonePlaceholder": "082 123 4567",
+    "phoneHint": "Ton opérateur est reconnu automatiquement.",
+    "operatorDetected": "Opérateur : {operator}",
+    "operatorUnknown": "Préfixe inconnu. Vérifie le numéro.",
+    "required": "Ce champ est obligatoire."
+  },
+  "toast": {
+    "paid": "Paiement reçu. Ton fichier est dans ta bibliothèque.",
+    "failed": "Pas de réponse. Vérifie ton téléphone ou réessaie.",
+    "close": "Fermer la notification"
+  },
+  "sheet": {
+    "close": "Fermer"
+  },
+  "offline": {
+    "title": "Pas de connexion",
+    "body": "Tes achats déjà téléchargés restent disponibles dans ta bibliothèque. Le reste reviendra avec le réseau.",
+    "cta": "Réessayer"
+  },
+  "notFound": {
+    "title": "Page introuvable",
+    "body": "Ce lien ne mène nulle part. Retourne à l'accueil pour voir le drop du jour.",
+    "cta": "Retour à l'accueil"
+  },
+  "footer": {
+    "support": "Support WhatsApp : {phone}",
+    "languages": "Langue"
+  },
+  "design": {
+    "title": "Design system",
+    "intro": "Tous les composants de Digi Store, dans tous leurs états. Chaque écran de la boutique est construit uniquement avec ces pièces.",
+    "sections": {
+      "colors": "Couleurs",
+      "type": "Typographie",
+      "buttons": "Boutons",
+      "badges": "Badges",
+      "chips": "Puces",
+      "fields": "Champs",
+      "tickets": "Tickets produit",
+      "kids": "Rayon Enfants",
+      "feedback": "Retours : toast, tampon, compteur",
+      "sheet": "Feuille modale",
+      "skeleton": "Chargement",
+      "nav": "Barre de navigation",
+      "patterns": "Motifs et photos"
+    },
+    "colorUsage": {
+      "ink": "Fond du mode sombre (par défaut)",
+      "paper": "Fond du mode clair, reçus",
+      "taxi": "Uniquement ce qui fait vendre : payer, prix, promo",
+      "laterite": "Ventes flash, nouveautés",
+      "fleuve": "Confirmations, « Livré », confiance",
+      "cendre": "Texte secondaire"
+    },
+    "typeSamples": {
+      "display": "Bricolage Grotesque — titres",
+      "body": "Work Sans — texte courant. Les clients lisent sur un petit écran, en plein soleil : phrases courtes, contraste fort.",
+      "mono": "Space Mono — prix et codes"
+    },
+    "buttons": {
+      "primary": "Bouton de vente (jaune taxi)",
+      "secondary": "Secondaire",
+      "ghost": "Discret",
+      "danger": "Destructif",
+      "disabled": "Désactivé",
+      "loading": "En cours…",
+      "deleteLabel": "Supprimer"
+    },
+    "chips": {
+      "all": "Tout",
+      "books": "Livres",
+      "courses": "Formations",
+      "kids": "Enfants",
+      "music": "Musique"
+    },
+    "fields": {
+      "nameLabel": "Nom affiché",
+      "namePlaceholder": "Ex. : Maman Nzinga",
+      "codeLabel": "Code promo",
+      "codeError": "Ce code a expiré."
+    },
+    "toastDemo": "Afficher un toast",
+    "stampDemo": "Rejouer le tampon",
+    "sheetDemo": "Ouvrir la feuille",
+    "sheetTitle": "Payer avec Mobile Money",
+    "sheetBody": "Saisis ton numéro. Tu recevras une demande de paiement sur ton téléphone : tape ton code PIN pour valider.",
+    "kidsNote": "Même charte, formes plus rondes, illustrations plus grandes.",
+    "duotoneCaption": "Photo en bichromie : noir et latérite.",
+    "navNote": "Barre fixe en bas d'écran, cibles tactiles de 56 px."
+  },
+  "soon": {
+    "title": "Bientôt ici",
+    "body": "Cet espace arrive dans une prochaine étape. En attendant, le drop du jour t'attend sur l'accueil.",
+    "cta": "Voir l'accueil"
+  }
+}

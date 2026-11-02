@@ -1,0 +1,179 @@
+{
+  "_meta": {
+    "language": "English",
+    "status": "draft"
+  },
+  "meta": {
+    "siteName": "Digi Store",
+    "title": "Digi Store — pay with your phone, get it right away",
+    "description": "Books, courses, kids' apps, music and templates. Pay with M-Pesa, Airtel Money, Orange Money, Afrimoney. Instant delivery.",
+    "tagline": "Pay with your phone, get it right away."
+  },
+  "a11y": {
+    "skipToContent": "Skip to content",
+    "mainNav": "Main navigation",
+    "home": "Digi Store home",
+    "settings": "Display settings"
+  },
+  "nav": {
+    "discover": "Discover",
+    "search": "Search",
+    "library": "My library",
+    "me": "Me"
+  },
+  "theme": {
+    "toLight": "Switch to light mode",
+    "toDark": "Switch to dark mode"
+  },
+  "lite": {
+    "label": "Data saver",
+    "on": "Data saver on: smaller images, no autoplay.",
+    "off": "Data saver off."
+  },
+  "product": {
+    "kinds": {
+      "ebook": "Book",
+      "course": "Course",
+      "kidsApp": "Kids' app",
+      "audio": "Audio",
+      "template": "Template",
+      "giftCard": "Gift card"
+    },
+    "by": "by {seller}",
+    "verifiedSeller": "Verified seller",
+    "sales": "{count} sales",
+    "rating": "Rated {rating} out of 5",
+    "previewFree": "Free preview",
+    "oldPrice": "Previous price",
+    "discount": "−{percent}%",
+    "new": "New",
+    "flash": "Flash sale"
+  },
+  "commerce": {
+    "pay": "Pay",
+    "payMobileMoney": "Pay with Mobile Money",
+    "addToCart": "Add to cart",
+    "offer": "Send as a gift",
+    "delivered": "Delivered",
+    "retry": "Try again",
+    "endsIn": "Ends in",
+    "flashEnded": "Sale over"
+  },
+  "home": {
+    "kicker": "Today's drop",
+    "title": "Knowledge from Kinshasa, delivered to your phone.",
+    "body": "Books, courses and kids' apps. Pay with Mobile Money, get your file in seconds.",
+    "cta": "See today's drop",
+    "storiesLabel": "Today's drops",
+    "seeAll": "See all",
+    "rails": {
+      "trending": "Trending in Kinshasa",
+      "under5": "Under $5",
+      "author": "Books by the author",
+      "kids": "Kids",
+      "creators": "Congolese creators"
+    },
+    "trust": {
+      "operators": "M-Pesa · Airtel Money · Orange Money · Afrimoney",
+      "delivery": "Delivered in under 10 seconds",
+      "support": "WhatsApp support in French and Lingala"
+    }
+  },
+  "field": {
+    "phoneLabel": "Mobile Money number",
+    "phonePlaceholder": "082 123 4567",
+    "phoneHint": "Your operator is detected automatically.",
+    "operatorDetected": "Operator: {operator}",
+    "operatorUnknown": "Unknown prefix. Check the number.",
+    "required": "This field is required."
+  },
+  "toast": {
+    "paid": "Payment received. Your file is in your library.",
+    "failed": "No answer. Check your phone or try again.",
+    "close": "Dismiss notification"
+  },
+  "sheet": {
+    "close": "Close"
+  },
+  "offline": {
+    "title": "No connection",
+    "body": "Purchases you have already downloaded stay available in your library. Everything else comes back with the network.",
+    "cta": "Try again"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "body": "This link goes nowhere. Head back home to see today's drop.",
+    "cta": "Back to home"
+  },
+  "footer": {
+    "support": "WhatsApp support: {phone}",
+    "languages": "Language"
+  },
+  "design": {
+    "title": "Design system",
+    "intro": "Every Digi Store component, in every state. Each screen of the store is built only from these pieces.",
+    "sections": {
+      "colors": "Colours",
+      "type": "Typography",
+      "buttons": "Buttons",
+      "badges": "Badges",
+      "chips": "Chips",
+      "fields": "Fields",
+      "tickets": "Product tickets",
+      "kids": "Kids section",
+      "feedback": "Feedback: toast, stamp, countdown",
+      "sheet": "Bottom sheet",
+      "skeleton": "Loading",
+      "nav": "Navigation bar",
+      "patterns": "Patterns and photos"
+    },
+    "colorUsage": {
+      "ink": "Dark mode background (default)",
+      "paper": "Light mode background, receipts",
+      "taxi": "Only what sells: pay, prices, promos",
+      "laterite": "Flash sales, new items",
+      "fleuve": "Confirmations, “Delivered”, trust",
+      "cendre": "Secondary text"
+    },
+    "typeSamples": {
+      "display": "Bricolage Grotesque — headings",
+      "body": "Work Sans — body text. Customers read on small screens in bright sunlight: short sentences, strong contrast.",
+      "mono": "Space Mono — prices and codes"
+    },
+    "buttons": {
+      "primary": "Sales button (taxi yellow)",
+      "secondary": "Secondary",
+      "ghost": "Subtle",
+      "danger": "Destructive",
+      "disabled": "Disabled",
+      "loading": "Working…",
+      "deleteLabel": "Delete"
+    },
+    "chips": {
+      "all": "All",
+      "books": "Books",
+      "courses": "Courses",
+      "kids": "Kids",
+      "music": "Music"
+    },
+    "fields": {
+      "nameLabel": "Display name",
+      "namePlaceholder": "e.g. Mama Nzinga",
+      "codeLabel": "Promo code",
+      "codeError": "This code has expired."
+    },
+    "toastDemo": "Show a toast",
+    "stampDemo": "Replay the stamp",
+    "sheetDemo": "Open the sheet",
+    "sheetTitle": "Pay with Mobile Money",
+    "sheetBody": "Enter your number. You will get a payment request on your phone: type your PIN to confirm.",
+    "kidsNote": "Same identity, rounder shapes, bigger illustrations.",
+    "duotoneCaption": "Duotone photo: black and laterite.",
+    "navNote": "Fixed bar at the bottom of the screen, 56 px touch targets."
+  },
+  "soon": {
+    "title": "Coming soon",
+    "body": "This area arrives in a later step. Meanwhile, today's drop is waiting on the home page.",
+    "cta": "Go to home"
+  }
+}

@@ -12,7 +12,10 @@ Format court en français : `feat: paiement Airtel Money`, `fix: lien expiré en
 
 ## Avant d'ouvrir une Pull Request
 
-- [ ] `npm run lint` et `npm run build` passent
+- [ ] `npm run lint`, `npm run typecheck`, `npm test` et `npm run build` passent
+- [ ] `npm run budget` passe (JS de l'accueil < 120 Ko)
+- [ ] Aucun texte en dur : tout passe par `lib/i18n/dictionaries/` (fr, ln, en)
+- [ ] Nouveaux écrans construits uniquement avec `components/ui/`
 - [ ] Aucune clé secrète dans le code
 - [ ] Respect de la charte ([docs/DESIGN.md](docs/DESIGN.md)) : le jaune taxi uniquement sur les éléments de vente
 - [ ] Page testée sur mobile en 3G simulée (< 1 Mo)
