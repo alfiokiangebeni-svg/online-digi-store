@@ -33,7 +33,7 @@ export function GetButton({
       <Link
         href={libraryHref}
         prefetch={false}
-        className={cn(base, "border border-steel bg-surface text-fg", block && "w-full")}
+        className={cn(base, "border border-line bg-surface text-fg", block && "w-full")}
         aria-label={`${openLabel} — ${title}`}
       >
         {openLabel}

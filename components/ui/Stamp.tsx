@@ -15,7 +15,7 @@ export function Stamp({
     <span
       role={announce ? "status" : undefined}
       className={cn(
-        "inline-block animate-stamp border-4 border-double border-fleuve px-3 py-1",
+        "inline-block animate-stamp border-4 border-double border-success px-3 py-1",
         "text-2xl font-bold uppercase tracking-widest text-success",
         "rounded-[4px] [transform:rotate(-12deg)]",
         className,

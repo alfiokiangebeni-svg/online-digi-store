@@ -91,24 +91,24 @@ export function LibraryView({
   return (
     <div className="flex flex-col gap-3">
       {showBanner ? (
-        <div role="status" className="flex items-start gap-3 rounded-[10px] bg-ink p-3.5">
-          <span className="grid size-7 shrink-0 place-items-center rounded-full bg-lime-strong text-ink">
+        <div role="status" className="flex items-start gap-3 card p-3.5">
+          <span className="grid size-7 shrink-0 place-items-center rounded-full bg-success text-on-primary">
             <IconCheck size={15} />
           </span>
           <div className="flex-1">
-            <p className="text-[15px] font-semibold text-white">
+            <p className="text-[15px] font-semibold">
               {t.banner} ·{" "}
               <span className="font-mono">
                 {<Money usdCents={lastOrder.totalUsdCents} locale={locale} />}
               </span>
             </p>
-            <p className="text-[13px] leading-snug text-steel">{t.bannerBody}</p>
+            <p className="text-[13px] leading-snug text-muted">{t.bannerBody}</p>
           </div>
           <button
             type="button"
             aria-label={t.close}
             onClick={() => lastOrderStore.set(null)}
-            className="-m-2 grid size-11 shrink-0 place-items-center text-steel hover:text-white"
+            className="-m-2 grid size-11 shrink-0 place-items-center text-muted hover:text-fg"
           >
             <IconClose size={18} />
           </button>
@@ -188,14 +188,14 @@ export function LibraryView({
                       aria-label={downloading ? undefined : `${t.download} — ${p.title}`}
                       className={cn(
                         "relative inline-flex h-9 w-[110px] items-center justify-center overflow-hidden rounded-[6px] text-[13px] font-semibold",
-                        downloading ? "border border-steel bg-surface" : "btn-primary",
+                        downloading ? "border border-line bg-surface" : "btn-primary",
                       )}
                     >
                       {downloading ? (
                         <>
                           <span
                             aria-hidden="true"
-                            className="absolute inset-y-0 left-0 bg-fleuve/30"
+                            className="absolute inset-y-0 left-0 bg-primary/25"
                             style={{ width: `${pct}%` }}
                           />
                           <span aria-hidden="true" className="relative">
@@ -224,7 +224,7 @@ export function LibraryView({
         </div>
       )}
 
-      <p className="text-xs leading-relaxed text-[#3a3f47] dark:text-muted">{t.note}</p>
+      <p className="text-xs leading-relaxed text-muted">{t.note}</p>
     </div>
   );
 }

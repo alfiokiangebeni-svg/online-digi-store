@@ -63,26 +63,35 @@ describe("contrastes AA de la charte di.si store", () => {
   });
 });
 
-/** Fichiers où aucune couleur ne doit être écrite en dur. */
-const STRICT_DIRS = ["components/ui"];
+/** Fichiers où aucune couleur ne doit être écrite en dur (le thème est la seule source). */
+const STRICT_DIRS = ["app", "components"];
+const THEME_FILE = join("app", "theme.css");
 function files(dir: string): string[] {
   return readdirSync(dir).flatMap((f) => {
     const p = join(dir, f);
+    if (p === THEME_FILE) return [];
     return statSync(p).isDirectory() ? files(p) : /\.(tsx?|css)$/.test(p) ? [p] : [];
   });
 }
+/** Anciens noms de couleur retirés à l'étape 4 : ne doivent plus réapparaître. */
+const LEGACY =
+  "ink|paper|lime|lime-strong|cta|cta-soft|mint|leaf|leaf-strong|link|cloud|slate|hint|hint-strong|steel|header|taxi|laterite|laterite-strong|fleuve|fleuve-bright|cendre|cendre-strong";
+const PATTERN = new RegExp(
+  [
+    String.raw`#[0-9a-fA-F]{3,8}\b(?![\w-])`,
+    String.raw`\b(?:bg|text|border|ring|fill|stroke)-(?:white|black)\b`,
+    String.raw`rgba?\(`,
+    String.raw`\bdark:`,
+    String.raw`\b(?:bg|text|border|ring|fill|stroke|outline|decoration|from|to|backdrop:bg)-(?:${LEGACY})(?![\w-])`,
+  ].join("|"),
+  "g",
+);
 
 describe("aucune couleur en dur hors du fichier de thème", () => {
-  const offenders = STRICT_DIRS.flatMap(files).flatMap((f) => {
-    const src = readFileSync(f, "utf8");
-    const hits = [
-      ...src.matchAll(
-        /#[0-9a-fA-F]{3,8}\b(?![\w-])|\b(?:bg|text|border|ring|fill|stroke)-(?:white|black)\b|rgb\(/g,
-      ),
-    ].map((m) => `${f}: ${m[0]}`);
-    return hits;
-  });
-  it("components/ui", () => {
+  const offenders = STRICT_DIRS.flatMap(files).flatMap((f) =>
+    [...readFileSync(f, "utf8").matchAll(PATTERN)].map((m) => `${f}: ${m[0]}`),
+  );
+  it("app et components", () => {
     expect(offenders).toEqual([]);
   });
 });

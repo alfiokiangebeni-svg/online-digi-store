@@ -29,7 +29,7 @@ export function PlatformPicker({
             onClick={() => setIndex(i)}
             className={cn(
               "min-h-10 flex-1 rounded-[6px] bg-surface px-2 text-[13px] font-medium",
-              i === index ? "border-2 border-fg" : "border border-steel hover:border-fg",
+              i === index ? "border-2 border-primary" : "border border-line hover:border-fg",
             )}
           >
             {o.label}

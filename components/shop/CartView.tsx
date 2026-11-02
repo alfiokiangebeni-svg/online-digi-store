@@ -215,7 +215,7 @@ export function CartView({
             </li>
           ))}
         </ul>
-        <p className="flex items-center gap-2.5 bg-mint px-3.5 py-3 text-xs text-leaf-strong dark:bg-surface-2 dark:text-success">
+        <p className="flex items-center gap-2.5 bg-surface-2 px-3.5 py-3 text-xs text-success">
           <IconDownload size={16} />
           {t.delivery}
         </p>
@@ -228,7 +228,7 @@ export function CartView({
             {t.coupon}
           </h2>
           {coupon?.ok ? (
-            <div className="flex items-center justify-between gap-3 rounded-[6px] bg-mint px-3 py-2.5 text-sm text-leaf-strong dark:bg-surface-2 dark:text-success">
+            <div className="flex items-center justify-between gap-3 rounded-[var(--radius-sm)] bg-surface-2 px-3 py-2.5 text-sm text-success">
               <span className="font-semibold">{format(t.couponApplied, { code: coupon.code })}</span>
               <button
                 type="button"
@@ -311,7 +311,7 @@ export function CartView({
                   aria-hidden="true"
                   className={cn(
                     "size-5 shrink-0 rounded-full",
-                    method === id ? "border-[6px] border-fg" : "border-[1.5px] border-hint",
+                    method === id ? "border-[6px] border-primary" : "border-[1.5px] border-muted",
                   )}
                 />
                 <span className="flex flex-1 flex-col">
@@ -367,7 +367,7 @@ export function CartView({
       {total > 0 ? <p className="px-1 text-[11px] leading-relaxed text-muted">{t.demoNotice}</p> : null}
 
       {/* Barre de paiement fixe */}
-      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-[#e5e7eb] bg-surface px-3 pb-[calc(1rem+env(safe-area-inset-bottom))] pt-2.5 dark:border-line">
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-surface px-3 pb-[calc(1rem+env(safe-area-inset-bottom))] pt-2.5">
         <div className="mx-auto flex max-w-xl flex-col gap-1.5">
           <Button size="lg" block onClick={pay} disabled={total > 0 && method === "card"}>
             {total > 0 ? (

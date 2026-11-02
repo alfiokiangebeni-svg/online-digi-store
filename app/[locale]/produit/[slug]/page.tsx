@@ -226,7 +226,7 @@ export default async function ProductPage({ params }: PageProps<"/[locale]/produ
               key={perk}
               className="flex min-h-11 items-center gap-3 border-b border-line text-sm last:border-b-0"
             >
-              <span className="grid size-[22px] shrink-0 place-items-center rounded-full bg-mint text-success dark:bg-surface-2">
+              <span className="grid size-[22px] shrink-0 place-items-center rounded-full bg-surface-2 text-success">
                 <IconCheck size={13} />
               </span>
               {perk}

@@ -133,7 +133,7 @@ export function PaymentFlow({
         onClose();
       }}
       onCancel={(e) => busy && e.preventDefault()}
-      className="m-0 mt-auto w-full max-w-none rounded-t-2xl bg-surface p-0 text-fg backdrop:bg-ink/60 sm:m-auto sm:max-w-md sm:rounded-2xl"
+      className="m-0 mt-auto w-full max-w-none rounded-t-2xl bg-surface p-0 text-fg backdrop:bg-background/80 sm:m-auto sm:max-w-md sm:rounded-2xl"
     >
       <div className="flex min-h-80 flex-col gap-4 p-5 pb-[calc(1.25rem+env(safe-area-inset-bottom))]">
         <div className="flex items-start justify-between gap-4">
@@ -188,7 +188,7 @@ export function PaymentFlow({
           {step === "waiting" ? (
             <>
               <div className="flex items-center gap-3">
-                <span className="grid size-12 shrink-0 animate-beat place-items-center rounded-full bg-lime text-leaf-strong">
+                <span className="grid size-12 shrink-0 animate-beat place-items-center rounded-full bg-surface-2 text-primary">
                   <IconPhone />
                 </span>
                 <div>
@@ -207,7 +207,7 @@ export function PaymentFlow({
 
           {step === "success" ? (
             <>
-              <div className="grid place-items-center rounded-[10px] bg-mint py-8 dark:bg-surface-2">
+              <div className="grid place-items-center rounded-[10px] bg-surface-2 py-8">
                 <Stamp label={t.delivered} announce={false} />
               </div>
               <p className="text-xl font-bold">{t.success}</p>
@@ -225,7 +225,7 @@ export function PaymentFlow({
 
           {step === "failed" && outcome !== "success" ? (
             <>
-              <p className="rounded-[8px] bg-[#fdecea] px-3 py-3 font-medium text-[#b42318] dark:bg-surface-2 dark:text-[#ff8a80]">
+              <p className="rounded-[8px] bg-surface-2 px-3 py-3 font-medium text-urgent-text">
                 {format(t.failed[outcome], { operator })}
               </p>
               <div className="flex gap-2">

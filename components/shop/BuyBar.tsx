@@ -110,7 +110,7 @@ export function BuyBar({
   }
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-[#e5e7eb] bg-surface px-3 pb-[calc(1.25rem+env(safe-area-inset-bottom))] pt-2.5 dark:border-line">
+    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-surface px-3 pb-[calc(1.25rem+env(safe-area-inset-bottom))] pt-2.5">
       <div className="mx-auto flex max-w-xl flex-col gap-2">
         {!free && !owned ? <div className="flex justify-end text-sm">{price}</div> : null}
         <div className="flex items-center gap-2">

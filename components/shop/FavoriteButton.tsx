@@ -28,7 +28,7 @@ export function FavoriteButton({
         toast({ tone: "success", message: on ? t.favRemoved : t.favAdded });
       }}
       className={cn(
-        "grid size-12 shrink-0 place-items-center rounded-[8px] border border-steel bg-surface transition-colors",
+        "grid size-12 shrink-0 place-items-center rounded-[8px] border border-line bg-surface transition-colors",
         on ? "text-urgent-text" : "text-fg hover:border-fg",
       )}
     >
