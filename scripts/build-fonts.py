@@ -2,11 +2,14 @@
 """
 Génère les polices auto-hébergées de Digi Store (app/fonts/*.woff2).
 
-Police unique : Inter (design de la maquette mobile). Google Fonts sert Inter en
-police variable complète (100–900, opsz) ; on garde ici 400–700, opsz 14, et le
-latin utile au français et au lingala (ɛ, ɔ, tons) : un seul fichier ≈ 28 Ko.
+Charte « di.si store » : Plus Jakarta Sans (titres, 700–800) et DM Sans (texte, 400–700,
+taille optique 14). Google Fonts sert ces polices en variables complètes ; on garde ici
+les seules graisses utiles et le latin du français et du lingala.
+(ɛ et ɔ absents de ces deux familles : le téléphone les affiche avec sa police système.)
 
-Source (licence SIL OFL 1.1) : https://github.com/google/fonts — ofl/inter/Inter[opsz,wght].ttf
+Sources (licence SIL OFL 1.1) : https://github.com/google/fonts
+  ofl/plusjakartasans/PlusJakartaSans[wght].ttf
+  ofl/dmsans/DMSans[opsz,wght].ttf
 
 Usage : pip install fonttools brotli
         python3 scripts/build-fonts.py <dossier-des-sources>
@@ -31,7 +34,8 @@ UNICODES = (
 
 FONTS = [
     # (source, sortie, positions des axes à figer — un intervalle garde l'axe variable)
-    ("Inter[opsz,wght].ttf", "inter-var.woff2", {"wght": (400, 700), "opsz": 14}),
+    ("PlusJakartaSans[wght].ttf", "jakarta-display.woff2", {"wght": (700, 800)}),
+    ("DMSans[opsz,wght].ttf", "dmsans-text.woff2", {"wght": (400, 700), "opsz": 14}),
 ]
 
 
@@ -43,9 +47,9 @@ def find(name: str) -> Path:
 
 
 def build(src: Path, out: Path, axes):
-    font = TTFont(src)
-    if axes:
-        font = instancer.instantiateVariableFont(font, axes, updateFontNames=False)
+    # Sous-ensemble d'abord, puis réduction des axes (l'ordre inverse plante sur
+    # certaines polices variables : table gvar incomplète après instanciation).
+    font = TTFont(src, lazy=False)
     options = subset.Options()
     options.flavor = "woff2"
     options.layout_features = ["kern", "liga", "calt", "ccmp", "locl", "mark", "mkmk"]
@@ -55,6 +59,8 @@ def build(src: Path, out: Path, axes):
     sub = subset.Subsetter(options)
     sub.populate(unicodes=subset.parse_unicodes(UNICODES))
     sub.subset(font)
+    if axes:
+        font = instancer.instantiateVariableFont(font, axes, updateFontNames=False)
     subset.save_font(font, str(out), options)
     print(f"{out.name:34} {out.stat().st_size / 1024:6.1f} Ko")
 
