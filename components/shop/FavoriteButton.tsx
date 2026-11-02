@@ -23,7 +23,7 @@ export function FavoriteButton({
       onClick={() => toggleFavorite(slug)}
       className={cn(
         "grid size-12 shrink-0 place-items-center rounded-[8px] border border-steel bg-surface transition-colors",
-        on ? "text-promo" : "text-fg hover:border-fg",
+        on ? "text-urgent-text" : "text-fg hover:border-fg",
       )}
     >
       <IconHeart size={20} filled={on} />

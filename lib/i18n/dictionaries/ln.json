@@ -128,8 +128,8 @@
     "navNote": "Nzela ya nse ya ekran, bisika ya kosimba ya 56 px.",
     "logo": "Logo",
     "colorsBase": "Balangi ya moboko",
-    "colorsMarketing": "Balangi ya mombongo",
-    "colorsCategories": "Balangi ya mitindo",
+    "colorsMarketing": "Balangi ya kobakisa (moke)",
+    "colorsCategories": "Mitindo (bilembo ya langi moko)",
     "oneGreen": "Bouton moko kaka ya langi ya citron na lokasa to na carte.",
     "outline": "Na mondelo (ya mibale)",
     "link": "Lien (ya misato)",
@@ -150,10 +150,12 @@
       "textSecondary": "Makomi ya mibale",
       "onPrimary": "Makomi likolo ya vert",
       "promo": "Promo ya mbangu, ntango, %",
-      "urgent": "Motuya ya kala, « Etikali 3 », ntango ekoki, mabunga",
+      "urgent": "Ba-promo, koteka ya mbangu, « Etikali 3 », ntango ekoki",
       "trust": "Moteki ya solo, biloko ya sika",
       "premium": "Piblisite, oyo etekami mingi, minzoto",
-      "success": "Kofuta elongi, « Ekómi », esengeli etindami"
+      "success": "Kofuta elongi, « Ekómi », moteki ya solo",
+      "urgentText": "Motane moko na makomi mike : motuya ya kala, mabunga",
+      "star": "Minzoto ya nota kaka"
     }
   },
   "nav": {

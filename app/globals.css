@@ -100,10 +100,8 @@
   .grid .ticket-card {
     width: auto;
   }
-  /* Bandeau fin de catégorie (repère couleur) */
   .ticket-strip {
-    height: 3px;
-    background: var(--cat, var(--color-border));
+    display: none;
   }
   .ticket-badges {
     position: absolute;
@@ -164,13 +162,6 @@
     padding: 0.75rem;
     background: var(--color-surface-high);
     color: var(--color-text-primary);
-  }
-  .cover::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: var(--cat, var(--color-border));
-    opacity: 0.16;
   }
   .cover-icon {
     position: absolute;
@@ -280,7 +271,7 @@
     display: block;
     height: 100%;
     border-radius: inherit;
-    background: var(--color-promo);
+    background: var(--color-urgent);
   }
 
   /* Squelettes de chargement */
@@ -308,27 +299,9 @@
   }
 }
 
-/* Repère de couleur par catégorie : posé sur un parent, lu par .cover, .ticket-strip… */
-.cat-books {
-  --cat: var(--color-cat-books);
-}
-.cat-apps {
-  --cat: var(--color-cat-apps);
-}
-.cat-realestate {
-  --cat: var(--color-cat-realestate);
-}
-.cat-jobs {
-  --cat: var(--color-cat-jobs);
-}
-.cat-music {
-  --cat: var(--color-cat-music);
-}
-.cat-images {
-  --cat: var(--color-cat-images);
-}
-.cat-tenders {
-  --cat: var(--color-cat-tenders);
+/* Catégories : repère neutre (palette minimale, pas de couleur par catégorie). */
+[class*="cat-"] {
+  --cat: var(--color-text-secondary);
 }
 
 /* Devise d'affichage : les deux prix sont rendus, l'attribut de <html> choisit. */

@@ -13,27 +13,15 @@ export const COLORS = {
   textPrimary: "#f2f5f3",
   textSecondary: "#a3aca7",
   onPrimary: "#0e100f",
-  promo: "#ff7a1a",
   urgent: "#ff4d5e",
   urgentText: "#ff5e6d",
-  trust: "#3ba9ff",
-  premium: "#ffc53d",
+  star: "#ffc53d",
   success: "#2ed3a0",
 } as const;
 
-/** Les 7 catégories de la plateforme et leur couleur de repère. */
-export const CATEGORY_COLORS = {
-  books: "#ffb547",
-  apps: "#3ba9ff",
-  realestate: "#2ed3a0",
-  jobs: "#8f9bff",
-  music: "#ff5fa2",
-  images: "#ff8a5b",
-  tenders: "#ffc53d",
-} as const;
+/** Les 7 catégories (sans couleur propre : icônes en gris, palette minimale). */
+export const CATEGORY_IDS = ["books", "apps", "realestate", "jobs", "music", "images", "tenders"] as const;
+export type CategoryId = (typeof CATEGORY_IDS)[number];
 
-export type CategoryId = keyof typeof CATEGORY_COLORS;
-export const CATEGORY_IDS = Object.keys(CATEGORY_COLORS) as CategoryId[];
-
-/** Classe CSS qui pose la couleur de repère (--cat) sur un élément. */
+/** Classe CSS d'une catégorie (repère neutre, conservé pour les styles par catégorie). */
 export const categoryClass = (id: CategoryId) => `cat-${id}`;

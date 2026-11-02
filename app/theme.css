@@ -19,22 +19,13 @@
   --color-text-secondary: #a3aca7; /* descriptions, métadonnées */
   --color-on-primary: #0e100f; /* texte sur le vert citron (jamais de blanc) */
 
-  /* ── Couleurs marketing (un sens chacune, avec parcimonie) ─────────────── */
-  --color-promo: #ff7a1a; /* ventes flash, compte à rebours, % de réduction */
-  --color-urgent: #ff4d5e; /* fonds et icônes : « Plus que 3 », date limite, erreurs */
-  --color-urgent-text: #ff5e6d; /* même sens, en petit texte sur carte (AA 4,9:1) */
-  --color-trust: #3ba9ff; /* vendeur vérifié, nouveautés, informations */
-  --color-premium: #ffc53d; /* sponsorisé, premium, meilleures ventes, étoiles */
-  --color-success: #2ed3a0; /* paiement réussi, « Livré », candidature envoyée */
-
-  /* ── Repères de catégorie (icône, bandeau fin, puce — jamais sur un bouton d'achat) ── */
-  --color-cat-books: #ffb547;
-  --color-cat-apps: #3ba9ff;
-  --color-cat-realestate: #2ed3a0;
-  --color-cat-jobs: #8f9bff;
-  --color-cat-music: #ff5fa2;
-  --color-cat-images: #ff8a5b;
-  --color-cat-tenders: #ffc53d;
+  /* ── Couleurs d'appoint (minimum : pas de surcharge) ─────────────────────
+   * Rouge = remises, ventes flash, urgences, erreurs. Doré = étoiles. Menthe = succès.
+   * Aucune autre couleur : pas de bleu, d'orange ni de rose ; catégories en gris. */
+  --color-urgent: #ff4d5e; /* fonds et icônes : −30 %, vente flash, « Plus que 3 », date limite */
+  --color-urgent-text: #ff5e6d; /* même sens en petit texte (prix barré, erreurs) — AA 4,9:1 */
+  --color-star: #ffc53d; /* étoiles de note uniquement */
+  --color-success: #2ed3a0; /* paiement réussi, « Livré », candidature envoyée, vendeur vérifié */
 
   /* ── Typographie ───────────────────────────────────────────────────────── */
   --font-display: var(--font-jakarta), system-ui, Roboto, sans-serif; /* titres, prix, logo */
@@ -119,7 +110,11 @@
   --color-muted: var(--color-text-secondary);
   --color-line: var(--color-border);
   --color-surface-2: var(--color-surface-high);
-  --color-accent: var(--color-trust);
+  /* Anciens rôles marketing ramenés à la palette minimale */
+  --color-promo: var(--color-urgent);
+  --color-trust: var(--color-success);
+  --color-premium: var(--color-star);
+  --color-accent: var(--color-text-primary);
   --color-price-fg: var(--color-text-primary);
 
   /*
@@ -137,7 +132,6 @@
   --color-leaf-strong: var(--color-success);
   --color-link: var(--color-trust);
   --color-price: var(--color-text-primary);
-  --color-star: var(--color-premium);
   --color-cloud: var(--color-surface-high);
   --color-slate: var(--color-text-secondary);
   --color-hint: var(--color-text-secondary);

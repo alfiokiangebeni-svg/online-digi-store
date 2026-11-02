@@ -1,7 +1,7 @@
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
-import { CATEGORY_COLORS as CAT, COLORS as C } from "@/lib/theme";
+import { COLORS as C } from "@/lib/theme";
 
 const css = readFileSync("app/theme.css", "utf8");
 const camel = (s: string) => s.replace(/-([a-z])/g, (_, c: string) => c.toUpperCase());
@@ -27,14 +27,8 @@ describe("tokens : app/theme.css et lib/theme.ts sont identiques", () => {
     const cssName = name.replace(/[A-Z]/g, (c) => "-" + c.toLowerCase());
     expect(defined[cssName]).toBe(hex);
   });
-  it.each(Object.entries(CAT))("catégorie %s", (name, hex) => {
-    expect(defined["cat-" + name]).toBe(hex);
-  });
   it("aucune couleur du CSS n'est absente du miroir", () => {
-    const known = new Set([
-      ...Object.keys(C),
-      ...Object.keys(CAT).map((k) => "cat" + k[0].toUpperCase() + k.slice(1)),
-    ]);
+    const known = new Set<string>(Object.keys(C));
     expect(
       Object.keys(defined)
         .map(camel)
@@ -54,25 +48,13 @@ const PAIRS: Array<[string, string, string, number]> = [
   ["bouton principal", C.onPrimary, C.primary, 4.5],
   ["bouton principal pressé", C.onPrimary, C.primaryPressed, 4.5],
   ["onglet actif (vert) / barre du bas", C.primary, C.surface, 4.5],
-  ["promo (texte) / carte", C.promo, C.surface, 4.5],
-  ["urgent (texte) / carte", C.urgentText, C.surface, 4.5],
-  ["urgent (texte) / fond", C.urgentText, C.background, 4.5],
-  ["confiance (texte) / carte", C.trust, C.surface, 4.5],
-  ["premium (étoiles, texte) / carte", C.premium, C.surface, 4.5],
+  ["onglet / puce active (vert) / relief", C.primary, C.surfaceHigh, 4.5],
+  ["rouge (petit texte) / carte", C.urgentText, C.surface, 4.5],
+  ["rouge (petit texte) / fond", C.urgentText, C.background, 4.5],
+  ["badge rouge (texte foncé)", C.onPrimary, C.urgent, 4.5],
+  ["étoiles / carte (non textuel)", C.star, C.surface, 3],
   ["succès (texte) / carte", C.success, C.surface, 4.5],
-  ["badge promo (texte foncé)", C.onPrimary, C.promo, 4.5],
-  ["badge urgent (texte foncé)", C.onPrimary, C.urgent, 4.5],
-  ["badge confiance (texte foncé)", C.onPrimary, C.trust, 4.5],
-  ["badge premium (texte foncé)", C.onPrimary, C.premium, 4.5],
   ["badge succès (texte foncé)", C.onPrimary, C.success, 4.5],
-  ["contour des champs / carte (non textuel)", C.border, C.background, 1.3],
-  ...Object.entries(CAT).map(
-    ([k, hex]) =>
-      [`puce catégorie ${k} (texte foncé)`, C.onPrimary, hex, 4.5] as [string, string, string, number],
-  ),
-  ...Object.entries(CAT).map(
-    ([k, hex]) => [`icône catégorie ${k} / carte`, hex, C.surface, 3] as [string, string, string, number],
-  ),
 ];
 
 describe("contrastes AA de la charte di.si store", () => {

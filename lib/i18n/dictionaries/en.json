@@ -128,8 +128,8 @@
     "navNote": "Fixed bar at the bottom of the screen, 56 px touch targets.",
     "logo": "Logo",
     "colorsBase": "Base colours",
-    "colorsMarketing": "Marketing colours",
-    "colorsCategories": "Category markers",
+    "colorsMarketing": "Accent colours (minimal)",
+    "colorsCategories": "Categories (neutral icons)",
     "oneGreen": "Only one solid lime button per screen or per card.",
     "outline": "Outline (secondary)",
     "link": "Link (tertiary)",
@@ -150,10 +150,12 @@
       "textSecondary": "Descriptions, metadata",
       "onPrimary": "Text on lime",
       "promo": "Flash sales, countdowns, % off",
-      "urgent": "Struck price, “Only 3 left”, deadlines, errors",
+      "urgent": "Discounts, flash sales, “Only 3 left”, deadlines (backgrounds, icons)",
       "trust": "Verified seller, new, info",
       "premium": "Sponsored, premium, best sellers, stars",
-      "success": "Payment done, “Delivered”, application sent"
+      "success": "Payment done, “Delivered”, sent, verified seller",
+      "urgentText": "Same red as small text: struck price, errors",
+      "star": "Rating stars only"
     }
   },
   "nav": {

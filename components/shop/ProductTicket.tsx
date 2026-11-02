@@ -47,7 +47,7 @@ export function ProductTicket({
       }
       meta={
         <>
-          <IconStar size={11} className="text-premium" />
+          <IconStar size={11} className="text-star" />
           <span>{p.rating.toLocaleString(nf, { minimumFractionDigits: 1 })}</span>
           <span>({p.reviews.toLocaleString(nf)})</span>
           <span aria-hidden="true">·</span>
@@ -79,7 +79,7 @@ export function ProductTicket({
             <div className="sold-bar" role="presentation">
               <span style={{ width: `${sold}%` }} />
             </div>
-            <span className="text-[10px] font-semibold text-promo">
+            <span className="text-[10px] font-semibold text-urgent-text">
               {format(dict.product.soldPct, { percent: sold })}
             </span>
           </div>

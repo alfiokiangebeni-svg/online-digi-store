@@ -2,8 +2,8 @@ import type { ReactNode } from "react";
 import { cn } from "./cn";
 
 /**
- * Badges : chaque couleur marketing a un sens (docs/DESIGN.md).
- * Texte toujours foncé (onPrimary) sur fond coloré : contraste ≥ 5,9:1.
+ * Badges. Palette minimale : rouge = remise / urgence, menthe = succès,
+ * tout le reste en neutre (fond en relief, texte clair).
  */
 export type BadgeTone =
   | "promo" // −30 %, vente flash
@@ -17,17 +17,18 @@ export type BadgeTone =
   | "verified" // vendeur vérifié (texte bleu, sans fond)
   | "category"; // repère de catégorie (--cat)
 
+/** Palette minimale : rouge (remises, urgences), menthe (succès), le reste en neutre. */
 const TONES: Record<BadgeTone, string> = {
-  promo: "bg-promo text-on-primary",
-  flash: "bg-promo text-on-primary",
+  promo: "bg-urgent text-on-primary",
+  flash: "bg-urgent text-on-primary",
   urgent: "bg-urgent text-on-primary",
-  trust: "bg-trust text-on-primary",
-  new: "bg-trust text-on-primary",
-  premium: "bg-premium text-on-primary",
+  trust: "bg-surface-2 text-fg",
+  new: "bg-surface-2 text-fg",
+  premium: "bg-surface-2 text-fg",
   success: "bg-success text-on-primary",
   neutral: "bg-surface-2 text-fg",
-  verified: "px-0 text-trust",
-  category: "bg-[var(--cat)] text-on-primary",
+  verified: "px-0 text-success",
+  category: "bg-surface-2 text-fg",
 };
 
 export function Badge({

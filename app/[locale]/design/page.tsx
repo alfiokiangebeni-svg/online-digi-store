@@ -35,7 +35,7 @@ import { Sheet } from "@/components/ui/Sheet";
 import { categoryOf, getProduct } from "@/lib/catalog";
 import { format, getDictionary } from "@/lib/i18n";
 import { resolveLocale } from "@/lib/i18n/params";
-import { CATEGORY_IDS, COLORS, categoryClass } from "@/lib/theme";
+import { CATEGORY_IDS, COLORS } from "@/lib/theme";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/design">): Promise<Metadata> {
   const dict = await getDictionary(await resolveLocale(params));
@@ -75,11 +75,9 @@ const SWATCH: Record<keyof typeof COLORS, string> = {
   textPrimary: "bg-text-primary text-on-primary",
   textSecondary: "bg-text-secondary text-on-primary",
   onPrimary: "bg-on-primary text-fg border border-line",
-  promo: "bg-promo text-on-primary",
   urgent: "bg-urgent text-on-primary",
   urgentText: "bg-urgent-text text-on-primary",
-  trust: "bg-trust text-on-primary",
-  premium: "bg-premium text-on-primary",
+  star: "bg-star text-on-primary",
   success: "bg-success text-on-primary",
 };
 const BASE = [
@@ -93,7 +91,7 @@ const BASE = [
   "textSecondary",
   "onPrimary",
 ] as const;
-const MARKETING = ["promo", "urgent", "trust", "premium", "success"] as const;
+const MARKETING = ["urgent", "urgentText", "star", "success"] as const;
 
 export default async function DesignPage({ params }: PageProps<"/[locale]/design">) {
   const locale = await resolveLocale(params);
@@ -161,11 +159,11 @@ export default async function DesignPage({ params }: PageProps<"/[locale]/design
       <Section id="categories" title={d.colorsCategories}>
         <ul className="grid grid-cols-2 gap-2">
           {CATEGORY_IDS.map((c) => (
-            <li key={c} className={`card flex items-center gap-3 overflow-hidden p-2 ${categoryClass(c)}`}>
-              <span className="grid size-11 shrink-0 place-items-center rounded-[var(--radius-sm)] bg-surface-2 text-[var(--cat)]">
+            <li key={c} className="card flex items-center gap-3 overflow-hidden p-2">
+              <span className="grid size-11 shrink-0 place-items-center rounded-[var(--radius-sm)] bg-surface-2 text-muted">
                 <CategoryIcon id={c} />
               </span>
-              <Badge tone="category">{dict.categories[c]}</Badge>
+              <span className="text-sm font-medium">{dict.categories[c]}</span>
             </li>
           ))}
         </ul>

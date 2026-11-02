@@ -185,7 +185,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
         <SectionHead
           id="rail-flash"
           title={dict.home.flash}
-          icon={<IconBolt size={18} className="text-promo" />}
+          icon={<IconBolt size={18} className="text-urgent-text" />}
           href={explore("?tri=priceAsc")}
           seeAll={dict.home.seeAll}
           extra={

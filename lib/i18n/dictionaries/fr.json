@@ -128,8 +128,8 @@
     "navNote": "Barre fixe en bas d'écran, cibles tactiles de 56 px.",
     "logo": "Logo",
     "colorsBase": "Couleurs de base",
-    "colorsMarketing": "Couleurs marketing",
-    "colorsCategories": "Repères de catégorie",
+    "colorsMarketing": "Couleurs d'appoint (minimum)",
+    "colorsCategories": "Catégories (icônes neutres)",
     "oneGreen": "Un seul bouton vert citron plein par écran ou par carte.",
     "outline": "Contour (secondaire)",
     "link": "Lien (tertiaire)",
@@ -150,10 +150,12 @@
       "textSecondary": "Descriptions, métadonnées",
       "onPrimary": "Texte sur le vert",
       "promo": "Ventes flash, compte à rebours, % de réduction",
-      "urgent": "Prix barré, « Plus que 3 », date limite, erreurs",
+      "urgent": "Remises, ventes flash, « Plus que 3 », date limite (fonds, icônes)",
       "trust": "Vendeur vérifié, nouveautés, infos",
       "premium": "Sponsorisé, premium, meilleures ventes, étoiles",
-      "success": "Paiement réussi, « Livré », candidature envoyée"
+      "success": "Paiement réussi, « Livré », envoyé, vendeur vérifié",
+      "urgentText": "Même rouge en petit texte : prix barré, erreurs",
+      "star": "Étoiles de note uniquement"
     }
   },
   "nav": {

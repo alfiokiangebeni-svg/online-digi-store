@@ -14,6 +14,8 @@ Toutes les couleurs, polices, rayons et animations sont définis dans **`app/the
 2. que tous les couples texte/fond utilisés atteignent le contraste **AA** ;
 3. qu'**aucune couleur n'est écrite en dur** dans les composants (`components/ui`, étendu aux écrans à l'étape 4).
 
+Ambiance : ergonomie des applications mobiles Amazon et AliExpress (recherche en haut, grille de catégories, ventes flash, double action d'achat), sur **fond gris foncé** avec le **vert citron** comme seule couleur forte.
+
 ## Couleurs de base (thème sombre unique)
 
 | Token          | Hex       | Classe                               | Usage                                                                       |
@@ -28,41 +30,32 @@ Toutes les couleurs, polices, rayons et animations sont définis dans **`app/the
 | textSecondary  | `#A3ACA7` | `text-text-secondary` / `text-muted` | Descriptions, métadonnées                                                   |
 | onPrimary      | `#0E100F` | `text-on-primary`                    | Texte sur le vert citron (**jamais de blanc sur le vert**)                  |
 
-## Couleurs marketing (un sens chacune, avec parcimonie)
+## Couleurs d'appoint — palette minimale
 
-| Token      | Hex       | Sens                                                                                                                  |
-| ---------- | --------- | --------------------------------------------------------------------------------------------------------------------- |
-| promo      | `#FF7A1A` | Ventes flash, compte à rebours, % de réduction                                                                        |
-| urgent     | `#FF4D5E` | Fonds et icônes : « Plus que 3 », date limite proche, erreurs                                                         |
-| urgentText | `#FF5E6D` | Même sens, **en petit texte** (prix barré, messages d'erreur) — l'urgent d'origine n'atteint que 4,48:1 sur une carte |
-| trust      | `#3BA9FF` | Vendeur vérifié, nouveautés, informations                                                                             |
-| premium    | `#FFC53D` | Sponsorisé, premium, meilleures ventes, étoiles                                                                       |
-| success    | `#2ED3A0` | Paiement réussi, « Livré », candidature envoyée                                                                       |
+Demande du propriétaire : **vert citron fort, fond gris, pas de surcharge de couleurs**.
+Le vert citron est la **seule couleur d'action** ; trois couleurs d'appoint seulement, chacune avec un sens unique :
 
-Sur un fond coloré (badge), le texte est toujours `onPrimary` (contraste ≥ 5,9:1).
+| Token      | Hex       | Sens                                                                                                                     |
+| ---------- | --------- | ------------------------------------------------------------------------------------------------------------------------ |
+| urgent     | `#FF4D5E` | Un seul rouge : remises (−30 %), ventes flash, compte à rebours, « Plus que 3 », date limite, erreurs (fonds et icônes)  |
+| urgentText | `#FF5E6D` | Le même rouge **en petit texte** (prix barré, messages d'erreur) — l'urgent d'origine n'atteint que 4,48:1 sur une carte |
+| star       | `#FFC53D` | **Étoiles de note uniquement**                                                                                           |
+| success    | `#2ED3A0` | Paiement réussi, « Livré », candidature envoyée, vendeur vérifié                                                         |
 
-## Repères de catégorie
+Pas de bleu, d'orange ni de rose. « Nouveau », « Sponsorisé », « Meilleure vente » : badges **neutres** (fond en relief, texte clair).
+Sur un fond coloré (badge rouge ou menthe), le texte est toujours `onPrimary` (≥ 5,9:1).
 
-Couleur posée sur l'**icône**, un **bandeau fin** (3 px en haut des cartes) ou une **puce** — **jamais** sur un bouton d'achat.
+## Catégories
 
-| Catégorie                        | Hex       | Classe           |
-| -------------------------------- | --------- | ---------------- |
-| Livres (ebooks, audio)           | `#FFB547` | `cat-books`      |
-| Applications (dont apps enfants) | `#3BA9FF` | `cat-apps`       |
-| Immobilier                       | `#2ED3A0` | `cat-realestate` |
-| Offres d'emploi                  | `#8F9BFF` | `cat-jobs`       |
-| Musique                          | `#FF5FA2` | `cat-music`      |
-| Images                           | `#FF8A5B` | `cat-images`     |
-| Appels d'offres                  | `#FFC53D` | `cat-tenders`    |
-
-La classe `cat-*` pose la variable `--cat`, lue par la carte, le visuel, la vignette et le badge `category`.
-Jamais en couleur de texte (certaines n'atteignent pas 4,5:1 en petit texte) ; en icône, toutes dépassent 3:1.
+Les 7 catégories (Livres, Applications, Immobilier, Offres d'emploi, Musique, Images, Appels d'offres) n'ont **pas de couleur propre** :
+icônes au trait en gris (`textSecondary`), sur fond en relief. Seule l'icône les distingue.
 
 ## Règles
 
 - **Un seul bouton vert citron plein** par écran ou par carte (`Button variant="primary"`).
 - Boutons secondaires **en contour** (`variant="outline"` : bordure `border`, texte `textPrimary`) ; actions tertiaires en **liens texte** (`variant="ghost"`).
 - Onglets et filtres actifs : contour et texte vert citron, sans fond plein.
+- Cartes produit : pas de bandeau ni de teinte de catégorie ; visuel en gris relief avec icône neutre.
 - Contraste **AA** partout (vérifié par les tests).
 - **Interdits** : dégradés violet-bleu, effet verre flou, mises en page « template IA », emoji en guise d'icônes.
 

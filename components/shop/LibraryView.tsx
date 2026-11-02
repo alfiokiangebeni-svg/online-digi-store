@@ -150,7 +150,7 @@ export function LibraryView({
                   <span className="flex flex-wrap items-center gap-x-2 text-[11px] font-semibold">
                     <span
                       className={
-                        item.paidUsdCents === 0 ? "text-success" : isNew ? "text-promo" : "text-muted"
+                        item.paidUsdCents === 0 ? "text-success" : isNew ? "text-urgent-text" : "text-muted"
                       }
                     >
                       {tag}

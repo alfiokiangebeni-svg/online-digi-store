@@ -21,7 +21,7 @@ export function CouponCard({
   const claimed = useStore(couponStore) === code;
   return (
     <div className="flex min-w-[15rem] shrink-0 items-stretch overflow-hidden rounded-[8px] border border-dashed border-promo bg-[#fff1ef] dark:bg-surface">
-      <div className="grid w-20 shrink-0 place-items-center bg-promo px-1 text-center text-lg font-extrabold leading-tight text-white">
+      <div className="grid w-20 shrink-0 place-items-center bg-urgent px-1 text-center text-lg font-extrabold leading-tight text-white">
         {value}
       </div>
       <div className="flex flex-1 flex-col justify-center gap-1 px-3 py-2.5">

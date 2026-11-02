@@ -14,7 +14,7 @@ export function Rating({
 }) {
   return (
     <span className="inline-flex items-center gap-1 text-xs text-muted">
-      <IconStar size={12} className="text-premium" />
+      <IconStar size={12} className="text-star" />
       <span aria-hidden="true">
         {value.toLocaleString(locale === "en" ? "en-US" : "fr-CD", { minimumFractionDigits: 1 })}
       </span>

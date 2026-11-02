@@ -331,7 +331,7 @@ export function CartView({
         {discount ? (
           <div className="flex justify-between">
             <span className="text-muted">{t.discount}</span>
-            <span className="text-promo">
+            <span className="text-urgent-text">
               −<Money usdCents={discount} locale={locale} />
             </span>
           </div>
