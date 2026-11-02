@@ -4,15 +4,15 @@
     "status": "draft-needs-native-review"
   },
   "meta": {
-    "siteName": "Digi Store",
-    "title": "Digi Store — futa na telefone, zwa yango sikoyo",
+    "siteName": "di.si store",
+    "title": "di.si store — babuku, ba-app, ndako, mosala, miziki, bilili, ba-appel d'offres",
     "description": "Babuku, mateya, ba-app ya bana, miziki mpe ba-template. Futa na M-Pesa, Airtel Money, Orange Money, Afrimoney. Ozwi yango mbala moko.",
-    "tagline": "Futa na telefone, zwa yango sikoyo."
+    "tagline": "Somba, futa ndako, senga mosala mpe teka na RDC, na Mobile Money."
   },
   "a11y": {
     "skipToContent": "Kende na makambo",
     "mainNav": "Nzela ya liboso",
-    "home": "Ebandeli ya Digi Store",
+    "home": "Ebandeli ya di.si store",
     "settings": "Ndenge ya kotala"
   },
   "theme": {
@@ -66,7 +66,7 @@
   },
   "design": {
     "title": "Design system",
-    "intro": "Biteni nyonso ya application, na ndenge ya maquette ya mobile. Lokasa nyonso etongami kaka na biteni oyo.",
+    "intro": "Biteni nyonso ya di.si store. Lokasa nyonso etongami kaka na biteni oyo mpe ba-token ya app/theme.css.",
     "sections": {
       "colors": "Balangi",
       "type": "Makomi",
@@ -125,14 +125,45 @@
     "sheetBody": "Koma nimero na yo. Okozwa motuna ya kofuta na telefone na yo : koma PIN na yo mpo na kondima.",
     "kidsNote": "Langi moko, maboko ya kozinga, bilili ya minene.",
     "duotoneCaption": "Foto ya balangi mibale : moindo mpe latérite.",
-    "navNote": "Nzela ya nse ya ekran, bisika ya kosimba ya 56 px."
+    "navNote": "Nzela ya nse ya ekran, bisika ya kosimba ya 56 px.",
+    "logo": "Logo",
+    "colorsBase": "Balangi ya moboko",
+    "colorsMarketing": "Balangi ya mombongo",
+    "colorsCategories": "Balangi ya mitindo",
+    "oneGreen": "Bouton moko kaka ya langi ya citron na lokasa to na carte.",
+    "outline": "Na mondelo (ya mibale)",
+    "link": "Lien (ya misato)",
+    "sizes": "Bonene",
+    "haptic": "Kotungisa moke na kosomba",
+    "cards": "Ba-carte ya biloko",
+    "skeletons": "Ezali koya",
+    "newNav": "Nzela ya sika ya nse",
+    "priceSample": "Motuya : bilembo minene",
+    "usage": {
+      "primary": "Misala ya liboso, onglet efungwami",
+      "primaryPressed": "Ntango ya kofina",
+      "background": "Nse ya application",
+      "surface": "Ba-carte, nzela ya nse",
+      "surfaceHigh": "Bisika ya kokoma, ba-puce",
+      "border": "Mondelo",
+      "textPrimary": "Makomi",
+      "textSecondary": "Makomi ya mibale",
+      "onPrimary": "Makomi likolo ya vert",
+      "promo": "Promo ya mbangu, ntango, %",
+      "urgent": "Motuya ya kala, « Etikali 3 », ntango ekoki, mabunga",
+      "trust": "Moteki ya solo, biloko ya sika",
+      "premium": "Piblisite, oyo etekami mingi, minzoto",
+      "success": "Kofuta elongi, « Ekómi », esengeli etindami"
+    }
   },
   "nav": {
     "home": "Ebandeli",
     "explore": "Koluka",
     "library": "Babuku na ngai",
     "cart": "Panier",
-    "account": "Ngai"
+    "account": "Ngai",
+    "categories": "Mitindo",
+    "sell": "Teka"
   },
   "header": {
     "cart": "Panier",
@@ -254,7 +285,7 @@
     "inCart": "Ezali na panier",
     "buy": "Somba",
     "share": "Kabola na WhatsApp",
-    "shareText": "{title} na Digi Store",
+    "shareText": "{title} na di.si store",
     "gift": "Pesa kado",
     "giftTitle": "Pesa yango lokola kado",
     "giftBody": "Moto akozwa lien na SMS mpe WhatsApp soki kofuta na yo endimami.",
@@ -414,7 +445,7 @@
     "notifications": "Ba-notification",
     "notificationsValue": "WhatsApp mpe SMS",
     "seller": "Ozali kokela babuku, masano, bilili to miziki ?",
-    "sellerBody": "Teka yango na Digi Store mpe zwa mbongo na yo na Mobile Money.",
+    "sellerBody": "Teka yango na di.si store mpe zwa mbongo na yo na Mobile Money.",
     "sellerCta": "Kokóma moteki",
     "sellerSoon": "Esika ya bateki ekofungwama kala te : komela biso na WhatsApp mpo na kozala na baye ya liboso.",
     "help": "Lisalisi na WhatsApp",
@@ -434,5 +465,22 @@
     "amount": "−{value}",
     "min": "Kobanda {amount} ya bisombi",
     "all": "Na katalóg mobimba"
+  },
+  "categories": {
+    "books": "Babuku",
+    "apps": "Ba-application",
+    "realestate": "Ndako",
+    "jobs": "Mosala",
+    "music": "Miziki",
+    "images": "Bilili",
+    "tenders": "Ba-appel d'offres"
+  },
+  "badges": {
+    "lowStock": "Etikali kaka {count}",
+    "sponsored": "Piblisite",
+    "bestSeller": "Etekami mingi",
+    "verifiedSince": "Moteki ya solo · banda {year}",
+    "deadline": "Ekosila na mikolo {days}",
+    "sent": "Etindami"
   }
 }

@@ -4,15 +4,15 @@
     "status": "draft"
   },
   "meta": {
-    "siteName": "Digi Store",
-    "title": "Digi Store — pay with your phone, get it right away",
+    "siteName": "di.si store",
+    "title": "di.si store — books, apps, real estate, jobs, music, images, tenders",
     "description": "Books, courses, kids' apps, music and templates. Pay with M-Pesa, Airtel Money, Orange Money, Afrimoney. Instant delivery.",
-    "tagline": "Pay with your phone, get it right away."
+    "tagline": "Buy, rent, apply and sell in the DRC, with Mobile Money."
   },
   "a11y": {
     "skipToContent": "Skip to content",
     "mainNav": "Main navigation",
-    "home": "Digi Store home",
+    "home": "di.si store home",
     "settings": "Display settings"
   },
   "theme": {
@@ -66,7 +66,7 @@
   },
   "design": {
     "title": "Design system",
-    "intro": "Every component of the app, based on the mobile design. Each screen is built only from these pieces.",
+    "intro": "Every di.si store component. Each screen is built only from these pieces and the tokens in app/theme.css.",
     "sections": {
       "colors": "Colours",
       "type": "Typography",
@@ -125,14 +125,45 @@
     "sheetBody": "Enter your number. You will get a payment request on your phone: type your PIN to confirm.",
     "kidsNote": "Same identity, rounder shapes, bigger illustrations.",
     "duotoneCaption": "Duotone photo: black and laterite.",
-    "navNote": "Fixed bar at the bottom of the screen, 56 px touch targets."
+    "navNote": "Fixed bar at the bottom of the screen, 56 px touch targets.",
+    "logo": "Logo",
+    "colorsBase": "Base colours",
+    "colorsMarketing": "Marketing colours",
+    "colorsCategories": "Category markers",
+    "oneGreen": "Only one solid lime button per screen or per card.",
+    "outline": "Outline (secondary)",
+    "link": "Link (tertiary)",
+    "sizes": "Sizes",
+    "haptic": "Light vibration on purchase actions",
+    "cards": "Product cards",
+    "skeletons": "Loading skeletons",
+    "newNav": "New bottom bar",
+    "priceSample": "Prices: tabular, bold, larger",
+    "usage": {
+      "primary": "Primary actions, active tab",
+      "primaryPressed": "Pressed state",
+      "background": "App background",
+      "surface": "Cards, sheets, bottom bar",
+      "surfaceHigh": "Fields, chips, raised items",
+      "border": "Dividers, outlines",
+      "textPrimary": "Headings and text",
+      "textSecondary": "Descriptions, metadata",
+      "onPrimary": "Text on lime",
+      "promo": "Flash sales, countdowns, % off",
+      "urgent": "Struck price, “Only 3 left”, deadlines, errors",
+      "trust": "Verified seller, new, info",
+      "premium": "Sponsored, premium, best sellers, stars",
+      "success": "Payment done, “Delivered”, application sent"
+    }
   },
   "nav": {
     "home": "Home",
     "explore": "Explore",
     "library": "Library",
     "cart": "Cart",
-    "account": "Account"
+    "account": "Account",
+    "categories": "Categories",
+    "sell": "Sell"
   },
   "header": {
     "cart": "Cart",
@@ -254,7 +285,7 @@
     "inCart": "In cart",
     "buy": "Buy",
     "share": "Share on WhatsApp",
-    "shareText": "{title} on Digi Store",
+    "shareText": "{title} on di.si store",
     "gift": "Gift",
     "giftTitle": "Send as a gift",
     "giftBody": "The recipient gets the link by SMS and WhatsApp as soon as your payment is confirmed.",
@@ -414,7 +445,7 @@
     "notifications": "Notifications",
     "notificationsValue": "WhatsApp and SMS",
     "seller": "Do you make books, games, images or music?",
-    "sellerBody": "Sell them on Digi Store and get paid with Mobile Money.",
+    "sellerBody": "Sell them on di.si store and get paid with Mobile Money.",
     "sellerCta": "Become a seller",
     "sellerSoon": "The seller area is opening soon: message us on WhatsApp to be among the first.",
     "help": "Help and contact on WhatsApp",
@@ -434,5 +465,22 @@
     "amount": "−{value}",
     "min": "On orders from {amount}",
     "all": "On the whole catalogue"
+  },
+  "categories": {
+    "books": "Books",
+    "apps": "Apps",
+    "realestate": "Real estate",
+    "jobs": "Jobs",
+    "music": "Music",
+    "images": "Images",
+    "tenders": "Tenders"
+  },
+  "badges": {
+    "lowStock": "Only {count} left",
+    "sponsored": "Sponsored",
+    "bestSeller": "Best seller",
+    "verifiedSince": "Verified seller · since {year}",
+    "deadline": "Closes in {days} d",
+    "sent": "Sent"
   }
 }

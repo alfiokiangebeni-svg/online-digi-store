@@ -1,15 +1,15 @@
 {
   "id": "/",
-  "name": "Digi Store",
-  "short_name": "Digi Store",
-  "description": "Tu paies avec ton téléphone, tu reçois tout de suite.",
+  "name": "di.si store",
+  "short_name": "di.si store",
+  "description": "Achète, loue, postule et vends en RDC, paiement Mobile Money.",
   "lang": "fr",
   "start_url": "/fr?source=pwa",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#F1F2F4",
-  "theme_color": "#0B1F3A",
+  "background_color": "#1C1F1E",
+  "theme_color": "#1C1F1E",
   "categories": ["shopping", "books", "education"],
   "icons": [
     {

@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-disable @typescript-eslint/no-require-imports -- script CommonJS lancé par node */
 /**
  * Vérifie toutes les options de la boutique dans un vrai navigateur mobile (Playwright) :
  * recherche, filtres, devise, coupons, ajout rapide, extraits audio, fiche produit,

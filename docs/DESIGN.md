@@ -1,59 +1,102 @@
-# Design de l'application
+# Charte « di.si store »
 
-Style **place de marché** : un rendu propre et dense, inspiré des grandes plateformes d'achat en ligne
-(sans reprendre leurs logos, noms ni couleurs signature). Il remplace le design « maquette citron »
-et la charte « Kinshasa la nuit » des étapes précédentes, à la demande du propriétaire.
+**di.si store** (toujours en minuscules, avec le point) : plateforme multi-catégories, mobile d'abord, pour la RDC.
+Cette charte remplace toutes les palettes précédentes (« Kinshasa la nuit », maquette citron, style place de marché).
 
-## Principes
+Ergonomie inspirée des grandes applications d'achat (recherche toujours visible, double action « Acheter maintenant » + « Ajouter au panier », étoiles et avis partout, grille dense de catégories, ventes flash, badges vendeur) — **sans** reprendre leurs logos, couleurs, images ni textes.
 
-- **Chercher d'abord** : en-tête bleu nuit fixe avec une grande barre de recherche (bouton orange) et des filtres en pastilles.
-- **Le prix se voit** : montant en rouge-orangé, ancien prix barré, remise en pastille rouge.
-- **Preuve sociale** : note, nombre de ventes, « x % vendus » sur les ventes flash.
-- **Acheter vite** : bouton rond d'ajout rapide sur chaque carte, « Ajouter au panier » + « Acheter maintenant » fixés en bas de la fiche.
-- **Promotions** : ventes flash avec compte à rebours (vendredi 23 h 59, heure de Kinshasa), coupons à récupérer, appliqués tout seuls au panier.
+## Fichier de thème unique
 
-## Couleurs
+Toutes les couleurs, polices, rayons et animations sont définis dans **`app/theme.css`** (Tailwind v4 `@theme`).
+`lib/theme.ts` en est le miroir pour le code ; `tests/theme.test.ts` vérifie :
 
-| Token              | Hex                   | Usage                                                              |
-| ------------------ | --------------------- | ------------------------------------------------------------------ |
-| `--color-ink`      | `#0B1F3A`             | En-tête, bandeaux (bleu nuit)                                      |
-| `--color-cta`      | `#FF7A1A`             | Action principale (texte foncé `#0F1111` dessus : contraste 5,9:1) |
-| `--color-cta-soft` | `#FFE8D6`             | « Ajouter au panier »                                              |
-| `--color-price`    | `#CC2E0A`             | Prix                                                               |
-| `--color-promo`    | `#E1251B`             | Remises, ventes flash, coupons                                     |
-| `--color-leaf`     | `#067D62`             | Gratuit, confirmations, livraison                                  |
-| `--color-link`     | `#0B57D0`             | Liens « Tout voir »                                                |
-| `--color-star`     | `#FFA41C`             | Étoiles                                                            |
-| `--color-mint`     | `#FFF4EC`             | Bandeaux d'information                                             |
-| fond               | `#F1F2F4`             | Fond de l'application                                              |
-| texte              | `#0F1111` / `#565959` | Texte principal / secondaire                                       |
+1. que les deux fichiers ont les mêmes valeurs ;
+2. que tous les couples texte/fond utilisés atteignent le contraste **AA** ;
+3. qu'**aucune couleur n'est écrite en dur** dans les composants (`components/ui`, étendu aux écrans à l'étape 4).
 
-Tous les couples texte/fond sont vérifiés AA par `tests/contrast.test.ts`. Mode sombre disponible dans Compte › Réglages.
+## Couleurs de base (thème sombre unique)
 
-## Typographie et formes
+| Token          | Hex       | Classe                               | Usage                                                                       |
+| -------------- | --------- | ------------------------------------ | --------------------------------------------------------------------------- |
+| primary        | `#B6F23A` | `bg-primary`                         | Actions principales (Acheter, Payer, Postuler, Soumissionner), onglet actif |
+| primaryPressed | `#9BD61F` | `bg-primary-pressed`                 | État pressé / survol                                                        |
+| background     | `#1C1F1E` | `bg-background` / `bg-bg`            | Fond général                                                                |
+| surface        | `#262A28` | `bg-surface`                         | Cartes, feuilles modales, barre du bas                                      |
+| surfaceHigh    | `#323735` | `bg-surface-high` / `bg-surface-2`   | Champs, puces, éléments en relief                                           |
+| border         | `#3E4441` | `border-border` / `border-line`      | Séparateurs, contours                                                       |
+| textPrimary    | `#F2F5F3` | `text-text-primary` / `text-fg`      | Titres et textes                                                            |
+| textSecondary  | `#A3ACA7` | `text-text-secondary` / `text-muted` | Descriptions, métadonnées                                                   |
+| onPrimary      | `#0E100F` | `text-on-primary`                    | Texte sur le vert citron (**jamais de blanc sur le vert**)                  |
 
-- Une seule police : **Inter** 400–700 (28 Ko, auto-hébergée, avec ɛ et ɔ pour le lingala).
-- Cartes blanches, rayon 8 px, ombre très légère ; visuels produits carrés.
-- Boutons d'achat en pilule (rayon complet) ; pastilles de filtre arrondies.
-- Icônes au trait (SVG maison), jamais d'emoji.
+## Couleurs marketing (un sens chacune, avec parcimonie)
 
-## Écrans
+| Token      | Hex       | Sens                                                                                                                  |
+| ---------- | --------- | --------------------------------------------------------------------------------------------------------------------- |
+| promo      | `#FF7A1A` | Ventes flash, compte à rebours, % de réduction                                                                        |
+| urgent     | `#FF4D5E` | Fonds et icônes : « Plus que 3 », date limite proche, erreurs                                                         |
+| urgentText | `#FF5E6D` | Même sens, **en petit texte** (prix barré, messages d'erreur) — l'urgent d'origine n'atteint que 4,48:1 sur une carte |
+| trust      | `#3BA9FF` | Vendeur vérifié, nouveautés, informations                                                                             |
+| premium    | `#FFC53D` | Sponsorisé, premium, meilleures ventes, étoiles                                                                       |
+| success    | `#2ED3A0` | Paiement réussi, « Livré », candidature envoyée                                                                       |
 
-| Écran         | Contenu                                                                                                                                                                                                                                                 |
-| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Accueil       | Recherche + filtres (en-tête), avantages (livraison instantanée, Mobile Money, WhatsApp), bandeau promo, catégories rondes, ventes flash (« x % vendus »), coupons du jour, gratuits populaires, musique avec extraits, grille « Recommandé pour vous » |
-| Explorer      | Recherche tolérante aux fautes, type, prix, tri                                                                                                                                                                                                         |
-| Fiche produit | Galerie, prix, note et ventes, chiffres clés, version, livraison et garantie, vendeur, avantages, offrir, WhatsApp, détails, avis, produits similaires en grille                                                                                        |
-| Panier        | Articles, coupon (auto), Mobile Money / carte, totaux, bouton fixe « Payer … et télécharger »                                                                                                                                                           |
-| Bibliothèque  | Bandeau de confirmation, filtres, téléchargement, hors-ligne                                                                                                                                                                                            |
-| Compte        | Statistiques, contrôle parental + PIN, favoris, réglages (devise, thème, données légères), langue                                                                                                                                                       |
+Sur un fond coloré (badge), le texte est toujours `onPrimary` (contraste ≥ 5,9:1).
 
-## Navigation
+## Repères de catégorie
 
-- En-tête : logo `digistore.`, bascule **$ / FC**, panier (pastille orange).
-- Barre du bas, 5 onglets : **Accueil · Explorer · Bibliothèque · Panier · Compte** (icône active en orange).
+Couleur posée sur l'**icône**, un **bandeau fin** (3 px en haut des cartes) ou une **puce** — **jamais** sur un bouton d'achat.
 
-## Mise en œuvre
+| Catégorie                        | Hex       | Classe           |
+| -------------------------------- | --------- | ---------------- |
+| Livres (ebooks, audio)           | `#FFB547` | `cat-books`      |
+| Applications (dont apps enfants) | `#3BA9FF` | `cat-apps`       |
+| Immobilier                       | `#2ED3A0` | `cat-realestate` |
+| Offres d'emploi                  | `#8F9BFF` | `cat-jobs`       |
+| Musique                          | `#FF5FA2` | `cat-music`      |
+| Images                           | `#FF8A5B` | `cat-images`     |
+| Appels d'offres                  | `#FFC53D` | `cat-tenders`    |
 
-Tokens dans `app/globals.css` (Tailwind v4), composants dans `components/ui/` et `components/shop/`, tous visibles sur `/design`.
-Cibles tactiles ≥ 44 px, focus visible orange, `prefers-reduced-motion` respecté.
+La classe `cat-*` pose la variable `--cat`, lue par la carte, le visuel, la vignette et le badge `category`.
+Jamais en couleur de texte (certaines n'atteignent pas 4,5:1 en petit texte) ; en icône, toutes dépassent 3:1.
+
+## Règles
+
+- **Un seul bouton vert citron plein** par écran ou par carte (`Button variant="primary"`).
+- Boutons secondaires **en contour** (`variant="outline"` : bordure `border`, texte `textPrimary`) ; actions tertiaires en **liens texte** (`variant="ghost"`).
+- Onglets et filtres actifs : contour et texte vert citron, sans fond plein.
+- Contraste **AA** partout (vérifié par les tests).
+- **Interdits** : dégradés violet-bleu, effet verre flou, mises en page « template IA », emoji en guise d'icônes.
+
+## Typographie
+
+| Rôle               | Police                                 | Graisses |
+| ------------------ | -------------------------------------- | -------- |
+| Titres, logo, prix | **Plus Jakarta Sans** (`font-display`) | 700–800  |
+| Texte              | **DM Sans** (`font-sans`)              | 400–700  |
+
+- Auto-hébergées, un fichier variable chacune (`app/fonts/`, 37 Ko au total), générées par `scripts/build-fonts.py`.
+- **Prix** : chiffres tabulaires, gras (800), nettement plus grands que le texte (17 px en carte, 30 px sur la fiche).
+- ɛ et ɔ (lingala) ne figurent pas dans ces familles : le téléphone les affiche avec sa police système.
+
+## Formes et icônes
+
+- Rayons : 8 px (puces, champs), 10 px (boutons), 12 px (cartes, feuilles).
+- **Pas d'ombres** : la profondeur vient des niveaux de gris (background → surface → surfaceHigh).
+- Une seule famille d'**icônes au trait** (`components/ui/icons.tsx`), y compris les 7 icônes de catégorie.
+
+## Mouvement
+
+- Retour visuel immédiat à chaque pression (`.pressable` : légère réduction d'échelle).
+- **Vibration haptique** légère sur les actions d'achat (`<Button haptic>`), ignorée si « réduire les animations ».
+- **Squelettes de chargement** (`Skeleton`, `TicketSkeleton`, `RowSkeleton`) au lieu d'écrans vides ou d'indicateurs sans fin.
+- Animation de confirmation (tampon « LIVRÉ ») après paiement, candidature ou soumission.
+- `prefers-reduced-motion` respecté partout.
+
+## Navigation (cible de l'étape 4)
+
+- **Barre du bas, 5 onglets** : Accueil · Catégories · Vendre / Publier · Panier · Compte (onglet actif en vert citron).
+- **En haut** : logo « di.si store », recherche permanente (vocale et scan quand l'appareil le permet), sélecteur CDF / USD, notifications.
+- Support client affiché dans l'application : WhatsApp **+243 824 176 729**.
+
+## Composants
+
+Tous visibles sur la page `/design` : logo, couleurs, typographie, boutons, badges, puces, sélecteurs, champs, cartes produit, lignes de liste, retours (toast, tampon, compte à rebours, feuille modale), squelettes, barre du bas.

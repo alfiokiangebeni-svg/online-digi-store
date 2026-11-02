@@ -4,15 +4,15 @@
     "status": "reference"
   },
   "meta": {
-    "siteName": "Digi Store",
-    "title": "Digi Store — tu paies avec ton téléphone, tu reçois tout de suite",
+    "siteName": "di.si store",
+    "title": "di.si store — livres, applis, immobilier, emploi, musique, images, appels d'offres",
     "description": "Livres, formations, apps pour enfants, musique et templates. Paiement M-Pesa, Airtel Money, Orange Money, Afrimoney. Livraison immédiate.",
-    "tagline": "Tu paies avec ton téléphone, tu reçois tout de suite."
+    "tagline": "Achète, loue, postule et vends en RDC, paiement Mobile Money."
   },
   "a11y": {
     "skipToContent": "Aller au contenu",
     "mainNav": "Navigation principale",
-    "home": "Accueil Digi Store",
+    "home": "Accueil di.si store",
     "settings": "Réglages d'affichage"
   },
   "theme": {
@@ -66,7 +66,7 @@
   },
   "design": {
     "title": "Design system",
-    "intro": "Tous les composants de l'application, d'après la maquette mobile. Chaque écran est construit uniquement avec ces pièces.",
+    "intro": "Tous les composants de di.si store. Chaque écran est construit uniquement avec ces pièces et les tokens de app/theme.css.",
     "sections": {
       "colors": "Couleurs",
       "type": "Typographie",
@@ -125,14 +125,45 @@
     "sheetBody": "Saisis ton numéro. Tu recevras une demande de paiement sur ton téléphone : tape ton code PIN pour valider.",
     "kidsNote": "Même charte, formes plus rondes, illustrations plus grandes.",
     "duotoneCaption": "Photo en bichromie : noir et latérite.",
-    "navNote": "Barre fixe en bas d'écran, cibles tactiles de 56 px."
+    "navNote": "Barre fixe en bas d'écran, cibles tactiles de 56 px.",
+    "logo": "Logo",
+    "colorsBase": "Couleurs de base",
+    "colorsMarketing": "Couleurs marketing",
+    "colorsCategories": "Repères de catégorie",
+    "oneGreen": "Un seul bouton vert citron plein par écran ou par carte.",
+    "outline": "Contour (secondaire)",
+    "link": "Lien (tertiaire)",
+    "sizes": "Tailles",
+    "haptic": "Vibration légère sur les actions d'achat",
+    "cards": "Cartes produit",
+    "skeletons": "Squelettes de chargement",
+    "newNav": "Nouvelle barre du bas",
+    "priceSample": "Prix : chiffres tabulaires, gras, plus grands",
+    "usage": {
+      "primary": "Actions principales, onglet actif",
+      "primaryPressed": "État pressé",
+      "background": "Fond général",
+      "surface": "Cartes, feuilles, barre du bas",
+      "surfaceHigh": "Champs, puces, relief",
+      "border": "Séparateurs, contours",
+      "textPrimary": "Titres et textes",
+      "textSecondary": "Descriptions, métadonnées",
+      "onPrimary": "Texte sur le vert",
+      "promo": "Ventes flash, compte à rebours, % de réduction",
+      "urgent": "Prix barré, « Plus que 3 », date limite, erreurs",
+      "trust": "Vendeur vérifié, nouveautés, infos",
+      "premium": "Sponsorisé, premium, meilleures ventes, étoiles",
+      "success": "Paiement réussi, « Livré », candidature envoyée"
+    }
   },
   "nav": {
     "home": "Accueil",
     "explore": "Explorer",
     "library": "Bibliothèque",
     "cart": "Panier",
-    "account": "Compte"
+    "account": "Compte",
+    "categories": "Catégories",
+    "sell": "Vendre"
   },
   "header": {
     "cart": "Panier",
@@ -254,7 +285,7 @@
     "inCart": "Dans le panier",
     "buy": "Acheter",
     "share": "Partager sur WhatsApp",
-    "shareText": "{title} sur Digi Store",
+    "shareText": "{title} sur di.si store",
     "gift": "Offrir",
     "giftTitle": "Offrir ce contenu",
     "giftBody": "Le destinataire reçoit le lien par SMS et WhatsApp dès que ton paiement est confirmé.",
@@ -414,7 +445,7 @@
     "notifications": "Notifications",
     "notificationsValue": "WhatsApp et SMS",
     "seller": "Tu crées des livres, jeux, images ou musiques ?",
-    "sellerBody": "Publie-les sur Digi Store et touche tes revenus en Mobile Money.",
+    "sellerBody": "Publie-les sur di.si store et touche tes revenus en Mobile Money.",
     "sellerCta": "Devenir vendeur",
     "sellerSoon": "Ouverture de l'espace vendeurs : écris-nous sur WhatsApp pour être parmi les premiers.",
     "help": "Aide et contact sur WhatsApp",
@@ -434,5 +465,22 @@
     "amount": "−{value}",
     "min": "Dès {amount} d'achat",
     "all": "Sur tout le catalogue"
+  },
+  "categories": {
+    "books": "Livres",
+    "apps": "Applications",
+    "realestate": "Immobilier",
+    "jobs": "Offres d'emploi",
+    "music": "Musique",
+    "images": "Images",
+    "tenders": "Appels d'offres"
+  },
+  "badges": {
+    "lowStock": "Plus que {count}",
+    "sponsored": "Sponsorisé",
+    "bestSeller": "Meilleure vente",
+    "verifiedSince": "Vendeur vérifié · depuis {year}",
+    "deadline": "Clôture dans {days} j",
+    "sent": "Envoyée"
   }
 }

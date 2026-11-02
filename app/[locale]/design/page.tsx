@@ -1,148 +1,255 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { AppShell } from "@/components/shell/AppShell";
-import { ChipDemo, StampDemo, ToastDemo } from "@/components/design/Demos";
+import { ChipDemo, SegmentedDemo, StampDemo, SwitchDemo, ToastDemo } from "@/components/design/Demos";
+import { metaLine } from "@/components/shop/labels";
+import { PreviewButton } from "@/components/shop/PreviewButton";
 import { ProductTicket } from "@/components/shop/ProductTicket";
 import {
   Badge,
   BottomNav,
   Button,
+  CategoryIcon,
   Field,
   IconBolt,
-  IconCheck,
   IconCart,
-  IconDownload,
+  IconCheck,
+  IconGrid,
   IconHome,
   IconMe,
-  IconSearch,
+  IconPlus,
   ListRow,
+  Logo,
+  Price,
   Rating,
+  RowSkeleton,
   SearchField,
   Thumb,
-  Price,
-  Skeleton,
-  Story,
   TicketSkeleton,
   Toast,
 } from "@/components/ui";
 import { Countdown } from "@/components/ui/Countdown";
+import { CurrencyToggle } from "@/components/ui/CurrencyToggle";
 import { PhoneField } from "@/components/ui/PhoneField";
 import { Sheet } from "@/components/ui/Sheet";
-import { ACCESSIBLE_VARIANTS, BRAND_COLORS } from "@/lib/brand";
-import { DEMO_USD_TO_CDF_RATE } from "@/lib/currency";
-import { CATALOG, getProduct } from "@/lib/catalog";
-import { metaLine } from "@/components/shop/labels";
-import { PreviewButton } from "@/components/shop/PreviewButton";
-import { SegmentedDemo, SwitchDemo } from "@/components/design/Demos";
-import { CurrencyToggle } from "@/components/ui/CurrencyToggle";
+import { categoryOf, getProduct } from "@/lib/catalog";
 import { format, getDictionary } from "@/lib/i18n";
 import { resolveLocale } from "@/lib/i18n/params";
+import { CATEGORY_IDS, COLORS, categoryClass } from "@/lib/theme";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/design">): Promise<Metadata> {
   const dict = await getDictionary(await resolveLocale(params));
   return { title: dict.design.title, robots: { index: false } };
 }
 
-function Section({ id, title, children }: { id: string; title: string; children: ReactNode }) {
+function Section({
+  id,
+  title,
+  note,
+  children,
+}: {
+  id: string;
+  title: string;
+  note?: string;
+  children: ReactNode;
+}) {
   return (
     <section aria-labelledby={id} className="mt-8">
-      <h2 id={id} className="mb-3 text-lg font-bold">
+      <h2 id={id} className="text-lg font-bold">
         {title}
       </h2>
-      {children}
+      {note ? <p className="mt-1 text-sm text-muted">{note}</p> : null}
+      <div className="mt-3">{children}</div>
     </section>
   );
 }
 
-const SWATCHES = [
-  { key: "lime", hex: BRAND_COLORS.lime, className: "bg-lime text-ink" },
-  { key: "ink", hex: BRAND_COLORS.ink, className: "bg-ink text-white" },
-  { key: "white", hex: BRAND_COLORS.white, className: "bg-white text-ink" },
-  { key: "leaf", hex: BRAND_COLORS.leaf, className: "bg-leaf text-white" },
-  { key: "promo", hex: BRAND_COLORS.promo, className: "bg-promo text-white" },
-  { key: "limeStrong", hex: BRAND_COLORS.limeStrong, className: "bg-lime-strong text-ink" },
+/** Pastille de couleur : la classe Tailwind vient du token (aucune couleur en dur). */
+const SWATCH: Record<keyof typeof COLORS, string> = {
+  primary: "bg-primary text-on-primary",
+  primaryPressed: "bg-primary-pressed text-on-primary",
+  background: "bg-background text-fg border border-line",
+  surface: "bg-surface text-fg",
+  surfaceHigh: "bg-surface-high text-fg",
+  border: "bg-border text-fg",
+  textPrimary: "bg-text-primary text-on-primary",
+  textSecondary: "bg-text-secondary text-on-primary",
+  onPrimary: "bg-on-primary text-fg border border-line",
+  promo: "bg-promo text-on-primary",
+  urgent: "bg-urgent text-on-primary",
+  urgentText: "bg-urgent-text text-on-primary",
+  trust: "bg-trust text-on-primary",
+  premium: "bg-premium text-on-primary",
+  success: "bg-success text-on-primary",
+};
+const BASE = [
+  "primary",
+  "primaryPressed",
+  "background",
+  "surface",
+  "surfaceHigh",
+  "border",
+  "textPrimary",
+  "textSecondary",
+  "onPrimary",
 ] as const;
+const MARKETING = ["promo", "urgent", "trust", "premium", "success"] as const;
 
 export default async function DesignPage({ params }: PageProps<"/[locale]/design">) {
   const locale = await resolveLocale(params);
   const dict = await getDictionary(locale);
   const d = dict.design;
-  const [book, course, kidsApp, kidsAudio, track] = [
+  const usage = d.usage as Record<string, string>;
+  const [book, app, track, image, free] = [
     "kinshasa-mode-emploi",
-    "vendre-sur-whatsapp",
     "maths-en-s-amusant",
-    "puzzle-des-animaux",
     "rumba-douce",
+    "pack-20-fonds-d-ecran",
+    "les-lettres-en-couleurs",
   ].map((slug) => getProduct(slug)!);
+  const priceProps = { locale, oldPriceLabel: dict.product.oldPrice, freeLabel: dict.product.free };
 
   return (
     <AppShell locale={locale} dict={dict} tab={null} path="design">
-      <header className="pt-2">
-        <h1 className="text-[28px] font-bold">{d.title}</h1>
-        <p className="mt-2 max-w-prose text-sm text-muted">{d.intro}</p>
+      <header className="pt-1">
+        <h1 className="text-[28px] font-extrabold">{d.title}</h1>
+        <p className="mt-1 max-w-prose text-sm text-muted">{d.intro}</p>
       </header>
 
-      <Section id="colors" title={d.sections.colors}>
-        <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-          {SWATCHES.map((s) => (
-            <li key={s.key} className="card overflow-hidden">
-              <div className={`flex h-20 items-end p-3 text-base font-bold ${s.className}`}>{s.hex}</div>
-              <p className="p-3 text-sm">{d.colorUsage[s.key]}</p>
-            </li>
-          ))}
-        </ul>
-        <p className="mt-3 text-xs text-muted">AA : {Object.values(ACCESSIBLE_VARIANTS).join(" · ")}</p>
-      </Section>
-
-      <Section id="type" title={d.sections.type}>
-        <div className="flex flex-col gap-4">
-          <p className="text-[26px] font-bold">{d.typeSamples.display}</p>
-          <p className="max-w-prose text-[15px]">{d.typeSamples.body}</p>
-          <p className="text-lg font-semibold tabular-nums">{d.typeSamples.mono} — TX-8F21-KIN</p>
+      <Section id="logo" title={d.logo}>
+        <div className="card flex items-center justify-center p-6">
+          <Logo size="lg" />
         </div>
       </Section>
 
-      <Section id="buttons" title={d.sections.buttons}>
-        <div className="flex flex-col items-start gap-3">
-          <Button size="lg" icon={<IconBolt size={20} />}>
-            {dict.commerce.payMobileMoney}
+      <Section id="colors" title={d.colorsBase}>
+        <ul className="grid grid-cols-3 gap-2">
+          {BASE.map((k) => (
+            <li key={k} className="card overflow-hidden">
+              <div className={`flex h-14 items-end p-2 text-[11px] font-bold uppercase ${SWATCH[k]}`}>
+                {COLORS[k]}
+              </div>
+              <p className="p-2 text-[11px] leading-tight">
+                <span className="font-semibold">{k}</span>
+                <br />
+                <span className="text-muted">{usage[k]}</span>
+              </p>
+            </li>
+          ))}
+        </ul>
+      </Section>
+
+      <Section id="marketing" title={d.colorsMarketing}>
+        <ul className="grid grid-cols-2 gap-2">
+          {MARKETING.map((k) => (
+            <li key={k} className="card flex items-center gap-3 p-2">
+              <span
+                className={`grid size-11 shrink-0 place-items-center rounded-[var(--radius-sm)] text-[10px] font-bold ${SWATCH[k]}`}
+              >
+                {COLORS[k].slice(1)}
+              </span>
+              <span className="text-[11px] leading-tight">
+                <span className="font-semibold">{k}</span>
+                <br />
+                <span className="text-muted">{usage[k]}</span>
+              </span>
+            </li>
+          ))}
+        </ul>
+      </Section>
+
+      <Section id="categories" title={d.colorsCategories}>
+        <ul className="grid grid-cols-2 gap-2">
+          {CATEGORY_IDS.map((c) => (
+            <li key={c} className={`card flex items-center gap-3 overflow-hidden p-2 ${categoryClass(c)}`}>
+              <span className="grid size-11 shrink-0 place-items-center rounded-[var(--radius-sm)] bg-surface-2 text-[var(--cat)]">
+                <CategoryIcon id={c} />
+              </span>
+              <Badge tone="category">{dict.categories[c]}</Badge>
+            </li>
+          ))}
+        </ul>
+      </Section>
+
+      <Section id="type" title={d.sections.type}>
+        <div className="card flex flex-col gap-3 p-4">
+          <p className="font-display text-[26px] font-extrabold leading-tight">
+            {d.typeSamples.display.replace("Inter 700", "Plus Jakarta Sans 800")}
+          </p>
+          <p className="text-[15px]">{d.typeSamples.body.replace("Inter 400", "DM Sans 400")}</p>
+          <div className="flex items-baseline gap-3">
+            <Price usdCents={2999} promoUsdCents={1999} size="lg" {...priceProps} />
+            <span className="text-xs text-muted">{d.priceSample}</span>
+          </div>
+        </div>
+      </Section>
+
+      <Section id="buttons" title={d.sections.buttons} note={d.oneGreen}>
+        <div className="card flex flex-col gap-3 p-4">
+          <Button size="lg" block haptic icon={<IconBolt size={18} />}>
+            {dict.product.buyNow}
           </Button>
-          <p className="text-sm text-muted">{d.buttons.primary}</p>
-          <div className="flex flex-wrap gap-3">
-            <Button variant="secondary">{d.buttons.secondary}</Button>
-            <Button variant="ghost">{d.buttons.ghost}</Button>
-            <Button variant="danger">{d.buttons.deleteLabel}</Button>
-            <Button disabled>{d.buttons.disabled}</Button>
-            <Button loading loadingLabel={d.buttons.loading}>
+          <div className="flex gap-2">
+            <Button variant="outline" className="flex-1" icon={<IconCart size={18} />}>
+              {dict.commerce.addToCart}
+            </Button>
+            <Button variant="ghost">{d.link}</Button>
+          </div>
+          <div className="flex flex-wrap items-center gap-2">
+            <Button variant="danger" size="sm">
+              {d.buttons.deleteLabel}
+            </Button>
+            <Button variant="outline" size="sm" disabled>
+              {d.buttons.disabled}
+            </Button>
+            <Button variant="outline" size="sm" loading loadingLabel={d.buttons.loading}>
               {dict.commerce.pay}
             </Button>
           </div>
+          <p className="text-xs text-muted">{d.haptic}</p>
         </div>
       </Section>
 
       <Section id="badges" title={d.sections.badges}>
         <div className="flex flex-wrap gap-2">
           <Badge tone="promo">{format(dict.product.discount, { percent: 30 })}</Badge>
-          <Badge tone="flash" icon={<IconBolt size={12} />}>
+          <Badge tone="flash" icon={<IconBolt size={11} />}>
             {dict.product.flash}
           </Badge>
-          <Badge tone="new">{dict.product.new}</Badge>
-          <Badge tone="success" icon={<IconCheck size={12} />}>
+          <Badge tone="urgent">{format(dict.badges.lowStock, { count: 3 })}</Badge>
+          <Badge tone="urgent">{format(dict.badges.deadline, { days: 2 })}</Badge>
+          <Badge tone="trust">{dict.product.new}</Badge>
+          <Badge tone="premium">{dict.badges.sponsored}</Badge>
+          <Badge tone="premium">{dict.badges.bestSeller}</Badge>
+          <Badge tone="success" icon={<IconCheck size={11} />}>
             {dict.commerce.delivered}
           </Badge>
           <Badge tone="verified" icon={<IconCheck size={12} />}>
-            {dict.product.verifiedSeller}
+            {format(dict.badges.verifiedSince, { year: 2023 })}
           </Badge>
-          <Badge>{dict.product.previewFree}</Badge>
         </div>
       </Section>
 
       <Section id="chips" title={d.sections.chips}>
-        <ChipDemo labels={[d.chips.all, d.chips.books, d.chips.courses, d.chips.kids, d.chips.music]} />
+        <ChipDemo labels={[dict.explore.all, ...CATEGORY_IDS.slice(0, 5).map((c) => dict.categories[c])]} />
+        <div className="mt-3 flex flex-wrap items-center gap-3">
+          <CurrencyToggle label={dict.header.currency} />
+          <SegmentedDemo
+            label={dict.explore.priceLabel}
+            options={[dict.explore.price.all, dict.explore.price.free, dict.explore.price.paid]}
+          />
+          <SwitchDemo label={dict.account.parental} />
+        </div>
       </Section>
 
       <Section id="fields" title={d.sections.fields}>
-        <div className="grid max-w-md gap-5">
+        <div className="flex flex-col gap-4">
+          <SearchField
+            action="#fields"
+            label={dict.search.label}
+            placeholder={dict.search.placeholder}
+            submitLabel={dict.search.submit}
+          />
           <PhoneField
             id="design-phone"
             label={dict.field.phoneLabel}
@@ -152,59 +259,57 @@ export default async function DesignPage({ params }: PageProps<"/[locale]/design
             unknownText={dict.field.operatorUnknown}
           />
           <Field
-            id="design-name"
-            label={d.fields.nameLabel}
-            placeholder={d.fields.namePlaceholder}
-            autoComplete="name"
-          />
-          <Field
             id="design-code"
             label={d.fields.codeLabel}
             defaultValue="KIN2026"
-            mono
             error={d.fields.codeError}
           />
         </div>
       </Section>
 
-      <Section id="tickets" title={d.sections.tickets}>
-        <div className="flex flex-wrap gap-4">
-          <ProductTicket product={book} locale={locale} dict={dict} />
-          <ProductTicket product={course} locale={locale} dict={dict} />
-          <TicketSkeleton />
+      <Section id="cards" title={d.cards}>
+        <div className="grid grid-cols-2 gap-2">
+          <ProductTicket product={book} locale={locale} dict={dict} quickAdd />
+          <ProductTicket product={app} locale={locale} dict={dict} flash />
+          <ProductTicket product={image} locale={locale} dict={dict} quickAdd />
+          <ProductTicket product={free} locale={locale} dict={dict} quickAdd />
         </div>
-        <div className="mt-6 flex flex-col gap-2">
-          <Price
-            usdCents={699}
-            promoUsdCents={499}
-            currency="USD"
-            rate={DEMO_USD_TO_CDF_RATE}
-            locale={locale}
-            oldPriceLabel={dict.product.oldPrice}
-            size="lg"
+        <ul className="card mt-3">
+          <ListRow
+            href="#cards"
+            media={<Thumb title={app.title} category={categoryOf(app.kind)} round />}
+            title={app.title}
+            meta={metaLine(app, dict)}
+            extra={
+              <Rating
+                value={app.rating}
+                count={String(app.reviews)}
+                locale={locale}
+                label={format(dict.product.rating, { rating: app.rating })}
+              />
+            }
+            action={<Price usdCents={app.priceUsdCents} promoUsdCents={app.promoUsdCents} {...priceProps} />}
           />
-          <Price
-            usdCents={699}
-            promoUsdCents={499}
-            currency="CDF"
-            rate={DEMO_USD_TO_CDF_RATE}
-            locale={locale}
-            oldPriceLabel={dict.product.oldPrice}
-            size="lg"
+          <ListRow
+            lead={
+              <PreviewButton
+                id={track.slug}
+                title={track.title}
+                playLabel={format(dict.product.listen, { title: track.title })}
+                pauseLabel={dict.product.pause}
+              />
+            }
+            title={track.title}
+            meta={metaLine(track, dict)}
+            action={<Price usdCents={track.priceUsdCents} {...priceProps} />}
           />
-        </div>
-      </Section>
-
-      <Section id="kids" title={d.sections.kids}>
-        <p className="mb-4 text-muted">{d.kidsNote}</p>
-        <div className="flex flex-wrap gap-4">
-          <ProductTicket product={kidsApp} locale={locale} dict={dict} />
-          <ProductTicket product={kidsAudio} locale={locale} dict={dict} />
-        </div>
+        </ul>
       </Section>
 
       <Section id="feedback" title={d.sections.feedback}>
-        <div className="grid gap-8 sm:grid-cols-2">
+        <div className="flex flex-col gap-4">
+          <Countdown durationMs={75_000} label={dict.commerce.endsIn} endedLabel={dict.commerce.flashEnded} />
+          <Toast tone="success">{dict.toast.paid}</Toast>
           <ToastDemo
             trigger={d.toastDemo}
             success={dict.toast.paid}
@@ -212,130 +317,48 @@ export default async function DesignPage({ params }: PageProps<"/[locale]/design
             closeLabel={dict.toast.close}
           />
           <StampDemo label={dict.commerce.delivered} replay={d.stampDemo} />
-          <div className="flex flex-col items-start gap-3">
-            <Countdown
-              durationMs={75_000}
-              label={dict.commerce.endsIn}
-              endedLabel={dict.commerce.flashEnded}
-            />
-            <Toast tone="success">{dict.toast.paid}</Toast>
-          </div>
+          <Sheet triggerLabel={d.sheetDemo} title={d.sheetTitle} closeLabel={dict.sheet.close}>
+            <p className="text-sm text-muted">{d.sheetBody}</p>
+            <Button size="lg" block haptic>
+              {dict.commerce.payMobileMoney}
+            </Button>
+          </Sheet>
         </div>
       </Section>
 
-      <Section id="sheet" title={d.sections.sheet}>
-        <Sheet triggerLabel={d.sheetDemo} title={d.sheetTitle} closeLabel={dict.sheet.close}>
-          <p className="text-muted">{d.sheetBody}</p>
-          <PhoneField
-            id="sheet-phone"
-            label={dict.field.phoneLabel}
-            placeholder={dict.field.phonePlaceholder}
-            hint={dict.field.phoneHint}
-            detectedTemplate={dict.field.operatorDetected}
-            unknownText={dict.field.operatorUnknown}
-          />
-          <Button size="lg" block>
-            {dict.commerce.payMobileMoney}
-          </Button>
-        </Sheet>
-      </Section>
-
-      <Section id="lists" title={d.sections.lists}>
-        <div className="flex max-w-md flex-col gap-4">
-          <SearchField
-            action="#lists"
-            label={dict.search.label}
-            placeholder={dict.search.placeholder}
-            submitLabel={dict.search.submit}
-          />
-          <ul>
-            {[kidsApp, kidsAudio].map((p) => (
-              <ListRow
-                key={p.slug}
-                href="#lists"
-                media={<Thumb id={`d-${p.slug}`} title={p.title} tone={p.tone} round />}
-                title={p.title}
-                meta={metaLine(p, dict)}
-                extra={<Rating value={p.rating} label={format(dict.product.rating, { rating: p.rating })} />}
-                action={
-                  <Price
-                    usdCents={p.priceUsdCents}
-                    promoUsdCents={p.promoUsdCents}
-                    locale={locale}
-                    oldPriceLabel={dict.product.oldPrice}
-                    freeLabel={dict.product.free}
-                  />
-                }
-              />
-            ))}
-            <ListRow
-              lead={
-                <PreviewButton
-                  id={track.slug}
-                  title={track.title}
-                  playLabel={format(dict.product.listen, { title: track.title })}
-                  pauseLabel={dict.product.pause}
-                />
-              }
-              title={track.title}
-              meta={metaLine(track, dict)}
-              action={
-                <Price usdCents={track.priceUsdCents} locale={locale} oldPriceLabel={dict.product.oldPrice} />
-              }
-            />
-          </ul>
-          <div className="flex flex-wrap items-center gap-4">
-            <CurrencyToggle label={dict.header.currency} />
-            <SegmentedDemo
-              label={dict.explore.priceLabel}
-              options={[dict.explore.price.all, dict.explore.price.free, dict.explore.price.paid]}
-            />
-            <SwitchDemo label={dict.account.parental} />
-          </div>
+      <Section id="skeletons" title={d.skeletons}>
+        <div className="grid grid-cols-2 gap-2">
+          <TicketSkeleton />
+          <TicketSkeleton />
+        </div>
+        <div className="card mt-3">
+          <RowSkeleton />
+          <RowSkeleton />
         </div>
       </Section>
 
-      <Section id="skeleton" title={d.sections.skeleton}>
-        <div className="flex max-w-md flex-col gap-2">
-          <Skeleton className="h-8 w-2/3" />
-          <Skeleton className="h-4 w-full" />
-          <Skeleton className="h-4 w-5/6" />
-        </div>
-      </Section>
-
-      <Section id="nav" title={d.sections.nav}>
-        <p className="mb-4 text-muted">{d.navNote}</p>
-        <div className="max-w-md border-2 border-line">
+      <Section id="nav" title={d.newNav}>
+        <div className="overflow-hidden rounded-[var(--radius-lg)] border border-line">
           <BottomNav
             fixed={false}
             label={`${dict.a11y.mainNav} (${d.title})`}
             items={[
               { href: "#nav", label: dict.nav.home, icon: <IconHome />, active: true },
-              { href: "#nav-2", label: dict.nav.explore, icon: <IconSearch /> },
-              { href: "#nav-3", label: dict.nav.library, icon: <IconDownload /> },
+              { href: "#categories", label: dict.nav.categories, icon: <IconGrid /> },
+              { href: "#buttons", label: dict.nav.sell, icon: <IconPlus /> },
               {
-                href: "#nav-4",
+                href: "#cards",
                 label: dict.nav.cart,
                 icon: <IconCart />,
                 badge: (
-                  <span className="absolute -right-2 -top-1.5 grid h-[18px] min-w-[18px] place-items-center rounded-full bg-fg px-1 text-[11px] font-bold leading-none text-surface">
+                  <span className="absolute -right-2 -top-1.5 grid h-[18px] min-w-[18px] place-items-center rounded-full bg-primary px-1 text-[11px] font-bold leading-none text-on-primary">
                     2
                   </span>
                 ),
               },
-              { href: "#nav-5", label: dict.nav.account, icon: <IconMe /> },
+              { href: "#fields", label: dict.nav.account, icon: <IconMe /> },
             ]}
           />
-        </div>
-      </Section>
-
-      <Section id="patterns" title={d.sections.patterns}>
-        <div className="flex flex-wrap items-start gap-6">
-          <div className="flex gap-3">
-            {CATALOG.slice(0, 3).map((p, i) => (
-              <Story key={p.slug} title={p.title} tone={p.tone} seen={i === 2} />
-            ))}
-          </div>
         </div>
       </Section>
     </AppShell>
