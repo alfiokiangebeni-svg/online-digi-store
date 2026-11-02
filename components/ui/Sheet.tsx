@@ -51,7 +51,7 @@ export function Sheet({
         onClick={(e) => {
           if (e.target === ref.current) ref.current.close();
         }}
-        className="m-0 mt-auto w-full max-w-none rounded-t-2xl bg-surface p-0 text-fg backdrop:bg-ink/60 sm:m-auto sm:max-w-md sm:rounded-2xl"
+        className="m-0 mt-auto w-full max-w-none rounded-t-[var(--radius-lg)] border-t border-line bg-surface p-0 text-fg backdrop:bg-background/80 sm:m-auto sm:max-w-md sm:rounded-[var(--radius-lg)]"
       >
         <div className="flex flex-col gap-4 p-5 pb-[calc(1.25rem+env(safe-area-inset-bottom))]">
           <div className="flex items-start justify-between gap-4">

@@ -16,14 +16,14 @@ export function Field({ id, label, hint, error, adornment, mono, className, ...i
   const errorId = error ? `${id}-error` : undefined;
   return (
     <div className={cn("flex flex-col gap-1.5", className)}>
-      <label htmlFor={id} className="text-[13px] text-muted">
+      <label htmlFor={id} className="text-[13px] font-medium text-muted">
         {label}
       </label>
       <div
         className={cn(
-          "flex min-h-11 items-center gap-2 border bg-surface px-3 rounded-[6px]",
-          "focus-within:border-fg",
-          error ? "border-promo" : "border-field",
+          "flex min-h-12 items-center gap-2 rounded-[var(--radius-sm)] border bg-surface-2 px-3",
+          "focus-within:border-primary",
+          error ? "border-urgent" : "border-line",
         )}
       >
         <input
@@ -31,7 +31,7 @@ export function Field({ id, label, hint, error, adornment, mono, className, ...i
           aria-invalid={error ? true : undefined}
           aria-describedby={[errorId, hintId].filter(Boolean).join(" ") || undefined}
           className={cn(
-            "min-w-0 flex-1 bg-transparent py-2 text-[15px] text-fg outline-none placeholder:text-hint",
+            "min-w-0 flex-1 bg-transparent py-2 text-[15px] text-fg outline-none placeholder:text-muted",
             mono && "font-mono tracking-wide",
           )}
           {...input}
@@ -39,7 +39,7 @@ export function Field({ id, label, hint, error, adornment, mono, className, ...i
         {adornment}
       </div>
       {error ? (
-        <p id={errorId} className="text-xs font-medium text-promo">
+        <p id={errorId} className="text-xs font-medium text-urgent-text">
           {error}
         </p>
       ) : null}

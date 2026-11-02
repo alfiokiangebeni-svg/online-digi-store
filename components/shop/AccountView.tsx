@@ -4,7 +4,7 @@ import { useState } from "react";
 import type { ProductSummary } from "@/lib/catalog";
 import { favoritesStore, libraryStore, parentalStore } from "@/lib/client/shop";
 import { useStore } from "@/lib/client/store";
-import { setCurrency, setTheme, useCurrency, useTheme } from "@/lib/client/prefs";
+import { setCurrency, useCurrency } from "@/lib/client/prefs";
 import type { Locale } from "@/lib/i18n/config";
 import { format } from "@/lib/i18n/format";
 import { Button } from "@/components/ui/Button";
@@ -62,7 +62,6 @@ export function AccountView({
   const favorites = useStore(favoritesStore);
   const parental = useStore(parentalStore);
   const currency = useCurrency();
-  const theme = useTheme();
   const [pin, setPin] = useState("");
   const [pinMsg, setPinMsg] = useState<{ ok: boolean; text: string }>();
 
@@ -233,18 +232,6 @@ export function AccountView({
               { value: "CDF", label: "CDF FC" },
             ]}
             onChange={setCurrency}
-          />
-        </div>
-        <div className="flex items-center justify-between gap-3 text-sm">
-          <span>{t.theme}</span>
-          <Segmented
-            label={t.theme}
-            value={theme}
-            options={[
-              { value: "light", label: t.themeLight },
-              { value: "dark", label: t.themeDark },
-            ]}
-            onChange={setTheme}
           />
         </div>
         <LiteToggle label={t.lite} hint={t.liteHint} onText={t.liteOn} offText={t.liteOff} />

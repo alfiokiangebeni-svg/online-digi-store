@@ -1,5 +1,6 @@
 import type { CoverTone } from "@/components/ui/Ticket";
 import type { Locale } from "@/lib/i18n/config";
+import type { CategoryId } from "@/lib/theme";
 
 /**
  * Catalogue de démonstration. Remplacé par Supabase en phase 2 :
@@ -369,7 +370,7 @@ export const CATALOG: Product[] = [
   {
     slug: "carte-cadeau-10",
     title: "Carte cadeau 10 $",
-    seller: "Digi Store",
+    seller: "di.si store",
     verified: true,
     kind: "giftCard",
     priceUsdCents: 1000,
@@ -384,7 +385,7 @@ export const CATALOG: Product[] = [
     updatedAt: "2026-01-01",
     tone: "laterite",
     rails: ["trending"],
-    description: "Offre 10 $ de contenus Digi Store à n'importe quel numéro, livrés par SMS et WhatsApp.",
+    description: "Offre 10 $ de contenus di.si store à n'importe quel numéro, livrés par SMS et WhatsApp.",
   },
 ];
 
@@ -402,6 +403,25 @@ export function effectivePrice(p: Pick<Product, "priceUsdCents" | "promoUsdCents
   return p.promoUsdCents !== undefined && p.promoUsdCents < p.priceUsdCents
     ? p.promoUsdCents
     : p.priceUsdCents;
+}
+
+/** Catégorie di.si store d'un type de produit (repère de couleur et rayons). */
+export function categoryOf(kind: Kind): CategoryId | undefined {
+  switch (kind) {
+    case "ebook":
+    case "course":
+      return "books";
+    case "game":
+    case "edu":
+      return "apps";
+    case "music":
+      return "music";
+    case "image":
+    case "template":
+      return "images";
+    default:
+      return undefined;
+  }
 }
 
 export const isFree = (p: Pick<Product, "priceUsdCents">) => p.priceUsdCents === 0;

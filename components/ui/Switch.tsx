@@ -28,13 +28,13 @@ export function Switch({
         aria-hidden="true"
         className={cn(
           "relative inline-block h-8 w-[52px] rounded-full transition-colors",
-          checked ? "bg-fg" : "bg-steel",
+          checked ? "bg-primary" : "bg-line",
         )}
       >
         <span
           className={cn(
-            "absolute left-0 top-[3px] size-[26px] rounded-full bg-white shadow-[0_1px_2px_rgb(0_0_0/0.2)] transition-transform",
-            checked ? "translate-x-[23px]" : "translate-x-[3px]",
+            "absolute left-0 top-[3px] size-[26px] rounded-full transition-transform",
+            checked ? "translate-x-[23px] bg-on-primary" : "translate-x-[3px] bg-muted",
           )}
         />
       </span>

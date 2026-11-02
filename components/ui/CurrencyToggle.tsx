@@ -3,14 +3,14 @@
 import { setCurrency, useCurrency } from "@/lib/client/prefs";
 import { cn } from "./cn";
 
-/** Bascule $ / FC de l'en-tête. */
-export function CurrencyToggle({ label, onDark }: { label: string; onDark?: boolean }) {
+/** Sélecteur CDF / USD de l'en-tête. */
+export function CurrencyToggle({ label }: { label: string; onDark?: boolean }) {
   const currency = useCurrency();
   return (
     <div
       role="radiogroup"
       aria-label={label}
-      className={cn("inline-flex rounded-[8px] p-[3px]", onDark ? "bg-white/12" : "bg-fg/6")}
+      className="inline-flex rounded-[var(--radius-sm)] bg-surface-2 p-[3px]"
     >
       {(["USD", "CDF"] as const).map((c) => (
         <button
@@ -20,12 +20,8 @@ export function CurrencyToggle({ label, onDark }: { label: string; onDark?: bool
           aria-checked={currency === c}
           onClick={() => setCurrency(c)}
           className={cn(
-            "min-h-[38px] min-w-[38px] rounded-[6px] px-2 text-xs font-bold",
-            currency === c
-              ? "bg-white text-[#0f1111] shadow-[0_1px_2px_rgb(0_0_0/0.08)]"
-              : onDark
-                ? "text-white/85 hover:text-white"
-                : "text-muted hover:text-fg",
+            "pressable min-h-[38px] min-w-[38px] rounded-[6px] px-2 text-xs font-bold",
+            currency === c ? "bg-line text-fg" : "text-muted hover:text-fg",
           )}
         >
           {c === "USD" ? "$" : "FC"}

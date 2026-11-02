@@ -25,7 +25,7 @@ export function BottomNav({
     <nav
       aria-label={label}
       className={cn(
-        "z-40 border-t border-[#e5e7eb] bg-surface pb-[env(safe-area-inset-bottom)] dark:border-line",
+        "z-40 border-t border-line bg-surface pb-[env(safe-area-inset-bottom)]",
         fixed && "fixed inset-x-0 bottom-0",
       )}
     >
@@ -42,7 +42,7 @@ export function BottomNav({
               className={cn(
                 "relative flex min-h-16 flex-col items-center justify-center gap-[3px] px-0.5 text-[11px]",
                 item.active
-                  ? "font-semibold text-fg [&_svg]:stroke-[2.6]"
+                  ? "font-semibold text-primary [&_svg]:stroke-[2.4]"
                   : "font-medium text-muted hover:text-fg",
               )}
             >

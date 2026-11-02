@@ -1,6 +1,6 @@
 import { Badge, IconStar, Price, Ticket, TicketCover } from "@/components/ui";
 import { discountPercent } from "@/lib/currency";
-import { isFree, type Product } from "@/lib/catalog";
+import { categoryOf, isFree, type Product } from "@/lib/catalog";
 import { localePath, type Locale } from "@/lib/i18n/config";
 import { format, type Dictionary } from "@/lib/i18n";
 import { productHref } from "./labels";
@@ -36,7 +36,8 @@ export function ProductTicket({
       href={productHref(localePath(locale), p.slug)}
       title={p.title}
       kindLabel={dict.product.kinds[p.kind]}
-      cover={<TicketCover tone={p.tone} title={p.title} />}
+      category={categoryOf(p.kind)}
+      cover={<TicketCover title={p.title} category={categoryOf(p.kind)} />}
       badges={
         percent > 0 ? (
           <Badge tone="promo">{format(dict.product.discount, { percent })}</Badge>
@@ -46,8 +47,9 @@ export function ProductTicket({
       }
       meta={
         <>
-          <IconStar size={11} className="text-star" />
+          <IconStar size={11} className="text-premium" />
           <span>{p.rating.toLocaleString(nf, { minimumFractionDigits: 1 })}</span>
+          <span>({p.reviews.toLocaleString(nf)})</span>
           <span aria-hidden="true">·</span>
           <span>{format(dict.product.sold, { count: p.sales.toLocaleString(nf) })}</span>
         </>

@@ -35,7 +35,11 @@ export function Price({
   if (current === 0 && freeLabel) {
     return (
       <span
-        className={cn("font-semibold text-success", size === "lg" ? "text-[26px]" : "text-[13px]", className)}
+        className={cn(
+          "font-display font-bold text-success",
+          size === "lg" ? "text-[26px]" : "text-sm",
+          className,
+        )}
       >
         {freeLabel}
       </span>

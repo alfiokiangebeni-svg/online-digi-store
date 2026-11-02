@@ -191,3 +191,80 @@ export const IconBook = (p: IconProps) => (
     <path d="M4 4h7a2 2 0 0 1 2 2v14a2 2 0 0 0-2-2H4zM20 4h-7v16" />
   </Base>
 );
+/* ── Catégories et outils di.si store ─────────────────────────────────────── */
+export const IconApps = (p: IconProps) => (
+  <Base {...p}>
+    <path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z" />
+  </Base>
+);
+export const IconBuilding = (p: IconProps) => (
+  <Base {...p}>
+    <path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-5h6v5M9 11h.01M15 11h.01" />
+  </Base>
+);
+export const IconBriefcase = (p: IconProps) => (
+  <Base {...p}>
+    <path d="M3 7h18v13H3zM8 7V4h8v3M3 13h18" />
+  </Base>
+);
+export const IconTender = (p: IconProps) => (
+  <Base {...p}>
+    <path d="M6 3h9l4 4v14H6zM14 3v5h5M9 13h7M9 17h5" />
+  </Base>
+);
+export const IconMic = (p: IconProps) => (
+  <Base {...p}>
+    <path d="M9 4h6v9a3 3 0 0 1-6 0zM5 11a7 7 0 0 0 14 0M12 18v3" />
+  </Base>
+);
+export const IconScan = (p: IconProps) => (
+  <Base {...p}>
+    <path d="M3 8V3h5M16 3h5v5M21 16v5h-5M8 21H3v-5M7 12h10" />
+  </Base>
+);
+export const IconBell = (p: IconProps) => (
+  <Base {...p}>
+    <path d="M6 9a6 6 0 0 1 12 0c0 6 3 8 3 8H3s3-2 3-8M10 21h4" />
+  </Base>
+);
+export const IconFlag = (p: IconProps) => (
+  <Base {...p}>
+    <path d="M5 21V4h11l-2 4 2 4H5" />
+  </Base>
+);
+export const IconLink = (p: IconProps) => (
+  <Base {...p}>
+    <path d="M10 14l4-4M9 7l2-2a4 4 0 0 1 6 6l-2 2M15 17l-2 2a4 4 0 0 1-6-6l2-2" />
+  </Base>
+);
+export const IconMessage = (p: IconProps) => (
+  <Base {...p}>
+    <path d="M4 5h16v11H9l-5 4zM8 9h8M8 12h5" />
+  </Base>
+);
+export const IconCalendar = (p: IconProps) => (
+  <Base {...p}>
+    <path d="M4 5h16v15H4zM4 10h16M8 3v4M16 3v4" />
+  </Base>
+);
+export const IconMapPin = (p: IconProps) => (
+  <Base {...p}>
+    <path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z" />
+    <circle cx="12" cy="10" r="2.5" />
+  </Base>
+);
+export const IconPlus = (p: IconProps) => (
+  <Base {...p}>
+    <path d="M12 5v14M5 12h14" />
+  </Base>
+);
+export const IconGrid = (p: IconProps) => (
+  <Base {...p}>
+    <path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z" />
+  </Base>
+);
+export const IconUpload = (p: IconProps) => (
+  <Base {...p}>
+    <path d="M12 16V4M7 9l5-5 5 5M4 20h16" />
+  </Base>
+);

@@ -5,6 +5,7 @@ import { format, type Dictionary } from "@/lib/i18n";
 import { SUPPORT_WHATSAPP } from "@/lib/brand";
 import {
   BottomNav,
+  Logo,
   IconBack,
   IconCart,
   IconChat,
@@ -88,7 +89,7 @@ export function AppShell({
               aria-label={dict.a11y.home}
               className="flex min-h-11 items-center text-[22px] font-bold tracking-[-0.6px]"
             >
-              digistore<span className="text-cta">.</span>
+              <Logo />
             </Link>
           )}
           <div role="group" aria-label={dict.a11y.settings} className="flex items-center gap-1">

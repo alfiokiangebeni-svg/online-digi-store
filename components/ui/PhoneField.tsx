@@ -4,13 +4,7 @@ import { useState } from "react";
 import { detectOperator, toNationalDigits } from "@/lib/operators";
 import { format } from "@/lib/i18n/format";
 import { Field } from "./Field";
-
-const OPERATOR_DOT: Record<string, string> = {
-  mpesa: "bg-[#E60000]",
-  orange: "bg-[#FF7900]",
-  airtel: "bg-[#ED1C24]",
-  afrimoney: "bg-[#5B2C83]",
-};
+import { IconPhone } from "./icons";
 
 /** Champ numéro Mobile Money avec détection de l'opérateur pendant la saisie. */
 export function PhoneField({
@@ -61,8 +55,8 @@ export function PhoneField({
       hint={message}
       adornment={
         operator ? (
-          <span className="flex items-center gap-1.5 text-xs font-medium">
-            <span aria-hidden="true" className={`size-2.5 rounded-full ${OPERATOR_DOT[operator.id]}`} />
+          <span className="badge bg-line text-fg">
+            <IconPhone size={12} />
             {operator.name.split(" ").at(-1)}
           </span>
         ) : null

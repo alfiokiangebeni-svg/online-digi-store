@@ -35,20 +35,6 @@ export function setCurrency(c: Currency) {
   notify();
 }
 
-export type Theme = "dark" | "light";
-export function useTheme(): Theme {
-  return useSyncExternalStore(
-    subscribe,
-    () => (document.documentElement.dataset.theme === "dark" ? "dark" : "light"),
-    () => "light" as Theme,
-  );
-}
-export function setTheme(t: Theme) {
-  document.documentElement.dataset.theme = t;
-  save("ds-theme", t);
-  notify();
-}
-
 export function useLite(): boolean {
   return useSyncExternalStore(
     subscribe,

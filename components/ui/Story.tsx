@@ -1,18 +1,28 @@
-import { COVER_TONES, type CoverTone } from "./Ticket";
+import { categoryClass, type CategoryId } from "@/lib/theme";
+import type { CoverTone } from "./Ticket";
 import { cn } from "./cn";
 
-/** Vignette « story » (drops du jour) : format vertical, liseré noir si non vue. */
-export function Story({ title, tone, seen }: { title: string; tone: CoverTone; seen?: boolean }) {
+/** Vignette « story » : format vertical, liseré vert citron si non vue. */
+export function Story({
+  title,
+  category,
+  seen,
+}: {
+  title: string;
+  tone?: CoverTone;
+  category?: CategoryId;
+  seen?: boolean;
+}) {
   return (
     <figure className="w-24 shrink-0">
-      <div className={cn("rounded-[12px] p-[2px]", seen ? "bg-line" : "bg-fg")}>
+      <div className={cn("rounded-[var(--radius-lg)] p-[2px]", seen ? "bg-line" : "bg-primary")}>
         <div
           className={cn(
-            "flex aspect-[9/14] items-end overflow-hidden rounded-[10px] border-2 border-surface p-2",
-            COVER_TONES[tone],
+            "cover flex aspect-[9/14] items-end rounded-[10px] border-2 border-background p-2",
+            category && categoryClass(category),
           )}
         >
-          <span aria-hidden="true" className="text-sm font-bold leading-tight">
+          <span aria-hidden="true" className="relative text-sm font-bold leading-tight">
             {title}
           </span>
         </div>

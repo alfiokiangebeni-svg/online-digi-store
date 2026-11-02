@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "../globals.css";
 import { BootScript } from "@/components/shell/BootScript";
 import { fontVariables } from "@/lib/fonts";
+import { COLORS } from "@/lib/theme";
 import { LOCALES } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n";
 import { localeStaticParams, resolveLocale } from "@/lib/i18n/params";
@@ -27,7 +28,7 @@ export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Pr
 }
 
 export const viewport: Viewport = {
-  themeColor: "#0B1F3A",
+  themeColor: COLORS.background,
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
@@ -36,7 +37,7 @@ export const viewport: Viewport = {
 export default async function RootLayout({ children, params }: LayoutProps<"/[locale]">) {
   const locale = await resolveLocale(params);
   return (
-    <html lang={locale} data-theme="light" className={fontVariables} suppressHydrationWarning>
+    <html lang={locale} className={fontVariables} suppressHydrationWarning>
       <head>
         <BootScript />
       </head>

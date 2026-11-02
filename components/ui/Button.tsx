@@ -1,30 +1,26 @@
+"use client";
+
 import Link from "next/link";
-import type { ComponentPropsWithoutRef, ReactNode } from "react";
-import { cn } from "./cn";
+import type { ComponentPropsWithoutRef, MouseEvent, ReactNode } from "react";
+import { haptic } from "@/lib/client/haptics";
+import { buttonClasses, type ButtonSize, type ButtonVariant } from "./buttonStyles";
 
-export type ButtonVariant = "sell" | "soft" | "secondary" | "ghost" | "danger";
-export type ButtonSize = "md" | "lg";
+export { buttonClasses, type ButtonSize, type ButtonVariant };
 
-const VARIANTS: Record<ButtonVariant, string> = {
-  // Action principale (acheter, payer) : bouton plein noir, comme la maquette.
-  sell: "btn-primary hover:brightness-95 active:brightness-90",
-  // « Ajouter au panier » : orange clair bordé.
-  soft: "btn-soft hover:brightness-95",
-  secondary: "bg-surface text-fg border border-fg hover:bg-surface-2",
-  ghost: "bg-transparent text-fg underline-offset-4 hover:underline",
-  danger: "bg-promo text-white hover:brightness-110",
-};
-
-const SIZES: Record<ButtonSize, string> = {
-  md: "min-h-11 px-4 text-sm",
-  lg: "min-h-12 px-5 text-[15px]",
-};
-
+/**
+ * Boutons di.si store :
+ * - `primary` (alias `sell`) : vert citron plein — UN seul par écran ou par carte ;
+ * - `outline` (alias `secondary`, `soft`) : contour, actions secondaires ;
+ * - `ghost` : lien texte, actions tertiaires ;
+ * - `danger` : contour rouge (supprimer, annuler une commande).
+ * `haptic` ajoute une légère vibration (actions d'achat).
+ */
 interface CommonProps {
   variant?: ButtonVariant;
   size?: ButtonSize;
   block?: boolean;
   icon?: ReactNode;
+  haptic?: boolean;
   children: ReactNode;
   className?: string;
 }
@@ -37,28 +33,18 @@ type AsButton = CommonProps &
   };
 type AsLink = CommonProps & Omit<ComponentPropsWithoutRef<typeof Link>, keyof CommonProps> & { href: string };
 
-export function buttonClasses({
-  variant = "sell",
-  size = "md",
-  block,
-  className,
-}: Pick<CommonProps, "variant" | "size" | "block" | "className">) {
-  return cn(
-    "inline-flex select-none items-center justify-center gap-2 font-sans font-semibold",
-    "rounded-[8px] transition-[filter,opacity,background-color,color] duration-150",
-    "disabled:cursor-not-allowed disabled:opacity-45 aria-disabled:opacity-45",
-    VARIANTS[variant],
-    SIZES[size],
-    block && "w-full",
-    className,
-  );
-}
-
 export function Button(props: AsButton | AsLink) {
   if (props.href !== undefined) {
-    const { variant, size, block, icon, children, className, ...rest } = props;
+    const { variant, size, block, icon, children, className, haptic: vibrate, onClick, ...rest } = props;
     return (
-      <Link className={buttonClasses({ variant, size, block, className })} {...rest}>
+      <Link
+        className={buttonClasses({ variant, size, block, className })}
+        onClick={(e: MouseEvent<HTMLAnchorElement>) => {
+          if (vibrate) haptic();
+          onClick?.(e);
+        }}
+        {...rest}
+      >
         {icon}
         {children}
       </Link>
@@ -74,6 +60,8 @@ export function Button(props: AsButton | AsLink) {
     loading,
     loadingLabel,
     disabled,
+    haptic: vibrate,
+    onClick,
     type = "button",
     ...rest
   } = props;
@@ -83,6 +71,10 @@ export function Button(props: AsButton | AsLink) {
       className={buttonClasses({ variant, size, block, className })}
       disabled={disabled || loading}
       aria-busy={loading || undefined}
+      onClick={(e) => {
+        if (vibrate) haptic();
+        onClick?.(e);
+      }}
       {...rest}
     >
       {loading ? (
