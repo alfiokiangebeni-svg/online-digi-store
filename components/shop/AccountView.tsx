@@ -55,10 +55,13 @@ export function AccountView({
   products,
   locale,
   labels: t,
+  purchases,
 }: {
   products: Record<string, ProductSummary & { meta: string; href: string }>;
   locale: Locale;
   labels: AccountLabels;
+  /** Entrée « Mes achats », affichée sous les compteurs. */
+  purchases?: React.ReactNode;
 }) {
   const library = useStore(libraryStore);
   const favorites = useStore(favoritesStore);
@@ -80,13 +83,13 @@ export function AccountView({
       <section className="flex items-center gap-3 pb-1 pt-2">
         <span
           aria-hidden="true"
-          className="grid size-[52px] shrink-0 place-items-center rounded-full bg-ink text-lg font-semibold text-lime-strong"
+          className="grid size-[52px] shrink-0 place-items-center rounded-full bg-surface-2 text-lg font-semibold text-primary"
         >
           DS
         </span>
         <div>
           <h1 className="text-lg font-bold">{t.guest}</h1>
-          <p className="text-[13px] leading-snug text-[#3a3f47] dark:text-muted">{t.guestBody}</p>
+          <p className="text-[13px] leading-snug text-muted">{t.guestBody}</p>
         </div>
       </section>
 
@@ -98,6 +101,8 @@ export function AccountView({
           </div>
         ))}
       </dl>
+
+      {purchases}
 
       {/* Contrôle parental */}
       <section aria-labelledby="parental-title" className="card flex flex-col gap-3 p-3.5">
@@ -134,7 +139,7 @@ export function AccountView({
                     onClick={() => parentalStore.set({ ...parental, maxAge: a })}
                     className={cn(
                       "h-10 flex-1 rounded-[6px] bg-surface text-[13px]",
-                      parental.maxAge === a ? "border-2 border-fg font-semibold" : "border border-steel",
+                      parental.maxAge === a ? "border-2 border-primary font-semibold" : "border border-line",
                     )}
                   >
                     {format(t.ageOption, { age: a })}

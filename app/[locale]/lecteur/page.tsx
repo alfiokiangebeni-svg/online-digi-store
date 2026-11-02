@@ -26,7 +26,7 @@ export default async function ReaderPage({ params }: PageProps<"/[locale]/lecteu
     <AppShell
       locale={locale}
       dict={dict}
-      tab="library"
+      tab="account"
       path="lecteur"
       back={localePath(locale, "bibliotheque")}
     >

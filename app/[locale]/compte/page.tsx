@@ -3,7 +3,7 @@ import Link from "next/link";
 import { AppShell } from "@/components/shell/AppShell";
 import { AccountView } from "@/components/shop/AccountView";
 import { metaLine, productHref } from "@/components/shop/labels";
-import { IconChat, IconChevron } from "@/components/ui";
+import { IconChat, IconChevron, IconDownload } from "@/components/ui";
 import { SUPPORT_WHATSAPP } from "@/lib/brand";
 import { CATALOG, summarize } from "@/lib/catalog";
 import { LOCALES, localePath } from "@/lib/i18n/config";
@@ -27,7 +27,6 @@ export default async function AccountPage({ params }: PageProps<"/[locale]/compt
       { ...summarize(p), meta: metaLine(p, dict), href: productHref(localePath(locale), p.slug) },
     ]),
   );
-  const sellerHref = `${SUPPORT_WHATSAPP.href}?text=${encodeURIComponent(a.sellerCta)}`;
   const rows: [string, string, string?][] = [
     [a.devices, a.devicesValue],
     [a.payments, a.paymentsValue],
@@ -48,6 +47,21 @@ export default async function AccountPage({ params }: PageProps<"/[locale]/compt
             free: dict.product.free,
             oldPrice: dict.product.oldPrice,
           }}
+          purchases={
+            <Link
+              href={localePath(locale, "bibliotheque")}
+              className="card pressable flex min-h-16 items-center gap-3 px-3.5 py-2 hover:bg-surface-2"
+            >
+              <span className="grid size-10 shrink-0 place-items-center rounded-full bg-surface-2 text-primary">
+                <IconDownload size={20} />
+              </span>
+              <span className="flex flex-1 flex-col">
+                <span className="text-[15px] font-semibold">{a.purchases}</span>
+                <span className="text-xs text-muted">{a.purchasesBody}</span>
+              </span>
+              <IconChevron size={16} className="text-muted" />
+            </Link>
+          }
         />
       </div>
 
@@ -63,8 +77,8 @@ export default async function AccountPage({ params }: PageProps<"/[locale]/compt
               hrefLang={l}
               lang={l}
               aria-current={l === locale ? "true" : undefined}
-              className={`inline-flex h-10 flex-1 items-center justify-center rounded-[6px] bg-surface text-[13px] ${
-                l === locale ? "border-2 border-fg font-semibold" : "border border-steel"
+              className={`inline-flex h-10 flex-1 items-center justify-center rounded-[var(--radius-sm)] bg-surface-2 text-[13px] ${
+                l === locale ? "border-2 border-primary font-semibold" : "border border-line"
               }`}
             >
               {LANGUAGE_NAMES[l]}
@@ -90,23 +104,19 @@ export default async function AccountPage({ params }: PageProps<"/[locale]/compt
         ))}
       </dl>
 
-      <section
-        aria-labelledby="seller-title"
-        className="mt-3 flex items-center gap-3 rounded-[10px] bg-ink p-3.5"
-      >
+      <section aria-labelledby="seller-title" className="card mt-3 flex items-center gap-3 p-3.5">
         <div className="flex flex-1 flex-col gap-1">
-          <h2 id="seller-title" className="text-[15px] font-semibold text-white">
+          <h2 id="seller-title" className="text-[15px] font-semibold">
             {a.seller}
           </h2>
-          <p className="text-xs text-steel">{a.sellerBody}</p>
+          <p className="text-xs text-muted">{a.sellerBody}</p>
         </div>
-        <a
-          href={sellerHref}
-          rel="noopener"
-          className="inline-flex h-[38px] shrink-0 items-center rounded-[6px] bg-lime-strong px-3 text-[13px] font-semibold text-ink"
+        <Link
+          href={localePath(locale, "vendre")}
+          className="btn-primary inline-flex h-10 shrink-0 items-center rounded-[var(--radius-md)] px-3 text-[13px] font-semibold"
         >
           {a.sellerCta}
-        </a>
+        </Link>
       </section>
 
       <div className="card mt-3 px-3.5">
