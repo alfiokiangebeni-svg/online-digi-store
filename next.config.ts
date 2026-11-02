@@ -24,6 +24,8 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
   experimental: {
+    // Vraie page 404 de la boutique pour toute adresse inconnue (app/global-not-found.tsx).
+    globalNotFound: true,
     // CSS (≈ 6 Ko) intégré au HTML : une requête bloquante de moins sur réseau lent.
     inlineCss: true,
   },

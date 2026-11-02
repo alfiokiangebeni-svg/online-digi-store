@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { AppShell } from "@/components/shell/AppShell";
+import { RetryButton } from "@/components/feedback/RetryButton";
 import { Button, KubaDivider } from "@/components/ui";
 import { localePath } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n";
@@ -22,9 +23,7 @@ export default async function OfflinePage({ params }: PageProps<"/[locale]/hors-
         <KubaDivider id="kuba-offline" />
         <div className="flex flex-wrap gap-3">
           <Button href={localePath(locale, "bibliotheque")}>{dict.nav.library}</Button>
-          <Button href={localePath(locale, "hors-ligne")} variant="secondary" prefetch={false}>
-            {dict.offline.cta}
-          </Button>
+          <RetryButton label={dict.offline.cta} />
         </div>
       </section>
     </AppShell>

@@ -5,12 +5,12 @@ import { fontVariables } from "@/lib/fonts";
 import { COLORS } from "@/lib/theme";
 import { LOCALES } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n";
-import { localeStaticParams, resolveLocale } from "@/lib/i18n/params";
+import { layoutLocale, localeStaticParams } from "@/lib/i18n/params";
 
 export const generateStaticParams = localeStaticParams;
 
 export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Promise<Metadata> {
-  const locale = await resolveLocale(params);
+  const locale = await layoutLocale(params);
   const dict = await getDictionary(locale);
   const site = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
   return {
@@ -35,7 +35,7 @@ export const viewport: Viewport = {
 };
 
 export default async function RootLayout({ children, params }: LayoutProps<"/[locale]">) {
-  const locale = await resolveLocale(params);
+  const locale = await layoutLocale(params);
   return (
     <html lang={locale} className={fontVariables} suppressHydrationWarning>
       <head>
