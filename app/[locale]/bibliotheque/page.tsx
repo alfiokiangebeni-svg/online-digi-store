@@ -28,6 +28,7 @@ export default async function LibraryPage({ params }: PageProps<"/[locale]/bibli
         products={products}
         locale={locale}
         freeHref={`${localePath(locale, "explorer")}?prix=gratuit`}
+        readerHref={localePath(locale, "lecteur")}
         labels={dict.library}
       />
     </AppShell>

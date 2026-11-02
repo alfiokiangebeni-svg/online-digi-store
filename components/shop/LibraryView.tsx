@@ -5,6 +5,8 @@ import { useRef, useState } from "react";
 import type { Kind, ProductSummary } from "@/lib/catalog";
 import { lastOrderStore, libraryStore, markDownloaded } from "@/lib/client/shop";
 import { useStore } from "@/lib/client/store";
+import { toast } from "@/lib/client/toast";
+import { useFeedbackTexts } from "@/components/feedback/FeedbackProvider";
 import type { Locale } from "@/lib/i18n/config";
 import { formatDate } from "@/lib/i18n/dates";
 import { format } from "@/lib/i18n/format";
@@ -47,14 +49,18 @@ export function LibraryView({
   products,
   locale,
   freeHref,
+  readerHref,
   labels: t,
 }: {
   products: Record<string, ProductSummary & { meta: string; href: string }>;
   locale: Locale;
   freeHref: string;
+  /** Écran « Lecteur » (Ouvrir). */
+  readerHref: string;
   labels: LibraryLabels;
 }) {
   const library = useStore(libraryStore);
+  const fb = useFeedbackTexts();
   const lastOrder = useStore(lastOrderStore);
   const [tab, setTab] = useState<Tab>("all");
   const [progress, setProgress] = useState<Record<string, number>>({});
@@ -72,6 +78,7 @@ export function LibraryView({
         clearInterval(timers.current[slug]);
         delete timers.current[slug];
         markDownloaded(slug);
+        toast({ tone: "success", message: fb.downloaded });
       }
     }, 220);
   }
@@ -166,9 +173,10 @@ export function LibraryView({
                 action={
                   item.downloaded ? (
                     <Link
-                      href={p.href}
+                      href={`${readerHref}?id=${item.slug}`}
                       prefetch={false}
-                      className="inline-flex h-9 w-[110px] items-center justify-center rounded-[6px] border border-steel bg-surface text-[13px] font-semibold"
+                      aria-label={`${t.open} — ${p.title}`}
+                      className="pressable inline-flex h-9 w-[110px] items-center justify-center rounded-[var(--radius-sm)] border border-line bg-surface text-[13px] font-semibold"
                     >
                       {t.open}
                     </Link>

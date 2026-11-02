@@ -4,6 +4,7 @@ import { AppShell } from "@/components/shell/AppShell";
 import { BuyBar } from "@/components/shop/BuyBar";
 import { GiftSheet } from "@/components/shop/GiftSheet";
 import { PlatformPicker } from "@/components/shop/PlatformPicker";
+import { PreviewGallery } from "@/components/shop/PreviewGallery";
 import { PreviewButton } from "@/components/shop/PreviewButton";
 import { ProductTicket } from "@/components/shop/ProductTicket";
 import {
@@ -14,11 +15,18 @@ import {
   IconStar,
   Price,
   Thumb,
-  TicketCover,
   buttonClasses,
 } from "@/components/ui";
 import { Countdown } from "@/components/ui/Countdown";
-import { CATALOG, effectivePrice, getProduct, isFree, type Platform, type Product } from "@/lib/catalog";
+import {
+  CATALOG,
+  categoryOf,
+  effectivePrice,
+  getProduct,
+  isFree,
+  type Platform,
+  type Product,
+} from "@/lib/catalog";
 import { discountPercent } from "@/lib/currency";
 import { localePath } from "@/lib/i18n/config";
 import { formatDate } from "@/lib/i18n/dates";
@@ -103,17 +111,17 @@ export default async function ProductPage({ params }: PageProps<"/[locale]/produ
           <h2 id="previews" className="sr-only">
             {dict.product.previews}
           </h2>
-          <ul className="scroll-rail flex overflow-x-auto bg-surface">
-            {([p.tone, "cendre", "paper"] as const).map((tone, i) => (
-              <li
-                key={i}
-                className="relative w-full shrink-0 [&_.cover]:aspect-[4/3] [&_.cover]:p-5 [&_.cover-title]:text-3xl"
-              >
-                <span className="sr-only">{format(dict.product.previewItem, { n: i + 1, total: 3 })}</span>
-                <TicketCover tone={tone} title={i === 0 ? p.title : `${dict.product.previews} ${i + 1}/3`} />
-              </li>
-            ))}
-          </ul>
+          <PreviewGallery
+            category={categoryOf(p.kind)}
+            slides={[p.title, `${dict.product.previews} 2/3`, `${dict.product.previews} 3/3`]}
+            labels={{
+              open: dict.gallery.open,
+              prev: dict.gallery.prev,
+              next: dict.gallery.next,
+              close: dict.sheet.close,
+              counter: dict.product.previewItem,
+            }}
+          />
         </section>
 
         {/* Prix, titre, note */}

@@ -317,9 +317,15 @@
   display: contents;
 }
 
-/* Mode données légères */
+/* Mode données légères : moins de visuels, plus courts, pas d'animation décorative */
 [data-lite] .lite-hide {
   display: none !important;
+}
+[data-lite] .cover {
+  aspect-ratio: 2 / 1;
+}
+[data-lite] .cover-icon {
+  display: none;
 }
 [data-lite] .skeleton {
   animation: none;

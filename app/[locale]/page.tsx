@@ -158,7 +158,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
             {dict.home.packCta}
           </Link>
         </div>
-        <div className="w-28 shrink-0 overflow-hidden rounded-[8px]">
+        <div className="lite-hide w-28 shrink-0 overflow-hidden rounded-[var(--radius-sm)]">
           <TicketCover tone="fleuve" title={pack.title} />
         </div>
       </section>
