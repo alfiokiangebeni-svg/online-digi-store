@@ -33,7 +33,9 @@ export function NotificationsButton({
       title={title}
       closeLabel={closeLabel}
     >
-      <Badge tone="neutral">{demo}</Badge>
+      <Badge tone="neutral" className="self-start">
+        {demo}
+      </Badge>
       <ul className="-mx-1 flex flex-col">
         {items.map((n) => (
           <li key={n.title}>
