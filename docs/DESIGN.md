@@ -12,7 +12,7 @@ Toutes les couleurs, polices, rayons et animations sont définis dans **`app/the
 
 1. que les deux fichiers ont les mêmes valeurs ;
 2. que tous les couples texte/fond utilisés atteignent le contraste **AA** ;
-3. qu'**aucune couleur n'est écrite en dur** dans les composants (`components/ui`, étendu aux écrans à l'étape 4).
+3. qu'**aucune couleur n'est écrite en dur** dans les écrans et composants (`app/`, `components/`) : ni hexadécimal, ni `white`/`black`, ni `rgb()`, ni variante `dark:`, ni ancien nom de couleur.
 
 Ambiance : ergonomie des applications mobiles Amazon et AliExpress (recherche en haut, grille de catégories, ventes flash, double action d'achat), sur **fond gris foncé** avec le **vert citron** comme seule couleur forte.
 
@@ -84,11 +84,23 @@ icônes au trait en gris (`textSecondary`), sur fond en relief. Seule l'icône l
 - Animation de confirmation (tampon « LIVRÉ ») après paiement, candidature ou soumission.
 - `prefers-reduced-motion` respecté partout.
 
-## Navigation (cible de l'étape 4)
+## Navigation
 
-- **Barre du bas, 5 onglets** : Accueil · Catégories · Vendre / Publier · Panier · Compte (onglet actif en vert citron).
-- **En haut** : logo « di.si store », recherche permanente (vocale et scan quand l'appareil le permet), sélecteur CDF / USD, notifications.
+- **Barre du bas, 5 onglets** : Accueil · Catégories · Vendre · Panier · Compte (onglet actif en vert citron, `aria-current="page"`). « Mes achats » (ex-Bibliothèque) est dans Compte.
+- **En haut** : logo « di.si store » (ou Retour), CDF / USD, cloche des notifications ; dessous, **recherche permanente** sur tous les onglets (sauf les écrans qui ont leur propre recherche filtrante : Explorer, page catégorie, Vendre).
 - Support client affiché dans l'application : WhatsApp **+243 824 176 729**.
+
+### Écrans
+
+| Écran          | Adresse                  | Contenu                                                                                                                                                                       |
+| -------------- | ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Accueil        | `/fr`                    | Bandeaux à la une (glisser), avantages, grille des 7 catégories + Toutes, ventes flash, coupons, un rayon par catégorie, musique à écouter, nouvelles catégories, recommandés |
+| Catégories     | `/fr/categories`         | Les 7 catégories (nombre de contenus ou « Nouveau »), raccourcis Gratuits et Promotions                                                                                       |
+| Page catégorie | `/fr/categories/livres`… | Recherche, filtres par type, prix, tri ; catégorie vide : « Publier une annonce » et « Voir les autres catégories »                                                           |
+| Vendre         | `/fr/vendre`             | Choix de la catégorie (ouvre WhatsApp avec le message prêt en attendant le formulaire de l'étape 5), étapes, support                                                          |
+| Compte         | `/fr/compte`             | Profil, compteurs, Mes achats, contrôle parental, favoris, réglages, langue, Devenir vendeur                                                                                  |
+
+Adresses des catégories : `livres`, `applications`, `immobilier`, `emplois`, `musique`, `images`, `appels-d-offres` (`lib/categories.ts`).
 
 ## Composants
 

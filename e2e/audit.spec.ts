@@ -19,6 +19,10 @@ const SEED = {
 const SCREENS = [
   "/fr",
   "/fr/explorer",
+  "/fr/categories",
+  "/fr/categories/livres",
+  "/fr/categories/immobilier",
+  "/fr/vendre",
   "/fr/produit/maths-en-s-amusant",
   "/fr/produit/kinshasa-mode-emploi",
   "/fr/produit/rumba-douce",
@@ -36,6 +40,9 @@ for (const path of SCREENS) {
     test.slow();
     await seed(page, SEED);
     await page.goto(path);
+    // Rien ne dépasse la largeur de l'écran (pas de défilement horizontal).
+    const widths = await page.evaluate(() => [document.documentElement.scrollWidth, window.innerWidth]);
+    expect(widths[0], "défilement horizontal").toBeLessThanOrEqual(widths[1]);
     const count = await page.locator(SELECTOR).count();
     const silent: string[] = [];
 
