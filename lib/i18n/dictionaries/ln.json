@@ -15,12 +15,6 @@
     "home": "Ebandeli ya Digi Store",
     "settings": "Ndenge ya kotala"
   },
-  "nav": {
-    "discover": "Kotala",
-    "search": "Koluka",
-    "library": "Babuku na ngai",
-    "me": "Ngai"
-  },
   "theme": {
     "toLight": "Tia mwinda",
     "toDark": "Tia molili"
@@ -29,25 +23,6 @@
     "label": "Kobatela forfait",
     "on": "Kobatela forfait efungwami : bilili mike, eloko moko te ebandaka yango moko.",
     "off": "Kobatela forfait ekangami."
-  },
-  "product": {
-    "kinds": {
-      "ebook": "Buku",
-      "course": "Liteya",
-      "kidsApp": "App ya bana",
-      "audio": "Audio",
-      "template": "Template",
-      "giftCard": "Kado"
-    },
-    "by": "na {seller}",
-    "verifiedSeller": "Moteki ya solo",
-    "sales": "Batekaki {count}",
-    "rating": "Nota {rating} na 5",
-    "previewFree": "Tala ofele",
-    "oldPrice": "Motuya ya kala",
-    "discount": "−{percent} %",
-    "new": "Ya sika",
-    "flash": "Promo ya mbangu"
   },
   "commerce": {
     "pay": "Futa",
@@ -58,26 +33,6 @@
     "retry": "Meka lisusu",
     "endsIn": "Ekosila na",
     "flashEnded": "Promo esili"
-  },
-  "home": {
-    "kicker": "Drop ya lelo",
-    "title": "Mayele ya Kinshasa, ekómi na telefone na yo.",
-    "body": "Babuku, mateya mpe ba-app ya bana. Futa na Mobile Money, zwa fisye na yo na mwa basekondi.",
-    "cta": "Tala drop ya lelo",
-    "storiesLabel": "Ba-drop ya lelo",
-    "seeAll": "Tala nyonso",
-    "rails": {
-      "trending": "Oyo ezali kotambola na Kinshasa",
-      "under5": "Na nse ya 5 $",
-      "author": "Babuku ya mokomi",
-      "kids": "Bana",
-      "creators": "Bakeli ya Kongo"
-    },
-    "trust": {
-      "operators": "M-Pesa · Airtel Money · Orange Money · Afrimoney",
-      "delivery": "Ekómi na nse ya basekondi 10",
-      "support": "Lisalisi na WhatsApp na lifalansé mpe na lingála"
-    }
   },
   "field": {
     "phoneLabel": "Nimero ya Mobile Money",
@@ -125,7 +80,8 @@
       "sheet": "Lokasa ya nse",
       "skeleton": "Ezali koya",
       "nav": "Nzela ya nse",
-      "patterns": "Bilembo mpe bafoto"
+      "patterns": "Bilembo mpe bafoto",
+      "lists": "Ba-liste, koluka mpe ba-réglage"
     },
     "colorUsage": {
       "ink": "Nse ya molili (ya liboso)",
@@ -171,9 +127,285 @@
     "duotoneCaption": "Foto ya balangi mibale : moindo mpe latérite.",
     "navNote": "Nzela ya nse ya ekran, bisika ya kosimba ya 56 px."
   },
-  "soon": {
-    "title": "Ekoya kala te",
-    "body": "Esika oyo ekoya na etape oyo ekolanda. Na ntango oyo, drop ya lelo ezali kozela yo na ebandeli.",
-    "cta": "Tala ebandeli"
+  "nav": {
+    "home": "Ebandeli",
+    "explore": "Koluka",
+    "library": "Babuku na ngai",
+    "cart": "Panier",
+    "account": "Ngai"
+  },
+  "header": {
+    "cart": "Panier",
+    "cartCount": "Biloko {count} na panier",
+    "currency": "Mbongo ya kolakisa"
+  },
+  "search": {
+    "label": "Luka na katalóg",
+    "placeholder": "Babuku, masano, bilili, miziki…",
+    "submit": "Luka"
+  },
+  "home": {
+    "kicker": "Drop ya lelo",
+    "title": "Mayele ya Kinshasa, ekómi na telefone na yo.",
+    "body": "Babuku, masano ya mateya, bilili mpe miziki. Futa na Mobile Money, zwa fisye na yo na mwa basekondi.",
+    "cta": "Tala drop ya lelo",
+    "storiesLabel": "Ba-drop ya lelo",
+    "seeAll": "Tala nyonso",
+    "categories": "Mitindo",
+    "packKicker": "Kozonga na kelasi",
+    "packTitle": "Ba-app 3 ya mateya mpo na bana ya mibu 4–8",
+    "packCta": "Tala pack",
+    "dealsEnd": "Promo ekosila na",
+    "rails": {
+      "trending": "Oyo ezali kotambola na Kinshasa",
+      "free": "Ya ofele oyo balingi mingi",
+      "deals": "Ba-promo ya pɔsɔ oyo",
+      "images": "Bilili mpe ba-fond d'écran",
+      "music": "Miziki",
+      "author": "Babuku ya mokomi",
+      "kids": "Bana",
+      "creators": "Bakeli ya Kongo"
+    },
+    "trust": {
+      "operators": "M-Pesa · Airtel Money · Orange Money · Afrimoney",
+      "delivery": "Ekómi na nse ya basekondi 10",
+      "support": "Lisalisi na WhatsApp na lifalansé mpe na lingála"
+    }
+  },
+  "product": {
+    "kinds": {
+      "game": "Lisano ya bana",
+      "edu": "Mateya",
+      "ebook": "Buku",
+      "course": "Liteya",
+      "image": "Bilili",
+      "music": "Miziki",
+      "template": "Template",
+      "giftCard": "Kado"
+    },
+    "by": "na {seller}",
+    "verifiedSeller": "Moteki ya solo",
+    "sales": "Batekaki {count}",
+    "rating": "Nota {rating} na 5",
+    "previewFree": "Tala ofele",
+    "oldPrice": "Motuya ya kala",
+    "discount": "−{percent} %",
+    "new": "Ya sika",
+    "flash": "Promo ya mbangu",
+    "free": "Ofele",
+    "get": "Zwa",
+    "open": "Fungola",
+    "owned": "Ezali na babuku na yo",
+    "ageRange": "Mibu {min}–{max}",
+    "age": "Mibu",
+    "size": "Bonene",
+    "purchases": "Bisombi",
+    "reviews": "Makanisi {count}",
+    "platformLabel": "Version :",
+    "platforms": {
+      "android": "Android",
+      "windows": "Windows",
+      "web": "Navigateur"
+    },
+    "platformNames": {
+      "android": "Android 8 to koleka",
+      "windows": "Ordinatɛ Windows 10 to 11",
+      "web": "Sakana na internet, kotia eloko te"
+    },
+    "perks": {
+      "instant": "Okitisi yango mbala moko sima ya kofuta",
+      "offline": "Esalaka ata internet ezali te",
+      "noAds": "Piblisite te, kosomba ya kobombama te",
+      "updates": "Ba-mise à jour ofele libela",
+      "print": "Ndingisa ya kosalela mpo na mombongo"
+    },
+    "about": "Mpo na yango",
+    "details": "Makambo mosusu",
+    "infos": {
+      "format": "Lolenge",
+      "version": "Version",
+      "languages": "Minoko",
+      "license": "Ndingisa",
+      "updated": "Ebongisami",
+      "refund": "Kozongisa mbongo",
+      "devices": "Bisaleli"
+    },
+    "licenseValues": {
+      "personal": "Mpo na yo moko",
+      "commercial": "Mpo na mombongo"
+    },
+    "devicesValue": "Compte 1, kino bisaleli 5",
+    "refundValue": "Na kati ya ngonga 48 soki okitisi te",
+    "languageNames": {
+      "fr": "Lifalansé",
+      "ln": "Lingála",
+      "en": "Lingɛlɛ́sa"
+    },
+    "favorite": "Bakisa na oyo nalingi",
+    "unfavorite": "Longola na oyo nalingi",
+    "inCart": "Ezali na panier",
+    "buy": "Somba",
+    "share": "Kabola na WhatsApp",
+    "shareText": "{title} na Digi Store",
+    "gift": "Pesa kado",
+    "giftTitle": "Pesa yango lokola kado",
+    "giftBody": "Moto akozwa lien na SMS mpe WhatsApp soki kofuta na yo endimami.",
+    "giftAdd": "Bakisa kado na panier",
+    "giftFor": "Kado mpo na {phone}",
+    "previews": "Bililí ya liboso",
+    "previewItem": "Elilí {n} na {total}",
+    "reviewsTitle": "Makanisi ya basombi",
+    "reviewsEmpty": "Kaka basombi bakoki kokoma likanisi. Ya liboso ekoya ntango magazini ekofungwama.",
+    "back": "Zonga",
+    "promoUntil": "Motuya ekiti kino mpokwa ya mokolo ya mitano",
+    "listen": "Yoka mwa moke ya {title}",
+    "pause": "Telemisa",
+    "previewDemo": "Ndakisa ya koyoka",
+    "notAllowed": "Ebombami na contrôle parental",
+    "related": "Biloko ya ndenge moko"
+  },
+  "explore": {
+    "title": "Koluka",
+    "count": "Biloko {count}",
+    "none": "Eloko ezwami te na ba-filtre oyo.",
+    "reset": "Longola ba-filtre",
+    "priceLabel": "Motuya",
+    "typeLabel": "Lolenge ya eloko",
+    "price": {
+      "all": "Nyonso",
+      "free": "Ofele",
+      "paid": "Ya kofuta"
+    },
+    "sort": {
+      "popular": "Oyo balingi",
+      "priceAsc": "Motuya ya moke liboso",
+      "rating": "Nota ya likolo"
+    },
+    "sortButton": "Kobongisa : {sort}",
+    "parental": "Contrôle parental efungwami : biloko kino mibu {age}.",
+    "all": "Nyonso",
+    "query": "Oyo ezwami mpo na « {q} »"
+  },
+  "cart": {
+    "title": "Panier",
+    "empty": "Panier na yo ezali pamba.",
+    "emptyCta": "Luka na katalóg",
+    "remove": "Longola {title}",
+    "removeShort": "Longola",
+    "delivery": "Okozwa yango na kokitisa soki kofuta endimami.",
+    "coupon": "Code ya promo",
+    "couponPlaceholder": "Koma code",
+    "couponApply": "Salela",
+    "couponApplied": "Code {code} esalelami.",
+    "couponInvalid": "Code eyebani te to esili.",
+    "couponRemove": "Longola code",
+    "couponHint": "Ba-code ya ndakisa : KIN2026 (−20 %), ENFANT1 (−1 $).",
+    "payWith": "Futa na",
+    "mobileMoney": "Mobile Money",
+    "mobileMoneyHint": "M-Pesa, Airtel Money, Orange Money, Afrimoney",
+    "card": "Carte ya banque",
+    "cardHint": "Visa, Mastercard — mpo na diaspora",
+    "cardSoon": "Kofuta na carte ekofungwama na agrégateur ya production. Salela Mobile Money sikoyo.",
+    "subtotal": "Motuya ya biloko",
+    "discount": "Kokitisa",
+    "total": "Nyonso",
+    "pay": "Futa",
+    "getFree": "Bakisa na babuku na ngai",
+    "secure": "Opérateur na yo andimi kofuta · Mbongo ezongaka soki kokitisa elongi te",
+    "demoNotice": "Ndakisa : mbongo ebimi te. Nimero oyo esuki na 1 = PIN ya mabe, 2 = mbongo ekoki te, 3 = eyano te.",
+    "phoneInvalid": "Nimero ekoki te to opérateur eyebani te.",
+    "giftLine": "Kado mpo na {phone}",
+    "items": "Biloko {count}"
+  },
+  "payment": {
+    "title": "Kofuta na Mobile Money",
+    "sending": "Tozali kotinda motuna epai ya {operator}…",
+    "waiting": "Tala telefone na yo",
+    "waitingBody": "Koma PIN na yo ya {operator} mpo na kondima kofuta.",
+    "expires": "Ekosila na",
+    "success": "Mbongo ekómi",
+    "successBody": "Biloko ebakisami na babuku na yo : {count}. Lien ekei pe na SMS mpe WhatsApp.",
+    "giftSent": "Kado etindami epai ya {phone}.",
+    "goLibrary": "Fungola babuku na ngai",
+    "failed": {
+      "pin_refused": "Code ya mabe. Meka lisusu.",
+      "insufficient_funds": "Mbongo ekoki te na compte na yo ya {operator}.",
+      "timeout": "Eyano ezali te. Tala telefone na yo to meka lisusu."
+    },
+    "retry": "Meka lisusu",
+    "cancel": "Tika",
+    "close": "Kanga",
+    "pinTitle": "Code ya baboti",
+    "pinBody": "Contrôle parental ebatelaka bisombi. Koma code ya bilembo 4.",
+    "pinLabel": "Code ya baboti",
+    "pinWrong": "Code ya mabe.",
+    "pinConfirm": "Ndima"
+  },
+  "library": {
+    "title": "Babuku na ngai",
+    "banner": "Kofuta endimami",
+    "bannerBody": "Bisombi na yo ezali prêt. Reçu mpe ba-lien etindami pe na SMS.",
+    "close": "Kanga sango",
+    "tabs": {
+      "all": "Nyonso",
+      "apps": "Masano mpe ba-app",
+      "reading": "Babuku mpe mateya",
+      "images": "Bilili",
+      "music": "Miziki"
+    },
+    "tabsLabel": "Pona na babuku",
+    "download": "Kitisa",
+    "downloading": "Ezali kokita… {percent} %",
+    "open": "Fungola",
+    "offline": "Ezali ata internet te",
+    "newTag": "Esombami sika",
+    "freeTag": "Ofele",
+    "boughtOn": "Ebakisami {date}",
+    "empty": "Eloko ezali awa te. Bisombi na yo mpe biloko ya ofele ekomonana awa.",
+    "emptyCta": "Tala biloko ya ofele",
+    "note": "Bisombi na yo ezali awa libela. Okoki kokitisa lisusu na bisaleli 5."
+  },
+  "account": {
+    "guest": "Compte ya mopaya",
+    "guestBody": "Compte na yo esalemaka yango moko na nimero na yo na kosomba ya liboso, mot de passe te.",
+    "stats": {
+      "purchases": "Bisombi",
+      "free": "Ofele",
+      "favorites": "Oyo nalingi"
+    },
+    "parental": "Contrôle parental",
+    "parentalOn": "Efungwami · biloko kino mibu {age}, bisombi ebatelami na code",
+    "parentalOff": "Ekangami",
+    "maxAge": "Mibu ya likolo ya biloko",
+    "ageOption": "Mibu {age}",
+    "pinLabel": "Code ya baboti (bilembo 4)",
+    "pinSave": "Bomba",
+    "pinSaved": "Code ebombami.",
+    "pinInvalid": "Koma bilembo 4 kaka.",
+    "pinNeeded": "Pona code mpo na kobatela bisombi.",
+    "settings": "Ba-réglage",
+    "currency": "Mbongo",
+    "language": "Lokota",
+    "theme": "Langi",
+    "themeDark": "Molili",
+    "themeLight": "Mwinda",
+    "liteHint": "Bilili mike, eloko ebandaka yango moko te.",
+    "devices": "Bisaleli endimami",
+    "devicesValue": "1 na 5",
+    "payments": "Lolenge ya kofuta",
+    "paymentsValue": "Mobile Money",
+    "notifications": "Ba-notification",
+    "notificationsValue": "WhatsApp mpe SMS",
+    "seller": "Ozali kokela babuku, masano, bilili to miziki ?",
+    "sellerBody": "Teka yango na Digi Store mpe zwa mbongo na yo na Mobile Money.",
+    "sellerCta": "Kokóma moteki",
+    "sellerSoon": "Esika ya bateki ekofungwama kala te : komela biso na WhatsApp mpo na kozala na baye ya liboso.",
+    "help": "Lisalisi na WhatsApp",
+    "favoritesTitle": "Oyo nalingi",
+    "favoritesEmpty": "Simba motema na lokasa ya eloko mpo na kozwa yango awa.",
+    "soon": "Kala te"
+  },
+  "common": {
+    "demo": "Ndakisa"
   }
 }

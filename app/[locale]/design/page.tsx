@@ -11,10 +11,15 @@ import {
   Field,
   IconBolt,
   IconCheck,
-  IconDiscover,
-  IconLibrary,
+  IconCart,
+  IconDownload,
+  IconHome,
   IconMe,
   IconSearch,
+  ListRow,
+  Rating,
+  SearchField,
+  Thumb,
   KubaDivider,
   Price,
   Skeleton,
@@ -27,7 +32,11 @@ import { PhoneField } from "@/components/ui/PhoneField";
 import { Sheet } from "@/components/ui/Sheet";
 import { ACCESSIBLE_VARIANTS, BRAND_COLORS } from "@/lib/brand";
 import { DEMO_USD_TO_CDF_RATE } from "@/lib/currency";
-import { DEMO_PRODUCTS } from "@/lib/demo/products";
+import { CATALOG, getProduct } from "@/lib/catalog";
+import { metaLine } from "@/components/shop/labels";
+import { PreviewButton } from "@/components/shop/PreviewButton";
+import { SegmentedDemo, SwitchDemo } from "@/components/design/Demos";
+import { CurrencyToggle } from "@/components/ui/CurrencyToggle";
 import { format, getDictionary } from "@/lib/i18n";
 import { resolveLocale } from "@/lib/i18n/params";
 import duotoneSample from "@/public/demo/marche.jpg";
@@ -61,8 +70,13 @@ export default async function DesignPage({ params }: PageProps<"/[locale]/design
   const locale = await resolveLocale(params);
   const dict = await getDictionary(locale);
   const d = dict.design;
-  const byId = (id: string) => DEMO_PRODUCTS.find((p) => p.id === id)!;
-  const [book, course, kidsApp, kidsAudio] = ["p1", "p3", "p5", "p8"].map(byId);
+  const [book, course, kidsApp, kidsAudio, track] = [
+    "kinshasa-mode-emploi",
+    "vendre-sur-whatsapp",
+    "maths-en-s-amusant",
+    "puzzle-des-animaux",
+    "rumba-douce",
+  ].map((slug) => getProduct(slug)!);
 
   return (
     <AppShell locale={locale} dict={dict} tab={null} path="design">
@@ -164,7 +178,7 @@ export default async function DesignPage({ params }: PageProps<"/[locale]/design
       <Section id="tickets" title={d.sections.tickets}>
         <div className="flex flex-wrap gap-4">
           <ProductTicket product={book} locale={locale} dict={dict} />
-          <ProductTicket product={course} locale={locale} dict={dict} currency="CDF" />
+          <ProductTicket product={course} locale={locale} dict={dict} />
           <TicketSkeleton />
         </div>
         <div className="mt-6 flex flex-col gap-2">
@@ -234,6 +248,61 @@ export default async function DesignPage({ params }: PageProps<"/[locale]/design
         </Sheet>
       </Section>
 
+      <Section id="lists" title={d.sections.lists}>
+        <div className="flex max-w-md flex-col gap-4">
+          <SearchField
+            action="#lists"
+            label={dict.search.label}
+            placeholder={dict.search.placeholder}
+            submitLabel={dict.search.submit}
+          />
+          <ul>
+            {[kidsApp, kidsAudio].map((p) => (
+              <ListRow
+                key={p.slug}
+                href="#lists"
+                media={<Thumb id={`d-${p.slug}`} title={p.title} tone={p.tone} round />}
+                title={p.title}
+                meta={metaLine(p, dict)}
+                extra={<Rating value={p.rating} label={format(dict.product.rating, { rating: p.rating })} />}
+                action={
+                  <Price
+                    usdCents={p.priceUsdCents}
+                    promoUsdCents={p.promoUsdCents}
+                    locale={locale}
+                    oldPriceLabel={dict.product.oldPrice}
+                    freeLabel={dict.product.free}
+                  />
+                }
+              />
+            ))}
+            <ListRow
+              lead={
+                <PreviewButton
+                  id={track.slug}
+                  title={track.title}
+                  playLabel={format(dict.product.listen, { title: track.title })}
+                  pauseLabel={dict.product.pause}
+                />
+              }
+              title={track.title}
+              meta={metaLine(track, dict)}
+              action={
+                <Price usdCents={track.priceUsdCents} locale={locale} oldPriceLabel={dict.product.oldPrice} />
+              }
+            />
+          </ul>
+          <div className="flex flex-wrap items-center gap-4">
+            <CurrencyToggle label={dict.header.currency} />
+            <SegmentedDemo
+              label={dict.explore.priceLabel}
+              options={[dict.explore.price.all, dict.explore.price.free, dict.explore.price.paid]}
+            />
+            <SwitchDemo label={dict.account.parental} />
+          </div>
+        </div>
+      </Section>
+
       <Section id="skeleton" title={d.sections.skeleton}>
         <div className="flex max-w-md flex-col gap-2">
           <Skeleton className="h-8 w-2/3" />
@@ -249,10 +318,20 @@ export default async function DesignPage({ params }: PageProps<"/[locale]/design
             fixed={false}
             label={`${dict.a11y.mainNav} (${d.title})`}
             items={[
-              { href: "#nav", label: dict.nav.discover, icon: <IconDiscover />, active: true },
-              { href: "#nav", label: dict.nav.search, icon: <IconSearch /> },
-              { href: "#nav", label: dict.nav.library, icon: <IconLibrary /> },
-              { href: "#nav", label: dict.nav.me, icon: <IconMe /> },
+              { href: "#nav", label: dict.nav.home, icon: <IconHome />, active: true },
+              { href: "#nav-2", label: dict.nav.explore, icon: <IconSearch /> },
+              { href: "#nav-3", label: dict.nav.library, icon: <IconDownload /> },
+              {
+                href: "#nav-4",
+                label: dict.nav.cart,
+                icon: <IconCart />,
+                badge: (
+                  <span className="absolute -right-1 -top-1 grid min-w-5 place-items-center rounded-full bg-taxi px-1 font-mono text-[11px] font-bold leading-5 text-ink">
+                    2
+                  </span>
+                ),
+              },
+              { href: "#nav-5", label: dict.nav.account, icon: <IconMe /> },
             ]}
           />
         </div>
@@ -261,8 +340,8 @@ export default async function DesignPage({ params }: PageProps<"/[locale]/design
       <Section id="patterns" title={d.sections.patterns}>
         <div className="flex flex-wrap items-start gap-6">
           <div className="flex gap-3">
-            {DEMO_PRODUCTS.slice(0, 3).map((p, i) => (
-              <Story key={p.id} title={p.title} tone={p.tone} seen={i === 2} />
+            {CATALOG.slice(0, 3).map((p, i) => (
+              <Story key={p.slug} title={p.title} tone={p.tone} seen={i === 2} />
             ))}
           </div>
           <figure className="w-60">

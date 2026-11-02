@@ -184,6 +184,161 @@
     right: -20px;
   }
 
+  /*
+   * Classes de composants répétés (tickets, prix, badges, lignes) : une classe
+   * courte au lieu de dizaines d'utilitaires, pour alléger le HTML des pages longues.
+   */
+  .ticket-card {
+    display: flex;
+    width: 11rem;
+    flex-shrink: 0;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .kids.ticket-card {
+    width: 12rem;
+  }
+  .ticket-badges {
+    position: absolute;
+    left: 0.5rem;
+    top: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+  .ticket-body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 0.375rem;
+    padding: 0.625rem 0.75rem 0.75rem;
+  }
+  .ticket-kind {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+    color: var(--muted);
+  }
+  .ticket-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1.25;
+  }
+  .kids .ticket-title {
+    font-size: 1.125rem;
+  }
+  .ticket-sub {
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+  .ticket-meta {
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+  .ticket-price {
+    margin-top: auto;
+    padding-top: 0.25rem;
+  }
+  .stretched::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+  }
+  .cover {
+    position: relative;
+    display: flex;
+    aspect-ratio: 4 / 5;
+    width: 100%;
+    align-items: flex-end;
+    overflow: hidden;
+    padding: 0.75rem;
+  }
+  .cover-title {
+    position: relative;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.25rem;
+    line-height: 0.95;
+  }
+  .kids .cover-title {
+    font-size: 1.5rem;
+  }
+  .price {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.25rem 0.5rem;
+  }
+  .price-tag {
+    background: var(--color-taxi);
+    color: var(--color-ink);
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 0.875rem;
+    white-space: nowrap;
+    padding: 0.125rem 0.375rem;
+    border-radius: calc(var(--radius-control) / 2);
+  }
+  .price-lg .price-tag {
+    font-size: 1.25rem;
+    padding: 0.25rem 0.625rem;
+  }
+  .price-old {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    white-space: nowrap;
+    color: var(--muted);
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.125rem 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+    border-radius: calc(var(--radius-control) / 2);
+  }
+  .row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    border-top: 2px solid var(--line);
+    padding-block: 0.75rem;
+  }
+  .row:first-child {
+    border-top: 0;
+  }
+  .row-main {
+    display: flex;
+    min-width: 0;
+    flex: 1;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .row-text {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+  .row-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 500;
+  }
+  .row-meta {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+
   /* Rayon Enfants : même charte, formes plus rondes */
   .kids {
     --radius-ticket: 22px;
@@ -203,6 +358,21 @@
     mix-blend-mode: multiply;
   }
 
+  /* Motif Kuba : un seul SVG en masque CSS, coloré par currentColor (aucun nœud DOM). */
+  .kuba {
+    background-color: currentColor;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='16'%3E%3Cg fill='none' stroke='%23000' stroke-width='1.6'%3E%3Cpath d='M0 8L8 0L16 8L8 16Z'/%3E%3Cpath d='M16 0H32M16 16H32'/%3E%3Cpath d='M16 8l4-4 4 4 4-4 4 4'/%3E%3C/g%3E%3Cpath d='M8 4L12 8L8 12L4 8Z'/%3E%3C/svg%3E")
+      repeat 0 0 / 32px 16px;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='16'%3E%3Cg fill='none' stroke='%23000' stroke-width='1.6'%3E%3Cpath d='M0 8L8 0L16 8L8 16Z'/%3E%3Cpath d='M16 0H32M16 16H32'/%3E%3Cpath d='M16 8l4-4 4 4 4-4 4 4'/%3E%3C/g%3E%3Cpath d='M8 4L12 8L8 12L4 8Z'/%3E%3C/svg%3E")
+      repeat 0 0 / 32px 16px;
+  }
+
+  .kuba-fill {
+    position: absolute;
+    inset: 0;
+    opacity: 0.15;
+  }
+
   .skeleton {
     background: linear-gradient(90deg, var(--surface) 0%, var(--surface-2) 50%, var(--surface) 100%);
     background-size: 200% 100%;
@@ -220,6 +390,19 @@
   .scroll-rail > * {
     scroll-snap-align: start;
   }
+}
+
+/* Devise d'affichage : les deux prix sont rendus, l'attribut de <html> choisit. */
+.cur-usd,
+.cur-cdf {
+  display: contents;
+}
+.cur-cdf,
+[data-currency="CDF"] .cur-usd {
+  display: none;
+}
+[data-currency="CDF"] .cur-cdf {
+  display: contents;
 }
 
 /* Mode données légères : pas d'images décoratives, pas d'animation de chargement */

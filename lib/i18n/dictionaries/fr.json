@@ -15,12 +15,6 @@
     "home": "Accueil Digi Store",
     "settings": "Réglages d'affichage"
   },
-  "nav": {
-    "discover": "Découvrir",
-    "search": "Chercher",
-    "library": "Ma bibliothèque",
-    "me": "Moi"
-  },
   "theme": {
     "toLight": "Passer en mode clair",
     "toDark": "Passer en mode sombre"
@@ -29,25 +23,6 @@
     "label": "Données légères",
     "on": "Données légères activées : images réduites, aucune lecture automatique.",
     "off": "Données légères désactivées."
-  },
-  "product": {
-    "kinds": {
-      "ebook": "Livre",
-      "course": "Formation",
-      "kidsApp": "App enfants",
-      "audio": "Audio",
-      "template": "Template",
-      "giftCard": "Carte cadeau"
-    },
-    "by": "par {seller}",
-    "verifiedSeller": "Vendeur vérifié",
-    "sales": "{count} ventes",
-    "rating": "Note {rating} sur 5",
-    "previewFree": "Aperçu gratuit",
-    "oldPrice": "Ancien prix",
-    "discount": "−{percent} %",
-    "new": "Nouveau",
-    "flash": "Vente flash"
   },
   "commerce": {
     "pay": "Payer",
@@ -58,26 +33,6 @@
     "retry": "Réessayer",
     "endsIn": "Se termine dans",
     "flashEnded": "Vente terminée"
-  },
-  "home": {
-    "kicker": "Drop du jour",
-    "title": "Le savoir de Kinshasa, livré sur ton téléphone.",
-    "body": "Livres, formations et apps pour enfants. Paie en Mobile Money, reçois ton fichier en quelques secondes.",
-    "cta": "Voir le drop du jour",
-    "storiesLabel": "Drops du jour",
-    "seeAll": "Tout voir",
-    "rails": {
-      "trending": "Tendance à Kinshasa",
-      "under5": "Moins de 5 $",
-      "author": "Livres de l'auteur",
-      "kids": "Enfants",
-      "creators": "Créateurs congolais"
-    },
-    "trust": {
-      "operators": "M-Pesa · Airtel Money · Orange Money · Afrimoney",
-      "delivery": "Livraison en moins de 10 secondes",
-      "support": "Support WhatsApp en français et en lingala"
-    }
   },
   "field": {
     "phoneLabel": "Numéro Mobile Money",
@@ -125,7 +80,8 @@
       "sheet": "Feuille modale",
       "skeleton": "Chargement",
       "nav": "Barre de navigation",
-      "patterns": "Motifs et photos"
+      "patterns": "Motifs et photos",
+      "lists": "Listes, recherche et réglages"
     },
     "colorUsage": {
       "ink": "Fond du mode sombre (par défaut)",
@@ -171,9 +127,285 @@
     "duotoneCaption": "Photo en bichromie : noir et latérite.",
     "navNote": "Barre fixe en bas d'écran, cibles tactiles de 56 px."
   },
-  "soon": {
-    "title": "Bientôt ici",
-    "body": "Cet espace arrive dans une prochaine étape. En attendant, le drop du jour t'attend sur l'accueil.",
-    "cta": "Voir l'accueil"
+  "nav": {
+    "home": "Accueil",
+    "explore": "Explorer",
+    "library": "Bibliothèque",
+    "cart": "Panier",
+    "account": "Compte"
+  },
+  "header": {
+    "cart": "Panier",
+    "cartCount": "{count} articles dans le panier",
+    "currency": "Devise d'affichage"
+  },
+  "search": {
+    "label": "Rechercher dans le catalogue",
+    "placeholder": "Livres, jeux, images, musique…",
+    "submit": "Chercher"
+  },
+  "home": {
+    "kicker": "Drop du jour",
+    "title": "Le savoir de Kinshasa, livré sur ton téléphone.",
+    "body": "Livres, jeux éducatifs, images et musique. Paie en Mobile Money, reçois ton fichier en quelques secondes.",
+    "cta": "Voir le drop du jour",
+    "storiesLabel": "Drops du jour",
+    "seeAll": "Tout voir",
+    "categories": "Catégories",
+    "packKicker": "Pack rentrée",
+    "packTitle": "3 applis éducatives pour les 4–8 ans",
+    "packCta": "Voir le pack",
+    "dealsEnd": "Fin des offres dans",
+    "rails": {
+      "trending": "Tendance à Kinshasa",
+      "free": "Gratuits populaires",
+      "deals": "Offres de la semaine",
+      "images": "Images et fonds d'écran",
+      "music": "Musique",
+      "author": "Livres de l'auteur",
+      "kids": "Enfants",
+      "creators": "Créateurs congolais"
+    },
+    "trust": {
+      "operators": "M-Pesa · Airtel Money · Orange Money · Afrimoney",
+      "delivery": "Livraison en moins de 10 secondes",
+      "support": "Support WhatsApp en français et en lingala"
+    }
+  },
+  "product": {
+    "kinds": {
+      "game": "Jeu enfants",
+      "edu": "Éducatif",
+      "ebook": "Livre",
+      "course": "Formation",
+      "image": "Images",
+      "music": "Musique",
+      "template": "Template",
+      "giftCard": "Carte cadeau"
+    },
+    "by": "par {seller}",
+    "verifiedSeller": "Vendeur vérifié",
+    "sales": "{count} ventes",
+    "rating": "Note {rating} sur 5",
+    "previewFree": "Aperçu gratuit",
+    "oldPrice": "Ancien prix",
+    "discount": "−{percent} %",
+    "new": "Nouveau",
+    "flash": "Vente flash",
+    "free": "Gratuit",
+    "get": "Obtenir",
+    "open": "Ouvrir",
+    "owned": "Dans ta bibliothèque",
+    "ageRange": "{min}–{max} ans",
+    "age": "Âge",
+    "size": "Taille",
+    "purchases": "Achats",
+    "reviews": "{count} avis",
+    "platformLabel": "Version :",
+    "platforms": {
+      "android": "Android",
+      "windows": "Windows",
+      "web": "Navigateur"
+    },
+    "platformNames": {
+      "android": "Android 8 ou plus",
+      "windows": "Ordinateur Windows 10 ou 11",
+      "web": "Jouable en ligne, sans installation"
+    },
+    "perks": {
+      "instant": "Téléchargement immédiat après paiement",
+      "offline": "Fonctionne sans Internet",
+      "noAds": "Sans publicité ni achat caché",
+      "updates": "Mises à jour gratuites à vie",
+      "print": "Usage commercial autorisé"
+    },
+    "about": "À propos",
+    "details": "Détails",
+    "infos": {
+      "format": "Format",
+      "version": "Version",
+      "languages": "Langues",
+      "license": "Licence",
+      "updated": "Mis à jour",
+      "refund": "Remboursement",
+      "devices": "Appareils"
+    },
+    "licenseValues": {
+      "personal": "Usage personnel",
+      "commercial": "Usage commercial"
+    },
+    "devicesValue": "1 compte, jusqu'à 5 appareils",
+    "refundValue": "Sous 48 h si non téléchargé",
+    "languageNames": {
+      "fr": "Français",
+      "ln": "Lingala",
+      "en": "Anglais"
+    },
+    "favorite": "Ajouter aux favoris",
+    "unfavorite": "Retirer des favoris",
+    "inCart": "Dans le panier",
+    "buy": "Acheter",
+    "share": "Partager sur WhatsApp",
+    "shareText": "{title} sur Digi Store",
+    "gift": "Offrir",
+    "giftTitle": "Offrir ce contenu",
+    "giftBody": "Le destinataire reçoit le lien par SMS et WhatsApp dès que ton paiement est confirmé.",
+    "giftAdd": "Ajouter le cadeau au panier",
+    "giftFor": "Cadeau pour {phone}",
+    "previews": "Aperçus",
+    "previewItem": "Aperçu {n} sur {total}",
+    "reviewsTitle": "Avis des clients",
+    "reviewsEmpty": "Seuls les acheteurs peuvent laisser un avis écrit. Les premiers arrivent avec l'ouverture de la boutique.",
+    "back": "Retour",
+    "promoUntil": "Prix réduit jusqu'à vendredi soir",
+    "listen": "Écouter un extrait de {title}",
+    "pause": "Mettre en pause l'extrait",
+    "previewDemo": "Extrait de démonstration",
+    "notAllowed": "Masqué par le contrôle parental",
+    "related": "Dans le même rayon"
+  },
+  "explore": {
+    "title": "Explorer",
+    "count": "{count} contenus",
+    "none": "Aucun résultat pour ces filtres.",
+    "reset": "Effacer les filtres",
+    "priceLabel": "Prix",
+    "typeLabel": "Type de contenu",
+    "price": {
+      "all": "Tous",
+      "free": "Gratuits",
+      "paid": "Payants"
+    },
+    "sort": {
+      "popular": "Populaires",
+      "priceAsc": "Prix croissant",
+      "rating": "Mieux notés"
+    },
+    "sortButton": "Tri : {sort}",
+    "parental": "Contrôle parental actif : contenus jusqu'à {age} ans.",
+    "all": "Tout",
+    "query": "Résultats pour « {q} »"
+  },
+  "cart": {
+    "title": "Panier",
+    "empty": "Ton panier est vide.",
+    "emptyCta": "Explorer le catalogue",
+    "remove": "Retirer {title}",
+    "removeShort": "Retirer",
+    "delivery": "Livraison par téléchargement dès que le paiement est confirmé.",
+    "coupon": "Code promo",
+    "couponPlaceholder": "Entrer un code",
+    "couponApply": "Appliquer",
+    "couponApplied": "Code {code} appliqué.",
+    "couponInvalid": "Code inconnu ou expiré.",
+    "couponRemove": "Retirer le code",
+    "couponHint": "Codes de démonstration : KIN2026 (−20 %), ENFANT1 (−1 $).",
+    "payWith": "Payer avec",
+    "mobileMoney": "Mobile Money",
+    "mobileMoneyHint": "M-Pesa, Airtel Money, Orange Money, Afrimoney",
+    "card": "Carte bancaire",
+    "cardHint": "Visa, Mastercard — pour la diaspora",
+    "cardSoon": "Le paiement par carte sera activé avec l'agrégateur en production. Utilise Mobile Money pour l'instant.",
+    "subtotal": "Sous-total",
+    "discount": "Réduction",
+    "total": "Total",
+    "pay": "Payer",
+    "getFree": "Ajouter à ma bibliothèque",
+    "secure": "Paiement validé par ton opérateur · Remboursé si le téléchargement échoue",
+    "demoNotice": "Mode démo : aucun argent n'est débité. Un numéro qui finit par 1 simule un PIN refusé, 2 un solde insuffisant, 3 une absence de réponse.",
+    "phoneInvalid": "Numéro incomplet ou opérateur inconnu.",
+    "giftLine": "Offert à {phone}",
+    "items": "{count} articles"
+  },
+  "payment": {
+    "title": "Paiement Mobile Money",
+    "sending": "Envoi de la demande à {operator}…",
+    "waiting": "Regarde ton téléphone",
+    "waitingBody": "Tape ton code PIN {operator} pour valider le paiement.",
+    "expires": "Expire dans",
+    "success": "Paiement reçu",
+    "successBody": "Contenus ajoutés à ta bibliothèque : {count}. Le lien part aussi par SMS et WhatsApp.",
+    "giftSent": "Cadeau envoyé à {phone}.",
+    "goLibrary": "Ouvrir ma bibliothèque",
+    "failed": {
+      "pin_refused": "Code incorrect. Réessaie.",
+      "insufficient_funds": "Solde insuffisant sur ton compte {operator}.",
+      "timeout": "Pas de réponse. Vérifie ton téléphone ou réessaie."
+    },
+    "retry": "Réessayer",
+    "cancel": "Annuler",
+    "close": "Fermer",
+    "pinTitle": "Code parental",
+    "pinBody": "Le contrôle parental protège les achats. Saisis le code à 4 chiffres.",
+    "pinLabel": "Code parental",
+    "pinWrong": "Code incorrect.",
+    "pinConfirm": "Valider"
+  },
+  "library": {
+    "title": "Bibliothèque",
+    "banner": "Paiement confirmé",
+    "bannerBody": "Tes achats sont prêts. Un reçu et les liens ont aussi été envoyés par SMS.",
+    "close": "Fermer le message",
+    "tabs": {
+      "all": "Tout",
+      "apps": "Jeux et applis",
+      "reading": "Livres et formations",
+      "images": "Images",
+      "music": "Musique"
+    },
+    "tabsLabel": "Filtrer la bibliothèque",
+    "download": "Télécharger",
+    "downloading": "Téléchargement… {percent} %",
+    "open": "Ouvrir",
+    "offline": "Disponible hors-ligne",
+    "newTag": "Nouvel achat",
+    "freeTag": "Gratuit",
+    "boughtOn": "Ajouté le {date}",
+    "empty": "Rien ici pour l'instant. Tes achats et tes contenus gratuits apparaîtront ici.",
+    "emptyCta": "Voir les gratuits",
+    "note": "Tes achats restent disponibles à vie. Re-téléchargement illimité sur 5 appareils."
+  },
+  "account": {
+    "guest": "Compte invité",
+    "guestBody": "Ton compte est créé automatiquement avec ton numéro au premier achat, sans mot de passe.",
+    "stats": {
+      "purchases": "Achats",
+      "free": "Gratuits",
+      "favorites": "Favoris"
+    },
+    "parental": "Contrôle parental",
+    "parentalOn": "Activé · contenus jusqu'à {age} ans, achats protégés par code",
+    "parentalOff": "Désactivé",
+    "maxAge": "Âge maximum des contenus",
+    "ageOption": "{age} ans",
+    "pinLabel": "Code parental (4 chiffres)",
+    "pinSave": "Enregistrer",
+    "pinSaved": "Code enregistré.",
+    "pinInvalid": "Saisis exactement 4 chiffres.",
+    "pinNeeded": "Choisis un code pour protéger les achats.",
+    "settings": "Réglages",
+    "currency": "Devise",
+    "language": "Langue",
+    "theme": "Thème",
+    "themeDark": "Sombre",
+    "themeLight": "Clair",
+    "liteHint": "Images réduites, aucune lecture automatique.",
+    "devices": "Appareils autorisés",
+    "devicesValue": "1 sur 5",
+    "payments": "Moyens de paiement",
+    "paymentsValue": "Mobile Money",
+    "notifications": "Notifications",
+    "notificationsValue": "WhatsApp et SMS",
+    "seller": "Tu crées des livres, jeux, images ou musiques ?",
+    "sellerBody": "Publie-les sur Digi Store et touche tes revenus en Mobile Money.",
+    "sellerCta": "Devenir vendeur",
+    "sellerSoon": "Ouverture de l'espace vendeurs : écris-nous sur WhatsApp pour être parmi les premiers.",
+    "help": "Aide et contact sur WhatsApp",
+    "favoritesTitle": "Mes favoris",
+    "favoritesEmpty": "Touche le cœur sur une fiche produit pour la retrouver ici.",
+    "soon": "Bientôt"
+  },
+  "common": {
+    "demo": "Démo"
   }
 }

@@ -3,7 +3,12 @@
     "collect": {
       "startServerCommand": "npm run start -- -p 3300",
       "startServerReadyPattern": "Ready",
-      "url": ["http://localhost:3300/", "http://localhost:3300/fr/design"],
+      "url": [
+        "http://localhost:3300/",
+        "http://localhost:3300/fr/produit/maths-en-s-amusant",
+        "http://localhost:3300/fr/panier",
+        "http://localhost:3300/fr/design"
+      ],
       "numberOfRuns": 3,
       "settings": {
         "preset": "perf",
@@ -24,7 +29,7 @@
     "assert": {
       "assertMatrix": [
         {
-          "matchingUrlPattern": "^http://localhost:3300/$",
+          "matchingUrlPattern": "^http://localhost:3300/(|fr/produit/.*|fr/panier)$",
           "assertions": {
             "categories:performance": [
               "error",

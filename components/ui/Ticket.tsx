@@ -26,15 +26,10 @@ export function TicketCover({
   kids?: boolean;
 }) {
   return (
-    <div
-      aria-hidden="true"
-      className={cn("relative flex aspect-[4/5] w-full items-end overflow-hidden p-3", COVER_TONES[tone])}
-    >
-      <KubaPattern id={`kuba-${id}`} className="absolute inset-0 h-full w-full opacity-[0.15]" />
+    <div aria-hidden="true" className={cn("cover", COVER_TONES[tone])}>
+      <KubaPattern id={`kuba-${id}`} className="kuba-fill" />
       {kids ? <span className="absolute -right-6 -top-6 size-28 rounded-full bg-current opacity-20" /> : null}
-      <span className={cn("relative font-display font-bold leading-[0.95]", kids ? "text-2xl" : "text-xl")}>
-        {title}
-      </span>
+      <span className={cn("cover-title", kids && "text-2xl")}>{title}</span>
     </div>
   );
 }
@@ -67,29 +62,25 @@ export function Ticket({
   className?: string;
 }) {
   const heading = href ? (
-    <Link href={href} className="after:absolute after:inset-0 after:content-['']">
+    <Link href={href} prefetch={false} className="stretched">
       {title}
     </Link>
   ) : (
     title
   );
   return (
-    <article
-      className={cn("ticket flex w-44 shrink-0 flex-col overflow-hidden", kids && "kids w-48", className)}
-    >
+    <article className={cn("ticket ticket-card", kids && "kids", className)}>
       <div className="relative">
         {cover}
-        {badges ? <div className="absolute left-2 top-2 flex flex-wrap gap-1">{badges}</div> : null}
+        {badges ? <div className="ticket-badges">{badges}</div> : null}
       </div>
       <div className="ticket-perforation" />
-      <div className="flex flex-1 flex-col gap-1.5 p-3 pt-2.5">
-        <p className="text-xs font-medium uppercase tracking-wide text-muted">{kindLabel}</p>
-        <h3 className={cn("font-display font-bold leading-tight", kids ? "text-lg" : "text-base")}>
-          {heading}
-        </h3>
-        <p className="text-sm text-muted">{seller}</p>
-        {meta ? <div className="text-xs text-muted">{meta}</div> : null}
-        <div className="mt-auto pt-1">{price}</div>
+      <div className="ticket-body">
+        <p className="ticket-kind">{kindLabel}</p>
+        <h3 className="ticket-title">{heading}</h3>
+        <p className="ticket-sub">{seller}</p>
+        {meta ? <div className="ticket-meta">{meta}</div> : null}
+        <div className="ticket-price">{price}</div>
       </div>
     </article>
   );

@@ -1,6 +1,7 @@
 "use client";
 
-import { useRef, type ReactNode } from "react";
+import { useId, useRef, type ReactNode } from "react";
+import { cn } from "./cn";
 import { buttonClasses, type ButtonVariant } from "./Button";
 import { IconClose } from "./icons";
 
@@ -11,30 +12,41 @@ import { IconClose } from "./icons";
 export function Sheet({
   triggerLabel,
   triggerVariant = "secondary",
+  triggerIcon,
+  triggerClassName,
   title,
   closeLabel,
   children,
 }: {
   triggerLabel: string;
   triggerVariant?: ButtonVariant;
+  triggerIcon?: ReactNode;
+  triggerClassName?: string;
   title: string;
   closeLabel: string;
-  children: ReactNode;
+  /** Contenu, ou fonction recevant `close` pour fermer après une action. */
+  children: ReactNode | ((close: () => void) => ReactNode);
 }) {
   const ref = useRef<HTMLDialogElement>(null);
-  const titleId = `sheet-${title.replace(/\W+/g, "-").toLowerCase()}`;
+  const uid = useId();
+  const titleId = `${uid}-title`;
+  const dialogId = `${uid}-dialog`;
+  // Fermeture par identifiant (et non par ref) : utilisable par le contenu.
+  const close = () => (document.getElementById(dialogId) as HTMLDialogElement | null)?.close();
 
   return (
     <>
       <button
         type="button"
-        className={buttonClasses({ variant: triggerVariant })}
+        className={cn(buttonClasses({ variant: triggerVariant }), triggerClassName)}
         onClick={() => ref.current?.showModal()}
       >
+        {triggerIcon}
         {triggerLabel}
       </button>
       <dialog
         ref={ref}
+        id={dialogId}
         aria-labelledby={titleId}
         onClick={(e) => {
           if (e.target === ref.current) ref.current.close();
@@ -55,7 +67,7 @@ export function Sheet({
               <IconClose size={20} />
             </button>
           </div>
-          {children}
+          {typeof children === "function" ? children(close) : children}
         </div>
       </dialog>
     </>

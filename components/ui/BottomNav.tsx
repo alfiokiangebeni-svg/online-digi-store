@@ -7,9 +7,11 @@ export interface NavItem {
   label: string;
   icon: ReactNode;
   active?: boolean;
+  /** Pastille (ex. nombre d'articles du panier). */
+  badge?: ReactNode;
 }
 
-/** Barre de navigation mobile : 4 onglets fixés en bas (docs/DESIGN.md). */
+/** Barre de navigation mobile fixée en bas : 5 onglets. */
 export function BottomNav({
   items,
   label,
@@ -27,21 +29,28 @@ export function BottomNav({
         fixed && "fixed inset-x-0 bottom-0",
       )}
     >
-      <ul className="mx-auto grid max-w-xl grid-cols-4">
+      <ul
+        className="mx-auto grid max-w-xl"
+        style={{ gridTemplateColumns: `repeat(${items.length}, minmax(0, 1fr))` }}
+      >
         {items.map((item) => (
           <li key={item.href}>
             <Link
               href={item.href}
+              prefetch={false}
               aria-current={item.active ? "page" : undefined}
               className={cn(
-                "relative flex min-h-14 flex-col items-center justify-center gap-0.5 px-1 text-[11px] font-medium",
+                "relative flex min-h-14 flex-col items-center justify-center gap-0.5 px-0.5 text-[11px] font-medium",
                 item.active ? "text-fg" : "text-muted hover:text-fg",
               )}
             >
               {item.active ? (
-                <span aria-hidden="true" className="absolute inset-x-6 top-0 h-[3px] bg-fg" />
+                <span aria-hidden="true" className="absolute inset-x-5 top-0 h-[3px] bg-fg" />
               ) : null}
-              {item.icon}
+              <span className="relative">
+                {item.icon}
+                {item.badge}
+              </span>
               <span className="leading-tight">{item.label}</span>
             </Link>
           </li>

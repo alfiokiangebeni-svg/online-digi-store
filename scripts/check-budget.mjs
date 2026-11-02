@@ -20,7 +20,8 @@ const KB = 1024;
 /** Budgets en octets compressés (brotli). `js` = JavaScript envoyé ; `total` = HTML + CSS + JS + polices préchargées. */
 const PAGES = [
   { path: "/", js: 120 * KB, total: 400 * KB },
-  { path: "/fr/recherche", js: 120 * KB, total: 400 * KB },
+  { path: "/fr/produit/maths-en-s-amusant", js: 135 * KB, total: 400 * KB },
+  { path: "/fr/panier", js: 140 * KB, total: 400 * KB },
   { path: "/fr/design", js: 160 * KB, total: 1000 * KB },
 ];
 

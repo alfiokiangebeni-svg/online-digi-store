@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { Chip } from "@/components/ui/Chip";
+import { Segmented } from "@/components/ui/Segmented";
+import { Switch } from "@/components/ui/Switch";
 import { Stamp } from "@/components/ui/Stamp";
 import { Toast } from "@/components/ui/Toast";
 
@@ -70,5 +72,29 @@ export function ChipDemo({ labels }: { labels: string[] }) {
         </Chip>
       ))}
     </div>
+  );
+}
+
+export function SegmentedDemo({ label, options }: { label: string; options: string[] }) {
+  const [value, setValue] = useState(options[0]);
+  return (
+    <Segmented
+      label={label}
+      value={value}
+      options={options.map((o) => ({ value: o, label: o }))}
+      onChange={setValue}
+    />
+  );
+}
+
+export function SwitchDemo({ label }: { label: string }) {
+  const [on, setOn] = useState(true);
+  return (
+    <span className="inline-flex items-center gap-2">
+      <span id="switch-demo-label" className="text-sm font-medium">
+        {label}
+      </span>
+      <Switch checked={on} onChange={setOn} labelledBy="switch-demo-label" />
+    </span>
   );
 }

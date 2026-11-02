@@ -58,8 +58,9 @@ Le style s'inspire de la ville (jaune des taxis, terre latérite, fleuve Congo) 
 
 ## Navigation mobile
 
-Barre en bas, 4 onglets : **Découvrir · Chercher · Ma bibliothèque · Moi**.
-Bouton « Payer avec Mobile Money » fixé en bas de la page produit.
+Barre en bas, 5 onglets : **Accueil · Explorer · Bibliothèque · Panier · Compte** (pastille jaune = nombre d'articles du panier).
+Sur la fiche produit, la barre est remplacée par une **barre d'achat fixe** : favori, « Ajouter au panier », « Acheter » (jaune taxi).
+En-tête : logo, bascule **$ / FC**, thème, panier.
 
 ## Accessibilité (contraste AA)
 
@@ -78,3 +79,16 @@ Certaines paires de la palette n'atteignent pas 4,5:1 sur du petit texte. Varian
 ## Mise en œuvre
 
 Les tokens sont dans `app/globals.css` (Tailwind v4, `@theme`). Les composants sont dans `components/ui/` et tous visibles sur la page `/design`. Mode sombre par défaut, mode clair via `data-theme="light"`, rayon Enfants via la classe `.kids`.
+
+## Écrans (maquette « Soko » intégrée)
+
+La maquette mobile (Accueil, Fiche produit, Explorer, Panier, Bibliothèque, Compte) est reprise pour sa structure et ses parcours, **rendue dans cette charte** : pas d'Inter ni de cartes arrondies génériques (interdits ci-dessus), vert citron remplacé par les couleurs de la marque.
+
+| Élément de la maquette                             | Dans Digi Store                                                               |
+| -------------------------------------------------- | ----------------------------------------------------------------------------- |
+| Lignes « Gratuits populaires » avec bouton Obtenir | `ListRow` + vignette `Thumb` (motif Kuba), bouton secondaire                  |
+| Cartes « Offres de la semaine »                    | Tickets à coin coupé + compteur jusqu'au vendredi 23 h 59 (heure de Kinshasa) |
+| Fiche jeu : version Android / Windows / Navigateur | `PlatformPicker`, taille du téléchargement selon la version                   |
+| Panier : code promo, Mobile Money / carte, totaux  | Idem + total en $ et en FC, paiement simulé jusqu'au tampon « LIVRÉ »         |
+| Bibliothèque : téléchargement en cours / Ouvrir    | Progression, « Disponible hors-ligne »                                        |
+| Compte : contrôle parental + âge                   | Idem + **code PIN** demandé avant chaque paiement                             |

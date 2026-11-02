@@ -21,6 +21,8 @@ export function PhoneField({
   hint,
   detectedTemplate,
   unknownText,
+  onValueChange,
+  error,
 }: {
   id: string;
   name?: string;
@@ -29,6 +31,8 @@ export function PhoneField({
   hint: string;
   detectedTemplate: string;
   unknownText: string;
+  onValueChange?: (value: string) => void;
+  error?: string;
 }) {
   const [value, setValue] = useState("");
   const operator = detectOperator(value);
@@ -48,7 +52,11 @@ export function PhoneField({
       label={label}
       placeholder={placeholder}
       value={value}
-      onChange={(e) => setValue(e.target.value)}
+      onChange={(e) => {
+        setValue(e.target.value);
+        onValueChange?.(e.target.value);
+      }}
+      error={error}
       mono
       hint={message}
       adornment={

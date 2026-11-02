@@ -15,12 +15,6 @@
     "home": "Digi Store home",
     "settings": "Display settings"
   },
-  "nav": {
-    "discover": "Discover",
-    "search": "Search",
-    "library": "My library",
-    "me": "Me"
-  },
   "theme": {
     "toLight": "Switch to light mode",
     "toDark": "Switch to dark mode"
@@ -29,25 +23,6 @@
     "label": "Data saver",
     "on": "Data saver on: smaller images, no autoplay.",
     "off": "Data saver off."
-  },
-  "product": {
-    "kinds": {
-      "ebook": "Book",
-      "course": "Course",
-      "kidsApp": "Kids' app",
-      "audio": "Audio",
-      "template": "Template",
-      "giftCard": "Gift card"
-    },
-    "by": "by {seller}",
-    "verifiedSeller": "Verified seller",
-    "sales": "{count} sales",
-    "rating": "Rated {rating} out of 5",
-    "previewFree": "Free preview",
-    "oldPrice": "Previous price",
-    "discount": "−{percent}%",
-    "new": "New",
-    "flash": "Flash sale"
   },
   "commerce": {
     "pay": "Pay",
@@ -58,26 +33,6 @@
     "retry": "Try again",
     "endsIn": "Ends in",
     "flashEnded": "Sale over"
-  },
-  "home": {
-    "kicker": "Today's drop",
-    "title": "Knowledge from Kinshasa, delivered to your phone.",
-    "body": "Books, courses and kids' apps. Pay with Mobile Money, get your file in seconds.",
-    "cta": "See today's drop",
-    "storiesLabel": "Today's drops",
-    "seeAll": "See all",
-    "rails": {
-      "trending": "Trending in Kinshasa",
-      "under5": "Under $5",
-      "author": "Books by the author",
-      "kids": "Kids",
-      "creators": "Congolese creators"
-    },
-    "trust": {
-      "operators": "M-Pesa · Airtel Money · Orange Money · Afrimoney",
-      "delivery": "Delivered in under 10 seconds",
-      "support": "WhatsApp support in French and Lingala"
-    }
   },
   "field": {
     "phoneLabel": "Mobile Money number",
@@ -125,7 +80,8 @@
       "sheet": "Bottom sheet",
       "skeleton": "Loading",
       "nav": "Navigation bar",
-      "patterns": "Patterns and photos"
+      "patterns": "Patterns and photos",
+      "lists": "Lists, search and settings"
     },
     "colorUsage": {
       "ink": "Dark mode background (default)",
@@ -171,9 +127,285 @@
     "duotoneCaption": "Duotone photo: black and laterite.",
     "navNote": "Fixed bar at the bottom of the screen, 56 px touch targets."
   },
-  "soon": {
-    "title": "Coming soon",
-    "body": "This area arrives in a later step. Meanwhile, today's drop is waiting on the home page.",
-    "cta": "Go to home"
+  "nav": {
+    "home": "Home",
+    "explore": "Explore",
+    "library": "Library",
+    "cart": "Cart",
+    "account": "Account"
+  },
+  "header": {
+    "cart": "Cart",
+    "cartCount": "{count} items in cart",
+    "currency": "Display currency"
+  },
+  "search": {
+    "label": "Search the catalogue",
+    "placeholder": "Books, games, images, music…",
+    "submit": "Search"
+  },
+  "home": {
+    "kicker": "Today's drop",
+    "title": "Knowledge from Kinshasa, delivered to your phone.",
+    "body": "Books, learning games, images and music. Pay with Mobile Money, get your file in seconds.",
+    "cta": "See today's drop",
+    "storiesLabel": "Today's drops",
+    "seeAll": "See all",
+    "categories": "Categories",
+    "packKicker": "Back to school",
+    "packTitle": "3 learning apps for ages 4–8",
+    "packCta": "See the bundle",
+    "dealsEnd": "Deals end in",
+    "rails": {
+      "trending": "Trending in Kinshasa",
+      "free": "Popular free picks",
+      "deals": "This week's deals",
+      "images": "Images and wallpapers",
+      "music": "Music",
+      "author": "Books by the author",
+      "kids": "Kids",
+      "creators": "Congolese creators"
+    },
+    "trust": {
+      "operators": "M-Pesa · Airtel Money · Orange Money · Afrimoney",
+      "delivery": "Delivered in under 10 seconds",
+      "support": "WhatsApp support in French and Lingala"
+    }
+  },
+  "product": {
+    "kinds": {
+      "game": "Kids' game",
+      "edu": "Educational",
+      "ebook": "Book",
+      "course": "Course",
+      "image": "Images",
+      "music": "Music",
+      "template": "Template",
+      "giftCard": "Gift card"
+    },
+    "by": "by {seller}",
+    "verifiedSeller": "Verified seller",
+    "sales": "{count} sales",
+    "rating": "Rated {rating} out of 5",
+    "previewFree": "Free preview",
+    "oldPrice": "Previous price",
+    "discount": "−{percent}%",
+    "new": "New",
+    "flash": "Flash sale",
+    "free": "Free",
+    "get": "Get",
+    "open": "Open",
+    "owned": "In your library",
+    "ageRange": "Ages {min}–{max}",
+    "age": "Age",
+    "size": "Size",
+    "purchases": "Purchases",
+    "reviews": "{count} reviews",
+    "platformLabel": "Version:",
+    "platforms": {
+      "android": "Android",
+      "windows": "Windows",
+      "web": "Browser"
+    },
+    "platformNames": {
+      "android": "Android 8 or later",
+      "windows": "Windows 10 or 11 computer",
+      "web": "Play online, nothing to install"
+    },
+    "perks": {
+      "instant": "Instant download after payment",
+      "offline": "Works without internet",
+      "noAds": "No ads, no hidden purchases",
+      "updates": "Free updates for life",
+      "print": "Commercial use allowed"
+    },
+    "about": "About",
+    "details": "Details",
+    "infos": {
+      "format": "Format",
+      "version": "Version",
+      "languages": "Languages",
+      "license": "Licence",
+      "updated": "Updated",
+      "refund": "Refunds",
+      "devices": "Devices"
+    },
+    "licenseValues": {
+      "personal": "Personal use",
+      "commercial": "Commercial use"
+    },
+    "devicesValue": "1 account, up to 5 devices",
+    "refundValue": "Within 48 h if not downloaded",
+    "languageNames": {
+      "fr": "French",
+      "ln": "Lingala",
+      "en": "English"
+    },
+    "favorite": "Add to favourites",
+    "unfavorite": "Remove from favourites",
+    "inCart": "In cart",
+    "buy": "Buy",
+    "share": "Share on WhatsApp",
+    "shareText": "{title} on Digi Store",
+    "gift": "Gift",
+    "giftTitle": "Send as a gift",
+    "giftBody": "The recipient gets the link by SMS and WhatsApp as soon as your payment is confirmed.",
+    "giftAdd": "Add gift to cart",
+    "giftFor": "Gift for {phone}",
+    "previews": "Previews",
+    "previewItem": "Preview {n} of {total}",
+    "reviewsTitle": "Customer reviews",
+    "reviewsEmpty": "Only buyers can write a review. The first ones arrive when the store opens.",
+    "back": "Back",
+    "promoUntil": "Reduced price until Friday night",
+    "listen": "Play a preview of {title}",
+    "pause": "Pause the preview",
+    "previewDemo": "Demo preview",
+    "notAllowed": "Hidden by parental control",
+    "related": "More like this"
+  },
+  "explore": {
+    "title": "Explore",
+    "count": "{count} items",
+    "none": "No results for these filters.",
+    "reset": "Clear filters",
+    "priceLabel": "Price",
+    "typeLabel": "Content type",
+    "price": {
+      "all": "All",
+      "free": "Free",
+      "paid": "Paid"
+    },
+    "sort": {
+      "popular": "Popular",
+      "priceAsc": "Price: low to high",
+      "rating": "Top rated"
+    },
+    "sortButton": "Sort: {sort}",
+    "parental": "Parental control on: content up to age {age}.",
+    "all": "All",
+    "query": "Results for “{q}”"
+  },
+  "cart": {
+    "title": "Cart",
+    "empty": "Your cart is empty.",
+    "emptyCta": "Explore the catalogue",
+    "remove": "Remove {title}",
+    "removeShort": "Remove",
+    "delivery": "Delivered as a download as soon as payment is confirmed.",
+    "coupon": "Promo code",
+    "couponPlaceholder": "Enter a code",
+    "couponApply": "Apply",
+    "couponApplied": "Code {code} applied.",
+    "couponInvalid": "Unknown or expired code.",
+    "couponRemove": "Remove code",
+    "couponHint": "Demo codes: KIN2026 (−20%), ENFANT1 (−$1).",
+    "payWith": "Pay with",
+    "mobileMoney": "Mobile Money",
+    "mobileMoneyHint": "M-Pesa, Airtel Money, Orange Money, Afrimoney",
+    "card": "Bank card",
+    "cardHint": "Visa, Mastercard — for the diaspora",
+    "cardSoon": "Card payments will be enabled with the production payment provider. Use Mobile Money for now.",
+    "subtotal": "Subtotal",
+    "discount": "Discount",
+    "total": "Total",
+    "pay": "Pay",
+    "getFree": "Add to my library",
+    "secure": "Payment approved by your operator · Refunded if the download fails",
+    "demoNotice": "Demo mode: no money is taken. A number ending in 1 simulates a wrong PIN, 2 insufficient funds, 3 no answer.",
+    "phoneInvalid": "Incomplete number or unknown operator.",
+    "giftLine": "Gift for {phone}",
+    "items": "{count} items"
+  },
+  "payment": {
+    "title": "Mobile Money payment",
+    "sending": "Sending the request to {operator}…",
+    "waiting": "Check your phone",
+    "waitingBody": "Type your {operator} PIN to approve the payment.",
+    "expires": "Expires in",
+    "success": "Payment received",
+    "successBody": "Items added to your library: {count}. The link is also sent by SMS and WhatsApp.",
+    "giftSent": "Gift sent to {phone}.",
+    "goLibrary": "Open my library",
+    "failed": {
+      "pin_refused": "Wrong PIN. Try again.",
+      "insufficient_funds": "Insufficient balance on your {operator} account.",
+      "timeout": "No answer. Check your phone or try again."
+    },
+    "retry": "Try again",
+    "cancel": "Cancel",
+    "close": "Close",
+    "pinTitle": "Parental code",
+    "pinBody": "Parental control protects purchases. Enter the 4-digit code.",
+    "pinLabel": "Parental code",
+    "pinWrong": "Wrong code.",
+    "pinConfirm": "Confirm"
+  },
+  "library": {
+    "title": "Library",
+    "banner": "Payment confirmed",
+    "bannerBody": "Your purchases are ready. A receipt and the links were also sent by SMS.",
+    "close": "Dismiss message",
+    "tabs": {
+      "all": "All",
+      "apps": "Games and apps",
+      "reading": "Books and courses",
+      "images": "Images",
+      "music": "Music"
+    },
+    "tabsLabel": "Filter the library",
+    "download": "Download",
+    "downloading": "Downloading… {percent}%",
+    "open": "Open",
+    "offline": "Available offline",
+    "newTag": "New purchase",
+    "freeTag": "Free",
+    "boughtOn": "Added {date}",
+    "empty": "Nothing here yet. Your purchases and free items will show up here.",
+    "emptyCta": "See free picks",
+    "note": "Your purchases stay available for life. Unlimited re-downloads on up to 5 devices."
+  },
+  "account": {
+    "guest": "Guest account",
+    "guestBody": "Your account is created automatically with your phone number at your first purchase, no password needed.",
+    "stats": {
+      "purchases": "Purchases",
+      "free": "Free",
+      "favorites": "Favourites"
+    },
+    "parental": "Parental control",
+    "parentalOn": "On · content up to age {age}, purchases protected by a code",
+    "parentalOff": "Off",
+    "maxAge": "Maximum content age",
+    "ageOption": "{age} yrs",
+    "pinLabel": "Parental code (4 digits)",
+    "pinSave": "Save",
+    "pinSaved": "Code saved.",
+    "pinInvalid": "Enter exactly 4 digits.",
+    "pinNeeded": "Choose a code to protect purchases.",
+    "settings": "Settings",
+    "currency": "Currency",
+    "language": "Language",
+    "theme": "Theme",
+    "themeDark": "Dark",
+    "themeLight": "Light",
+    "liteHint": "Smaller images, no autoplay.",
+    "devices": "Authorised devices",
+    "devicesValue": "1 of 5",
+    "payments": "Payment methods",
+    "paymentsValue": "Mobile Money",
+    "notifications": "Notifications",
+    "notificationsValue": "WhatsApp and SMS",
+    "seller": "Do you make books, games, images or music?",
+    "sellerBody": "Sell them on Digi Store and get paid with Mobile Money.",
+    "sellerCta": "Become a seller",
+    "sellerSoon": "The seller area is opening soon: message us on WhatsApp to be among the first.",
+    "help": "Help and contact on WhatsApp",
+    "favoritesTitle": "My favourites",
+    "favoritesEmpty": "Tap the heart on a product page to find it here.",
+    "soon": "Soon"
+  },
+  "common": {
+    "demo": "Demo"
   }
 }

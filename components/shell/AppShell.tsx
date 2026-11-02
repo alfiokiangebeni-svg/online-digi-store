@@ -3,11 +3,21 @@ import type { ReactNode } from "react";
 import { LOCALES, localePath, type Locale } from "@/lib/i18n/config";
 import { format, type Dictionary } from "@/lib/i18n";
 import { SUPPORT_WHATSAPP } from "@/lib/brand";
-import { BottomNav, IconChat, IconDiscover, IconLibrary, IconMe, IconSearch } from "@/components/ui";
-import { LiteToggle } from "@/components/ui/LiteToggle";
+import {
+  BottomNav,
+  IconBack,
+  IconCart,
+  IconChat,
+  IconDownload,
+  IconHome,
+  IconMe,
+  IconSearch,
+} from "@/components/ui";
+import { CartBadge } from "@/components/ui/CartBadge";
+import { CurrencyToggle } from "@/components/ui/CurrencyToggle";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
-export type Tab = "discover" | "search" | "library" | "me" | null;
+export type Tab = "home" | "explore" | "library" | "cart" | "account" | null;
 
 const LANGUAGE_NAMES: Record<Locale, string> = { fr: "Français", ln: "Lingála", en: "English" };
 
@@ -17,6 +27,8 @@ export function AppShell({
   dict,
   tab,
   path = "",
+  back,
+  hideNav,
   children,
 }: {
   locale: Locale;
@@ -24,18 +36,30 @@ export function AppShell({
   tab: Tab;
   /** Chemin courant sans préfixe de langue, pour le sélecteur de langue. */
   path?: string;
+  /** Lien « Retour » à la place du logo (fiches produit). */
+  back?: string;
+  /** Masque la barre du bas (remplacée par une barre d'achat). */
+  hideNav?: boolean;
   children: ReactNode;
 }) {
+  const cartLabel = dict.header.cartCount;
   const nav = [
-    { key: "discover", href: localePath(locale), label: dict.nav.discover, icon: <IconDiscover /> },
-    { key: "search", href: localePath(locale, "recherche"), label: dict.nav.search, icon: <IconSearch /> },
+    { key: "home", href: localePath(locale), label: dict.nav.home, icon: <IconHome /> },
+    { key: "explore", href: localePath(locale, "explorer"), label: dict.nav.explore, icon: <IconSearch /> },
     {
       key: "library",
       href: localePath(locale, "bibliotheque"),
       label: dict.nav.library,
-      icon: <IconLibrary />,
+      icon: <IconDownload />,
     },
-    { key: "me", href: localePath(locale, "moi"), label: dict.nav.me, icon: <IconMe /> },
+    {
+      key: "cart",
+      href: localePath(locale, "panier"),
+      label: dict.nav.cart,
+      icon: <IconCart />,
+      badge: <CartBadge srTemplate={cartLabel} />,
+    },
+    { key: "account", href: localePath(locale, "compte"), label: dict.nav.account, icon: <IconMe /> },
   ].map(({ key, ...item }) => ({ ...item, active: key === tab }));
 
   return (
@@ -47,16 +71,37 @@ export function AppShell({
         {dict.a11y.skipToContent}
       </a>
       <header className="mx-auto flex max-w-5xl items-center justify-between gap-2 px-4 pt-3">
-        <Link
-          href={localePath(locale)}
-          aria-label={dict.a11y.home}
-          className="flex min-h-11 items-center font-display text-xl font-bold uppercase tracking-tight"
-        >
-          Digi<span className="ml-1 border-b-4 border-laterite leading-none">Store</span>
-        </Link>
+        {back ? (
+          <Link
+            href={back}
+            aria-label={dict.product.back}
+            className="-ml-2 grid size-11 place-items-center rounded-[var(--radius-control)] hover:bg-surface-2"
+          >
+            <IconBack />
+          </Link>
+        ) : (
+          <Link
+            href={localePath(locale)}
+            aria-label={dict.a11y.home}
+            className="flex min-h-11 items-center font-display text-xl font-bold uppercase tracking-tight"
+          >
+            Digi<span className="ml-1 border-b-4 border-laterite leading-none">Store</span>
+          </Link>
+        )}
         <div role="group" aria-label={dict.a11y.settings} className="flex items-center gap-1">
-          <LiteToggle label={dict.lite.label} onText={dict.lite.on} offText={dict.lite.off} />
+          <CurrencyToggle label={dict.header.currency} />
           <ThemeToggle toLight={dict.theme.toLight} toDark={dict.theme.toDark} />
+          <Link
+            href={localePath(locale, "panier")}
+            prefetch={false}
+            aria-label={dict.header.cart}
+            className="relative grid size-11 place-items-center rounded-[var(--radius-control)] hover:bg-surface-2"
+          >
+            <span className="relative">
+              <IconCart size={22} />
+              <CartBadge srTemplate={cartLabel} />
+            </span>
+          </Link>
         </div>
       </header>
 
@@ -64,7 +109,9 @@ export function AppShell({
         {children}
       </main>
 
-      <footer className="mx-auto max-w-5xl border-t-2 border-line px-4 pb-24 pt-6 text-sm text-muted">
+      <footer
+        className={`mx-auto max-w-5xl border-t-2 border-line px-4 pt-6 text-sm text-muted ${hideNav ? "pb-32" : "pb-24"}`}
+      >
         <a
           href={SUPPORT_WHATSAPP.href}
           rel="noopener"
@@ -91,7 +138,7 @@ export function AppShell({
         </nav>
       </footer>
 
-      <BottomNav items={nav} label={dict.a11y.mainNav} />
+      {hideNav ? null : <BottomNav items={nav} label={dict.a11y.mainNav} />}
     </>
   );
 }

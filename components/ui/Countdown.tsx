@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useSyncExternalStore } from "react";
+import { nextFridayNight } from "@/lib/time";
 import { cn } from "./cn";
 
 /**
@@ -31,20 +32,24 @@ function split(ms: number) {
 export function Countdown({
   endsAt: endsAtProp,
   durationMs,
+  until,
   label,
   endedLabel,
 }: {
   /** Horodatage de fin (ms depuis l'époque Unix)… */
   endsAt?: number;
-  /** …ou durée à partir de l'affichage (démonstration). */
+  /** …ou durée à partir de l'affichage (démonstration)… */
   durationMs?: number;
+  /** …ou échéance récurrente : vendredi 23 h 59, heure de Kinshasa. */
+  until?: "friday";
   label: string;
   endedLabel: string;
 }) {
   const [clock] = useState(createClock);
   const nowSec = useSyncExternalStore(clock.subscribe, clock.snapshot, clock.serverSnapshot);
   const now = nowSec === null ? null : nowSec * 1000;
-  const endsAt = endsAtProp ?? (clock.startedAt ?? 0) + (durationMs ?? 0);
+  const start = clock.startedAt ?? 0;
+  const endsAt = endsAtProp ?? (until === "friday" ? nextFridayNight(start) : start + (durationMs ?? 0));
 
   const remaining = now === null ? null : endsAt - now;
   const ended = remaining !== null && remaining <= 0;

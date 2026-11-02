@@ -28,6 +28,13 @@ const nextConfig: NextConfig = {
     // Le français, langue par défaut, est servi à la racine sans redirection.
     return { beforeFiles: [{ source: "/", destination: "/fr" }] };
   },
+  async redirects() {
+    // Anciennes routes de la phase 1.
+    return [
+      { source: "/:locale(fr|ln|en)/recherche", destination: "/:locale/explorer", permanent: true },
+      { source: "/:locale(fr|ln|en)/moi", destination: "/:locale/compte", permanent: true },
+    ];
+  },
   async headers() {
     return [
       { source: "/:path*", headers: securityHeaders },

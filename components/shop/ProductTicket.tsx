@@ -1,29 +1,29 @@
 import { Badge, IconCheck, Price, Ticket, TicketCover } from "@/components/ui";
-import { DEMO_USD_TO_CDF_RATE, discountPercent, type Currency } from "@/lib/currency";
-import type { Locale } from "@/lib/i18n/config";
+import { discountPercent } from "@/lib/currency";
+import { isKids, type Product } from "@/lib/catalog";
+import { localePath, type Locale } from "@/lib/i18n/config";
 import { format, type Dictionary } from "@/lib/i18n";
-import type { DemoProduct } from "@/lib/demo/products";
+import { productHref } from "./labels";
 
 export function ProductTicket({
   product: p,
   locale,
   dict,
-  currency = "USD",
 }: {
-  product: DemoProduct;
+  product: Product;
   locale: Locale;
   dict: Dictionary;
-  currency?: Currency;
 }) {
-  const kids = p.kind === "kidsApp" || p.rails.includes("kids");
+  const kids = isKids(p);
   const percent = p.promoUsdCents ? discountPercent(p.priceUsdCents, p.promoUsdCents) : 0;
   return (
     <Ticket
       kids={kids}
+      href={productHref(localePath(locale), p.slug)}
       title={p.title}
       kindLabel={dict.product.kinds[p.kind]}
       seller={format(dict.product.by, { seller: p.seller })}
-      cover={<TicketCover id={p.id} tone={p.tone} title={p.title} kids={kids} />}
+      cover={<TicketCover id={p.slug} tone={p.tone} title={p.title} kids={kids} />}
       badges={
         <>
           {percent > 0 ? <Badge tone="promo">{format(dict.product.discount, { percent })}</Badge> : null}
@@ -49,10 +49,9 @@ export function ProductTicket({
         <Price
           usdCents={p.priceUsdCents}
           promoUsdCents={p.promoUsdCents}
-          currency={currency}
-          rate={DEMO_USD_TO_CDF_RATE}
           locale={locale}
           oldPriceLabel={dict.product.oldPrice}
+          freeLabel={dict.product.free}
         />
       }
     />
