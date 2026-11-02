@@ -50,3 +50,6 @@ android/local.properties
 *.apk
 dist/
 .next-web/
+test-results/
+playwright-report/
+blob-report/

@@ -12,3 +12,5 @@ android/app/build
 android/app/src/main/assets
 dist
 .next-web
+test-results
+playwright-report

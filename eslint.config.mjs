@@ -17,6 +17,8 @@ const eslintConfig = defineConfig([
     ".next-web/**",
     "android/**",
     "dist/**",
+    "test-results/**",
+    "playwright-report/**",
   ]),
 ]);
 
