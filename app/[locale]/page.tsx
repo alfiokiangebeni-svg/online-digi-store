@@ -6,37 +6,30 @@ import { PreviewButton } from "@/components/shop/PreviewButton";
 import { ProductTicket } from "@/components/shop/ProductTicket";
 import { metaLine, productHref } from "@/components/shop/labels";
 import {
-  Chip,
+  CategoryIcon,
   IconBolt,
-  IconBook,
   IconChat,
+  IconChevron,
   IconDownload,
-  IconGamepad,
-  IconImage,
-  IconMusic,
+  IconGrid,
   IconPhone,
-  IconSchool,
   ListRow,
   Money,
   Price,
-  SearchField,
-  TicketCover,
 } from "@/components/ui";
 import { Countdown } from "@/components/ui/Countdown";
-import { CATALOG, effectivePrice, getProduct, productsForRail, type Kind } from "@/lib/catalog";
+import { CATALOG, effectivePrice, getProduct, productsForRail } from "@/lib/catalog";
+import { CATEGORY_IDS, CATEGORY_SLUGS, productsInCategory } from "@/lib/categories";
+import type { CategoryId } from "@/lib/theme";
 import { DEMO_COUPONS } from "@/lib/coupons";
 import { formatMoney } from "@/lib/currency";
 import { localePath } from "@/lib/i18n/config";
 import { format, getDictionary } from "@/lib/i18n";
 import { resolveLocale } from "@/lib/i18n/params";
 
-const CATEGORIES: { kind: Kind; icon: ReactNode }[] = [
-  { kind: "game", icon: <IconGamepad /> },
-  { kind: "edu", icon: <IconSchool /> },
-  { kind: "ebook", icon: <IconBook /> },
-  { kind: "image", icon: <IconImage /> },
-  { kind: "music", icon: <IconMusic /> },
-];
+/** Catégories qui ont déjà des contenus : un rayon chacune sur l'accueil. */
+const RAIL_CATEGORIES: CategoryId[] = ["apps", "books", "images"];
+const NEW_CATEGORIES: CategoryId[] = ["realestate", "jobs", "tenders"];
 
 function SectionHead({
   id,
@@ -78,44 +71,62 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
   const dict = await getDictionary(locale);
   const base = localePath(locale);
   const explore = (query = "") => `${localePath(locale, "explorer")}${query}`;
+  const category = (id: CategoryId) => localePath(locale, `categories/${CATEGORY_SLUGS[id]}`);
   const pack = getProduct("maths-en-s-amusant")!;
   const priceProps = { locale, oldPriceLabel: dict.product.oldPrice, freeLabel: dict.product.free };
-  const forYou = [...CATALOG].sort((a, b) => b.sales - a.sales).slice(0, 6);
+  const forYou = [...CATALOG].sort((a, b) => b.rating * b.reviews - a.rating * a.reviews).slice(0, 6);
+  const [bPack, bFlash, bSell] = dict.home.banners;
+  const banners = [
+    {
+      ...bPack,
+      href: productHref(base, pack.slug),
+      extra: (
+        <p className="text-[13px] text-muted">
+          <span className="price-tag text-lg">
+            <Money usdCents={effectivePrice(pack)} locale={locale} />
+          </span>{" "}
+          <s className="price-old">
+            <Money usdCents={pack.priceUsdCents} locale={locale} />
+          </s>
+        </p>
+      ),
+    },
+    { ...bFlash, href: explore("?tri=priceAsc"), extra: null },
+    { ...bSell, href: localePath(locale, "vendre"), extra: null },
+  ];
 
   return (
-    <AppShell
-      locale={locale}
-      dict={dict}
-      tab="home"
-      headerExtra={
-        <div className="flex flex-col gap-2">
-          <SearchField
-            action={explore()}
-            label={dict.search.label}
-            placeholder={dict.search.placeholder}
-            submitLabel={dict.search.submit}
-          />
-          <nav
-            aria-label={dict.explore.typeLabel}
-            className="scroll-rail -mx-3 flex gap-2 overflow-x-auto px-3"
-          >
-            <Chip href={explore()} selected onDark>
-              {dict.explore.all}
-            </Chip>
-            {CATEGORIES.map((c) => (
-              <Chip key={c.kind} href={explore(`?type=${c.kind}`)} onDark>
-                {dict.product.kinds[c.kind]}
-              </Chip>
-            ))}
-            <Chip href={explore("?prix=gratuit")} onDark>
-              {dict.product.free}
-            </Chip>
-          </nav>
-        </div>
-      }
-    >
+    <AppShell locale={locale} dict={dict} tab="home">
+      {/* Bandeaux à la une : carrousel horizontal (glisser), le suivant dépasse */}
+      <section aria-labelledby="banners-title">
+        <h1 id="banners-title" className="sr-only">
+          {dict.home.bannersLabel}
+        </h1>
+        <ul className="scroll-rail -mx-3 flex gap-2.5 overflow-x-auto px-3">
+          {banners.map((b, i) => (
+            <li key={b.kicker} className="w-[86%] shrink-0 sm:w-[48%]">
+              <Link
+                href={b.href}
+                prefetch={false}
+                className="card pressable relative flex h-full min-h-[9.5rem] flex-col gap-1.5 p-4"
+              >
+                <span className="text-xs font-bold uppercase tracking-[0.6px] text-primary">{b.kicker}</span>
+                <span className="font-display text-[19px] font-bold leading-tight">{b.title}</span>
+                {b.extra}
+                <span className="btn-primary mt-auto inline-flex h-10 items-center self-start rounded-[var(--radius-md)] px-4 text-[13px] font-bold">
+                  {b.cta}
+                </span>
+                <span className="sr-only">
+                  {i + 1} / {banners.length}
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
+
       {/* Avantages */}
-      <ul className="-mx-3 -mt-3 mb-3 flex justify-around bg-mint px-2 py-2 text-[11px] font-semibold text-[#9a3412] dark:bg-surface-2 dark:text-cta">
+      <ul className="mt-2 flex justify-around px-1 py-1 text-[11px] font-semibold text-muted">
         <li className="inline-flex items-center gap-1">
           <IconDownload size={14} />
           {dict.home.trustDelivery}
@@ -130,54 +141,31 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
         </li>
       </ul>
 
-      {/* Bandeau promo (élément principal) */}
-      <section
-        aria-labelledby="pack-title"
-        className="flex items-center gap-3 overflow-hidden rounded-[10px] bg-ink p-4"
-      >
-        <div className="flex flex-1 flex-col gap-1.5">
-          <span className="text-xs font-bold uppercase tracking-[0.6px] text-cta">
-            {dict.home.packKicker}
-          </span>
-          <h1 id="pack-title" className="text-[19px] leading-tight font-bold text-white">
-            {dict.home.packTitle}
-          </h1>
-          <p className="text-[13px] text-white/80">
-            <span className="text-lg font-bold text-white">
-              <Money usdCents={effectivePrice(pack)} locale={locale} />
-            </span>{" "}
-            <s className="text-white/60">
-              <Money usdCents={pack.priceUsdCents} locale={locale} />
-            </s>
-          </p>
+      {/* Les 7 catégories + toutes */}
+      <nav aria-label={dict.home.categories} className="card mt-2 grid grid-cols-4 gap-y-3 px-1 py-3">
+        {CATEGORY_IDS.map((id) => (
           <Link
-            href={productHref(base, pack.slug)}
+            key={id}
+            href={category(id)}
             prefetch={false}
-            className="btn-primary mt-1 inline-flex h-10 items-center self-start rounded-full px-4 text-[13px] font-bold"
+            className="pressable flex min-h-11 flex-col items-center gap-1.5 text-center text-[11px] font-medium leading-tight"
           >
-            {dict.home.packCta}
-          </Link>
-        </div>
-        <div className="lite-hide w-28 shrink-0 overflow-hidden rounded-[var(--radius-sm)]">
-          <TicketCover tone="fleuve" title={pack.title} />
-        </div>
-      </section>
-
-      {/* Catégories */}
-      <nav aria-label={dict.home.categories} className="card mt-3 grid grid-cols-5 px-1 py-3">
-        {CATEGORIES.map((c) => (
-          <Link
-            key={c.kind}
-            href={explore(`?type=${c.kind}`)}
-            prefetch={false}
-            className="flex min-h-11 flex-col items-center gap-1.5 text-center text-[11px] font-medium"
-          >
-            <span className="grid size-12 place-items-center rounded-full bg-mint text-[#9a3412] dark:bg-surface-2 dark:text-cta">
-              {c.icon}
+            <span className="grid size-12 place-items-center rounded-full bg-surface-2 text-fg">
+              <CategoryIcon id={id} />
             </span>
-            {dict.product.kinds[c.kind]}
+            {dict.categories[id]}
           </Link>
         ))}
+        <Link
+          href={localePath(locale, "categories")}
+          prefetch={false}
+          className="pressable flex min-h-11 flex-col items-center gap-1.5 text-center text-[11px] font-medium leading-tight"
+        >
+          <span className="grid size-12 place-items-center rounded-full bg-surface-2 text-primary">
+            <IconGrid />
+          </span>
+          {dict.home.allCategories}
+        </Link>
       </nav>
 
       {/* Ventes flash */}
@@ -192,7 +180,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
             <Countdown until="friday" label={dict.home.dealsEnd} endedLabel={dict.commerce.flashEnded} />
           }
         />
-        <div className="scroll-rail mt-1 flex gap-2.5 overflow-x-auto px-3 [&_.ticket]:shadow-none [&_.ticket]:ring-1 [&_.ticket]:ring-line">
+        <div className="scroll-rail mt-1 flex gap-2.5 overflow-x-auto px-3">
           {productsForRail("deals").map((p) => (
             <ProductTicket key={p.slug} product={p} locale={locale} dict={dict} flash />
           ))}
@@ -200,7 +188,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
       </section>
 
       {/* Coupons */}
-      <section aria-labelledby="coupons-title" className="mt-3">
+      <section id="coupons" aria-labelledby="coupons-title" className="mt-3 scroll-mt-32">
         <h2 id="coupons-title" className="mb-2 px-1 text-[17px] font-bold">
           {dict.home.coupons}
         </h2>
@@ -230,29 +218,33 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
         </div>
       </section>
 
-      {/* Gratuits populaires */}
-      <section aria-labelledby="rail-free" className="card mt-3 pb-3">
-        <SectionHead
-          id="rail-free"
-          title={dict.home.rails.free}
-          href={explore("?prix=gratuit")}
-          seeAll={dict.home.seeAll}
-        />
-        <div className="scroll-rail mt-1 flex gap-2.5 overflow-x-auto px-3 [&_.ticket]:shadow-none [&_.ticket]:ring-1 [&_.ticket]:ring-line">
-          {productsForRail("free")
-            .slice(0, 4)
-            .map((p) => (
-              <ProductTicket key={p.slug} product={p} locale={locale} dict={dict} quickAdd />
-            ))}
-        </div>
-      </section>
+      {/* Un rayon par catégorie */}
+      {RAIL_CATEGORIES.map((id) => (
+        <section key={id} aria-labelledby={`rail-${id}`} className="card mt-3 pb-3">
+          <SectionHead
+            id={`rail-${id}`}
+            title={dict.categories[id]}
+            icon={<CategoryIcon id={id} size={18} className="text-muted" />}
+            href={category(id)}
+            seeAll={dict.home.seeAll}
+          />
+          <div className="scroll-rail mt-1 flex gap-2.5 overflow-x-auto px-3">
+            {productsInCategory(id)
+              .slice(0, 6)
+              .map((p) => (
+                <ProductTicket key={p.slug} product={p} locale={locale} dict={dict} quickAdd />
+              ))}
+          </div>
+        </section>
+      ))}
 
-      {/* Musique */}
+      {/* Musique : écoute directe */}
       <section aria-labelledby="rail-music" className="card mt-3">
         <SectionHead
           id="rail-music"
-          title={dict.home.rails.music}
-          href={explore("?type=music")}
+          title={dict.categories.music}
+          icon={<CategoryIcon id="music" size={18} className="text-muted" />}
+          href={category("music")}
           seeAll={dict.home.seeAll}
         />
         <ul>
@@ -271,6 +263,28 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
               title={p.title}
               meta={metaLine(p, dict)}
               action={<Price usdCents={p.priceUsdCents} promoUsdCents={p.promoUsdCents} {...priceProps} />}
+            />
+          ))}
+        </ul>
+      </section>
+
+      {/* Nouvelles catégories (annonces) */}
+      <section aria-labelledby="new-cats" className="card mt-3 pb-1">
+        <SectionHead id="new-cats" title={dict.home.newCategories} />
+        <p className="px-3 text-[13px] text-muted">{dict.home.newCategoriesBody}</p>
+        <ul className="mt-1">
+          {NEW_CATEGORIES.map((id) => (
+            <ListRow
+              key={id}
+              href={category(id)}
+              media={
+                <span className="grid size-10 place-items-center rounded-[var(--radius-sm)] bg-surface-2">
+                  <CategoryIcon id={id} size={20} />
+                </span>
+              }
+              title={dict.categories[id]}
+              meta={dict.categoriesPage.publish}
+              action={<IconChevron size={16} className="text-muted" />}
             />
           ))}
         </ul>

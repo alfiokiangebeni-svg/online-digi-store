@@ -79,7 +79,7 @@ export function ExplorerView({
 
   return (
     <div className="flex flex-col gap-3">
-      <label className="flex h-[46px] items-center gap-2 rounded-[8px] border border-fg/8 bg-surface px-3 focus-within:border-fg">
+      <label className="flex h-[46px] items-center gap-2 rounded-[var(--radius-md)] border border-line bg-surface-2 px-3 focus-within:border-primary">
         <IconSearch size={18} className="text-muted" />
         <span className="sr-only">{t.searchLabel}</span>
         <input
@@ -93,20 +93,22 @@ export function ExplorerView({
         />
       </label>
 
-      <div
-        role="group"
-        aria-label={t.typeLabel}
-        className="scroll-rail -mx-3 flex gap-2 overflow-x-auto px-3"
-      >
-        <Chip selected={!type} onClick={() => setSearchParams({ type: null })}>
-          {t.all}
-        </Chip>
-        {kinds.map((k) => (
-          <Chip key={k} selected={type === k} onClick={() => setSearchParams({ type: k })}>
-            {t.kinds[k]}
+      {kinds.length ? (
+        <div
+          role="group"
+          aria-label={t.typeLabel}
+          className="scroll-rail -mx-3 flex gap-2 overflow-x-auto px-3"
+        >
+          <Chip selected={!type} onClick={() => setSearchParams({ type: null })}>
+            {t.all}
           </Chip>
-        ))}
-      </div>
+          {kinds.map((k) => (
+            <Chip key={k} selected={type === k} onClick={() => setSearchParams({ type: k })}>
+              {t.kinds[k]}
+            </Chip>
+          ))}
+        </div>
+      ) : null}
 
       <div className="flex flex-wrap items-center justify-between gap-2">
         <Segmented
@@ -120,19 +122,19 @@ export function ExplorerView({
         <button
           type="button"
           onClick={() => setSearchParams({ tri: SORTS[(SORTS.indexOf(sort) + 1) % SORTS.length] })}
-          className="ml-auto min-h-[38px] rounded-[6px] border border-fg/12 bg-surface px-2.5 text-[13px] hover:border-fg/40"
+          className="ml-auto min-h-[38px] rounded-[var(--radius-sm)] border border-line bg-surface px-2.5 text-[13px] hover:bg-surface-2"
         >
           {format(t.sortButton, { sort: t.sort[sort] })}
         </button>
       </div>
 
       {parental.enabled ? (
-        <p className="border-l-4 border-fleuve bg-surface px-3 py-2 text-sm">
+        <p className="border-l-4 border-primary bg-surface px-3 py-2 text-sm">
           {format(t.parental, { age: parental.maxAge })}
         </p>
       ) : null}
 
-      <p className="text-[13px] text-[#3a3f47] dark:text-muted" aria-live="polite">
+      <p className="text-[13px] text-muted" aria-live="polite">
         {format(t.count, { count: list.length })}
       </p>
 

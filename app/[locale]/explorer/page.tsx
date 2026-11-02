@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { AppShell } from "@/components/shell/AppShell";
 import { ExplorerView, type ExploreItem } from "@/components/shop/ExplorerView";
 import { metaLine, productHref } from "@/components/shop/labels";
+import { explorerLabels } from "@/components/shop/explorerLabels";
 import { CATALOG, summarize, type Kind } from "@/lib/catalog";
 import { localePath } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n";
@@ -25,31 +26,9 @@ export default async function ExplorePage({ params }: PageProps<"/[locale]/explo
   }));
 
   return (
-    <AppShell locale={locale} dict={dict} tab="explore" path="explorer">
+    <AppShell locale={locale} dict={dict} tab="categories" path="explorer" search={false}>
       <h1 className="mb-3 mt-1 text-[22px] font-bold">{dict.explore.title}</h1>
-      <ExplorerView
-        items={items}
-        kinds={KINDS}
-        locale={locale}
-        labels={{
-          searchLabel: dict.search.label,
-          searchPlaceholder: dict.search.placeholder,
-          typeLabel: dict.explore.typeLabel,
-          all: dict.explore.all,
-          kinds: dict.product.kinds,
-          priceLabel: dict.explore.priceLabel,
-          price: dict.explore.price,
-          sort: dict.explore.sort,
-          sortButton: dict.explore.sortButton,
-          count: dict.explore.count,
-          none: dict.explore.none,
-          reset: dict.explore.reset,
-          parental: dict.explore.parental,
-          free: dict.product.free,
-          oldPrice: dict.product.oldPrice,
-          rating: dict.product.rating,
-        }}
-      />
+      <ExplorerView items={items} kinds={KINDS} locale={locale} labels={explorerLabels(dict)} />
     </AppShell>
   );
 }
