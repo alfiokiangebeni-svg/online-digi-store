@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { addToLibrary, libraryStore } from "@/lib/client/shop";
 import { useStore } from "@/lib/client/store";
+import { toast } from "@/lib/client/toast";
+import { useFeedbackTexts } from "@/components/feedback/FeedbackProvider";
 import { cn } from "@/components/ui/cn";
 
 const base =
@@ -25,6 +27,7 @@ export function GetButton({
   block?: boolean;
 }) {
   const owned = useStore(libraryStore).some((i) => i.slug === slug);
+  const t = useFeedbackTexts();
   if (owned) {
     return (
       <Link
@@ -42,7 +45,14 @@ export function GetButton({
       type="button"
       className={cn(base, "btn-primary", block && "w-full")}
       aria-label={`${getLabel} — ${title}`}
-      onClick={() => addToLibrary([{ slug, paidUsdCents: 0 }])}
+      onClick={() => {
+        addToLibrary([{ slug, paidUsdCents: 0 }]);
+        toast({
+          tone: "success",
+          message: t.addedToLibrary,
+          action: { label: t.openLibrary, href: libraryHref },
+        });
+      }}
     >
       {getLabel}
     </button>

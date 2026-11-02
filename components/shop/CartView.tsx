@@ -13,6 +13,8 @@ import {
   removeFromCart,
 } from "@/lib/client/shop";
 import { useStore } from "@/lib/client/store";
+import { toast } from "@/lib/client/toast";
+import { useFeedbackTexts } from "@/components/feedback/FeedbackProvider";
 import type { Locale } from "@/lib/i18n/config";
 import { format } from "@/lib/i18n/format";
 import { parsePhone } from "@/lib/operators";
@@ -81,6 +83,7 @@ export function CartView({
   payment: PaymentLabels;
 }) {
   const cart = useStore(cartStore);
+  const fb = useFeedbackTexts();
   const parental = useStore(parentalStore);
   const [method, setMethod] = useState<"mobile" | "card">("mobile");
   const [couponInput, setCouponInput] = useState("");
@@ -184,7 +187,17 @@ export function CartView({
                 </span>
                 <button
                   type="button"
-                  onClick={() => removeFromCart(index)}
+                  onClick={() => {
+                    removeFromCart(index);
+                    toast({
+                      tone: "info",
+                      message: fb.removedFromCart,
+                      action: {
+                        label: fb.undo,
+                        onClick: () => cartStore.set((c) => [...c.slice(0, index), line, ...c.slice(index)]),
+                      },
+                    });
+                  }}
                   aria-label={format(t.remove, { title: p.title })}
                   className="self-start py-1 text-xs text-muted underline underline-offset-2 hover:text-fg"
                 >
@@ -283,8 +296,16 @@ export function CartView({
                 type="button"
                 role="radio"
                 aria-checked={method === id}
-                onClick={() => setMethod(id)}
-                className="flex min-h-14 w-full items-center gap-3 border-b border-surface-2 text-left"
+                aria-disabled={id === "card" || undefined}
+                onClick={() => {
+                  // Carte : pas encore branchée à l'agrégateur → message clair, Mobile Money reste choisi.
+                  if (id === "card") toast({ tone: "info", message: fb.cardSoon });
+                  else setMethod(id);
+                }}
+                className={cn(
+                  "flex min-h-14 w-full items-center gap-3 border-b border-surface-2 text-left",
+                  id === "card" && "opacity-70",
+                )}
               >
                 <span
                   aria-hidden="true"
@@ -293,10 +314,11 @@ export function CartView({
                     method === id ? "border-[6px] border-fg" : "border-[1.5px] border-hint",
                   )}
                 />
-                <span className="flex flex-col">
+                <span className="flex flex-1 flex-col">
                   <span className="text-sm font-medium">{label}</span>
                   <span className="text-xs text-muted">{hint}</span>
                 </span>
+                {id === "card" ? <span className="badge bg-surface-2 text-fg">{fb.soon}</span> : null}
               </button>
             ))}
           </div>

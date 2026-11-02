@@ -5,7 +5,10 @@ import { useRouter } from "next/navigation";
 import type { ReactNode } from "react";
 import { addToCart, addToLibrary, cartStore, libraryStore } from "@/lib/client/shop";
 import { useStore } from "@/lib/client/store";
-import { buttonClasses } from "@/components/ui/Button";
+import { haptic } from "@/lib/client/haptics";
+import { toast } from "@/lib/client/toast";
+import { useFeedbackTexts } from "@/components/feedback/FeedbackProvider";
+import { buttonClasses } from "@/components/ui/buttonStyles";
 import { FavoriteButton } from "./FavoriteButton";
 
 /** Barre d'achat fixée en bas de la fiche produit (remplace la navigation). */
@@ -35,6 +38,7 @@ export function BuyBar({
   };
 }) {
   const router = useRouter();
+  const t = useFeedbackTexts();
   const inCart = useStore(cartStore).some((l) => l.slug === slug && !l.giftTo);
   const owned = useStore(libraryStore).some((i) => i.slug === slug);
 
@@ -50,7 +54,15 @@ export function BuyBar({
       <button
         type="button"
         className={buttonClasses({ variant: "sell", size: "lg", block: true })}
-        onClick={() => addToLibrary([{ slug, paidUsdCents: 0 }])}
+        onClick={() => {
+          haptic();
+          addToLibrary([{ slug, paidUsdCents: 0 }]);
+          toast({
+            tone: "success",
+            message: t.addedToLibrary,
+            action: { label: t.openLibrary, href: libraryHref },
+          });
+        }}
       >
         {labels.get}
       </button>
@@ -69,7 +81,15 @@ export function BuyBar({
           <button
             type="button"
             className={buttonClasses({ variant: "soft", size: "lg", className: "flex-1 rounded-full px-2" })}
-            onClick={() => addToCart({ slug })}
+            onClick={() => {
+              haptic();
+              addToCart({ slug });
+              toast({
+                tone: "success",
+                message: t.addedToCart,
+                action: { label: t.viewCart, href: cartHref },
+              });
+            }}
           >
             {labels.addToCart}
           </button>
@@ -78,6 +98,7 @@ export function BuyBar({
           type="button"
           className={buttonClasses({ variant: "sell", size: "lg", className: "flex-1 rounded-full px-2" })}
           onClick={() => {
+            haptic();
             addToCart({ slug });
             router.push(cartHref);
           }}

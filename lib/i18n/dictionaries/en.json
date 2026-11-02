@@ -57,7 +57,7 @@
   },
   "notFound": {
     "title": "Page not found",
-    "body": "This link goes nowhere. Head back home to see today's drop.",
+    "body": "This link goes nowhere. Head back home or explore the categories.",
     "cta": "Back to home"
   },
   "footer": {
@@ -484,5 +484,41 @@
     "verifiedSince": "Verified seller · since {year}",
     "deadline": "Closes in {days} d",
     "sent": "Sent"
+  },
+  "feedback": {
+    "addedToCart": "Added to cart",
+    "viewCart": "View cart",
+    "addedToLibrary": "Added to your library",
+    "openLibrary": "Open",
+    "removedFromCart": "Removed from cart",
+    "undo": "Undo",
+    "favAdded": "Added to your favourites",
+    "favRemoved": "Removed from your favourites",
+    "couponClaimed": "Coupon {code} claimed: it will apply in your cart",
+    "couponReleased": "Coupon {code} removed",
+    "giftAdded": "Gift added to cart",
+    "downloaded": "Downloaded: available offline",
+    "cardSoon": "Card payment: coming soon. Use Mobile Money for now.",
+    "soon": "Coming soon",
+    "offline": "Offline: the catalogue, cart and purchases still work. Sharing and WhatsApp will resume with the network.",
+    "retry": "Try again",
+    "close": "Dismiss message",
+    "pinSaved": "Parental code saved",
+    "settingsSaved": "Setting saved"
+  },
+  "reader": {
+    "title": "Reader",
+    "notOwned": "This item isn't in your library yet.",
+    "seeProduct": "See the product",
+    "readerSoon": "Built-in reader (PDF, EPUB): coming soon. The seller's file will open here, offline.",
+    "installSoon": "App installation: coming soon.",
+    "hdSoon": "HD download: coming soon.",
+    "listenDemo": "Play the preview below. The full track will play offline once the seller uploads the file.",
+    "back": "My library"
+  },
+  "gallery": {
+    "open": "Enlarge preview {n}",
+    "prev": "Previous preview",
+    "next": "Next preview"
   }
 }

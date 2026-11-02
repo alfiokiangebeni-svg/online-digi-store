@@ -2,6 +2,9 @@
 
 import { useState } from "react";
 import { addToCart } from "@/lib/client/shop";
+import { useLocalePath } from "@/lib/client/nav";
+import { toast } from "@/lib/client/toast";
+import { useFeedbackTexts } from "@/components/feedback/FeedbackProvider";
 import { parsePhone } from "@/lib/operators";
 import { Button } from "@/components/ui/Button";
 import { PhoneField } from "@/components/ui/PhoneField";
@@ -30,6 +33,8 @@ export function GiftSheet({
 }) {
   const [value, setValue] = useState("");
   const [error, setError] = useState<string>();
+  const t = useFeedbackTexts();
+  const path = useLocalePath();
   return (
     <Sheet
       triggerLabel={labels.trigger}
@@ -50,6 +55,11 @@ export function GiftSheet({
               return;
             }
             addToCart({ slug, giftTo: phone.e164 });
+            toast({
+              tone: "success",
+              message: t.giftAdded,
+              action: { label: t.viewCart, href: path("panier") },
+            });
             setError(undefined);
             close();
           }}

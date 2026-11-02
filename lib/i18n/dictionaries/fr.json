@@ -57,7 +57,7 @@
   },
   "notFound": {
     "title": "Page introuvable",
-    "body": "Ce lien ne mène nulle part. Retourne à l'accueil pour voir le drop du jour.",
+    "body": "Ce lien ne mène nulle part. Retourne à l'accueil ou explore les catégories.",
     "cta": "Retour à l'accueil"
   },
   "footer": {
@@ -484,5 +484,41 @@
     "verifiedSince": "Vendeur vérifié · depuis {year}",
     "deadline": "Clôture dans {days} j",
     "sent": "Envoyée"
+  },
+  "feedback": {
+    "addedToCart": "Ajouté au panier",
+    "viewCart": "Voir le panier",
+    "addedToLibrary": "Ajouté à ta bibliothèque",
+    "openLibrary": "Ouvrir",
+    "removedFromCart": "Retiré du panier",
+    "undo": "Annuler",
+    "favAdded": "Ajouté à tes favoris",
+    "favRemoved": "Retiré de tes favoris",
+    "couponClaimed": "Coupon {code} récupéré : il s'appliquera au panier",
+    "couponReleased": "Coupon {code} retiré",
+    "giftAdded": "Cadeau ajouté au panier",
+    "downloaded": "Téléchargé : disponible hors-ligne",
+    "cardSoon": "Paiement par carte : bientôt disponible. Utilise Mobile Money.",
+    "soon": "Bientôt disponible",
+    "offline": "Hors connexion : catalogue, panier et achats restent disponibles. Le partage et WhatsApp reprendront avec le réseau.",
+    "retry": "Réessayer",
+    "close": "Fermer le message",
+    "pinSaved": "Code parental enregistré",
+    "settingsSaved": "Réglage enregistré"
+  },
+  "reader": {
+    "title": "Lecteur",
+    "notOwned": "Ce contenu n'est pas encore dans ta bibliothèque.",
+    "seeProduct": "Voir la fiche",
+    "readerSoon": "Lecteur intégré (PDF, EPUB) : bientôt disponible. Le fichier du vendeur sera lisible ici, hors-ligne.",
+    "installSoon": "Installation de l'application : bientôt disponible.",
+    "hdSoon": "Téléchargement en HD : bientôt disponible.",
+    "listenDemo": "Écoute l'extrait ci-dessous. Le titre complet sera lisible hors-ligne quand le vendeur aura déposé le fichier.",
+    "back": "Ma bibliothèque"
+  },
+  "gallery": {
+    "open": "Agrandir l'aperçu {n}",
+    "prev": "Aperçu précédent",
+    "next": "Aperçu suivant"
   }
 }

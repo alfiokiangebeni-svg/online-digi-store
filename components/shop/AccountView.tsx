@@ -4,6 +4,8 @@ import { useState } from "react";
 import type { ProductSummary } from "@/lib/catalog";
 import { favoritesStore, libraryStore, parentalStore } from "@/lib/client/shop";
 import { useStore } from "@/lib/client/store";
+import { toast } from "@/lib/client/toast";
+import { useFeedbackTexts } from "@/components/feedback/FeedbackProvider";
 import { setCurrency, useCurrency } from "@/lib/client/prefs";
 import type { Locale } from "@/lib/i18n/config";
 import { format } from "@/lib/i18n/format";
@@ -61,6 +63,7 @@ export function AccountView({
   const library = useStore(libraryStore);
   const favorites = useStore(favoritesStore);
   const parental = useStore(parentalStore);
+  const fb = useFeedbackTexts();
   const currency = useCurrency();
   const [pin, setPin] = useState("");
   const [pinMsg, setPinMsg] = useState<{ ok: boolean; text: string }>();
@@ -150,6 +153,7 @@ export function AccountView({
                 parentalStore.set({ ...parental, pin });
                 setPin("");
                 setPinMsg({ ok: true, text: t.pinSaved });
+                toast({ tone: "success", message: fb.pinSaved });
               }}
             >
               <Field

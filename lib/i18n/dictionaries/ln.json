@@ -57,7 +57,7 @@
   },
   "notFound": {
     "title": "Lokasa ezwami te",
-    "body": "Lien oyo ememi esika moko te. Zonga na ebandeli mpo na kotala drop ya lelo.",
+    "body": "Lien oyo ememi esika moko te. Zonga na ebandeli to luka na mitindo.",
     "cta": "Zonga na ebandeli"
   },
   "footer": {
@@ -484,5 +484,41 @@
     "verifiedSince": "Moteki ya solo · banda {year}",
     "deadline": "Ekosila na mikolo {days}",
     "sent": "Etindami"
+  },
+  "feedback": {
+    "addedToCart": "Ebakisami na panier",
+    "viewCart": "Tala panier",
+    "addedToLibrary": "Ebakisami na babuku na yo",
+    "openLibrary": "Fungola",
+    "removedFromCart": "Elongolami na panier",
+    "undo": "Zongisa",
+    "favAdded": "Ebakisami na oyo olingi",
+    "favRemoved": "Elongolami na oyo olingi",
+    "couponClaimed": "Coupon {code} ozwi : ekosalelama na panier",
+    "couponReleased": "Coupon {code} elongolami",
+    "giftAdded": "Kado ebakisami na panier",
+    "downloaded": "Ekiti : ezali ata internet te",
+    "cardSoon": "Kofuta na carte : ekoya kala te. Salela Mobile Money.",
+    "soon": "Ekoya kala te",
+    "offline": "Réseau ezali te : katalóg, panier mpe bisombi ezali kaka. Kokabola mpe WhatsApp ekozonga na réseau.",
+    "retry": "Meka lisusu",
+    "close": "Kanga sango",
+    "pinSaved": "Code ya baboti ebombami",
+    "settingsSaved": "Ebombami"
+  },
+  "reader": {
+    "title": "Motángi",
+    "notOwned": "Eloko oyo ezali naino na babuku na yo te.",
+    "seeProduct": "Tala eloko",
+    "readerSoon": "Motángi (PDF, EPUB) : ekoya kala te. Fisye ya moteki ekotángama awa, ata internet te.",
+    "installSoon": "Kotia application : ekoya kala te.",
+    "hdSoon": "Kokitisa na HD : ekoya kala te.",
+    "listenDemo": "Yoka mwa moke awa na nse. Loyembo mobimba ekoyokana ntango moteki akotia fisye.",
+    "back": "Babuku na ngai"
+  },
+  "gallery": {
+    "open": "Kómisa monene elilí {n}",
+    "prev": "Elilí ya liboso",
+    "next": "Elilí oyo elandi"
   }
 }

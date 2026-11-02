@@ -6,7 +6,6 @@ import { SUPPORT_WHATSAPP } from "@/lib/brand";
 import {
   BottomNav,
   Logo,
-  IconBack,
   IconCart,
   IconChat,
   IconDownload,
@@ -15,6 +14,8 @@ import {
   IconSearch,
 } from "@/components/ui";
 import { CartBadge } from "@/components/ui/CartBadge";
+import { BackButton, NavDepthTracker } from "./BackButton";
+import { FeedbackProvider } from "@/components/feedback/FeedbackProvider";
 import { CurrencyToggle } from "@/components/ui/CurrencyToggle";
 
 export type Tab = "home" | "explore" | "library" | "cart" | "account" | null;
@@ -66,23 +67,18 @@ export function AppShell({
   ].map(({ key, ...item }) => ({ ...item, active: key === tab }));
 
   return (
-    <>
+    <FeedbackProvider texts={dict.feedback}>
       <a
         href="#contenu"
-        className="sr-only z-50 bg-ink px-4 py-3 font-medium text-white focus:not-sr-only focus:fixed focus:left-2 focus:top-2"
+        className="sr-only z-50 bg-primary px-4 py-3 font-medium text-on-primary focus:not-sr-only focus:fixed focus:left-2 focus:top-2"
       >
         {dict.a11y.skipToContent}
       </a>
-      <header className="sticky top-0 z-30 bg-header text-white">
+      <NavDepthTracker />
+      <header className="sticky top-0 z-30 bg-background text-fg">
         <div className="mx-auto flex max-w-5xl items-center justify-between gap-2 px-4 pt-1.5">
           {back ? (
-            <Link
-              href={back}
-              aria-label={dict.product.back}
-              className="-ml-2 grid size-11 place-items-center rounded-[8px] hover:bg-white/10"
-            >
-              <IconBack />
-            </Link>
+            <BackButton fallback={back} label={dict.product.back} />
           ) : (
             <Link
               href={localePath(locale)}
@@ -98,7 +94,7 @@ export function AppShell({
               href={localePath(locale, "panier")}
               prefetch={false}
               aria-label={dict.header.cart}
-              className="relative grid size-11 place-items-center rounded-[8px] hover:bg-white/10"
+              className="pressable relative grid size-11 place-items-center rounded-[var(--radius-sm)] hover:bg-surface-2"
             >
               <span className="relative">
                 <IconCart size={24} />
@@ -142,6 +138,6 @@ export function AppShell({
       </footer>
 
       {hideNav ? null : <BottomNav items={nav} label={dict.a11y.mainNav} />}
-    </>
+    </FeedbackProvider>
   );
 }
