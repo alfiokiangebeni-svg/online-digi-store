@@ -20,7 +20,7 @@ export function Rail({
         </h2>
         {action}
       </div>
-      <div className="scroll-rail -mx-4 flex gap-2.5 overflow-x-auto px-4 pb-1">{children}</div>
+      <div className="scroll-rail -mx-3 flex gap-2.5 overflow-x-auto px-3 pb-1">{children}</div>
     </section>
   );
 }

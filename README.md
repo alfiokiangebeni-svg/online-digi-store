@@ -120,6 +120,19 @@ La CI GitHub Actions lance tout cela sur chaque Pull Request. Plan et mesures : 
 
 ---
 
+## Application Android de test (APK)
+
+```bash
+# Prérequis : JDK 17+, Android SDK (plateforme 35, build-tools 35), Gradle 8.13+
+ANDROID_HOME=~/Android/Sdk ./scripts/build-apk.sh     # → dist/DigiStore-demo.apk
+```
+
+L'APK embarque toute la boutique (fonctionne sans Internet). Sur le téléphone : autoriser l'installation d'applications de sources inconnues, ouvrir le fichier, installer. Elle est aussi construite par GitHub Actions (artefact « DigiStore-demo-apk »).
+
+Pour tester sans téléphone : `node scripts/serve-apk-site.mjs` puis `node scripts/test-options.cjs http://localhost:4500`.
+
+---
+
 ## Règles de sécurité (non négociables)
 
 1. **Livrer uniquement après confirmation serveur** : le fichier est débloqué par le webhook signé de l'agrégateur, jamais par le retour du navigateur.

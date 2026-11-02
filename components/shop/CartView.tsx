@@ -4,7 +4,14 @@ import Link from "next/link";
 import { useState } from "react";
 import { applyCoupon } from "@/lib/coupons";
 import { effectivePrice, type ProductSummary } from "@/lib/catalog";
-import { addToLibrary, cartStore, parentalStore, recordOrder, removeFromCart } from "@/lib/client/shop";
+import {
+  addToLibrary,
+  cartStore,
+  couponStore,
+  parentalStore,
+  recordOrder,
+  removeFromCart,
+} from "@/lib/client/shop";
 import { useStore } from "@/lib/client/store";
 import type { Locale } from "@/lib/i18n/config";
 import { format } from "@/lib/i18n/format";
@@ -77,7 +84,10 @@ export function CartView({
   const parental = useStore(parentalStore);
   const [method, setMethod] = useState<"mobile" | "card">("mobile");
   const [couponInput, setCouponInput] = useState("");
-  const [couponCode, setCouponCode] = useState<string | null>(null);
+  // Code saisi ici (undefined = rien saisi : on reprend le coupon récupéré sur l'accueil).
+  const [typedCoupon, setCouponCode] = useState<string | null | undefined>(undefined);
+  const claimedCoupon = useStore(couponStore);
+  const couponCode = typedCoupon === undefined ? claimedCoupon : typedCoupon;
   const [couponError, setCouponError] = useState<string>();
   const [phoneValue, setPhoneValue] = useState("");
   const [phoneError, setPhoneError] = useState<string>();
@@ -209,7 +219,10 @@ export function CartView({
               <span className="font-semibold">{format(t.couponApplied, { code: coupon.code })}</span>
               <button
                 type="button"
-                onClick={() => setCouponCode(null)}
+                onClick={() => {
+                  setCouponCode(null);
+                  couponStore.set(null);
+                }}
                 className="min-h-9 text-xs underline underline-offset-2"
               >
                 {t.couponRemove}

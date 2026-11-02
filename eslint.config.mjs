@@ -12,6 +12,11 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Exports et builds de l'application Android
+    "out-apk/**",
+    ".next-web/**",
+    "android/**",
+    "dist/**",
   ]),
 ]);
 

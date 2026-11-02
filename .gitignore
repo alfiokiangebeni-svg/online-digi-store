@@ -41,3 +41,12 @@ uploads/
 *.pdf
 *.zip
 *.pem
+out-apk/
+android/app/src/main/assets/www/
+android/.gradle/
+android/build/
+android/app/build/
+android/local.properties
+*.apk
+dist/
+.next-web/

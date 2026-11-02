@@ -2,12 +2,14 @@ import Link from "next/link";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { cn } from "./cn";
 
-export type ButtonVariant = "sell" | "secondary" | "ghost" | "danger";
+export type ButtonVariant = "sell" | "soft" | "secondary" | "ghost" | "danger";
 export type ButtonSize = "md" | "lg";
 
 const VARIANTS: Record<ButtonVariant, string> = {
   // Action principale (acheter, payer) : bouton plein noir, comme la maquette.
-  sell: "btn-primary hover:opacity-90 active:opacity-80",
+  sell: "btn-primary hover:brightness-95 active:brightness-90",
+  // « Ajouter au panier » : orange clair bordé.
+  soft: "btn-soft hover:brightness-95",
   secondary: "bg-surface text-fg border border-fg hover:bg-surface-2",
   ghost: "bg-transparent text-fg underline-offset-4 hover:underline",
   danger: "bg-promo text-white hover:brightness-110",

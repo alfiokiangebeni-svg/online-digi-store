@@ -91,3 +91,10 @@ export function markDownloaded(slug: string) {
 export function recordOrder(order: Omit<LastOrder, "at">) {
   lastOrderStore.set({ ...order, at: Date.now() });
 }
+
+/** Coupon « récupéré » sur l'accueil : appliqué automatiquement au panier. */
+export const couponStore = createStore<string | null>(
+  "ds-coupon",
+  null,
+  (v): v is string | null => v === null || typeof v === "string",
+);

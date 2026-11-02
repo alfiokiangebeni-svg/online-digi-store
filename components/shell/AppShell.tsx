@@ -28,6 +28,7 @@ export function AppShell({
   path = "",
   back,
   hideNav,
+  headerExtra,
   children,
 }: {
   locale: Locale;
@@ -39,6 +40,8 @@ export function AppShell({
   back?: string;
   /** Masque la barre du bas (remplacée par une barre d'achat). */
   hideNav?: boolean;
+  /** Contenu ajouté dans l'en-tête bleu nuit (recherche, filtres). */
+  headerExtra?: React.ReactNode;
   children: ReactNode;
 }) {
   const cartLabel = dict.header.cartCount;
@@ -69,41 +72,44 @@ export function AppShell({
       >
         {dict.a11y.skipToContent}
       </a>
-      <header className="mx-auto flex max-w-5xl items-center justify-between gap-2 px-4 pt-2.5">
-        {back ? (
-          <Link
-            href={back}
-            aria-label={dict.product.back}
-            className="-ml-2 grid size-11 place-items-center rounded-[8px] hover:bg-fg/6"
-          >
-            <IconBack />
-          </Link>
-        ) : (
-          <Link
-            href={localePath(locale)}
-            aria-label={dict.a11y.home}
-            className="flex min-h-11 items-center text-2xl font-bold tracking-[-0.8px]"
-          >
-            digistore<span className="text-accent">.</span>
-          </Link>
-        )}
-        <div role="group" aria-label={dict.a11y.settings} className="flex items-center gap-1">
-          <CurrencyToggle label={dict.header.currency} />
-          <Link
-            href={localePath(locale, "panier")}
-            prefetch={false}
-            aria-label={dict.header.cart}
-            className="relative grid size-11 place-items-center rounded-[8px] hover:bg-fg/6"
-          >
-            <span className="relative">
-              <IconCart size={22} />
-              <CartBadge srTemplate={cartLabel} />
-            </span>
-          </Link>
+      <header className="sticky top-0 z-30 bg-header text-white">
+        <div className="mx-auto flex max-w-5xl items-center justify-between gap-2 px-4 pt-1.5">
+          {back ? (
+            <Link
+              href={back}
+              aria-label={dict.product.back}
+              className="-ml-2 grid size-11 place-items-center rounded-[8px] hover:bg-white/10"
+            >
+              <IconBack />
+            </Link>
+          ) : (
+            <Link
+              href={localePath(locale)}
+              aria-label={dict.a11y.home}
+              className="flex min-h-11 items-center text-[22px] font-bold tracking-[-0.6px]"
+            >
+              digistore<span className="text-cta">.</span>
+            </Link>
+          )}
+          <div role="group" aria-label={dict.a11y.settings} className="flex items-center gap-1">
+            <CurrencyToggle label={dict.header.currency} onDark />
+            <Link
+              href={localePath(locale, "panier")}
+              prefetch={false}
+              aria-label={dict.header.cart}
+              className="relative grid size-11 place-items-center rounded-[8px] hover:bg-white/10"
+            >
+              <span className="relative">
+                <IconCart size={24} />
+                <CartBadge srTemplate={cartLabel} />
+              </span>
+            </Link>
+          </div>
         </div>
+        <div className="mx-auto max-w-5xl px-4 pb-2.5 pt-1">{headerExtra}</div>
       </header>
 
-      <main id="contenu" className="mx-auto max-w-5xl px-4 pb-6">
+      <main id="contenu" className="mx-auto max-w-5xl px-3 pb-6 pt-3">
         {children}
       </main>
 

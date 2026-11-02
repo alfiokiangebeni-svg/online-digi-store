@@ -31,7 +31,7 @@ export function TicketCover({
 }
 
 /**
- * Carte produit (« Offres de la semaine ») : visuel, remise en coin, nom, type, prix.
+ * Carte produit : visuel carré, remise en coin, nom sur 2 lignes, note et ventes, prix.
  * `cover` accepte le visuel typographique ou une photo (next/image).
  */
 export function Ticket({
@@ -41,6 +41,9 @@ export function Ticket({
   cover,
   price,
   badges,
+  meta,
+  footer,
+  action,
   className,
 }: {
   href?: string;
@@ -51,6 +54,10 @@ export function Ticket({
   price: ReactNode;
   badges?: ReactNode;
   meta?: ReactNode;
+  /** Élément sous le prix (barre « x % vendus », bouton d'ajout rapide…). */
+  footer?: ReactNode;
+  /** Bouton posé en bas à droite du visuel (ajout rapide). */
+  action?: ReactNode;
   kids?: boolean;
   className?: string;
 }) {
@@ -66,11 +73,13 @@ export function Ticket({
       <div className="relative">
         {cover}
         {badges ? <div className="ticket-badges">{badges}</div> : null}
+        {action ? <div className="absolute bottom-2 right-2 z-10">{action}</div> : null}
       </div>
       <div className="ticket-body">
         <h3 className="ticket-title">{heading}</h3>
-        <p className="ticket-kind">{kindLabel}</p>
+        {meta ? <div className="ticket-meta">{meta}</div> : <p className="ticket-kind">{kindLabel}</p>}
         <div className="ticket-price">{price}</div>
+        {footer ? <div className="relative z-10">{footer}</div> : null}
       </div>
     </article>
   );

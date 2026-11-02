@@ -17,6 +17,7 @@ export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Pr
     title: { default: dict.meta.title, template: `%s · ${dict.meta.siteName}` },
     description: dict.meta.description,
     applicationName: dict.meta.siteName,
+    manifest: "/manifest.webmanifest",
     alternates: {
       languages: Object.fromEntries(LOCALES.map((l) => [l, `/${l}`])),
     },
@@ -26,7 +27,7 @@ export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Pr
 }
 
 export const viewport: Viewport = {
-  themeColor: "#E8F5C0",
+  themeColor: "#0B1F3A",
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",

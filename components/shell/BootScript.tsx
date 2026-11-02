@@ -8,6 +8,8 @@ const THEME_AND_LITE = `(function(){try{var d=document.documentElement,t=localSt
 const REGISTER_SW = `if("serviceWorker"in navigator)addEventListener("load",function(){navigator.serviceWorker.register("/sw.js").catch(function(){})});`;
 
 export function BootScript() {
-  const code = process.env.NODE_ENV === "production" ? THEME_AND_LITE + REGISTER_SW : THEME_AND_LITE;
+  // Pas de service worker dans l'application Android : les fichiers sont déjà sur le téléphone.
+  const withSw = process.env.NODE_ENV === "production" && process.env.BUILD_TARGET !== "apk";
+  const code = withSw ? THEME_AND_LITE + REGISTER_SW : THEME_AND_LITE;
   return <script dangerouslySetInnerHTML={{ __html: code }} />;
 }

@@ -90,3 +90,25 @@ Lighthouse (médiane de 5 passages, mobile Slow 4G simulé, CPU ×4) — **toute
 | Panier        | 97–99 | 100     | 1,3–1,8 s                 | 95–180 ms | 0   |
 
 JavaScript (brotli) : accueil 115 Ko, fiche produit 117 Ko, panier 121 Ko. Police : 28 Ko.
+
+## Style « place de marché » et application Android de test
+
+**Design** : en-tête bleu nuit avec grande recherche, ventes flash avec « x % vendus », coupons à récupérer (appliqués tout seuls au panier), grille « Recommandé pour vous » avec ajout rapide, fiche produit avec galerie et « Ajouter au panier » / « Acheter maintenant ». Détails : `docs/DESIGN.md`.
+
+**APK** (`android/`, `scripts/build-apk.sh`) :
+
+- La boutique est exportée en fichiers statiques (`BUILD_TARGET=apk next build` → `out-apk/`) puis embarquée dans une application Android minimale (WebView + `androidx.webkit`, aucune autre dépendance).
+- `SiteHandler.java` sert les fichiers comme un hébergement statique (`/fr/explorer/` → `fr/explorer/index.html`), sur un domaine local sécurisé (`https://appassets.androidplatform.net`).
+- Tout fonctionne **hors-ligne** : panier, favoris, bibliothèque, paiement simulé, contrôle parental et réglages sont stockés sur le téléphone. Les liens WhatsApp s'ouvrent dans WhatsApp.
+- APK de débogage signée automatiquement, installable directement (Android 7 et plus) ; ≈ 7 Mo.
+- Workflow `.github/workflows/apk.yml` : construit l'APK et la publie en artefact à chaque PR touchant l'application.
+
+**Vérification** : `scripts/serve-apk-site.mjs` sert les fichiers de l'APK avec exactement les règles de `SiteHandler.java` ; `scripts/test-options.cjs` y vérifie **28 options sur 28** dans Chromium mobile, sans erreur JavaScript. Pas d'émulateur Android disponible ici (pas de virtualisation) : le test sur téléphone réel reste à faire.
+
+**Lighthouse** (web, médiane de 5 passages, mobile Slow 4G simulé, CPU ×4) — toutes les assertions passent :
+
+| Page          | Perf. | Access. | LCP    | TBT    | CLS |
+| ------------- | ----- | ------- | ------ | ------ | --- |
+| Accueil       | 98    | 100     | 1,87 s | 147 ms | 0   |
+| Fiche produit | 98    | 100     | 1,87 s | 134 ms | 0   |
+| Panier        | 99    | 100     | 1,72 s | 100 ms | 0   |

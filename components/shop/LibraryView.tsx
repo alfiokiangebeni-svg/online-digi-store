@@ -111,7 +111,7 @@ export function LibraryView({
       <div
         role="group"
         aria-label={t.tabsLabel}
-        className="scroll-rail -mx-4 flex gap-2 overflow-x-auto px-4"
+        className="scroll-rail -mx-3 flex gap-2 overflow-x-auto px-3"
       >
         {(Object.keys(t.tabs) as Tab[]).map((id) => (
           <Chip key={id} selected={tab === id} onClick={() => setTab(id)}>

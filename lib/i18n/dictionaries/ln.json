@@ -172,7 +172,13 @@
       "support": "Lisalisi na WhatsApp na lifalansé mpe na lingála"
     },
     "packPrice": "{price} na esika ya {old}",
-    "trustTitle": "Kofuta na Mobile Money · ekómi mbala moko"
+    "trustTitle": "Kofuta na Mobile Money · ekómi mbala moko",
+    "flash": "Koteka ya mbangu",
+    "coupons": "Ba-coupon ya lelo",
+    "forYou": "Oyo tolingi mpo na yo",
+    "trustDelivery": "Ekómi mbala moko",
+    "trustPay": "Mobile Money",
+    "trustSupport": "Lisalisi na WhatsApp"
   },
   "product": {
     "kinds": {
@@ -264,7 +270,15 @@
     "pause": "Telemisa",
     "previewDemo": "Ndakisa ya koyoka",
     "notAllowed": "Ebombami na contrôle parental",
-    "related": "Biloko ya ndenge moko"
+    "related": "Biloko ya ndenge moko",
+    "sold": "Batekaki {count}",
+    "soldPct": "{percent} % etekami",
+    "buyNow": "Somba sikoyo",
+    "quickAdd": "Bakisa « {title} » na panier",
+    "added": "Ebakisami na panier",
+    "guarantee": "Mbongo ezongaka soki kokitisa elongi te",
+    "deliveryInstant": "Ekómi mbala moko sima ya kofuta",
+    "seller": "Moteki : {seller}"
   },
   "explore": {
     "title": "Koluka",
@@ -410,5 +424,15 @@
   },
   "common": {
     "demo": "Ndakisa"
+  },
+  "coupon": {
+    "claim": "Zwa",
+    "claimed": "Ozwi",
+    "code": "Code {code}",
+    "auto": "Ekosalelama yango moko na panier",
+    "percent": "−{value} %",
+    "amount": "−{value}",
+    "min": "Kobanda {amount} ya bisombi",
+    "all": "Na katalóg mobimba"
   }
 }

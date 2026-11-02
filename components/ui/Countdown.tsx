@@ -62,7 +62,7 @@ export function Countdown({
       {!ended ? (
         <time
           dateTime={`PT${h}H${m}M${s}S`}
-          className={cn("inline-block font-bold tabular-nums", lastMinute && "animate-beat")}
+          className={cn("inline-block min-w-[9ch] font-bold tabular-nums", lastMinute && "animate-beat")}
         >
           {h}:{m}:{s}
         </time>

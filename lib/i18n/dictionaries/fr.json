@@ -172,7 +172,13 @@
       "support": "Support WhatsApp en français et en lingala"
     },
     "packPrice": "{price} au lieu de {old}",
-    "trustTitle": "Paiement Mobile Money · livraison immédiate"
+    "trustTitle": "Paiement Mobile Money · livraison immédiate",
+    "flash": "Ventes flash",
+    "coupons": "Coupons du jour",
+    "forYou": "Recommandé pour vous",
+    "trustDelivery": "Livraison instantanée",
+    "trustPay": "Mobile Money",
+    "trustSupport": "Support WhatsApp"
   },
   "product": {
     "kinds": {
@@ -264,7 +270,15 @@
     "pause": "Mettre en pause l'extrait",
     "previewDemo": "Extrait de démonstration",
     "notAllowed": "Masqué par le contrôle parental",
-    "related": "Dans le même rayon"
+    "related": "Dans le même rayon",
+    "sold": "{count} vendus",
+    "soldPct": "{percent} % vendus",
+    "buyNow": "Acheter maintenant",
+    "quickAdd": "Ajouter « {title} » au panier",
+    "added": "Ajouté au panier",
+    "guarantee": "Remboursé si le téléchargement échoue",
+    "deliveryInstant": "Livraison instantanée après paiement",
+    "seller": "Vendu par {seller}"
   },
   "explore": {
     "title": "Explorer",
@@ -410,5 +424,15 @@
   },
   "common": {
     "demo": "Démo"
+  },
+  "coupon": {
+    "claim": "Récupérer",
+    "claimed": "Récupéré",
+    "code": "Code {code}",
+    "auto": "S'applique tout seul au panier",
+    "percent": "−{value} %",
+    "amount": "−{value}",
+    "min": "Dès {amount} d'achat",
+    "all": "Sur tout le catalogue"
   }
 }

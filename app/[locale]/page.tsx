@@ -1,28 +1,31 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { AppShell } from "@/components/shell/AppShell";
-import { GetButton } from "@/components/shop/GetButton";
+import { CouponCard } from "@/components/shop/CouponCard";
 import { PreviewButton } from "@/components/shop/PreviewButton";
 import { ProductTicket } from "@/components/shop/ProductTicket";
 import { metaLine, productHref } from "@/components/shop/labels";
 import {
   Chip,
+  IconBolt,
   IconBook,
+  IconChat,
+  IconDownload,
   IconGamepad,
   IconImage,
   IconMusic,
+  IconPhone,
   IconSchool,
   ListRow,
   Money,
   Price,
-  Rail,
-  Rating,
   SearchField,
-  Thumb,
   TicketCover,
 } from "@/components/ui";
 import { Countdown } from "@/components/ui/Countdown";
-import { effectivePrice, getProduct, productsForRail, type Kind } from "@/lib/catalog";
+import { CATALOG, effectivePrice, getProduct, productsForRail, type Kind } from "@/lib/catalog";
+import { DEMO_COUPONS } from "@/lib/coupons";
+import { formatMoney } from "@/lib/currency";
 import { localePath } from "@/lib/i18n/config";
 import { format, getDictionary } from "@/lib/i18n";
 import { resolveLocale } from "@/lib/i18n/params";
@@ -35,32 +38,37 @@ const CATEGORIES: { kind: Kind; icon: ReactNode }[] = [
   { kind: "music", icon: <IconMusic /> },
 ];
 
-/** En-tête de section : titre + « Tout voir » (vert foncé sur fond citron, vert sur carte blanche). */
 function SectionHead({
   id,
   title,
   href,
   seeAll,
-  onCard,
+  icon,
+  extra,
 }: {
   id: string;
   title: string;
-  href: string;
-  seeAll: string;
-  onCard?: boolean;
+  href?: string;
+  seeAll?: string;
+  icon?: ReactNode;
+  extra?: ReactNode;
 }) {
   return (
-    <div className={`flex items-center justify-between gap-4 ${onCard ? "px-3.5 pb-1.5" : "mb-2.5"}`}>
-      <h2 id={id} className="text-base font-bold">
+    <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 px-3 pt-2.5">
+      <h2 id={id} className="flex items-center gap-1.5 text-[17px] font-bold">
+        {icon}
         {title}
       </h2>
-      <Link
-        href={href}
-        prefetch={false}
-        className={`inline-flex min-h-11 items-center text-[13px] font-semibold ${onCard ? "text-accent" : "text-success"}`}
-      >
-        {seeAll}
-      </Link>
+      {extra}
+      {href && seeAll ? (
+        <Link
+          href={href}
+          prefetch={false}
+          className="inline-flex min-h-11 items-center text-[13px] font-semibold text-accent"
+        >
+          {seeAll}
+        </Link>
+      ) : null}
     </div>
   );
 }
@@ -72,173 +80,180 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
   const explore = (query = "") => `${localePath(locale, "explorer")}${query}`;
   const pack = getProduct("maths-en-s-amusant")!;
   const priceProps = { locale, oldPriceLabel: dict.product.oldPrice, freeLabel: dict.product.free };
-  const rating = (v: number) => (
-    <Rating value={v} locale={locale} label={format(dict.product.rating, { rating: v })} />
-  );
+  const forYou = [...CATALOG].sort((a, b) => b.sales - a.sales).slice(0, 6);
 
   return (
-    <AppShell locale={locale} dict={dict} tab="home">
-      {/* Recherche + types de contenu */}
-      <div className="mt-2 flex flex-col gap-3">
-        <SearchField
-          action={explore()}
-          label={dict.search.label}
-          placeholder={dict.search.placeholder}
-          submitLabel={dict.search.submit}
-        />
-        <nav
-          aria-label={dict.explore.typeLabel}
-          className="scroll-rail -mx-4 flex gap-2 overflow-x-auto px-4"
-        >
-          <Chip href={explore()} selected>
-            {dict.explore.all}
-          </Chip>
-          {CATEGORIES.map((c) => (
-            <Chip key={c.kind} href={explore(`?type=${c.kind}`)}>
-              {dict.product.kinds[c.kind]}
+    <AppShell
+      locale={locale}
+      dict={dict}
+      tab="home"
+      headerExtra={
+        <div className="flex flex-col gap-2">
+          <SearchField
+            action={explore()}
+            label={dict.search.label}
+            placeholder={dict.search.placeholder}
+            submitLabel={dict.search.submit}
+          />
+          <nav
+            aria-label={dict.explore.typeLabel}
+            className="scroll-rail -mx-3 flex gap-2 overflow-x-auto px-3"
+          >
+            <Chip href={explore()} selected onDark>
+              {dict.explore.all}
             </Chip>
-          ))}
-          <Chip href={explore("?prix=gratuit")}>{dict.product.free}</Chip>
-        </nav>
-      </div>
+            {CATEGORIES.map((c) => (
+              <Chip key={c.kind} href={explore(`?type=${c.kind}`)} onDark>
+                {dict.product.kinds[c.kind]}
+              </Chip>
+            ))}
+            <Chip href={explore("?prix=gratuit")} onDark>
+              {dict.product.free}
+            </Chip>
+          </nav>
+        </div>
+      }
+    >
+      {/* Avantages */}
+      <ul className="-mx-3 -mt-3 mb-3 flex justify-around bg-mint px-2 py-2 text-[11px] font-semibold text-[#9a3412] dark:bg-surface-2 dark:text-cta">
+        <li className="inline-flex items-center gap-1">
+          <IconDownload size={14} />
+          {dict.home.trustDelivery}
+        </li>
+        <li className="inline-flex items-center gap-1">
+          <IconPhone size={14} />
+          {dict.home.trustPay}
+        </li>
+        <li className="inline-flex items-center gap-1">
+          <IconChat size={14} />
+          {dict.home.trustSupport}
+        </li>
+      </ul>
 
-      {/* Bandeau promo (élément principal de la page) */}
+      {/* Bandeau promo (élément principal) */}
       <section
         aria-labelledby="pack-title"
-        className="mt-3 flex items-center gap-3.5 rounded-[10px] bg-ink p-[18px]"
+        className="flex items-center gap-3 overflow-hidden rounded-[10px] bg-ink p-4"
       >
         <div className="flex flex-1 flex-col gap-1.5">
-          <span className="text-xs font-semibold uppercase tracking-[0.6px] text-lime-strong">
+          <span className="text-xs font-bold uppercase tracking-[0.6px] text-cta">
             {dict.home.packKicker}
           </span>
-          <h1 id="pack-title" className="text-lg leading-tight font-bold text-white">
+          <h1 id="pack-title" className="text-[19px] leading-tight font-bold text-white">
             {dict.home.packTitle}
           </h1>
-          <p className="text-[13px] text-steel">
-            {format(dict.home.packPrice, { price: "\u0000", old: "\u0001" })
-              .split(/(\u0000|\u0001)/)
-              .map((part, i) =>
-                part === "\u0000" ? (
-                  <Money key={i} usdCents={effectivePrice(pack)} locale={locale} />
-                ) : part === "\u0001" ? (
-                  <Money key={i} usdCents={pack.priceUsdCents} locale={locale} />
-                ) : (
-                  part
-                ),
-              )}
+          <p className="text-[13px] text-white/80">
+            <span className="text-lg font-bold text-white">
+              <Money usdCents={effectivePrice(pack)} locale={locale} />
+            </span>{" "}
+            <s className="text-white/60">
+              <Money usdCents={pack.priceUsdCents} locale={locale} />
+            </s>
           </p>
           <Link
             href={productHref(base, pack.slug)}
             prefetch={false}
-            className="mt-1.5 inline-flex h-[38px] items-center self-start rounded-[6px] bg-lime-strong px-3.5 text-[13px] font-semibold text-ink"
+            className="btn-primary mt-1 inline-flex h-10 items-center self-start rounded-full px-4 text-[13px] font-bold"
           >
             {dict.home.packCta}
           </Link>
         </div>
-        <div className="w-24 shrink-0 overflow-hidden rounded-[8px] [&_.cover]:h-28">
+        <div className="w-28 shrink-0 overflow-hidden rounded-[8px]">
           <TicketCover tone="fleuve" title={pack.title} />
         </div>
       </section>
 
       {/* Catégories */}
-      <nav aria-label={dict.home.categories} className="card mt-3 grid grid-cols-5 px-1.5 py-3.5">
+      <nav aria-label={dict.home.categories} className="card mt-3 grid grid-cols-5 px-1 py-3">
         {CATEGORIES.map((c) => (
           <Link
             key={c.kind}
             href={explore(`?type=${c.kind}`)}
             prefetch={false}
-            className="flex min-h-11 flex-col items-center gap-1.5 text-center text-xs font-medium"
+            className="flex min-h-11 flex-col items-center gap-1.5 text-center text-[11px] font-medium"
           >
-            <span className="grid size-12 place-items-center rounded-[8px] bg-surface-2">{c.icon}</span>
+            <span className="grid size-12 place-items-center rounded-full bg-mint text-[#9a3412] dark:bg-surface-2 dark:text-cta">
+              {c.icon}
+            </span>
             {dict.product.kinds[c.kind]}
           </Link>
         ))}
       </nav>
 
+      {/* Ventes flash */}
+      <section aria-labelledby="rail-flash" className="card mt-3 pb-3">
+        <SectionHead
+          id="rail-flash"
+          title={dict.home.flash}
+          icon={<IconBolt size={18} className="text-promo" />}
+          href={explore("?tri=priceAsc")}
+          seeAll={dict.home.seeAll}
+          extra={
+            <Countdown until="friday" label={dict.home.dealsEnd} endedLabel={dict.commerce.flashEnded} />
+          }
+        />
+        <div className="scroll-rail mt-1 flex gap-2.5 overflow-x-auto px-3 [&_.ticket]:shadow-none [&_.ticket]:ring-1 [&_.ticket]:ring-line">
+          {productsForRail("deals").map((p) => (
+            <ProductTicket key={p.slug} product={p} locale={locale} dict={dict} flash />
+          ))}
+        </div>
+      </section>
+
+      {/* Coupons */}
+      <section aria-labelledby="coupons-title" className="mt-3">
+        <h2 id="coupons-title" className="mb-2 px-1 text-[17px] font-bold">
+          {dict.home.coupons}
+        </h2>
+        <div className="scroll-rail -mx-3 flex gap-2.5 overflow-x-auto px-3">
+          {DEMO_COUPONS.map((c) => (
+            <CouponCard
+              key={c.code}
+              code={c.code}
+              value={
+                c.percent
+                  ? format(dict.coupon.percent, { value: c.percent })
+                  : format(dict.coupon.amount, { value: formatMoney(c.amountUsdCents ?? 0, "USD", locale) })
+              }
+              condition={
+                c.minSubtotalUsdCents
+                  ? format(dict.coupon.min, { amount: formatMoney(c.minSubtotalUsdCents, "USD", locale) })
+                  : dict.coupon.all
+              }
+              labels={{
+                claim: dict.coupon.claim,
+                claimed: dict.coupon.claimed,
+                code: dict.coupon.code,
+                auto: dict.coupon.auto,
+              }}
+            />
+          ))}
+        </div>
+      </section>
+
       {/* Gratuits populaires */}
-      <section aria-labelledby="rail-free" className="card mt-3 pt-2">
+      <section aria-labelledby="rail-free" className="card mt-3 pb-3">
         <SectionHead
           id="rail-free"
           title={dict.home.rails.free}
           href={explore("?prix=gratuit")}
           seeAll={dict.home.seeAll}
-          onCard
         />
-        <ul>
+        <div className="scroll-rail mt-1 flex gap-2.5 overflow-x-auto px-3 [&_.ticket]:shadow-none [&_.ticket]:ring-1 [&_.ticket]:ring-line">
           {productsForRail("free")
-            .slice(0, 3)
+            .slice(0, 4)
             .map((p) => (
-              <ListRow
-                key={p.slug}
-                href={productHref(base, p.slug)}
-                media={<Thumb title={p.title} tone={p.tone} round={p.kind === "game" || p.kind === "edu"} />}
-                title={p.title}
-                meta={metaLine(p, dict)}
-                extra={rating(p.rating)}
-                action={
-                  <GetButton
-                    slug={p.slug}
-                    title={p.title}
-                    getLabel={dict.product.get}
-                    openLabel={dict.product.open}
-                    libraryHref={localePath(locale, "bibliotheque")}
-                  />
-                }
-              />
+              <ProductTicket key={p.slug} product={p} locale={locale} dict={dict} quickAdd />
             ))}
-        </ul>
-      </section>
-
-      {/* Offres de la semaine */}
-      <Rail
-        id="rail-deals"
-        title={dict.home.rails.deals}
-        action={<Countdown until="friday" label={dict.home.dealsEnd} endedLabel={dict.commerce.flashEnded} />}
-      >
-        {productsForRail("deals").map((p) => (
-          <ProductTicket key={p.slug} product={p} locale={locale} dict={dict} />
-        ))}
-      </Rail>
-
-      {/* Images et fonds d'écran */}
-      <section aria-labelledby="rail-images" className="card mt-4 px-3.5 pb-3.5 pt-2">
-        <div className="-mx-3.5">
-          <SectionHead
-            id="rail-images"
-            title={dict.home.rails.images}
-            href={explore("?type=image")}
-            seeAll={dict.home.seeAll}
-            onCard
-          />
         </div>
-        <ul className="grid grid-cols-3 gap-2">
-          {productsForRail("images").map((p) => (
-            <li key={p.slug}>
-              <Link href={productHref(base, p.slug)} prefetch={false} className="flex flex-col gap-1">
-                <span className="block overflow-hidden rounded-[6px] [&_.cover]:h-[120px] [&_.cover-title]:text-[13px]">
-                  <TicketCover tone={p.tone} title={p.title} />
-                </span>
-                <span className="sr-only">{p.title}</span>
-                <Price
-                  usdCents={p.priceUsdCents}
-                  promoUsdCents={p.promoUsdCents}
-                  {...priceProps}
-                  className="[&_.price-tag]:text-xs [&_.price-old]:hidden"
-                />
-              </Link>
-            </li>
-          ))}
-        </ul>
       </section>
 
       {/* Musique */}
-      <section aria-labelledby="rail-music" className="card mt-3 pt-2">
+      <section aria-labelledby="rail-music" className="card mt-3">
         <SectionHead
           id="rail-music"
           title={dict.home.rails.music}
           href={explore("?type=music")}
           seeAll={dict.home.seeAll}
-          onCard
         />
         <ul>
           {productsForRail("music").map((p) => (
@@ -255,47 +270,34 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
               }
               title={p.title}
               meta={metaLine(p, dict)}
-              action={
-                <Price
-                  usdCents={p.priceUsdCents}
-                  promoUsdCents={p.promoUsdCents}
-                  {...priceProps}
-                  className="[&_.price-tag]:text-[13px]"
-                />
-              }
+              action={<Price usdCents={p.priceUsdCents} promoUsdCents={p.promoUsdCents} {...priceProps} />}
             />
           ))}
         </ul>
       </section>
 
-      {(["author", "trending", "creators"] as const).map((rail) => (
-        <Rail
-          key={rail}
-          id={`rail-${rail}`}
-          title={dict.home.rails[rail]}
-          action={
-            <Link
-              href={explore()}
-              prefetch={false}
-              className="inline-flex min-h-11 items-center text-[13px] font-semibold text-success"
-            >
-              {dict.home.seeAll}
-            </Link>
-          }
-        >
-          {productsForRail(rail)
-            .slice(0, 4)
-            .map((p) => (
-              <ProductTicket key={p.slug} product={p} locale={locale} dict={dict} />
-            ))}
-        </Rail>
-      ))}
+      {/* Recommandé pour vous : grille 2 colonnes */}
+      <section aria-labelledby="for-you" className="mt-4">
+        <div className="mb-1 flex items-center justify-between px-1">
+          <h2 id="for-you" className="text-[17px] font-bold">
+            {dict.home.forYou}
+          </h2>
+          <Link
+            href={explore("?tri=rating")}
+            prefetch={false}
+            className="inline-flex min-h-11 items-center text-[13px] font-semibold text-accent"
+          >
+            {dict.home.seeAll}
+          </Link>
+        </div>
+        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
+          {forYou.map((p) => (
+            <ProductTicket key={p.slug} product={p} locale={locale} dict={dict} quickAdd />
+          ))}
+        </div>
+      </section>
 
-      <p className="mt-5 text-center text-xs text-muted">
-        {dict.home.trustTitle}
-        <br />
-        {dict.home.trust.operators}
-      </p>
+      <p className="mt-5 text-center text-xs text-muted">{dict.home.trust.operators}</p>
     </AppShell>
   );
 }

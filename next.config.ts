@@ -9,9 +9,18 @@ const securityHeaders = [
   // CSP stricte (nonces) : phase 8 — durcissement.
 ];
 
+/**
+ * BUILD_TARGET=apk : export statique (dossier out/) embarqué dans l'application Android
+ * (voir android/ et scripts/build-apk.sh). Pas de serveur : ni réécritures, ni redirections,
+ * ni en-têtes HTTP ; chaque page devient dossier/index.html.
+ */
+const isApk = process.env.BUILD_TARGET === "apk";
+
 const nextConfig: NextConfig = {
-  cacheComponents: true,
-  partialPrefetching: true,
+  ...(isApk ? { output: "export" as const, trailingSlash: true, distDir: "out-apk" } : {}),
+  // Rendu partiel / cache des composants : utiles avec un serveur, inutiles (et incompatibles) en export.
+  cacheComponents: !isApk,
+  partialPrefetching: !isApk,
   poweredByHeader: false,
   reactStrictMode: true,
   experimental: {
@@ -19,38 +28,43 @@ const nextConfig: NextConfig = {
     inlineCss: true,
   },
   images: {
+    unoptimized: isApk,
     formats: ["image/avif", "image/webp"],
     deviceSizes: [360, 414, 640, 828, 1080, 1440],
     imageSizes: [96, 176, 240, 320],
     minimumCacheTTL: 60 * 60 * 24 * 30,
   },
-  async rewrites() {
-    // Le français, langue par défaut, est servi à la racine sans redirection.
-    return { beforeFiles: [{ source: "/", destination: "/fr" }] };
-  },
-  async redirects() {
-    // Anciennes routes de la phase 1.
-    return [
-      { source: "/:locale(fr|ln|en)/recherche", destination: "/:locale/explorer", permanent: true },
-      { source: "/:locale(fr|ln|en)/moi", destination: "/:locale/compte", permanent: true },
-    ];
-  },
-  async headers() {
-    return [
-      { source: "/:path*", headers: securityHeaders },
-      {
-        source: "/sw.js",
-        headers: [
-          { key: "Cache-Control", value: "no-cache, no-store, must-revalidate" },
-          { key: "Service-Worker-Allowed", value: "/" },
-        ],
-      },
-      {
-        source: "/icons/:file*",
-        headers: [{ key: "Cache-Control", value: "public, max-age=604800, stale-while-revalidate=86400" }],
-      },
-    ];
-  },
+  ...(isApk ? {} : { rewrites, redirects, headers }),
 };
+
+async function rewrites() {
+  // Le français, langue par défaut, est servi à la racine sans redirection.
+  return { beforeFiles: [{ source: "/", destination: "/fr" }] };
+}
+
+async function redirects() {
+  // Anciennes routes de la phase 1.
+  return [
+    { source: "/:locale(fr|ln|en)/recherche", destination: "/:locale/explorer", permanent: true },
+    { source: "/:locale(fr|ln|en)/moi", destination: "/:locale/compte", permanent: true },
+  ];
+}
+
+async function headers() {
+  return [
+    { source: "/:path*", headers: securityHeaders },
+    {
+      source: "/sw.js",
+      headers: [
+        { key: "Cache-Control", value: "no-cache, no-store, must-revalidate" },
+        { key: "Service-Worker-Allowed", value: "/" },
+      ],
+    },
+    {
+      source: "/icons/:file*",
+      headers: [{ key: "Cache-Control", value: "public, max-age=604800, stale-while-revalidate=86400" }],
+    },
+  ];
+}
 
 export default nextConfig;

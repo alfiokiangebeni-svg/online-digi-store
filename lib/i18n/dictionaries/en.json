@@ -172,7 +172,13 @@
       "support": "WhatsApp support in French and Lingala"
     },
     "packPrice": "{price} instead of {old}",
-    "trustTitle": "Mobile Money payment · instant delivery"
+    "trustTitle": "Mobile Money payment · instant delivery",
+    "flash": "Flash deals",
+    "coupons": "Today's coupons",
+    "forYou": "Recommended for you",
+    "trustDelivery": "Instant delivery",
+    "trustPay": "Mobile Money",
+    "trustSupport": "WhatsApp support"
   },
   "product": {
     "kinds": {
@@ -264,7 +270,15 @@
     "pause": "Pause the preview",
     "previewDemo": "Demo preview",
     "notAllowed": "Hidden by parental control",
-    "related": "More like this"
+    "related": "More like this",
+    "sold": "{count} sold",
+    "soldPct": "{percent}% sold",
+    "buyNow": "Buy now",
+    "quickAdd": "Add “{title}” to cart",
+    "added": "Added to cart",
+    "guarantee": "Refunded if the download fails",
+    "deliveryInstant": "Instant delivery after payment",
+    "seller": "Sold by {seller}"
   },
   "explore": {
     "title": "Explore",
@@ -410,5 +424,15 @@
   },
   "common": {
     "demo": "Demo"
+  },
+  "coupon": {
+    "claim": "Claim",
+    "claimed": "Claimed",
+    "code": "Code {code}",
+    "auto": "Applied automatically in your cart",
+    "percent": "−{value}%",
+    "amount": "−{value}",
+    "min": "On orders from {amount}",
+    "all": "On the whole catalogue"
   }
 }

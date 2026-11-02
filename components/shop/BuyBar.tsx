@@ -68,7 +68,7 @@ export function BuyBar({
         ) : (
           <button
             type="button"
-            className={buttonClasses({ variant: "secondary", size: "lg", className: "flex-1 px-2" })}
+            className={buttonClasses({ variant: "soft", size: "lg", className: "flex-1 rounded-full px-2" })}
             onClick={() => addToCart({ slug })}
           >
             {labels.addToCart}
@@ -76,13 +76,13 @@ export function BuyBar({
         )}
         <button
           type="button"
-          className={buttonClasses({ variant: "sell", size: "lg", className: "flex-1 px-2" })}
+          className={buttonClasses({ variant: "sell", size: "lg", className: "flex-1 rounded-full px-2" })}
           onClick={() => {
             addToCart({ slug });
             router.push(cartHref);
           }}
         >
-          {labels.buy} {price}
+          {labels.buy}
         </button>
       </>
     );
@@ -91,6 +91,7 @@ export function BuyBar({
   return (
     <div className="fixed inset-x-0 bottom-0 z-40 border-t border-[#e5e7eb] bg-surface px-3 pb-[calc(1.25rem+env(safe-area-inset-bottom))] pt-2.5 dark:border-line">
       <div className="mx-auto flex max-w-xl flex-col gap-2">
+        {!free && !owned ? <div className="flex justify-end text-sm">{price}</div> : null}
         <div className="flex items-center gap-2">
           <FavoriteButton slug={slug} addLabel={labels.favorite} removeLabel={labels.unfavorite} />
           {actions}
