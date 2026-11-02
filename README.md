@@ -123,4 +123,4 @@ Le site tourne sur http://localhost:3000.
 
 ## Contact
 
-Support client : WhatsApp (français et lingala) — numéro à ajouter.
+Support client : WhatsApp (français et lingala) — [+243 824 176 729](https://wa.me/243824176729)
