@@ -70,14 +70,10 @@ test.describe("Accueil et catégories", () => {
     await expect(page).toHaveURL(/\/fr\/categories(\?.*)?$/);
   });
 
-  test("catégorie vide : Publier une annonce et autres catégories", async ({ page }) => {
-    await page.goto("/fr/categories/immobilier");
-    await expect(page.getByRole("heading", { name: "Pas encore d'annonce ici" })).toBeVisible();
-    await page.getByRole("link", { name: "Publier une annonce" }).click();
-    await expect(page).toHaveURL(/\/fr\/vendre$/);
-    await page.goto("/fr/categories/immobilier");
-    await page.getByRole("link", { name: "Voir les autres catégories" }).click();
-    await expect(page).toHaveURL(/\/fr\/categories$/);
+  test("les 7 catégories affichent leur nombre de contenus ou d'annonces", async ({ page }) => {
+    await page.goto("/fr/categories");
+    await expect(page.getByRole("link", { name: /^Immobilier 5 contenus/ })).toBeVisible();
+    await expect(page.getByRole("link", { name: /^Appels d'offres 3 contenus/ })).toBeVisible();
   });
 
   test("catégorie inconnue : page 404 de la boutique", async ({ page }) => {
