@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { AppShell } from "@/components/shell/AppShell";
 import { AccountView } from "@/components/shop/AccountView";
+import { ActivityView } from "@/components/listings/ActivityView";
+import { recentItems } from "@/components/shop/recentItems";
 import { metaLine, productHref } from "@/components/shop/labels";
 import { IconChat, IconChevron, IconDownload } from "@/components/ui";
 import { SUPPORT_WHATSAPP } from "@/lib/brand";
@@ -62,6 +64,19 @@ export default async function AccountPage({ params }: PageProps<"/[locale]/compt
               <IconChevron size={16} className="text-muted" />
             </Link>
           }
+        />
+      </div>
+
+      <div className="mt-3">
+        <ActivityView
+          labels={dict.activity}
+          locale={locale}
+          categoryNames={dict.categories}
+          listings={Object.fromEntries(
+            Object.entries(recentItems(locale, dict))
+              .filter(([k]) => k.startsWith("a:"))
+              .map(([k, v]) => [k.slice(2), v]),
+          )}
         />
       </div>
 
