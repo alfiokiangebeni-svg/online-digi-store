@@ -689,12 +689,7 @@
     "visitTitle": "Book a visit",
     "visitDay": "Day",
     "visitSlot": "Time slot",
-    "slots": [
-      "9–11 am",
-      "11 am–1 pm",
-      "2–4 pm",
-      "4–6 pm"
-    ],
+    "slots": ["9–11 am", "11 am–1 pm", "2–4 pm", "4–6 pm"],
     "visitConfirm": "Confirm the visit",
     "visitDone": "Visit requested: {day}, {slot}. The advertiser will confirm by SMS.",
     "payDeposit": "Pay the deposit",

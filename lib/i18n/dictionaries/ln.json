@@ -689,12 +689,7 @@
     "visitTitle": "Kamata rendez-vous ya kotala",
     "visitDay": "Mokolo",
     "visitSlot": "Ngonga",
-    "slots": [
-      "9 h – 11 h",
-      "11 h – 13 h",
-      "14 h – 16 h",
-      "16 h – 18 h"
-    ],
+    "slots": ["9 h – 11 h", "11 h – 13 h", "14 h – 16 h", "16 h – 18 h"],
     "visitConfirm": "Ndima rendez-vous",
     "visitDone": "Rendez-vous esengami : {day}, {slot}. Motii akondimisa na SMS.",
     "payDeposit": "Futa garantie",
@@ -800,13 +795,7 @@
     "copyFailed": "Kopia ekoki te. Lien : {url}",
     "report": "Yebisa likambo",
     "reportTitle": "Yebisa likambo",
-    "reasons": [
-      "Bokosi to moyibi",
-      "Makambo epekisami",
-      "Sango ya lokuta",
-      "Eloko ya kokosa",
-      "Mosusu"
-    ],
+    "reasons": ["Bokosi to moyibi", "Makambo epekisami", "Sango ya lokuta", "Eloko ya kokosa", "Mosusu"],
     "reportReason": "Ntina",
     "reportDetails": "Bilimbisi (soki olingi)",
     "reportSend": "Tinda",
