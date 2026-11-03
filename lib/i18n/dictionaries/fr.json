@@ -1059,5 +1059,14 @@
       "no": "Non"
     },
     "draftBadge": "Brouillon"
+  },
+  "searchTools": {
+    "voice": "Recherche vocale",
+    "scan": "Scanner un code",
+    "listening": "Je t'écoute… dis ce que tu cherches.",
+    "voiceFailed": "Je n'ai pas compris. Vérifie le micro et réessaie.",
+    "scanFailed": "Scan impossible. Réessaie avec plus de lumière.",
+    "scanned": "Code lu : {code}",
+    "retry": "Réessayer"
   }
 }

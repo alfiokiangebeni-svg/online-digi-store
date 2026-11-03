@@ -20,6 +20,7 @@ import { FeedbackProvider } from "@/components/feedback/FeedbackProvider";
 import { CurrencyToggle } from "@/components/ui/CurrencyToggle";
 import { NotificationsButton } from "./NotificationsButton";
 import { MiniPlayer } from "./MiniPlayer";
+import { SearchTools } from "./SearchTools";
 
 export type Tab = "home" | "categories" | "sell" | "cart" | "account" | null;
 
@@ -133,6 +134,13 @@ export function AppShell({
                 placeholder={dict.search.placeholder}
                 submitLabel={dict.search.submit}
                 defaultValue={searchValue}
+                tools={
+                  <SearchTools
+                    exploreHref={localePath(locale, "explorer")}
+                    lang={locale === "en" ? "en-US" : locale === "ln" ? "ln-CD" : "fr-FR"}
+                    labels={dict.searchTools}
+                  />
+                }
               />
             ) : null}
             {headerExtra}

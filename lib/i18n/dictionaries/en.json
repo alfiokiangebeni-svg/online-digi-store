@@ -1059,5 +1059,14 @@
       "no": "No"
     },
     "draftBadge": "Draft"
+  },
+  "searchTools": {
+    "voice": "Voice search",
+    "scan": "Scan a code",
+    "listening": "Listening… say what you are looking for.",
+    "voiceFailed": "I didn't catch that. Check the microphone and try again.",
+    "scanFailed": "Couldn't scan. Try again with more light.",
+    "scanned": "Code read: {code}",
+    "retry": "Try again"
   }
 }

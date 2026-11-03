@@ -1053,5 +1053,14 @@
       "no": "Non"
     },
     "draftBadge": "Brouillon"
+  },
+  "searchTools": {
+    "voice": "Koluka na mongongo",
+    "scan": "Scanner code",
+    "listening": "Nazali koyoka… loba oyo ozali koluka.",
+    "voiceFailed": "Nayoki malamu te. Tala micro mpe meka lisusu.",
+    "scanFailed": "Scan ekoki te. Meka lisusu na pole mingi.",
+    "scanned": "Code etangami : {code}",
+    "retry": "Meka lisusu"
   }
 }

@@ -7,7 +7,10 @@ export function haptic(ms = 12) {
   if (typeof window === "undefined") return;
   if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
   try {
-    navigator.vibrate?.(ms);
+    // Dans l'APK, le WebView n'implémente pas navigator.vibrate : on passe par le pont natif.
+    const native = (window as { DisiNative?: { vibrate(ms: number): void } }).DisiNative;
+    if (native) native.vibrate(ms);
+    else navigator.vibrate?.(ms);
   } catch {
     /* non pris en charge */
   }
