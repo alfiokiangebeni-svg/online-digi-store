@@ -836,5 +836,84 @@
     "since": "Sur di.si store depuis {year}",
     "similar": "Produits similaires",
     "recent": "Récemment consultés"
+  },
+  "px": {
+    "readExtract": "Lire un extrait",
+    "format": "Format",
+    "formats": {
+      "pdf": "PDF",
+      "epub": "EPUB",
+      "audio": "Livre audio"
+    },
+    "formatLabel": "Format : {format}",
+    "author": "Auteur",
+    "pages": "Pages",
+    "pagesValue": "{count} pages",
+    "reader": {
+      "resume": "Reprendre à la page {page}",
+      "page": "Page {page} sur {total}",
+      "prev": "Page précédente",
+      "next": "Page suivante",
+      "extract": "Extrait gratuit",
+      "extractEnd": "Fin de l'extrait",
+      "extractBody": "Achète le livre pour lire la suite, même hors connexion.",
+      "buyToContinue": "Acheter pour lire la suite",
+      "restart": "Revenir au début",
+      "saved": "Ta page est mémorisée : tu reprendras ici.",
+      "samplePages": [
+        "Kinshasa se réveille avant le soleil. Les premiers taxis-bus klaxonnent déjà sur le boulevard, les vendeuses installent leurs bassines de pain et de beignets, et la radio annonce la météo du jour : chaud, humide, une averse possible en fin d'après-midi.",
+        "Pour bien commencer, il faut connaître trois choses : où l'on va, combien cela coûte, et à qui l'on peut faire confiance. Ce chapitre répond à ces trois questions, quartier par quartier, avec les prix constatés cette année.",
+        "Le marché est un lieu de rencontre autant que de commerce. On y négocie, on y prend des nouvelles de la famille, on y apprend les dernières rumeurs. Savoir saluer en lingala ouvre beaucoup de portes : « Mbote, ndeko ! »",
+        "Le soir, la ville change de visage. Les terrasses se remplissent, la rumba s'échappe des bars et les embouteillages se dénouent peu à peu. C'est le moment idéal pour découvrir les quartiers animés de Matonge et de Bandal.",
+        "Ce livre n'est pas un guide figé : il évolue avec la ville. Chaque mise à jour est gratuite pour les lecteurs, et vos remarques envoyées par WhatsApp nous aident à l'améliorer.",
+        "Dernier conseil avant de partir : gardez toujours un peu de monnaie en francs congolais, chargez votre téléphone et notez le numéro d'un chauffeur de confiance."
+      ]
+    },
+    "screenshots": "Voir les captures",
+    "compat": "Compatibilité",
+    "compatValue": "Android {version} ou plus récent",
+    "changelog": "Nouveautés de la version {version}",
+    "parentalBlocked": "Contrôle parental actif (jusqu'à {age} ans) : ce contenu dépasse l'âge choisi. Le code parental sera demandé au paiement.",
+    "parentalOk": "Adapté à l'âge choisi dans le contrôle parental ({age} ans).",
+    "tracks": "Titres de l'album",
+    "buyTrack": "Acheter le titre",
+    "buyAlbum": "Acheter l'album",
+    "trackLabel": "Titre : {title}",
+    "trackAdded": "Titre ajouté au panier",
+    "addPlaylist": "Ajouter à ma playlist",
+    "removePlaylist": "Retirer de ma playlist",
+    "playlistAdded": "Ajouté à ta playlist",
+    "playlistRemoved": "Retiré de ta playlist",
+    "playlist": "Ma playlist",
+    "playlistEmpty": "Ajoute des titres depuis une fiche musique.",
+    "genre": "Genre",
+    "artist": "Artiste",
+    "duration": "Durée",
+    "nowPlaying": "En écoute",
+    "stop": "Arrêter l'écoute",
+    "license": "Licence",
+    "licenses": {
+      "personal": "Personnelle",
+      "commercial": "Commerciale"
+    },
+    "licenseHint": {
+      "personal": "Usage privé : fond d'écran, impression personnelle.",
+      "commercial": "Usage professionnel : affiches, réseaux sociaux, produits vendus."
+    },
+    "licenseLabel": "Licence : {license}",
+    "watermark": "di.si store · aperçu",
+    "watermarkNote": "Aperçu avec filigrane. Le fichier HD acheté n'en a pas.",
+    "resolution": "Résolution",
+    "files": "Format de fichier",
+    "orientation": "Orientation",
+    "orientations": {
+      "landscape": "Paysage",
+      "portrait": "Portrait",
+      "square": "Carré"
+    },
+    "color": "Couleur dominante",
+    "collection": "Collection",
+    "downloadHd": "Télécharger en HD",
+    "sellerSince": "Vendeur depuis {year}"
   }
 }

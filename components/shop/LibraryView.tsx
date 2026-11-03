@@ -50,6 +50,7 @@ export function LibraryView({
   locale,
   freeHref,
   readerHref,
+  hdLabel,
   labels: t,
 }: {
   products: Record<string, ProductSummary & { meta: string; href: string }>;
@@ -57,6 +58,8 @@ export function LibraryView({
   freeHref: string;
   /** Écran « Lecteur » (Ouvrir). */
   readerHref: string;
+  /** « Télécharger en HD » (images). */
+  hdLabel: string;
   labels: LibraryLabels;
 }) {
   const library = useStore(libraryStore);
@@ -152,7 +155,7 @@ export function LibraryView({
                   />
                 }
                 title={p.title}
-                meta={p.meta}
+                meta={item.optionLabel ? `${p.meta} · ${item.optionLabel}` : p.meta}
                 extra={
                   <span className="flex flex-wrap items-center gap-x-2 text-[11px] font-semibold">
                     <span
@@ -205,6 +208,8 @@ export function LibraryView({
                             {format(t.downloading, { percent: pct })}
                           </span>
                         </>
+                      ) : p.kind === "image" || p.kind === "template" ? (
+                        hdLabel
                       ) : (
                         t.download
                       )}

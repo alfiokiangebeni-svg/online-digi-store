@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import type { ReactNode } from "react";
-import { addToCart, addToLibrary, cartStore, libraryStore } from "@/lib/client/shop";
+import { addToCart, addToLibrary, cartStore, libraryStore, optionStore } from "@/lib/client/shop";
+import type { OptionChoice } from "./ProductOptions";
 import { useStore } from "@/lib/client/store";
 import { haptic } from "@/lib/client/haptics";
 import { toast } from "@/lib/client/toast";
@@ -18,6 +19,7 @@ export function BuyBar({
   price,
   cartHref,
   libraryHref,
+  choices,
   labels,
 }: {
   slug: string;
@@ -26,6 +28,8 @@ export function BuyBar({
   price: ReactNode;
   cartHref: string;
   libraryHref: string;
+  /** Options de la fiche (format, licence) : l'option choisie part avec la ligne de panier. */
+  choices?: OptionChoice[];
   labels: {
     buy: string;
     addToCart: string;
@@ -41,6 +45,10 @@ export function BuyBar({
   const t = useFeedbackTexts();
   const inCart = useStore(cartStore).some((l) => l.slug === slug && !l.giftTo);
   const owned = useStore(libraryStore).some((i) => i.slug === slug);
+  const chosen = useStore(optionStore)[slug];
+  const current = choices ? (choices.find((c) => c.value === chosen?.option) ?? choices[0]) : undefined;
+  const line = { slug, option: current?.value, optionLabel: current?.cartLabel };
+  const shownPrice = current?.price ?? price;
 
   let actions: ReactNode;
   if (owned) {
@@ -83,7 +91,7 @@ export function BuyBar({
             className={buttonClasses({ variant: "soft", size: "lg", className: "flex-1 rounded-full px-2" })}
             onClick={() => {
               haptic();
-              addToCart({ slug });
+              addToCart(line);
               toast({
                 tone: "success",
                 message: t.addedToCart,
@@ -99,7 +107,7 @@ export function BuyBar({
           className={buttonClasses({ variant: "sell", size: "lg", className: "flex-1 rounded-full px-2" })}
           onClick={() => {
             haptic();
-            addToCart({ slug });
+            addToCart(line);
             router.push(cartHref);
           }}
         >
@@ -112,7 +120,12 @@ export function BuyBar({
   return (
     <div className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-surface px-3 pb-[calc(1.25rem+env(safe-area-inset-bottom))] pt-2.5">
       <div className="mx-auto flex max-w-xl flex-col gap-2">
-        {!free && !owned ? <div className="flex justify-end text-sm">{price}</div> : null}
+        {!free && !owned ? (
+          <div className="flex items-center justify-end gap-2 text-sm">
+            {current ? <span className="text-xs text-muted">{current.cartLabel}</span> : null}
+            {shownPrice}
+          </div>
+        ) : null}
         <div className="flex items-center gap-2">
           <FavoriteButton slug={slug} addLabel={labels.favorite} removeLabel={labels.unfavorite} />
           {actions}

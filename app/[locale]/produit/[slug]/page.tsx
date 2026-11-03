@@ -8,11 +8,29 @@ import { PreviewGallery } from "@/components/shop/PreviewGallery";
 import { PreviewButton } from "@/components/shop/PreviewButton";
 import { ProductTicket } from "@/components/shop/ProductTicket";
 import {
+  ContactLink,
+  ReportSheet,
+  ReviewsBlock,
+  ShareSheet,
+  TrackRecent,
+} from "@/components/shop/CommonActions";
+import {
+  FormatPicker,
+  LicensePicker,
+  ParentalNotice,
+  ScreenshotsButton,
+  TrackList,
+  type OptionChoice,
+} from "@/components/shop/ProductOptions";
+import { SUPPORT_WHATSAPP } from "@/lib/brand";
+import { COMMERCIAL_FACTOR, TRACK_PRICE_USD_CENTS, duration, extrasOf } from "@/lib/productExtras";
+import {
   Badge,
   IconCheck,
   IconDownload,
-  IconShare,
+  IconBook,
   IconStar,
+  Money,
   Price,
   Thumb,
   buttonClasses,
@@ -70,15 +88,63 @@ export default async function ProductPage({ params }: PageProps<"/[locale]/produ
   const base = localePath(locale);
   const free = isFree(p);
   const percent = p.promoUsdCents ? discountPercent(p.priceUsdCents, p.promoUsdCents) : 0;
-  // Lien vers la fiche si le site public est configuré (absent dans l'APK de test).
-  const site = process.env.NEXT_PUBLIC_SITE_URL;
-  const shareUrl = `https://wa.me/?text=${encodeURIComponent(
-    [format(dict.product.shareText, { title: p.title }), site ? `${site}${base}/produit/${p.slug}/` : ""]
-      .filter(Boolean)
-      .join(" "),
-  )}`;
   const related = CATALOG.filter((x) => x.kind === p.kind && x.slug !== p.slug).slice(0, 6);
   const priceProps = { locale, oldPriceLabel: dict.product.oldPrice, freeLabel: dict.product.free };
+  const x = extrasOf(p);
+  const px = dict.px;
+  const isAlbum = (x.music?.tracks.length ?? 0) > 1;
+  const choices: OptionChoice[] | undefined =
+    x.book && x.book.formats.length > 1
+      ? x.book.formats.map((f) => ({
+          value: `format:${f}`,
+          label: px.formats[f],
+          cartLabel: format(px.formatLabel, { format: px.formats[f] }),
+        }))
+      : x.image && !free
+        ? (["personal", "commercial"] as const).map((l) => ({
+            value: `license:${l}`,
+            label: px.licenses[l],
+            cartLabel: format(px.licenseLabel, { license: px.licenses[l] }),
+            hint: px.licenseHint[l],
+            price: (
+              <Money
+                usdCents={effectivePrice(p) * (l === "commercial" ? COMMERCIAL_FACTOR : 1)}
+                locale={locale}
+              />
+            ),
+          }))
+        : undefined;
+  const extraInfos: [string, string][] = [
+    ...(x.book
+      ? ([
+          [px.author, p.seller],
+          ...(x.book.pages ? [[px.pages, format(px.pagesValue, { count: x.book.pages })]] : []),
+          [px.format, x.book.formats.map((f) => px.formats[f]).join(", ")],
+        ] as [string, string][])
+      : []),
+    ...(x.app
+      ? ([[px.compat, format(px.compatValue, { version: x.app.minAndroid })]] as [string, string][])
+      : []),
+    ...(x.music
+      ? ([
+          [px.artist, x.music.artist],
+          [px.genre, x.music.genre],
+          [px.duration, duration(x.music.tracks.reduce((n, t) => n + t.seconds, 0))],
+        ] as [string, string][])
+      : []),
+    ...(x.image
+      ? ([
+          [px.resolution, x.image.resolution],
+          [px.files, x.image.files],
+          [px.orientation, px.orientations[x.image.orientation]],
+          [px.color, x.image.color],
+          [px.collection, x.image.collection],
+        ] as [string, string][])
+      : []),
+  ];
+  const contactHref = `${SUPPORT_WHATSAPP.href}?text=${encodeURIComponent(
+    format(dict.actions.contactText, { title: p.title, seller: p.seller }),
+  )}`;
   const stats = [
     {
       value: p.rating.toLocaleString(locale === "en" ? "en-US" : "fr-CD", { minimumFractionDigits: 1 }),
@@ -92,6 +158,7 @@ export default async function ProductPage({ params }: PageProps<"/[locale]/produ
     { value: p.sales.toLocaleString(locale === "en" ? "en-US" : "fr-CD"), label: dict.product.purchases },
   ];
   const infos: [string, string][] = [
+    ...extraInfos,
     [dict.product.infos.format, p.format],
     [dict.product.infos.version, p.version],
     [dict.product.infos.languages, p.languages.map((l) => dict.product.languageNames[l]).join(", ")],
@@ -105,6 +172,7 @@ export default async function ProductPage({ params }: PageProps<"/[locale]/produ
 
   return (
     <AppShell locale={locale} dict={dict} tab={null} path={`produit/${p.slug}`} back={base} hideNav>
+      <TrackRecent id={`p:${p.slug}`} />
       <article className="flex flex-col gap-2.5">
         {/* Galerie */}
         <section aria-labelledby="previews" className="-mx-3 -mt-3">
@@ -113,6 +181,7 @@ export default async function ProductPage({ params }: PageProps<"/[locale]/produ
           </h2>
           <PreviewGallery
             category={categoryOf(p.kind)}
+            watermark={x.image ? px.watermark : undefined}
             slides={[p.title, `${dict.product.previews} 2/3`, `${dict.product.previews} 3/3`]}
             labels={{
               open: dict.gallery.open,
@@ -203,9 +272,65 @@ export default async function ProductPage({ params }: PageProps<"/[locale]/produ
                   {dict.product.verifiedSeller}
                 </Badge>
               ) : null}
+              <span className="ml-1.5 text-xs text-muted">
+                {format(px.sellerSince, { year: x.sellerSince })}
+              </span>
             </span>
           </p>
         </section>
+
+        {/* Options et actions propres à la catégorie */}
+        {x.book || x.app || isAlbum || x.image ? (
+          <section className="card flex flex-col gap-3 p-3.5">
+            {x.book && choices ? <FormatPicker slug={p.slug} label={px.format} choices={choices} /> : null}
+            {x.book && p.kind === "ebook" ? (
+              <a
+                href={`${localePath(locale, "lecteur")}?id=${p.slug}&extrait=1`}
+                className={buttonClasses({ variant: "outline", block: true })}
+              >
+                <IconBook size={18} />
+                {px.readExtract}
+              </a>
+            ) : null}
+            {x.app ? (
+              <>
+                <ScreenshotsButton label={px.screenshots} />
+                <ParentalNotice age={p.age} blocked={px.parentalBlocked} ok={px.parentalOk} />
+              </>
+            ) : null}
+            {isAlbum && x.music ? (
+              <>
+                <h2 className="text-base font-bold">{px.tracks}</h2>
+                <TrackList
+                  slug={p.slug}
+                  tracks={x.music.tracks.map((t) => ({ title: t.title, duration: duration(t.seconds) }))}
+                  price={
+                    <Money usdCents={Math.min(effectivePrice(p), TRACK_PRICE_USD_CENTS)} locale={locale} />
+                  }
+                  cartHref={localePath(locale, "panier")}
+                  labels={{
+                    listen: dict.product.listen,
+                    pause: dict.product.pause,
+                    buyTrack: px.buyTrack,
+                    addPlaylist: px.addPlaylist,
+                    removePlaylist: px.removePlaylist,
+                    playlistAdded: px.playlistAdded,
+                    playlistRemoved: px.playlistRemoved,
+                    trackAdded: px.trackAdded,
+                    trackLabel: px.trackLabel,
+                    viewCart: dict.feedback.viewCart,
+                  }}
+                />
+              </>
+            ) : null}
+            {x.image && choices ? (
+              <>
+                <LicensePicker slug={p.slug} label={px.license} choices={choices} />
+                <p className="text-xs text-muted">{px.watermarkNote}</p>
+              </>
+            ) : null}
+          </section>
+        ) : null}
 
         {p.kind === "music" ? (
           <div className="card flex items-center gap-3 p-3.5">
@@ -254,15 +379,14 @@ export default async function ProductPage({ params }: PageProps<"/[locale]/produ
               }}
             />
           ) : null}
-          <a
-            href={shareUrl}
-            target="_blank"
-            rel="noopener"
-            className={buttonClasses({ variant: "ghost", className: "px-2" })}
-          >
-            <IconShare size={18} />
-            {dict.product.share}
-          </a>
+          <ShareSheet
+            path={`${base}/produit/${p.slug}/`}
+            text={format(dict.product.shareText, { title: p.title })}
+            t={dict.actions}
+            closeLabel={dict.sheet.close}
+          />
+          <ContactLink href={contactHref} label={dict.actions.contact} />
+          <ReportSheet slug={p.slug} t={dict.actions} closeLabel={dict.sheet.close} />
         </div>
 
         <section aria-labelledby="about" className="card flex flex-col gap-2 p-3.5">
@@ -289,6 +413,22 @@ export default async function ProductPage({ params }: PageProps<"/[locale]/produ
           </dl>
         </section>
 
+        {x.app ? (
+          <section aria-labelledby="changelog" className="card flex flex-col gap-2 p-3.5">
+            <h2 id="changelog" className="text-base font-bold">
+              {format(px.changelog, { version: p.version })}
+            </h2>
+            <ul className="flex flex-col gap-1.5">
+              {x.app.changelog.map((c) => (
+                <li key={c} className="flex items-start gap-2 text-sm">
+                  <IconCheck size={16} className="mt-0.5 shrink-0 text-success" />
+                  {c}
+                </li>
+              ))}
+            </ul>
+          </section>
+        ) : null}
+
         <section aria-labelledby="reviews" className="card flex flex-col gap-2 p-3.5">
           <h2 id="reviews" className="text-base font-bold">
             {dict.product.reviewsTitle}
@@ -300,14 +440,14 @@ export default async function ProductPage({ params }: PageProps<"/[locale]/produ
               {format(dict.product.reviews, { count: p.reviews })}
             </span>
           </p>
-          <p className="text-[13px] leading-relaxed text-muted">{dict.product.reviewsEmpty}</p>
+          <ReviewsBlock slug={p.slug} t={dict.actions} closeLabel={dict.sheet.close} />
         </section>
       </article>
 
       {related.length ? (
         <section aria-labelledby="related" className="mt-4">
           <h2 id="related" className="mb-2 px-1 text-[17px] font-bold">
-            {dict.product.related}
+            {dict.actions.similar}
           </h2>
           <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
             {related.map((r) => (
@@ -323,8 +463,9 @@ export default async function ProductPage({ params }: PageProps<"/[locale]/produ
         price={<Price usdCents={effectivePrice(p)} {...priceProps} />}
         cartHref={localePath(locale, "panier")}
         libraryHref={localePath(locale, "bibliotheque")}
+        choices={choices}
         labels={{
-          buy: dict.product.buyNow,
+          buy: isAlbum ? px.buyAlbum : dict.product.buyNow,
           addToCart: dict.commerce.addToCart,
           inCart: dict.product.inCart,
           get: dict.product.get,

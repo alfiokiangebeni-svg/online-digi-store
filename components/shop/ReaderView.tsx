@@ -2,7 +2,10 @@
 
 import Link from "next/link";
 import { categoryOf, type ProductSummary } from "@/lib/catalog";
-import { libraryStore } from "@/lib/client/shop";
+import { useState } from "react";
+import { libraryStore, readingStore } from "@/lib/client/shop";
+import { format } from "@/lib/i18n/format";
+import { Button } from "@/components/ui/Button";
 import { useStore } from "@/lib/client/store";
 import { useSearchParam } from "@/lib/client/url";
 import { buttonClasses } from "@/components/ui/buttonStyles";
@@ -23,6 +26,86 @@ export interface ReaderLabels {
   soon: string;
   listen: string;
   pause: string;
+  book: {
+    resume: string;
+    page: string;
+    prev: string;
+    next: string;
+    extract: string;
+    extractEnd: string;
+    extractBody: string;
+    buyToContinue: string;
+    restart: string;
+    saved: string;
+    samplePages: string[];
+  };
+}
+
+/** Nombre de pages lisibles dans l'extrait gratuit. */
+const EXTRACT_PAGES = 2;
+
+/** Lecteur de livre intégré : pages, reprise de lecture, extrait gratuit. */
+function BookReader({
+  slug,
+  description,
+  extract,
+  productHref,
+  t,
+}: {
+  slug: string;
+  description: string;
+  extract: boolean;
+  productHref: string;
+  t: ReaderLabels["book"];
+}) {
+  const pages = [description, ...t.samplePages];
+  const saved = useStore(readingStore)[slug] ?? 0;
+  const total = extract ? EXTRACT_PAGES : pages.length;
+  const page = Math.min(extract ? 0 : saved, total - 1);
+  const [view, setView] = useState<number | null>(null);
+  const current = view ?? page;
+  const go = (n: number) => {
+    setView(n);
+    if (!extract) readingStore.set((r) => ({ ...r, [slug]: n }));
+  };
+  const atEnd = current === total - 1;
+  return (
+    <div className="flex flex-col gap-3">
+      {extract ? (
+        <Badge tone="neutral" className="self-start">
+          {t.extract}
+        </Badge>
+      ) : saved > 0 && view === null ? (
+        <p className="text-xs text-muted">{t.saved}</p>
+      ) : null}
+      <article aria-live="polite" className="card min-h-64 p-5 font-sans text-[17px] leading-relaxed">
+        {pages[current]}
+      </article>
+      <p className="text-center text-xs text-muted">{format(t.page, { page: current + 1, total })}</p>
+      <div className="flex gap-2">
+        <Button variant="outline" className="flex-1" disabled={current === 0} onClick={() => go(current - 1)}>
+          {t.prev}
+        </Button>
+        <Button className="flex-1" disabled={atEnd} onClick={() => go(current + 1)}>
+          {t.next}
+        </Button>
+      </div>
+      {extract && atEnd ? (
+        <div className="card flex flex-col gap-2 p-4">
+          <p className="font-semibold">{t.extractEnd}</p>
+          <p className="text-sm text-muted">{t.extractBody}</p>
+          <Link href={productHref} className={buttonClasses({ variant: "primary", block: true })}>
+            {t.buyToContinue}
+          </Link>
+        </div>
+      ) : null}
+      {!extract && current > 0 ? (
+        <Button variant="ghost" onClick={() => go(0)}>
+          {t.restart}
+        </Button>
+      ) : null}
+    </div>
+  );
 }
 
 /**
@@ -34,14 +117,36 @@ export function ReaderView({
   libraryHref,
   labels: t,
 }: {
-  products: Record<string, ProductSummary & { meta: string; href: string }>;
+  products: Record<string, ProductSummary & { meta: string; href: string; description: string }>;
   libraryHref: string;
   labels: ReaderLabels;
 }) {
   const slug = useSearchParam("id");
+  const extractMode = useSearchParam("extrait") === "1";
   const library = useStore(libraryStore);
   const p = products[slug];
   const owned = library.some((i) => i.slug === slug);
+
+  if (p && p.kind === "ebook" && (owned || extractMode)) {
+    return (
+      <div className="flex flex-col gap-3">
+        <h2 className="text-base font-bold">{p.title}</h2>
+        <BookReader
+          slug={p.slug}
+          description={p.description}
+          extract={!owned}
+          productHref={p.href}
+          t={t.book}
+        />
+        <Link
+          href={owned ? libraryHref : p.href}
+          className={buttonClasses({ variant: "outline", block: true })}
+        >
+          {owned ? t.back : t.seeProduct}
+        </Link>
+      </div>
+    );
+  }
 
   if (!p || !owned) {
     return (

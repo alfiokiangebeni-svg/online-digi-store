@@ -19,7 +19,12 @@ export default async function ReaderPage({ params }: PageProps<"/[locale]/lecteu
   const products = Object.fromEntries(
     CATALOG.map((p) => [
       p.slug,
-      { ...summarize(p), meta: metaLine(p, dict), href: productHref(localePath(locale), p.slug) },
+      {
+        ...summarize(p),
+        meta: metaLine(p, dict),
+        href: productHref(localePath(locale), p.slug),
+        description: p.description,
+      },
     ]),
   );
   return (
@@ -39,6 +44,7 @@ export default async function ReaderPage({ params }: PageProps<"/[locale]/lecteu
           soon: dict.feedback.soon,
           listen: dict.product.listen,
           pause: dict.product.pause,
+          book: dict.px.reader,
         }}
       />
     </AppShell>

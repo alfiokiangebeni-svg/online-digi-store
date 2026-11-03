@@ -14,10 +14,13 @@ import { cn } from "@/components/ui/cn";
 export function PreviewGallery({
   slides,
   category,
+  watermark,
   labels,
 }: {
   slides: string[];
   category?: CategoryId;
+  /** Filigrane posé sur les aperçus (images vendues : « di.si store · aperçu »). */
+  watermark?: string;
   labels: { open: string; prev: string; next: string; close: string; counter: string };
 }) {
   const ref = useRef<HTMLDialogElement>(null);
@@ -26,7 +29,7 @@ export function PreviewGallery({
 
   return (
     <>
-      <ul className="scroll-rail flex overflow-x-auto bg-surface">
+      <ul data-gallery className="scroll-rail flex overflow-x-auto bg-surface">
         {slides.map((title, i) => (
           <li key={i} className={cn("relative w-full shrink-0", i > 0 && "lite-hide")}>
             <button
@@ -39,6 +42,14 @@ export function PreviewGallery({
               className="block w-full text-left [&_.cover]:aspect-[4/3] [&_.cover]:p-5 [&_.cover-title]:text-3xl"
             >
               <TicketCover title={title} category={category} />
+              {watermark ? (
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 grid place-items-center text-2xl font-extrabold uppercase tracking-widest text-fg/25 [transform:rotate(-24deg)]"
+                >
+                  {watermark}
+                </span>
+              ) : null}
               <span className="absolute bottom-3 right-3 rounded-full bg-background px-2 py-0.5 text-xs text-fg">
                 {labels.counter.replace("{n}", String(i + 1)).replace("{total}", String(slides.length))}
               </span>
@@ -68,8 +79,16 @@ export function PreviewGallery({
               <IconClose size={18} />
             </button>
           </div>
-          <div className="overflow-hidden rounded-[var(--radius-lg)] [&_.cover]:aspect-[3/4] [&_.cover]:p-6 [&_.cover-title]:text-4xl">
+          <div className="relative overflow-hidden rounded-[var(--radius-lg)] [&_.cover]:aspect-[3/4] [&_.cover]:p-6 [&_.cover-title]:text-4xl">
             <TicketCover title={slides[index]} category={category} />
+            {watermark ? (
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 grid place-items-center text-3xl font-extrabold uppercase tracking-widest text-fg/25 [transform:rotate(-24deg)]"
+              >
+                {watermark}
+              </span>
+            ) : null}
           </div>
           {slides.length > 1 ? (
             <div className="flex justify-between">

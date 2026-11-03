@@ -19,6 +19,7 @@ import { BackButton, NavDepthTracker } from "./BackButton";
 import { FeedbackProvider } from "@/components/feedback/FeedbackProvider";
 import { CurrencyToggle } from "@/components/ui/CurrencyToggle";
 import { NotificationsButton } from "./NotificationsButton";
+import { MiniPlayer } from "./MiniPlayer";
 
 export type Tab = "home" | "categories" | "sell" | "cart" | "account" | null;
 
@@ -172,6 +173,7 @@ export function AppShell({
         </nav>
       </footer>
 
+      <MiniPlayer label={dict.px.nowPlaying} stopLabel={dict.px.stop} raised={hideNav} />
       {hideNav ? null : <BottomNav items={nav} label={dict.a11y.mainNav} />}
     </FeedbackProvider>
   );

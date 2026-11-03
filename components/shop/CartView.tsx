@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { applyCoupon } from "@/lib/coupons";
 import { effectivePrice, type ProductSummary } from "@/lib/catalog";
+import { optionPrice } from "@/lib/productExtras";
 import {
   addToLibrary,
   cartStore,
@@ -99,7 +100,8 @@ export function CartView({
   const lines = cart
     .map((line, index) => ({ line, index, product: products[line.slug] }))
     .filter((l) => l.product);
-  const subtotal = lines.reduce((sum, l) => sum + effectivePrice(l.product), 0);
+  const priceOf = (l: (typeof lines)[number]) => optionPrice(effectivePrice(l.product), l.line.option);
+  const subtotal = lines.reduce((sum, l) => sum + priceOf(l), 0);
   const coupon = couponCode ? applyCoupon(couponCode, subtotal) : null;
   const discount = coupon?.ok ? coupon.discountUsdCents : 0;
   const total = subtotal - discount;
@@ -140,7 +142,7 @@ export function CartView({
     addToLibrary(
       lines
         .filter((l) => !l.line.giftTo)
-        .map((l) => ({ slug: l.line.slug, paidUsdCents: effectivePrice(l.product) })),
+        .map((l) => ({ slug: l.line.slug, paidUsdCents: priceOf(l), optionLabel: l.line.optionLabel })),
     );
     recordOrder({ totalUsdCents: total, count: lines.length, giftTo: gifts });
     cartStore.set([]);
@@ -167,7 +169,7 @@ export function CartView({
         <ul>
           {lines.map(({ line, index, product: p }) => (
             <li
-              key={`${line.slug}-${line.giftTo ?? ""}`}
+              key={`${line.slug}-${line.giftTo ?? ""}-${line.option ?? ""}`}
               className="flex items-center gap-3 border-b border-surface-2 p-3.5"
             >
               <Thumb title={p.title} tone={p.tone} round={p.kind === "game" || p.kind === "edu"} />
@@ -182,7 +184,7 @@ export function CartView({
                       {format(t.giftLine, { phone: parsePhone(line.giftTo)?.display ?? line.giftTo })}
                     </span>
                   ) : (
-                    p.meta
+                    (line.optionLabel ?? p.meta)
                   )}
                 </span>
                 <button
@@ -205,8 +207,8 @@ export function CartView({
                 </button>
               </div>
               <Price
-                usdCents={p.priceUsdCents}
-                promoUsdCents={p.promoUsdCents}
+                usdCents={line.option ? priceOf({ line, index, product: p }) : p.priceUsdCents}
+                promoUsdCents={line.option ? undefined : p.promoUsdCents}
                 locale={locale}
                 oldPriceLabel={t.oldPrice}
                 freeLabel={t.free}

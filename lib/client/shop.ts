@@ -6,6 +6,10 @@ import { createStore } from "./store";
 export interface CartLine {
   slug: string;
   giftTo?: string;
+  /** Option choisie : « format:epub », « track:3 », « license:commercial »… */
+  option?: string;
+  /** Libellé de l'option, figé dans la langue de l'achat (« Format : EPUB »). */
+  optionLabel?: string;
 }
 
 export interface LibraryItem {
@@ -15,6 +19,7 @@ export interface LibraryItem {
   /** Prix payé en cents USD (0 = gratuit). */
   paidUsdCents: number;
   downloaded?: boolean;
+  optionLabel?: string;
 }
 
 export interface Parental {
@@ -67,7 +72,9 @@ export const lastOrderStore = createStore<LastOrder | null>(
 
 export function addToCart(line: CartLine) {
   cartStore.set((cart) =>
-    cart.some((l) => l.slug === line.slug && l.giftTo === line.giftTo) ? cart : [...cart, line],
+    cart.some((l) => l.slug === line.slug && l.giftTo === line.giftTo && l.option === line.option)
+      ? cart
+      : [...cart, line],
   );
 }
 export function removeFromCart(index: number) {
@@ -76,7 +83,7 @@ export function removeFromCart(index: number) {
 export function toggleFavorite(slug: string) {
   favoritesStore.set((f) => (f.includes(slug) ? f.filter((s) => s !== slug) : [slug, ...f]));
 }
-export function addToLibrary(items: { slug: string; paidUsdCents: number }[]) {
+export function addToLibrary(items: { slug: string; paidUsdCents: number; optionLabel?: string }[]) {
   const now = Date.now();
   libraryStore.set((lib) => {
     const owned = new Set(lib.map((i) => i.slug));
@@ -97,4 +104,41 @@ export const couponStore = createStore<string | null>(
   "ds-coupon",
   null,
   (v): v is string | null => v === null || typeof v === "string",
+);
+
+/** Option choisie sur la fiche (format, licence), reprise par « Ajouter au panier ». */
+export const optionStore = createStore<Record<string, { option: string; label: string }>>(
+  "ds-options",
+  {},
+  (v): v is Record<string, { option: string; label: string }> => isObj(v),
+);
+export function chooseOption(slug: string, option: string, label: string) {
+  optionStore.set((o) => ({ ...o, [slug]: { option, label } }));
+}
+
+/** Playlist (titres de musique), dans l'ordre d'ajout. */
+export interface PlaylistItem {
+  id: string;
+  slug: string;
+  title: string;
+}
+export const playlistStore = createStore<PlaylistItem[]>(
+  "ds-playlist",
+  [],
+  isArrayOf<PlaylistItem>((x) => isObj(x) && typeof x.id === "string"),
+);
+export function togglePlaylist(item: PlaylistItem): boolean {
+  let added = false;
+  playlistStore.set((list) => {
+    added = !list.some((i) => i.id === item.id);
+    return added ? [...list, item] : list.filter((i) => i.id !== item.id);
+  });
+  return added;
+}
+
+/** Page atteinte dans chaque livre (reprise de lecture). */
+export const readingStore = createStore<Record<string, number>>(
+  "ds-reading",
+  {},
+  (v): v is Record<string, number> => isObj(v),
 );

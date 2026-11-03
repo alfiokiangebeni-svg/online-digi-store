@@ -836,5 +836,84 @@
     "since": "On di.si store since {year}",
     "similar": "Similar products",
     "recent": "Recently viewed"
+  },
+  "px": {
+    "readExtract": "Read a sample",
+    "format": "Format",
+    "formats": {
+      "pdf": "PDF",
+      "epub": "EPUB",
+      "audio": "Audiobook"
+    },
+    "formatLabel": "Format: {format}",
+    "author": "Author",
+    "pages": "Pages",
+    "pagesValue": "{count} pages",
+    "reader": {
+      "resume": "Resume at page {page}",
+      "page": "Page {page} of {total}",
+      "prev": "Previous page",
+      "next": "Next page",
+      "extract": "Free sample",
+      "extractEnd": "End of the sample",
+      "extractBody": "Buy the book to keep reading, even offline.",
+      "buyToContinue": "Buy to keep reading",
+      "restart": "Back to the start",
+      "saved": "Your page is saved: you'll resume here.",
+      "samplePages": [
+        "Kinshasa se réveille avant le soleil. Les premiers taxis-bus klaxonnent déjà sur le boulevard, les vendeuses installent leurs bassines de pain et de beignets, et la radio annonce la météo du jour : chaud, humide, une averse possible en fin d'après-midi.",
+        "Pour bien commencer, il faut connaître trois choses : où l'on va, combien cela coûte, et à qui l'on peut faire confiance. Ce chapitre répond à ces trois questions, quartier par quartier, avec les prix constatés cette année.",
+        "Le marché est un lieu de rencontre autant que de commerce. On y négocie, on y prend des nouvelles de la famille, on y apprend les dernières rumeurs. Savoir saluer en lingala ouvre beaucoup de portes : « Mbote, ndeko ! »",
+        "Le soir, la ville change de visage. Les terrasses se remplissent, la rumba s'échappe des bars et les embouteillages se dénouent peu à peu. C'est le moment idéal pour découvrir les quartiers animés de Matonge et de Bandal.",
+        "Ce livre n'est pas un guide figé : il évolue avec la ville. Chaque mise à jour est gratuite pour les lecteurs, et vos remarques envoyées par WhatsApp nous aident à l'améliorer.",
+        "Dernier conseil avant de partir : gardez toujours un peu de monnaie en francs congolais, chargez votre téléphone et notez le numéro d'un chauffeur de confiance."
+      ]
+    },
+    "screenshots": "See screenshots",
+    "compat": "Compatibility",
+    "compatValue": "Android {version} or newer",
+    "changelog": "What's new in version {version}",
+    "parentalBlocked": "Parental control on (up to {age}): this content is above the chosen age. The parental code will be asked at checkout.",
+    "parentalOk": "Suitable for the age set in parental control ({age}).",
+    "tracks": "Album tracks",
+    "buyTrack": "Buy the track",
+    "buyAlbum": "Buy the album",
+    "trackLabel": "Track: {title}",
+    "trackAdded": "Track added to cart",
+    "addPlaylist": "Add to my playlist",
+    "removePlaylist": "Remove from my playlist",
+    "playlistAdded": "Added to your playlist",
+    "playlistRemoved": "Removed from your playlist",
+    "playlist": "My playlist",
+    "playlistEmpty": "Add tracks from a music page.",
+    "genre": "Genre",
+    "artist": "Artist",
+    "duration": "Length",
+    "nowPlaying": "Now playing",
+    "stop": "Stop listening",
+    "license": "Licence",
+    "licenses": {
+      "personal": "Personal",
+      "commercial": "Commercial"
+    },
+    "licenseHint": {
+      "personal": "Private use: wallpaper, personal printing.",
+      "commercial": "Business use: posters, social media, products for sale."
+    },
+    "licenseLabel": "Licence: {license}",
+    "watermark": "di.si store · preview",
+    "watermarkNote": "Watermarked preview. The HD file you buy has none.",
+    "resolution": "Resolution",
+    "files": "File format",
+    "orientation": "Orientation",
+    "orientations": {
+      "landscape": "Landscape",
+      "portrait": "Portrait",
+      "square": "Square"
+    },
+    "color": "Main colour",
+    "collection": "Collection",
+    "downloadHd": "Download in HD",
+    "sellerSince": "Seller since {year}"
   }
 }

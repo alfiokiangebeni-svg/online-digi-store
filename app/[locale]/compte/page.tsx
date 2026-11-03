@@ -3,6 +3,7 @@ import Link from "next/link";
 import { AppShell } from "@/components/shell/AppShell";
 import { AccountView } from "@/components/shop/AccountView";
 import { ActivityView } from "@/components/listings/ActivityView";
+import { PlaylistView } from "@/components/shop/ProductOptions";
 import { recentItems } from "@/components/shop/recentItems";
 import { metaLine, productHref } from "@/components/shop/labels";
 import { IconChat, IconChevron, IconDownload } from "@/components/ui";
@@ -77,6 +78,19 @@ export default async function AccountPage({ params }: PageProps<"/[locale]/compt
               .filter(([k]) => k.startsWith("a:"))
               .map(([k, v]) => [k.slice(2), v]),
           )}
+        />
+      </div>
+
+      <div className="mt-3">
+        <PlaylistView
+          title={dict.px.playlist}
+          empty={dict.px.playlistEmpty}
+          labels={{
+            listen: dict.product.listen,
+            pause: dict.product.pause,
+            remove: dict.cart.removeShort,
+            removed: dict.px.playlistRemoved,
+          }}
         />
       </div>
 

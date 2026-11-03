@@ -830,5 +830,84 @@
     "since": "Na di.si store banda {year}",
     "similar": "Biloko ekokani",
     "recent": "Otalaki kala te"
+  },
+  "px": {
+    "readExtract": "Tanga moke",
+    "format": "Format",
+    "formats": {
+      "pdf": "PDF",
+      "epub": "EPUB",
+      "audio": "Livre audio"
+    },
+    "formatLabel": "Format : {format}",
+    "author": "Mokomi",
+    "pages": "Pages",
+    "pagesValue": "{count} pages",
+    "reader": {
+      "resume": "Kobanda lisusu na lokasa {page}",
+      "page": "Lokasa {page} na {total}",
+      "prev": "Lokasa ya liboso",
+      "next": "Lokasa oyo elandi",
+      "extract": "Moke ya ofele",
+      "extractEnd": "Nsuka ya moke ya ofele",
+      "extractBody": "Somba buku mpo na kotanga oyo etikali, ata soki internet ezali te.",
+      "buyToContinue": "Somba mpo na kokoba",
+      "restart": "Zonga na ebandeli",
+      "saved": "Lokasa na yo ebombami.",
+      "samplePages": [
+        "Kinshasa se réveille avant le soleil. Les premiers taxis-bus klaxonnent déjà sur le boulevard, les vendeuses installent leurs bassines de pain et de beignets, et la radio annonce la météo du jour : chaud, humide, une averse possible en fin d'après-midi.",
+        "Pour bien commencer, il faut connaître trois choses : où l'on va, combien cela coûte, et à qui l'on peut faire confiance. Ce chapitre répond à ces trois questions, quartier par quartier, avec les prix constatés cette année.",
+        "Le marché est un lieu de rencontre autant que de commerce. On y négocie, on y prend des nouvelles de la famille, on y apprend les dernières rumeurs. Savoir saluer en lingala ouvre beaucoup de portes : « Mbote, ndeko ! »",
+        "Le soir, la ville change de visage. Les terrasses se remplissent, la rumba s'échappe des bars et les embouteillages se dénouent peu à peu. C'est le moment idéal pour découvrir les quartiers animés de Matonge et de Bandal.",
+        "Ce livre n'est pas un guide figé : il évolue avec la ville. Chaque mise à jour est gratuite pour les lecteurs, et vos remarques envoyées par WhatsApp nous aident à l'améliorer.",
+        "Dernier conseil avant de partir : gardez toujours un peu de monnaie en francs congolais, chargez votre téléphone et notez le numéro d'un chauffeur de confiance."
+      ]
+    },
+    "screenshots": "Tala bilili ya application",
+    "compat": "Compatibilité",
+    "compatValue": "Android {version} to oyo ya sika",
+    "changelog": "Makambo ya sika na version {version}",
+    "parentalBlocked": "Bokengeli ya baboti ezali (kino mibu {age}) : eloko oyo eleki mibu oponaki. Code ekosengama na kofuta.",
+    "parentalOk": "Ebongi na mibu oponaki ({age}).",
+    "tracks": "Banzembo ya album",
+    "buyTrack": "Somba nzembo",
+    "buyAlbum": "Somba album",
+    "trackLabel": "Nzembo : {title}",
+    "trackAdded": "Nzembo ebakisami na panier",
+    "addPlaylist": "Bakisa na playlist na ngai",
+    "removePlaylist": "Longola na playlist",
+    "playlistAdded": "Ebakisami na playlist na yo",
+    "playlistRemoved": "Elongolami na playlist na yo",
+    "playlist": "Playlist na ngai",
+    "playlistEmpty": "Bakisa banzembo uta na lokasa ya miziki.",
+    "genre": "Genre",
+    "artist": "Moyembi",
+    "duration": "Ntango",
+    "nowPlaying": "Ozali koyoka",
+    "stop": "Tika koyoka",
+    "license": "Licence",
+    "licenses": {
+      "personal": "Ya moto moko",
+      "commercial": "Ya mombongo"
+    },
+    "licenseHint": {
+      "personal": "Mpo na yo moko : fond d'écran, kobimisa na ndako.",
+      "commercial": "Mpo na mombongo : ba-affiche, réseaux sociaux, biloko oteki."
+    },
+    "licenseLabel": "Licence : {license}",
+    "watermark": "di.si store · kotala",
+    "watermarkNote": "Kotala na elembo. Fichier HD osombi ezali na yango te.",
+    "resolution": "Résolution",
+    "files": "Format de fichier",
+    "orientation": "Orientation",
+    "orientations": {
+      "landscape": "Paysage",
+      "portrait": "Portrait",
+      "square": "Carré"
+    },
+    "color": "Langi monene",
+    "collection": "Collection",
+    "downloadHd": "Kitisa na HD",
+    "sellerSince": "Moteki banda {year}"
   }
 }
