@@ -51,3 +51,19 @@ Après l'étape 3 : aucun bouton sans effet sur les écrans audités (`e2e/audit
 
 Restent simulés (démo, sans serveur) : paiement Mobile Money, téléchargement, envoi du cadeau par SMS.
 Démo sans serveur : visites, cautions, candidatures, offres, devis, avis, signalements et annonces publiées sont enregistrés sur le téléphone ; « Contacter » ouvre WhatsApp vers le support.
+
+## Mesures avant / après (étape 6)
+
+Avant = APK du début de la mission (commit `60f10c3`) ; après = APK de l'étape 6.
+Démarrage mesuré sur le site embarqué dans l'APK, téléphone simulé (Pixel 7, processeur ralenti ×4), médiane de 7 ouvertures de l'accueil.
+
+| Mesure                         | Avant      | Après    | Écart                                                 |
+| ------------------------------ | ---------- | -------- | ----------------------------------------------------- |
+| Taille de l'APK                | 7,24 Mo    | 16,07 Mo | +122 % (limite +10 % : dépassée, à réduire plus tard) |
+| Site embarqué (non compressé)  | 25 Mo      | 54 Mo    | 3 langues × 174 pages, chaque page en 3 fichiers      |
+| Code Android (dex compressé)   | —          | 2,0 Mo   | Lecteur de codes Google                               |
+| Premier affichage de l'accueil | 204–280 ms | 248 ms   | ≈ identique                                           |
+| Accueil chargé                 | 443–479 ms | 516 ms   | +40 à +70 ms                                          |
+| JavaScript de l'accueil        | 458 Ko     | 484 Ko   | +6 %                                                  |
+
+Pistes pour revenir sous la limite (non appliquées, à décider) : retirer `/design` et la page hors ligne de l'APK, compresser le code Android (R8), supprimer les fichiers de navigation en double, alléger les textes envoyés à chaque page ; en dernier recours, retirer le scan ou réduire le catalogue de démo.
