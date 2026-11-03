@@ -3,6 +3,8 @@ import { AppShell } from "@/components/shell/AppShell";
 import { ExplorerView, type ExploreItem } from "@/components/shop/ExplorerView";
 import { metaLine, productHref } from "@/components/shop/labels";
 import { explorerLabels } from "@/components/shop/explorerLabels";
+import { ListingResults } from "@/components/listings/ListingResults";
+import { listingHits } from "@/components/listings/items";
 import { CATALOG, summarize, type Kind } from "@/lib/catalog";
 import { localePath } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n";
@@ -29,6 +31,7 @@ export default async function ExplorePage({ params }: PageProps<"/[locale]/explo
     <AppShell locale={locale} dict={dict} tab="categories" path="explorer" search={false}>
       <h1 className="mb-3 mt-1 text-[22px] font-bold">{dict.explore.title}</h1>
       <ExplorerView items={items} kinds={KINDS} locale={locale} labels={explorerLabels(dict)} />
+      <ListingResults items={listingHits(locale, dict)} title={dict.listing.results} />
     </AppShell>
   );
 }

@@ -18,6 +18,10 @@ import { localePath } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n";
 import { resolveLocale } from "@/lib/i18n/params";
 import { explorerLabels } from "@/components/shop/explorerLabels";
+import { ListingsView } from "@/components/listings/ListingsView";
+import { listingsPageData } from "@/components/listings/items";
+import { isListingCategory } from "@/lib/listings";
+import { AlertSwitch, QuoteSheet } from "@/components/listings/ListingActions";
 
 export function generateStaticParams() {
   return CATEGORY_IDS.map((id) => ({ cat: CATEGORY_SLUGS[id] }));
@@ -60,7 +64,37 @@ export default async function CategoryPage({ params }: PageProps<"/[locale]/cate
         <CategoryIcon id={id} className="text-muted" />
         {dict.categories[id]}
       </h1>
-      {items.length ? (
+      {isListingCategory(id) ? (
+        <>
+          <div className="card mb-3 flex flex-col gap-2 px-3.5 py-2">
+            <AlertSwitch
+              category={id}
+              label={id === "jobs" ? dict.listing.alertJobs : dict.listing.alert}
+              on={dict.listing.alertOn}
+              off={dict.listing.alertOff}
+            />
+            {id === "tenders" ? (
+              <div className="flex flex-wrap gap-2 pb-1.5">
+                <QuoteSheet
+                  t={dict.listing}
+                  field={dict.field}
+                  closeLabel={dict.sheet.close}
+                  activityHref={`${localePath(locale, "compte")}#activites`}
+                  invalidPhone={dict.cart.phoneInvalid}
+                  category={dict.categories.tenders}
+                />
+                <Link
+                  href={`${localePath(locale, "vendre")}?categorie=tenders`}
+                  className={buttonClasses({ variant: "primary", className: "flex-1" })}
+                >
+                  {dict.listing.publishTender}
+                </Link>
+              </div>
+            ) : null}
+          </div>
+          <ListingsView category={id} {...listingsPageData(id, locale, dict)} />
+        </>
+      ) : items.length ? (
         <ExplorerView
           items={items}
           kinds={CATEGORY_KINDS[id].length > 1 ? CATEGORY_KINDS[id] : []}

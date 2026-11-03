@@ -1,4 +1,5 @@
 import { CATALOG, type Kind, type Product } from "@/lib/catalog";
+import { isListingCategory, listingsIn } from "@/lib/listings";
 import { CATEGORY_IDS, type CategoryId } from "@/lib/theme";
 
 /**
@@ -35,4 +36,9 @@ export function categoryFromSlug(slug: string): CategoryId | undefined {
 export function productsInCategory(id: CategoryId): Product[] {
   const kinds = CATEGORY_KINDS[id];
   return CATALOG.filter((p) => kinds.includes(p.kind)).sort((a, b) => b.sales - a.sales);
+}
+
+/** Nombre de contenus (produits ou annonces) d'une catégorie. */
+export function countInCategory(id: CategoryId): number {
+  return isListingCategory(id) ? listingsIn(id).length : productsInCategory(id).length;
 }

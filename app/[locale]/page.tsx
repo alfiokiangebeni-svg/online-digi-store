@@ -9,7 +9,6 @@ import {
   CategoryIcon,
   IconBolt,
   IconChat,
-  IconChevron,
   IconDownload,
   IconGrid,
   IconPhone,
@@ -20,6 +19,10 @@ import {
 import { Countdown } from "@/components/ui/Countdown";
 import { CATALOG, effectivePrice, getProduct, productsForRail } from "@/lib/catalog";
 import { CATEGORY_IDS, CATEGORY_SLUGS, productsInCategory } from "@/lib/categories";
+import { isListingCategory, listingsIn } from "@/lib/listings";
+import { ListingTicket } from "@/components/listings/ListingTicket";
+import { RecentRail } from "@/components/shop/RecentRail";
+import { recentItems } from "@/components/shop/recentItems";
 import type { CategoryId } from "@/lib/theme";
 import { DEMO_COUPONS } from "@/lib/coupons";
 import { formatMoney } from "@/lib/currency";
@@ -28,8 +31,8 @@ import { format, getDictionary } from "@/lib/i18n";
 import { resolveLocale } from "@/lib/i18n/params";
 
 /** Catégories qui ont déjà des contenus : un rayon chacune sur l'accueil. */
-const RAIL_CATEGORIES: CategoryId[] = ["apps", "books", "images"];
-const NEW_CATEGORIES: CategoryId[] = ["realestate", "jobs", "tenders"];
+/** Rayons de l'accueil, dans l'ordre (la musique a son propre rayon à écouter). */
+const RAILS: CategoryId[] = ["realestate", "jobs", "apps", "books", "tenders", "images"];
 
 function SectionHead({
   id,
@@ -219,30 +222,36 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
       </section>
 
       {/* Un rayon par catégorie */}
-      {RAIL_CATEGORIES.map((id) => (
+      {RAILS.map((id) => (
         <section key={id} aria-labelledby={`rail-${id}`} className="card mt-3 pb-3">
           <SectionHead
             id={`rail-${id}`}
-            title={dict.categories[id]}
+            title={
+              id in dict.homeRails ? dict.homeRails[id as keyof typeof dict.homeRails] : dict.categories[id]
+            }
             icon={<CategoryIcon id={id} size={18} className="text-muted" />}
             href={category(id)}
             seeAll={dict.home.seeAll}
           />
           <div className="scroll-rail mt-1 flex gap-2.5 overflow-x-auto px-3">
-            {productsInCategory(id)
-              .slice(0, 6)
-              .map((p) => (
-                <ProductTicket key={p.slug} product={p} locale={locale} dict={dict} quickAdd />
-              ))}
+            {isListingCategory(id)
+              ? listingsIn(id).map((l) => (
+                  <ListingTicket key={l.slug} listing={l} locale={locale} dict={dict} />
+                ))
+              : productsInCategory(id)
+                  .slice(0, 6)
+                  .map((p) => (
+                    <ProductTicket key={p.slug} product={p} locale={locale} dict={dict} quickAdd />
+                  ))}
           </div>
         </section>
       ))}
 
-      {/* Musique : écoute directe */}
+      {/* Top musique : écoute directe */}
       <section aria-labelledby="rail-music" className="card mt-3">
         <SectionHead
           id="rail-music"
-          title={dict.categories.music}
+          title={dict.homeRails.music}
           icon={<CategoryIcon id="music" size={18} className="text-muted" />}
           href={category("music")}
           seeAll={dict.home.seeAll}
@@ -268,27 +277,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
         </ul>
       </section>
 
-      {/* Nouvelles catégories (annonces) */}
-      <section aria-labelledby="new-cats" className="card mt-3 pb-1">
-        <SectionHead id="new-cats" title={dict.home.newCategories} />
-        <p className="px-3 text-[13px] text-muted">{dict.home.newCategoriesBody}</p>
-        <ul className="mt-1">
-          {NEW_CATEGORIES.map((id) => (
-            <ListRow
-              key={id}
-              href={category(id)}
-              media={
-                <span className="grid size-10 place-items-center rounded-[var(--radius-sm)] bg-surface-2">
-                  <CategoryIcon id={id} size={20} />
-                </span>
-              }
-              title={dict.categories[id]}
-              meta={dict.categoriesPage.publish}
-              action={<IconChevron size={16} className="text-muted" />}
-            />
-          ))}
-        </ul>
-      </section>
+      <RecentRail title={dict.actions.recent} items={recentItems(locale, dict)} />
 
       {/* Recommandé pour vous : grille 2 colonnes */}
       <section aria-labelledby="for-you" className="mt-4">

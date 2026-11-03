@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { AppShell } from "@/components/shell/AppShell";
 import { CategoryIcon, IconBolt, IconChevron, IconDownload, ListRow } from "@/components/ui";
 import { Badge } from "@/components/ui/Badge";
-import { CATEGORY_IDS, CATEGORY_SLUGS, productsInCategory } from "@/lib/categories";
+import { CATEGORY_IDS, CATEGORY_SLUGS, countInCategory } from "@/lib/categories";
 import { localePath } from "@/lib/i18n/config";
 import { format, getDictionary } from "@/lib/i18n";
 import { resolveLocale } from "@/lib/i18n/params";
@@ -28,7 +28,7 @@ export default async function CategoriesPage({ params }: PageProps<"/[locale]/ca
       <h1 className="mb-3 mt-1 text-[22px] font-bold">{t.title}</h1>
       <ul className="card overflow-hidden">
         {CATEGORY_IDS.map((id) => {
-          const count = productsInCategory(id).length;
+          const count = countInCategory(id);
           return (
             <ListRow
               key={id}
