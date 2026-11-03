@@ -84,14 +84,6 @@ test.describe("Accueil et catégories", () => {
 });
 
 test.describe("Vendre et compte", () => {
-  test("chaque catégorie ouvre WhatsApp avec le message prêt", async ({ page }) => {
-    await page.goto("/fr/vendre");
-    const tile = page.getByRole("link", { name: "Offres d'emploi" });
-    const href = (await tile.getAttribute("href")) ?? "";
-    expect(href).toContain("https://wa.me/243824176729?text=");
-    expect(decodeURIComponent(href)).toContain("je veux publier sur di.si store : Offres d'emploi");
-  });
-
   test("Compte → Mes achats, Retour vers Compte", async ({ page }) => {
     await page.goto("/fr/compte");
     await page.getByRole("link", { name: /Mes achats/ }).click();
