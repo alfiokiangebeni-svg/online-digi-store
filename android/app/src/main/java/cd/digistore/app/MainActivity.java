@@ -15,7 +15,7 @@ import androidx.webkit.WebViewAssetLoader;
 import androidx.webkit.WebViewClientCompat;
 
 /**
- * Application Android de test : affiche la boutique Digi Store exportée en fichiers
+ * Application Android de test : affiche la boutique di.si store exportée en fichiers
  * statiques (assets/www). Tout fonctionne hors-ligne : panier, paiement simulé,
  * bibliothèque et réglages sont stockés dans le WebView (localStorage).
  * Les liens externes (WhatsApp…) s'ouvrent dans l'application correspondante.
@@ -26,6 +26,7 @@ public class MainActivity extends Activity {
     private static final String START_URL = "https://" + HOST + "/fr/";
 
     private WebView web;
+    private NativeBridge bridge;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,10 @@ public class MainActivity extends Activity {
         settings.setAllowContentAccess(false);
         settings.setTextZoom(100);
         settings.setMediaPlaybackRequiresUserGesture(true);
+
+        // Pont natif (voix, scan, vibration) : la WebView ne charge que la boutique embarquée.
+        bridge = new NativeBridge(this, web);
+        web.addJavascriptInterface(bridge, "DisiNative");
 
         final WebViewAssetLoader loader = new WebViewAssetLoader.Builder()
                 .setDomain(HOST)
@@ -76,6 +81,15 @@ public class MainActivity extends Activity {
             startActivity(new Intent(Intent.ACTION_VIEW, uri));
         } catch (ActivityNotFoundException e) {
             Toast.makeText(this, R.string.no_app, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == NativeBridge.VOICE_REQUEST && bridge != null) {
+            bridge.onVoiceResult(resultCode, data);
         }
     }
 
