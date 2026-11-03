@@ -153,10 +153,22 @@ test.describe("Fiche produit", () => {
     await expect(page.getByRole("link", { name: /Le fleuve et nous/ })).toBeVisible();
   });
 
-  test("partage WhatsApp : lien d'envoi prêt", async ({ page }) => {
+  test("partager : WhatsApp, Facebook et copier le lien", async ({ page, context }) => {
+    await context.grantPermissions(["clipboard-read", "clipboard-write"]);
     await page.goto("/fr/produit/rumba-douce");
-    const href = await page.getByRole("link", { name: "Partager sur WhatsApp" }).getAttribute("href");
-    expect(href).toMatch(/^https:\/\/wa\.me\/\?text=.*Rumba/);
+    await page.getByRole("button", { name: "Partager" }).click();
+    const sheet = page.locator("dialog[open]");
+    await expect(sheet.getByRole("link", { name: "WhatsApp" })).toHaveAttribute(
+      "href",
+      /^https:\/\/wa\.me\/\?text=.*Rumba/,
+    );
+    await expect(sheet.getByRole("link", { name: "Facebook" })).toHaveAttribute(
+      "href",
+      /facebook\.com\/sharer/,
+    );
+    await sheet.getByRole("button", { name: "Copier le lien" }).click();
+    await expect(toastZone(page)).toContainText("Lien copié");
+    expect(await page.evaluate(() => navigator.clipboard.readText())).toContain("/fr/produit/rumba-douce");
   });
 
   test("offrir à un numéro : cadeau ajouté au panier", async ({ page }) => {
@@ -183,7 +195,7 @@ test.describe("Fiche produit", () => {
   test("choix de version : la taille change", async ({ page }) => {
     await page.goto("/fr/produit/maths-en-s-amusant");
     await page.getByRole("button", { name: "Windows" }).click();
-    await expect(page.locator("fieldset")).toContainText("120 Mo");
+    await expect(page.locator("fieldset").filter({ visible: true })).toContainText("120 Mo");
   });
 });
 
@@ -199,12 +211,18 @@ test.describe("Bibliothèque et lecteur", () => {
     await expect(page.getByRole("button", { name: "Mettre en pause l'extrait" })).toBeVisible();
   });
 
-  test("lecteur : un livre annonce « Bientôt disponible »", async ({ page }) => {
+  test("lecteur de livre : pages et reprise de lecture", async ({ page }) => {
     await seed(page, {
       "ds-library": [{ slug: "le-fleuve-et-nous", at: Date.now(), paidUsdCents: 899, downloaded: true }],
     });
     await page.goto("/fr/lecteur?id=le-fleuve-et-nous");
-    await expect(page.getByText("Bientôt disponible", { exact: true })).toBeVisible();
+    await expect(page.getByText("Page 1 sur 7")).toBeVisible();
+    await page.getByRole("button", { name: "Page suivante" }).click();
+    await page.getByRole("button", { name: "Page suivante" }).click();
+    await expect(page.getByText("Page 3 sur 7")).toBeVisible();
+    await page.reload();
+    await expect(page.getByText("Page 3 sur 7")).toBeVisible();
+    await expect(page.getByText("Ta page est mémorisée")).toBeVisible();
   });
 });
 
