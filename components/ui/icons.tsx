@@ -268,3 +268,8 @@ export const IconUpload = (p: IconProps) => (
     <path d="M12 16V4M7 9l5-5 5 5M4 20h16" />
   </Base>
 );
+export const IconTrash = (p: IconProps) => (
+  <Base {...p}>
+    <path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6" />
+  </Base>
+);

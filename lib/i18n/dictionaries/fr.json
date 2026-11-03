@@ -915,5 +915,149 @@
     "collection": "Collection",
     "downloadHd": "Télécharger en HD",
     "sellerSince": "Vendeur depuis {year}"
+  },
+  "sellx": {
+    "tabs": {
+      "publish": "Publier",
+      "mine": "Mes annonces",
+      "inbox": "Messages"
+    },
+    "tabsLabel": "Espace vendeur",
+    "step1": "1. Choisis la catégorie",
+    "step2": "2. Décris ton annonce",
+    "change": "Changer de catégorie",
+    "fields": {
+      "title": "Titre",
+      "description": "Description",
+      "price": "Prix (USD)",
+      "salary": "Salaire mensuel (USD)",
+      "budget": "Budget estimé (USD)",
+      "rent": "Loyer par mois (USD)",
+      "commune": "Commune",
+      "quartier": "Quartier",
+      "phone": "Numéro de contact",
+      "formats": "Formats",
+      "pages": "Nombre de pages",
+      "version": "Version",
+      "size": "Taille (Mo)",
+      "age": "Âge minimum",
+      "type": "Type de bien",
+      "bedrooms": "Chambres",
+      "furnished": "Meublé",
+      "contract": "Contrat",
+      "mode": "Lieu de travail",
+      "deadline": "Date limite (dans combien de jours)",
+      "sector": "Secteur",
+      "documents": "Documents requis (un par ligne)",
+      "genre": "Genre",
+      "tracks": "Nombre de titres",
+      "license": "Licence proposée",
+      "resolution": "Résolution",
+      "photos": "Photos ou fichiers",
+      "photosHint": "Démo : les fichiers restent sur ton téléphone.",
+      "photosChosen": "{count} fichier(s) choisi(s)"
+    },
+    "errors": {
+      "title": "Indique un titre (5 caractères minimum).",
+      "description": "Décris ton annonce (20 caractères minimum).",
+      "price": "Indique un montant en dollars.",
+      "fix": "Corrige les champs en rouge."
+    },
+    "saveDraft": "Enregistrer le brouillon",
+    "draftSaved": "Brouillon enregistré",
+    "draftRestored": "Brouillon repris du {date}",
+    "draftClear": "Effacer le brouillon",
+    "draftCleared": "Brouillon effacé",
+    "preview": "Aperçu avant publication",
+    "previewTitle": "Aperçu de ton annonce",
+    "previewNote": "Voici comment les acheteurs verront ton annonce.",
+    "edit": "Modifier",
+    "publish": "Publier l'annonce",
+    "published": "Annonce publiée",
+    "publishedBody": "Elle est en vérification (moins de 24 h). Suis ses statistiques dans « Mes annonces ».",
+    "stampPublished": "Publié",
+    "seeMine": "Voir mes annonces",
+    "newListing": "Publier une autre annonce",
+    "mineEmpty": "Tu n'as encore rien publié. Choisis une catégorie dans « Publier ».",
+    "status": {
+      "review": "En vérification",
+      "live": "En ligne"
+    },
+    "stats": {
+      "views": "Vues",
+      "contacts": "Contacts",
+      "sales": "Ventes",
+      "applications": "Candidatures",
+      "bids": "Offres reçues",
+      "visits": "Visites demandées"
+    },
+    "boost": "Booster mon annonce",
+    "boosted": "Boostée 7 jours",
+    "boostTitle": "Mise en avant payante",
+    "boostIntro": "Ton annonce passe en tête de sa catégorie et sur l'accueil pendant 7 jours, pour {price}.",
+    "boostPay": "Payer {price}",
+    "boostSuccess": "Annonce boostée",
+    "boostBody": "Elle est mise en avant pendant 7 jours.",
+    "remove": "Supprimer",
+    "removed": "Annonce supprimée",
+    "inboxIntro": "Messages, candidatures et offres reçus pour tes annonces (démo).",
+    "inboxEmpty": "Aucun message pour l'instant.",
+    "kinds": {
+      "message": "Message",
+      "application": "Candidature",
+      "bid": "Offre reçue"
+    },
+    "reply": "Répondre",
+    "replyTitle": "Répondre à {name}",
+    "replyLabel": "Ta réponse",
+    "replyMissing": "Écris ta réponse.",
+    "replySend": "Envoyer",
+    "replySent": "Réponse envoyée",
+    "replied": "Répondu",
+    "demoInbox": [
+      {
+        "id": "m1",
+        "from": "Joël M.",
+        "kind": "message",
+        "text": "Bonjour, est-ce toujours disponible ? Je peux passer demain matin."
+      },
+      {
+        "id": "m2",
+        "from": "Sarah K.",
+        "kind": "message",
+        "text": "Faites-vous un prix pour 3 exemplaires ? Je paie en Airtel Money."
+      }
+    ],
+    "genApplication": "{name} a postulé à « {title} ».",
+    "genBid": "{name} propose {amount} $ pour « {title} ».",
+    "genMessage": "{name} demande plus d'informations sur « {title} ».",
+    "names": ["Christelle B.", "Héritier N.", "Kin Services SARL"],
+    "options": {
+      "contract": {
+        "cdi": "CDI",
+        "cdd": "CDD",
+        "internship": "Stage",
+        "freelance": "Freelance"
+      },
+      "mode": {
+        "onsite": "Sur site",
+        "remote": "Télétravail",
+        "hybrid": "Hybride"
+      },
+      "type": {
+        "apartment": "Appartement",
+        "house": "Maison",
+        "office": "Bureau",
+        "hall": "Salle",
+        "land": "Terrain"
+      },
+      "license": {
+        "personal": "Personnelle",
+        "commercial": "Personnelle + commerciale"
+      },
+      "yes": "Oui",
+      "no": "Non"
+    },
+    "draftBadge": "Brouillon"
   }
 }

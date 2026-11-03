@@ -909,5 +909,149 @@
     "collection": "Collection",
     "downloadHd": "Kitisa na HD",
     "sellerSince": "Moteki banda {year}"
+  },
+  "sellx": {
+    "tabs": {
+      "publish": "Tia",
+      "mine": "Ba-annonce na ngai",
+      "inbox": "Ba-message"
+    },
+    "tabsLabel": "Esika ya moteki",
+    "step1": "1. Pona motindo",
+    "step2": "2. Limbola annonce na yo",
+    "change": "Bongola motindo",
+    "fields": {
+      "title": "Titre",
+      "description": "Description",
+      "price": "Prix (USD)",
+      "salary": "Salaire mensuel (USD)",
+      "budget": "Budget estimé (USD)",
+      "rent": "Loyer par mois (USD)",
+      "commune": "Commune",
+      "quartier": "Quartier",
+      "phone": "Numéro de contact",
+      "formats": "Formats",
+      "pages": "Nombre de pages",
+      "version": "Version",
+      "size": "Taille (Mo)",
+      "age": "Âge minimum",
+      "type": "Type de bien",
+      "bedrooms": "Chambres",
+      "furnished": "Meublé",
+      "contract": "Contrat",
+      "mode": "Lieu de travail",
+      "deadline": "Date limite (dans combien de jours)",
+      "sector": "Secteur",
+      "documents": "Documents requis (un par ligne)",
+      "genre": "Genre",
+      "tracks": "Nombre de titres",
+      "license": "Licence proposée",
+      "resolution": "Résolution",
+      "photos": "Photos ou fichiers",
+      "photosHint": "Démo : les fichiers restent sur ton téléphone.",
+      "photosChosen": "{count} fichier(s) choisi(s)"
+    },
+    "errors": {
+      "title": "Indique un titre (5 caractères minimum).",
+      "description": "Décris ton annonce (20 caractères minimum).",
+      "price": "Indique un montant en dollars.",
+      "fix": "Corrige les champs en rouge."
+    },
+    "saveDraft": "Bomba brouillon",
+    "draftSaved": "Brouillon ebombami",
+    "draftRestored": "Brouillon ya {date} ezongisami",
+    "draftClear": "Longola brouillon",
+    "draftCleared": "Brouillon elongolami",
+    "preview": "Tala liboso ya kotia",
+    "previewTitle": "Ndenge annonce na yo ekomonana",
+    "previewNote": "Ndenge oyo basombi bakomona annonce na yo.",
+    "edit": "Bongola",
+    "publish": "Tia annonce",
+    "published": "Annonce etiami",
+    "publishedBody": "Ezali kotalama (na nse ya ngonga 24). Landa yango na « Ba-annonce na ngai ».",
+    "stampPublished": "Etiami",
+    "seeMine": "Tala ba-annonce na ngai",
+    "newListing": "Tia annonce mosusu",
+    "mineEmpty": "Otii naino eloko te. Pona motindo na « Tia ».",
+    "status": {
+      "review": "Ezali kotalama",
+      "live": "Ezali na internet"
+    },
+    "stats": {
+      "views": "Vues",
+      "contacts": "Contacts",
+      "sales": "Ventes",
+      "applications": "Candidatures",
+      "bids": "Offres reçues",
+      "visits": "Ba-rendez-vous"
+    },
+    "boost": "Tombola annonce na ngai",
+    "boosted": "Etombolami mikolo 7",
+    "boostTitle": "Kotombola na mbongo",
+    "boostIntro": "Annonce na yo ekozala na liboso ya motindo na yango mpe na ebandeli mikolo 7, mpo na {price}.",
+    "boostPay": "Futa {price}",
+    "boostSuccess": "Annonce etombolami",
+    "boostBody": "Ezali na liboso mikolo 7.",
+    "remove": "Longola",
+    "removed": "Annonce elongolami",
+    "inboxIntro": "Ba-message, ba-demande mpe ba-offre ozwi (démo).",
+    "inboxEmpty": "Message moko te sikoyo.",
+    "kinds": {
+      "message": "Message",
+      "application": "Candidature",
+      "bid": "Offre reçue"
+    },
+    "reply": "Zongisa",
+    "replyTitle": "Zongisela {name}",
+    "replyLabel": "Eyano na yo",
+    "replyMissing": "Koma eyano na yo.",
+    "replySend": "Tinda",
+    "replySent": "Eyano etindami",
+    "replied": "Ozongisaki",
+    "demoInbox": [
+      {
+        "id": "m1",
+        "from": "Joël M.",
+        "kind": "message",
+        "text": "Bonjour, est-ce toujours disponible ? Je peux passer demain matin."
+      },
+      {
+        "id": "m2",
+        "from": "Sarah K.",
+        "kind": "message",
+        "text": "Faites-vous un prix pour 3 exemplaires ? Je paie en Airtel Money."
+      }
+    ],
+    "genApplication": "{name} a postulé à « {title} ».",
+    "genBid": "{name} propose {amount} $ pour « {title} ».",
+    "genMessage": "{name} demande plus d'informations sur « {title} ».",
+    "names": ["Christelle B.", "Héritier N.", "Kin Services SARL"],
+    "options": {
+      "contract": {
+        "cdi": "CDI",
+        "cdd": "CDD",
+        "internship": "Stage",
+        "freelance": "Freelance"
+      },
+      "mode": {
+        "onsite": "Sur site",
+        "remote": "Télétravail",
+        "hybrid": "Hybride"
+      },
+      "type": {
+        "apartment": "Appartement",
+        "house": "Maison",
+        "office": "Bureau",
+        "hall": "Salle",
+        "land": "Terrain"
+      },
+      "license": {
+        "personal": "Personnelle",
+        "commercial": "Personnelle + commerciale"
+      },
+      "yes": "Oui",
+      "no": "Non"
+    },
+    "draftBadge": "Brouillon"
   }
 }

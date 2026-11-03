@@ -44,6 +44,7 @@ export function MobileMoneyPay({
   className,
   activity,
   onPaid,
+  hideTrigger,
 }: {
   id: string;
   amount: ReactNode;
@@ -56,6 +57,8 @@ export function MobileMoneyPay({
   /** Démarche enregistrée dans « Mes activités » après paiement. */
   activity?: Omit<Activity, "id" | "at">;
   onPaid?: () => void;
+  /** Masque le bouton (déjà payé) sans couper l'écran de confirmation en cours. */
+  hideTrigger?: boolean;
 }) {
   const parental = useStore(parentalStore);
   const [value, setValue] = useState("");
@@ -64,45 +67,47 @@ export function MobileMoneyPay({
 
   return (
     <>
-      <Sheet
-        triggerLabel={t.trigger}
-        triggerVariant={variant}
-        triggerIcon={icon ?? <IconPhone size={18} />}
-        triggerClassName={className}
-        title={t.title}
-        closeLabel={t.close}
-      >
-        {(close) => (
-          <form
-            className="flex flex-col gap-4"
-            onSubmit={(e) => {
-              e.preventDefault();
-              const parsed = parsePhone(value);
-              if (!parsed) return setError(t.invalid);
-              close();
-              setPhone(parsed);
-            }}
-          >
-            <p className="text-sm text-muted">{t.intro}</p>
-            <PhoneField
-              id={`pay-${id}`}
-              label={t.phoneLabel}
-              placeholder={t.phonePlaceholder}
-              hint={t.phoneHint}
-              detectedTemplate={t.detected}
-              unknownText={t.unknown}
-              onValueChange={(v) => {
-                setValue(v);
-                setError(undefined);
+      {hideTrigger ? null : (
+        <Sheet
+          triggerLabel={t.trigger}
+          triggerVariant={variant}
+          triggerIcon={icon ?? <IconPhone size={18} />}
+          triggerClassName={className}
+          title={t.title}
+          closeLabel={t.close}
+        >
+          {(close) => (
+            <form
+              className="flex flex-col gap-4"
+              onSubmit={(e) => {
+                e.preventDefault();
+                const parsed = parsePhone(value);
+                if (!parsed) return setError(t.invalid);
+                close();
+                setPhone(parsed);
               }}
-              error={error}
-            />
-            <Button type="submit" block haptic>
-              {t.pay}
-            </Button>
-          </form>
-        )}
-      </Sheet>
+            >
+              <p className="text-sm text-muted">{t.intro}</p>
+              <PhoneField
+                id={`pay-${id}`}
+                label={t.phoneLabel}
+                placeholder={t.phonePlaceholder}
+                hint={t.phoneHint}
+                detectedTemplate={t.detected}
+                unknownText={t.unknown}
+                onValueChange={(v) => {
+                  setValue(v);
+                  setError(undefined);
+                }}
+                error={error}
+              />
+              <Button type="submit" block haptic>
+                {t.pay}
+              </Button>
+            </form>
+          )}
+        </Sheet>
+      )}
       {phone ? (
         <PaymentFlow
           phone={phone}

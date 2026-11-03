@@ -915,5 +915,149 @@
     "collection": "Collection",
     "downloadHd": "Download in HD",
     "sellerSince": "Seller since {year}"
+  },
+  "sellx": {
+    "tabs": {
+      "publish": "Post",
+      "mine": "My listings",
+      "inbox": "Messages"
+    },
+    "tabsLabel": "Seller space",
+    "step1": "1. Pick the category",
+    "step2": "2. Describe your listing",
+    "change": "Change category",
+    "fields": {
+      "title": "Title",
+      "description": "Description",
+      "price": "Price (USD)",
+      "salary": "Monthly salary (USD)",
+      "budget": "Estimated budget (USD)",
+      "rent": "Monthly rent (USD)",
+      "commune": "Area",
+      "quartier": "Neighbourhood",
+      "phone": "Contact number",
+      "formats": "Formats",
+      "pages": "Number of pages",
+      "version": "Version",
+      "size": "Size (MB)",
+      "age": "Minimum age",
+      "type": "Property type",
+      "bedrooms": "Bedrooms",
+      "furnished": "Furnished",
+      "contract": "Contract",
+      "mode": "Workplace",
+      "deadline": "Deadline (in how many days)",
+      "sector": "Sector",
+      "documents": "Required documents (one per line)",
+      "genre": "Genre",
+      "tracks": "Number of tracks",
+      "license": "Licence offered",
+      "resolution": "Resolution",
+      "photos": "Photos or files",
+      "photosHint": "Demo: files stay on your phone.",
+      "photosChosen": "{count} file(s) selected"
+    },
+    "errors": {
+      "title": "Enter a title (at least 5 characters).",
+      "description": "Describe your listing (at least 20 characters).",
+      "price": "Enter an amount in dollars.",
+      "fix": "Fix the fields in red."
+    },
+    "saveDraft": "Save draft",
+    "draftSaved": "Draft saved",
+    "draftRestored": "Draft from {date} restored",
+    "draftClear": "Delete draft",
+    "draftCleared": "Draft deleted",
+    "preview": "Preview before posting",
+    "previewTitle": "Preview of your listing",
+    "previewNote": "This is how buyers will see your listing.",
+    "edit": "Edit",
+    "publish": "Post the listing",
+    "published": "Listing posted",
+    "publishedBody": "It is under review (less than 24 h). Follow its statistics in “My listings”.",
+    "stampPublished": "Posted",
+    "seeMine": "See my listings",
+    "newListing": "Post another listing",
+    "mineEmpty": "You haven't posted anything yet. Pick a category in “Post”.",
+    "status": {
+      "review": "Under review",
+      "live": "Live"
+    },
+    "stats": {
+      "views": "Views",
+      "contacts": "Contacts",
+      "sales": "Sales",
+      "applications": "Applications",
+      "bids": "Bids received",
+      "visits": "Visit requests"
+    },
+    "boost": "Boost my listing",
+    "boosted": "Boosted for 7 days",
+    "boostTitle": "Paid promotion",
+    "boostIntro": "Your listing goes to the top of its category and the home screen for 7 days, for {price}.",
+    "boostPay": "Pay {price}",
+    "boostSuccess": "Listing boosted",
+    "boostBody": "It is promoted for 7 days.",
+    "remove": "Delete",
+    "removed": "Listing deleted",
+    "inboxIntro": "Messages, applications and bids received for your listings (demo).",
+    "inboxEmpty": "No messages yet.",
+    "kinds": {
+      "message": "Message",
+      "application": "Application",
+      "bid": "Bid received"
+    },
+    "reply": "Reply",
+    "replyTitle": "Reply to {name}",
+    "replyLabel": "Your reply",
+    "replyMissing": "Write your reply.",
+    "replySend": "Send",
+    "replySent": "Reply sent",
+    "replied": "Replied",
+    "demoInbox": [
+      {
+        "id": "m1",
+        "from": "Joël M.",
+        "kind": "message",
+        "text": "Hello, is it still available? I can come by tomorrow morning."
+      },
+      {
+        "id": "m2",
+        "from": "Sarah K.",
+        "kind": "message",
+        "text": "Any discount for 3 copies? I pay with Airtel Money."
+      }
+    ],
+    "genApplication": "{name} applied to “{title}”.",
+    "genBid": "{name} offers ${amount} for “{title}”.",
+    "genMessage": "{name} asks for more information about “{title}”.",
+    "names": ["Christelle B.", "Héritier N.", "Kin Services SARL"],
+    "options": {
+      "contract": {
+        "cdi": "Permanent",
+        "cdd": "Fixed-term",
+        "internship": "Internship",
+        "freelance": "Freelance"
+      },
+      "mode": {
+        "onsite": "On site",
+        "remote": "Remote",
+        "hybrid": "Hybrid"
+      },
+      "type": {
+        "apartment": "Apartment",
+        "house": "House",
+        "office": "Office",
+        "hall": "Venue",
+        "land": "Land"
+      },
+      "license": {
+        "personal": "Personal",
+        "commercial": "Personal + commercial"
+      },
+      "yes": "Yes",
+      "no": "No"
+    },
+    "draftBadge": "Draft"
   }
 }

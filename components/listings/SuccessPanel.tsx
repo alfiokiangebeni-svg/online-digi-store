@@ -9,12 +9,15 @@ export function SuccessPanel({
   body,
   href,
   linkLabel,
+  onLink,
 }: {
   stamp: string;
   title: string;
   body: string;
   href: string;
   linkLabel: string;
+  /** Action à la place du lien (changement d'onglet sur la même page). */
+  onLink?: () => void;
 }) {
   return (
     <div role="status" className="flex flex-col gap-3">
@@ -23,9 +26,15 @@ export function SuccessPanel({
       </div>
       <p className="text-lg font-bold">{title}</p>
       <p className="text-sm text-muted">{body}</p>
-      <Link href={href} className={buttonClasses({ variant: "outline", block: true })}>
-        {linkLabel}
-      </Link>
+      {onLink ? (
+        <button type="button" onClick={onLink} className={buttonClasses({ variant: "outline", block: true })}>
+          {linkLabel}
+        </button>
+      ) : (
+        <Link href={href} className={buttonClasses({ variant: "outline", block: true })}>
+          {linkLabel}
+        </Link>
+      )}
     </div>
   );
 }
