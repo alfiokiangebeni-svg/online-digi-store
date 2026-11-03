@@ -97,10 +97,32 @@ icônes au trait en gris (`textSecondary`), sur fond en relief. Seule l'icône l
 | Accueil        | `/fr`                    | Bandeaux à la une (glisser), avantages, grille des 7 catégories + Toutes, ventes flash, coupons, un rayon par catégorie, musique à écouter, nouvelles catégories, recommandés |
 | Catégories     | `/fr/categories`         | Les 7 catégories (nombre de contenus ou « Nouveau »), raccourcis Gratuits et Promotions                                                                                       |
 | Page catégorie | `/fr/categories/livres`… | Recherche, filtres par type, prix, tri ; catégorie vide : « Publier une annonce » et « Voir les autres catégories »                                                           |
-| Vendre         | `/fr/vendre`             | Choix de la catégorie (ouvre WhatsApp avec le message prêt en attendant le formulaire de l'étape 5), étapes, support                                                          |
-| Compte         | `/fr/compte`             | Profil, compteurs, Mes achats, contrôle parental, favoris, réglages, langue, Devenir vendeur                                                                                  |
+| Vendre         | `/fr/vendre`             | Publier (formulaire par catégorie, brouillon, aperçu), Mes annonces (statistiques, Booster, supprimer), Messages reçus (répondre)                                             |
+| Compte         | `/fr/compte`             | Profil, compteurs, Mes achats, Mes activités (candidatures, offres, visites, cautions, devis), Ma playlist, contrôle parental, favoris, réglages, langue, Devenir vendeur     |
+
+| Annonce | `/fr/annonce/…` | Immobilier, emploi ou appel d'offres : actions de la catégorie, barre d'action fixe, annonces similaires |
+| Cahier des charges | `/fr/annonce/…/cahier` | Texte complet de l'appel d'offres, copiable |
 
 Adresses des catégories : `livres`, `applications`, `immobilier`, `emplois`, `musique`, `images`, `appels-d-offres` (`lib/categories.ts`).
+
+## Boutons par catégorie (étape 5)
+
+| Catégorie         | Actions                                                                                                     | Options                                                                                                                                                      |
+| ----------------- | ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Toutes les fiches | Favoris · Partager (WhatsApp, Facebook, copier le lien) · Signaler · Contacter le vendeur · Donner mon avis | Vendeur vérifié et ancienneté, produits ou annonces similaires, récemment consultés                                                                          |
+| Livres            | Lire un extrait · Acheter maintenant · Ajouter au panier · Offrir                                           | Format (PDF, EPUB, audio), auteur, pages, langue, lecteur intégré avec reprise de lecture                                                                    |
+| Applications      | Obtenir / Télécharger · Voir les captures · Acheter                                                         | Taille, version, compatibilité Android, âge conseillé, notes de mise à jour, avertissement du contrôle parental                                              |
+| Immobilier        | Réserver une visite · Contacter sur WhatsApp · Payer la caution / l'acompte                                 | Type, commune et quartier, prix par mois ou par jour, chambres, meublé, photos, visite vidéo (bientôt), carte, disponibilité, alerte nouvelle annonce        |
+| Offres d'emploi   | Postuler · Envoyer mon CV · Sauvegarder l'offre                                                             | Secteur, contrat, lieu ou télétravail, salaire, date limite (compte à rebours sous 3 jours), suivi de candidature, alertes emploi                            |
+| Musique           | Écouter l'extrait · Acheter le titre · Acheter l'album · Ajouter à ma playlist                              | Genre, artiste, durée, mini-lecteur persistant en bas d'écran, écoute hors-ligne après achat                                                                 |
+| Images            | Aperçu avec filigrane · Choisir la licence · Télécharger en HD                                              | Licence personnelle ou commerciale (×3), résolution, format, orientation, couleur dominante, collection                                                      |
+| Appels d'offres   | Télécharger le cahier des charges · Soumissionner · Poser une question                                      | Secteur, organisme, budget, date limite, documents requis, dépôt en ligne, statut de la soumission ; acheteur : Publier un appel d'offres, Demander un devis |
+
+Recherche : bouton micro (reconnaissance vocale du téléphone) et bouton scan (lecteur de codes Google, sans permission caméra) dans la barre de recherche, affichés seulement quand le téléphone les prend en charge. Un QR code di.si store ouvre la fiche ; un autre code lance une recherche.
+
+Confirmation animée (tampon « Envoyé », « Déposé », « Réservé », « Payé », « Publié ») après candidature, offre, visite, paiement et publication.
+
+Démo sans serveur : ces démarches sont enregistrées sur le téléphone et suivies dans Compte › Mes activités ; « Contacter » et « Poser une question » ouvrent WhatsApp vers le support (+243 824 176 729).
 
 ## Composants
 

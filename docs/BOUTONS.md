@@ -1,7 +1,7 @@
 # di.si store — état des boutons
 
 Audit initial (étape 1) : 263 éléments cliquables, 237 OK, 19 partiels, 7 sans effet.
-Après l'étape 3 : aucun bouton sans effet sur les 10 écrans audités (`e2e/audit.spec.ts`).
+Après l'étape 3 : aucun bouton sans effet sur les écrans audités (`e2e/audit.spec.ts`, 14 écrans depuis l'étape 4).
 
 | Bouton                                 | Écran                  | Statut avant                                 | Correction                                                        | Test associé (`e2e/`)            |
 | -------------------------------------- | ---------------------- | -------------------------------------------- | ----------------------------------------------------------------- | -------------------------------- |
@@ -27,5 +27,27 @@ Après l'étape 3 : aucun bouton sans effet sur les 10 écrans audités (`e2e/au
 | Recherche, filtres, Effacer            | Explorer               | OK                                           | —                                                                 | `boutons` › Recherche et filtres |
 | Tous les autres boutons                | 10 écrans              | —                                            | Chacun doit produire un effet                                     | `audit` (10 tests)               |
 
+## Nouveaux boutons (étapes 4 et 5)
+
+| Bouton                                                           | Écran                                     | Statut avant                      | Ajout                                                                        | Test associé (`e2e/`)                             |
+| ---------------------------------------------------------------- | ----------------------------------------- | --------------------------------- | ---------------------------------------------------------------------------- | ------------------------------------------------- |
+| Onglets Accueil · Catégories · Vendre · Panier · Compte          | Barre du bas                              | Explorer / Bibliothèque           | Nouvelle barre, Mes achats dans Compte                                       | `navigation` › Barre du bas                       |
+| Recherche permanente, notifications                              | En-tête                                   | Recherche sur l'accueil seulement | Sur tous les onglets ; cloche avec notifications (démo)                      | `navigation` › En-tête                            |
+| Recherche vocale, scan                                           | En-tête                                   | Absent                            | Pont Android (voix, lecteur de codes Google) ; masqués si non pris en charge | `recherche-native` (6 tests)                      |
+| Filtres type, meublé, contrat, télétravail, secteur, tri         | Pages Immobilier, Emploi, Appels d'offres | Absent                            | Filtres dans l'adresse (partageables)                                        | `annonces` › filtres                              |
+| Réserver une visite                                              | Annonce immobilière                       | Absent                            | Jour, créneau, numéro → « Réservé »                                          | `annonces` › visite                               |
+| Payer la caution / l'acompte                                     | Annonce immobilière                       | Absent                            | Mobile Money (échecs + Réessayer)                                            | `annonces` › caution                              |
+| Voir sur la carte, Contacter sur WhatsApp, Alerte                | Annonce immobilière                       | Absent                            | Google Maps, WhatsApp, alerte enregistrée                                    | `annonces` › carte                                |
+| Visite vidéo                                                     | Annonce immobilière                       | Absent                            | « Bientôt disponible »                                                       | `annonces` › carte                                |
+| Postuler, Envoyer mon CV, Sauvegarder l'offre                    | Offre d'emploi                            | Absent                            | Champs vérifiés, CV joint, suivi dans Mes activités                          | `annonces` › postuler, CV                         |
+| Cahier des charges, Poser une question, Soumissionner            | Appel d'offres                            | Absent                            | Document copiable, WhatsApp, offre avec documents requis                     | `annonces` › soumission                           |
+| Demander un devis, Publier un appel d'offres                     | Page Appels d'offres                      | Absent                            | Demande enregistrée ; formulaire Vendre                                      | `annonces` › acheteur                             |
+| Lire un extrait, format, lecteur                                 | Livre                                     | Lecteur « bientôt »               | Extrait gratuit, choix du format, pages + reprise                            | `fiches` › Livres, `boutons` › lecteur            |
+| Voir les captures, avertissement parental                        | Application                               | Absent                            | Galerie, notes de mise à jour, compatibilité                                 | `fiches` › Applications                           |
+| Acheter le titre / l'album, playlist, mini-lecteur               | Musique                                   | Extrait seul                      | Titres, playlist dans Compte, lecteur persistant                             | `fiches` › Musique                                |
+| Licence, Télécharger en HD                                       | Images                                    | Absent                            | Filigrane, licence ×3, HD en bibliothèque                                    | `fiches` › Images                                 |
+| Partager (WhatsApp, Facebook, copier), Signaler, Contacter, Avis | Toutes les fiches                         | WhatsApp seul                     | Feuille de partage, motif obligatoire, note 1–5                              | `fiches` › Actions communes, `boutons` › partager |
+| Publier (brouillon, aperçu), Booster, Supprimer, Répondre        | Vendre                                    | WhatsApp seul                     | Espace vendeur complet                                                       | `vendre` (4 tests)                                |
+
 Restent simulés (démo, sans serveur) : paiement Mobile Money, téléchargement, envoi du cadeau par SMS.
-« Devenir vendeur » ouvre WhatsApp en attendant l'onglet Vendre (étapes 4–5).
+Démo sans serveur : visites, cautions, candidatures, offres, devis, avis, signalements et annonces publiées sont enregistrés sur le téléphone ; « Contacter » ouvre WhatsApp vers le support.
