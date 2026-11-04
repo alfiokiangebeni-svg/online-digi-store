@@ -26,7 +26,7 @@ export function SearchField({
       action={action}
       method="get"
       role="search"
-      className="flex h-11 items-center gap-1 rounded-[var(--radius-md)] border border-line bg-surface-2 pl-3 pr-1 focus-within:border-primary"
+      className="flex h-12 items-center gap-1 rounded-full border-2 border-primary bg-surface pl-4 pr-1 focus-within:border-primary-text"
     >
       <IconSearch size={18} className="shrink-0 text-muted" />
       <label className="flex min-w-0 flex-1">
@@ -42,8 +42,12 @@ export function SearchField({
         />
       </label>
       {tools}
-      <button type="submit" className="sr-only">
-        {submitLabel}
+      <button
+        type="submit"
+        aria-label={submitLabel}
+        className="grid h-9 w-11 shrink-0 place-items-center rounded-full bg-text-primary text-on-accent hover:opacity-90"
+      >
+        <IconSearch size={18} />
       </button>
     </form>
   );

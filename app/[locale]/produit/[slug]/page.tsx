@@ -175,7 +175,7 @@ export default async function ProductPage({ params }: PageProps<"/[locale]/produ
       <TrackRecent id={`p:${p.slug}`} />
       <article className="flex flex-col gap-2.5">
         {/* Galerie */}
-        <section aria-labelledby="previews" className="-mx-3 -mt-3">
+        <section aria-labelledby="previews" className="-mx-4 -mt-4">
           <h2 id="previews" className="sr-only">
             {dict.product.previews}
           </h2>

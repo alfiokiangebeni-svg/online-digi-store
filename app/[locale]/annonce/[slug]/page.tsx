@@ -124,7 +124,7 @@ export default async function ListingPage({ params }: PageProps<"/[locale]/annon
       <TrackRecent id={`a:${l.slug}`} />
       <article className="flex flex-col gap-2.5">
         {l.category === "realestate" ? (
-          <section aria-labelledby="photos" className="-mx-3 -mt-3">
+          <section aria-labelledby="photos" className="-mx-4 -mt-4">
             <h2 id="photos" className="sr-only">
               {t.sections.photos}
             </h2>
@@ -331,7 +331,7 @@ export default async function ListingPage({ params }: PageProps<"/[locale]/annon
           <h2 id="similar" className="mb-2 px-1 text-[17px] font-bold">
             {t.sections.similar}
           </h2>
-          <div className="scroll-rail -mx-3 flex gap-2.5 overflow-x-auto px-3">
+          <div className="scroll-rail -mx-4 flex gap-2.5 overflow-x-auto px-4">
             {similar.map((s) => (
               <ListingTicket key={s.slug} listing={s} locale={locale} dict={dict} />
             ))}

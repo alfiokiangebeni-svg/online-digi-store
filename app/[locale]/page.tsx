@@ -7,6 +7,7 @@ import { ProductTicket } from "@/components/shop/ProductTicket";
 import { metaLine, productHref } from "@/components/shop/labels";
 import {
   CategoryIcon,
+  Chip,
   IconBolt,
   IconChat,
   IconDownload,
@@ -77,14 +78,15 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
   const category = (id: CategoryId) => localePath(locale, `categories/${CATEGORY_SLUGS[id]}`);
   const pack = getProduct("maths-en-s-amusant")!;
   const priceProps = { locale, oldPriceLabel: dict.product.oldPrice, freeLabel: dict.product.free };
-  const forYou = [...CATALOG].sort((a, b) => b.rating * b.reviews - a.rating * a.reviews).slice(0, 6);
+  // Fil « Pour toi » façon place de marché : tout le catalogue en 2 colonnes.
+  const forYou = [...CATALOG].sort((a, b) => b.rating * b.reviews - a.rating * a.reviews);
   const [bPack, bFlash, bSell] = dict.home.banners;
   const banners = [
     {
       ...bPack,
       href: productHref(base, pack.slug),
       extra: (
-        <p className="text-[13px] text-muted">
+        <p className="text-[13px]">
           <span className="price-tag text-lg">
             <Money usdCents={effectivePrice(pack)} locale={locale} />
           </span>{" "}
@@ -99,22 +101,38 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
   ];
 
   return (
-    <AppShell locale={locale} dict={dict} tab="home">
+    <AppShell
+      locale={locale}
+      dict={dict}
+      tab="home"
+      headerExtra={
+        <nav aria-label={dict.home.tabsLabel} className="scroll-rail -mx-4 flex gap-2 overflow-x-auto px-4">
+          <Chip href={base} selected>
+            {dict.home.forYou}
+          </Chip>
+          {CATEGORY_IDS.map((id) => (
+            <Chip key={id} href={category(id)}>
+              {dict.categories[id]}
+            </Chip>
+          ))}
+        </nav>
+      }
+    >
       {/* Bandeaux à la une : carrousel horizontal (glisser), le suivant dépasse */}
       <section aria-labelledby="banners-title">
         <h1 id="banners-title" className="sr-only">
           {dict.home.bannersLabel}
         </h1>
-        <ul className="scroll-rail -mx-3 flex gap-2.5 overflow-x-auto px-3">
+        <ul className="scroll-rail -mx-4 flex gap-2.5 overflow-x-auto px-4">
           {banners.map((b, i) => (
-            <li key={b.kicker} className="w-[86%] shrink-0 sm:w-[48%]">
+            <li key={b.kicker} className="w-[90%] shrink-0 sm:w-[48%]">
               <Link
                 href={b.href}
                 prefetch={false}
-                className="card pressable relative flex h-full min-h-[9.5rem] flex-col gap-1.5 p-4"
+                className="pressable relative flex h-full min-h-[11rem] flex-col gap-2 rounded-[var(--radius-lg)] bg-text-primary p-5 text-on-accent [&_.price-old]:text-on-accent/60 [&_.price-tag]:text-on-accent"
               >
                 <span className="text-xs font-bold uppercase tracking-[0.6px] text-primary">{b.kicker}</span>
-                <span className="font-display text-[19px] font-bold leading-tight">{b.title}</span>
+                <span className="font-display text-[21px] font-bold leading-tight">{b.title}</span>
                 {b.extra}
                 <span className="btn-primary mt-auto inline-flex h-10 items-center self-start rounded-[var(--radius-md)] px-4 text-[13px] font-bold">
                   {b.cta}
@@ -129,7 +147,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
       </section>
 
       {/* Avantages */}
-      <ul className="mt-2 flex justify-around px-1 py-1 text-[11px] font-semibold text-muted">
+      <ul className="mt-3 flex justify-around px-1 py-1 text-[11px] font-semibold text-muted">
         <li className="inline-flex items-center gap-1">
           <IconDownload size={14} />
           {dict.home.trustDelivery}
@@ -145,7 +163,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
       </ul>
 
       {/* Les 7 catégories + toutes */}
-      <nav aria-label={dict.home.categories} className="card mt-2 grid grid-cols-4 gap-y-3 px-1 py-3">
+      <nav aria-label={dict.home.categories} className="card mt-3 grid grid-cols-4 gap-y-5 px-2 py-5">
         {CATEGORY_IDS.map((id) => (
           <Link
             key={id}
@@ -153,7 +171,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
             prefetch={false}
             className="pressable flex min-h-11 flex-col items-center gap-1.5 text-center text-[11px] font-medium leading-tight"
           >
-            <span className="grid size-12 place-items-center rounded-full bg-surface-2 text-fg">
+            <span className="grid size-14 place-items-center rounded-full bg-surface-2 text-fg">
               <CategoryIcon id={id} />
             </span>
             {dict.categories[id]}
@@ -164,7 +182,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
           prefetch={false}
           className="pressable flex min-h-11 flex-col items-center gap-1.5 text-center text-[11px] font-medium leading-tight"
         >
-          <span className="grid size-12 place-items-center rounded-full bg-surface-2 text-primary">
+          <span className="grid size-14 place-items-center rounded-full bg-primary text-on-primary">
             <IconGrid />
           </span>
           {dict.home.allCategories}
@@ -172,7 +190,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
       </nav>
 
       {/* Ventes flash */}
-      <section aria-labelledby="rail-flash" className="card mt-3 pb-3">
+      <section aria-labelledby="rail-flash" className="card mt-5 pb-4">
         <SectionHead
           id="rail-flash"
           title={dict.home.flash}
@@ -191,11 +209,11 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
       </section>
 
       {/* Coupons */}
-      <section id="coupons" aria-labelledby="coupons-title" className="mt-3 scroll-mt-32">
+      <section id="coupons" aria-labelledby="coupons-title" className="mt-5 scroll-mt-32">
         <h2 id="coupons-title" className="mb-2 px-1 text-[17px] font-bold">
           {dict.home.coupons}
         </h2>
-        <div className="scroll-rail -mx-3 flex gap-2.5 overflow-x-auto px-3">
+        <div className="scroll-rail -mx-4 flex gap-2.5 overflow-x-auto px-4">
           {DEMO_COUPONS.map((c) => (
             <CouponCard
               key={c.code}
@@ -223,7 +241,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
 
       {/* Un rayon par catégorie */}
       {RAILS.map((id) => (
-        <section key={id} aria-labelledby={`rail-${id}`} className="card mt-3 pb-3">
+        <section key={id} aria-labelledby={`rail-${id}`} className="card mt-5 pb-4">
           <SectionHead
             id={`rail-${id}`}
             title={
@@ -248,7 +266,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
       ))}
 
       {/* Top musique : écoute directe */}
-      <section aria-labelledby="rail-music" className="card mt-3">
+      <section aria-labelledby="rail-music" className="card mt-5">
         <SectionHead
           id="rail-music"
           title={dict.homeRails.music}
@@ -280,7 +298,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
       <RecentRail title={dict.actions.recent} items={recentItems(locale, dict)} />
 
       {/* Recommandé pour vous : grille 2 colonnes */}
-      <section aria-labelledby="for-you" className="mt-4">
+      <section aria-labelledby="for-you" className="mt-6">
         <div className="mb-1 flex items-center justify-between px-1">
           <h2 id="for-you" className="text-[17px] font-bold">
             {dict.home.forYou}
@@ -293,7 +311,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
             {dict.home.seeAll}
           </Link>
         </div>
-        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
           {forYou.map((p) => (
             <ProductTicket key={p.slug} product={p} locale={locale} dict={dict} quickAdd />
           ))}

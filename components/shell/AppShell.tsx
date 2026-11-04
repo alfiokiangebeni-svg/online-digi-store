@@ -88,8 +88,8 @@ export function AppShell({
         {dict.a11y.skipToContent}
       </a>
       <NavDepthTracker />
-      <header className="sticky top-0 z-30 bg-background text-fg">
-        <div className="mx-auto flex max-w-5xl items-center justify-between gap-2 px-4 pt-1.5">
+      <header className="sticky top-0 z-30 bg-surface text-fg shadow-[var(--shadow-card)]">
+        <div className="mx-auto flex max-w-5xl items-center justify-between gap-2 px-4 pt-2.5">
           {back ? (
             <BackButton fallback={back} label={dict.product.back} />
           ) : (
@@ -126,7 +126,7 @@ export function AppShell({
           </div>
         </div>
         {search || headerExtra ? (
-          <div className="mx-auto flex max-w-5xl flex-col gap-2 px-4 pb-2.5 pt-1">
+          <div className="mx-auto flex max-w-5xl flex-col gap-3 px-4 pb-3 pt-2">
             {search ? (
               <SearchField
                 action={localePath(locale, "explorer")}
@@ -150,7 +150,7 @@ export function AppShell({
         )}
       </header>
 
-      <main id="contenu" className="mx-auto max-w-5xl px-3 pb-6 pt-3">
+      <main id="contenu" className="mx-auto max-w-5xl px-4 pb-8 pt-4">
         {children}
       </main>
 

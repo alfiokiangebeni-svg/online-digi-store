@@ -104,7 +104,7 @@ export function ListingsView({
       <div
         role="group"
         aria-label={t.groupLabel}
-        className="scroll-rail -mx-3 flex gap-2 overflow-x-auto px-3"
+        className="scroll-rail -mx-4 flex gap-2 overflow-x-auto px-4"
       >
         <Chip selected={!group} onClick={() => setSearchParams({ type: null })}>
           {t.all}
@@ -120,7 +120,7 @@ export function ListingsView({
         <div
           role="group"
           aria-label={t.modeLabel}
-          className="scroll-rail -mx-3 flex gap-2 overflow-x-auto px-3"
+          className="scroll-rail -mx-4 flex gap-2 overflow-x-auto px-4"
         >
           {modes.map((m) => (
             <Chip
