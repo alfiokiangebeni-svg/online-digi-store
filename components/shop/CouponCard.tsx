@@ -24,7 +24,7 @@ export function CouponCard({
   const t = useFeedbackTexts();
   return (
     <div className="flex min-w-[15rem] shrink-0 items-stretch overflow-hidden rounded-[8px] border border-dashed border-promo bg-surface">
-      <div className="grid w-20 shrink-0 place-items-center bg-urgent px-1 text-center text-lg font-extrabold leading-tight text-on-primary">
+      <div className="grid w-20 shrink-0 place-items-center bg-urgent px-1 text-center text-lg font-extrabold leading-tight text-on-accent">
         {value}
       </div>
       <div className="flex flex-1 flex-col justify-center gap-1 px-3 py-2.5">
@@ -42,7 +42,7 @@ export function CouponCard({
           }}
           className={cn(
             "mt-0.5 inline-flex h-8 items-center gap-1 self-start rounded-full px-3 text-xs font-bold",
-            claimed ? "bg-success text-on-primary" : "btn-primary",
+            claimed ? "bg-success text-on-accent" : "btn-primary",
           )}
         >
           {claimed ? <IconCheck size={12} /> : null}

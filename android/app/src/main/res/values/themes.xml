@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Thème clair « Lumière » : barre d'état blanche à icônes foncées, fond gris très clair. -->
     <style name="Theme.DigiStore" parent="android:Theme.Material.Light.NoActionBar">
-        <item name="android:statusBarColor">#0B1F3A</item>
+        <item name="android:statusBarColor">#FFFFFF</item>
         <item name="android:navigationBarColor">#FFFFFF</item>
-        <item name="android:windowBackground">#F1F2F4</item>
-        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowBackground">#F3F4F2</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 </resources>

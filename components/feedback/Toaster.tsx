@@ -34,7 +34,7 @@ export function Toaster({ closeLabel }: { closeLabel: string }) {
                 href={t.action.href}
                 prefetch={false}
                 onClick={() => dismiss(t.id)}
-                className="shrink-0 py-2 font-semibold text-primary"
+                className="shrink-0 py-2 font-semibold text-primary-text"
               >
                 {t.action.label}
               </Link>
@@ -45,7 +45,7 @@ export function Toaster({ closeLabel }: { closeLabel: string }) {
                   t.action?.onClick?.();
                   dismiss(t.id);
                 }}
-                className="shrink-0 py-2 font-semibold text-primary"
+                className="shrink-0 py-2 font-semibold text-primary-text"
               >
                 {t.action.label}
               </button>

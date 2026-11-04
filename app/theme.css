@@ -8,24 +8,26 @@
  */
 
 @theme {
-  /* ── Couleurs de base ─────────────────────────────────────────────────── */
-  --color-primary: #b6f23a; /* actions principales, onglet actif */
-  --color-primary-pressed: #9bd61f; /* état pressé / survol */
-  --color-background: #1c1f1e; /* fond général */
-  --color-surface: #262a28; /* cartes, feuilles modales, barre du bas */
-  --color-surface-high: #323735; /* champs, puces, éléments en relief */
-  --color-border: #3e4441; /* séparateurs, contours */
-  --color-text-primary: #f2f5f3; /* titres et textes */
-  --color-text-secondary: #a3aca7; /* descriptions, métadonnées */
+  /* ── Couleurs de base (thème clair « Lumière ») ───────────────────────── */
+  --color-primary: #b6f23a; /* vert citron : boutons d'action, pastille du logo */
+  --color-primary-pressed: #a2dc24; /* état pressé / survol */
+  --color-primary-text: #3a6200; /* vert lisible sur fond clair : onglet actif, liens, puces */
+  --color-background: #f3f4f2; /* fond général, gris très clair */
+  --color-surface: #ffffff; /* cartes, feuilles modales, barres */
+  --color-surface-high: #eaece9; /* champs, puces, éléments en relief */
+  --color-border: #d8dcd7; /* séparateurs, contours */
+  --color-text-primary: #141816; /* titres et textes */
+  --color-text-secondary: #555d58; /* descriptions, métadonnées */
   --color-on-primary: #0e100f; /* texte sur le vert citron (jamais de blanc) */
+  --color-on-accent: #ffffff; /* texte sur le rouge et le vert succès */
 
   /* ── Couleurs d'appoint (minimum : pas de surcharge) ─────────────────────
-   * Rouge = remises, ventes flash, urgences, erreurs. Doré = étoiles. Menthe = succès.
+   * Rouge = remises, ventes flash, urgences, erreurs. Doré = étoiles. Vert = succès.
    * Aucune autre couleur : pas de bleu, d'orange ni de rose ; catégories en gris. */
-  --color-urgent: #ff4d5e; /* fonds et icônes : −30 %, vente flash, « Plus que 3 », date limite */
-  --color-urgent-text: #ff5e6d; /* même sens en petit texte (prix barré, erreurs) — AA 4,9:1 */
-  --color-star: #ffc53d; /* étoiles de note uniquement */
-  --color-success: #2ed3a0; /* paiement réussi, « Livré », candidature envoyée, vendeur vérifié */
+  --color-urgent: #d42b3a; /* fonds : −30 %, vente flash, « Plus que 3 », date limite (texte blanc) */
+  --color-urgent-text: #c41f2e; /* même sens en petit texte (prix barré, erreurs) */
+  --color-star: #b07a00; /* étoiles de note uniquement */
+  --color-success: #0a7655; /* paiement réussi, « Livré », candidature envoyée, vendeur vérifié */
 
   /* ── Typographie ───────────────────────────────────────────────────────── */
   --font-display: var(--font-jakarta), system-ui, Roboto, sans-serif; /* titres, prix, logo */
@@ -39,6 +41,9 @@
   --radius-control: 10px;
   --radius-card: 12px;
   --radius-ticket: 12px;
+
+  /* ── Ombres (très légères, thème clair) ────────────────────────────────── */
+  --shadow-card: 0 1px 2px rgb(20 24 22 / 0.06), 0 0 0 1px rgb(20 24 22 / 0.04);
 
   /* ── Mouvement (désactivé si « réduire les animations ») ───────────────── */
   --animate-stamp: stamp 520ms cubic-bezier(0.2, 0.9, 0.3, 1.35) both;

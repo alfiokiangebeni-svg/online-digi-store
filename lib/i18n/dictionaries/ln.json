@@ -140,7 +140,7 @@
     "newNav": "Nzela ya sika ya nse",
     "priceSample": "Motuya : bilembo minene",
     "usage": {
-      "primary": "Misala ya liboso, onglet efungwami",
+      "primary": "Ba-bouton ya mosala, logo",
       "primaryPressed": "Ntango ya kofina",
       "background": "Nse ya application",
       "surface": "Ba-carte, nzela ya nse",
@@ -155,7 +155,9 @@
       "premium": "Piblisite, oyo etekami mingi, minzoto",
       "success": "Kofuta elongi, « Ekómi », moteki ya solo",
       "urgentText": "Motane moko na makomi mike : motuya ya kala, mabunga",
-      "star": "Minzoto ya nota kaka"
+      "star": "Minzoto ya nota kaka",
+      "primaryText": "Langi ya vert oyo etangamaka malamu",
+      "onAccent": "Makomi ya pembe na motane mpe vert"
     }
   },
   "nav": {
@@ -252,7 +254,8 @@
     "bannersLabel": "Na liboso",
     "allCategories": "Nyonso",
     "newCategories": "Mitindo ya sika",
-    "newCategoriesBody": "Ba-annonce ya liboso ezali koya : zala moto ya liboso kotia."
+    "newCategoriesBody": "Ba-annonce ya liboso ezali koya : zala moto ya liboso kotia.",
+    "tabsLabel": "Bitando"
   },
   "product": {
     "kinds": {

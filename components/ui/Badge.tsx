@@ -19,13 +19,13 @@ export type BadgeTone =
 
 /** Palette minimale : rouge (remises, urgences), menthe (succès), le reste en neutre. */
 const TONES: Record<BadgeTone, string> = {
-  promo: "bg-urgent text-on-primary",
-  flash: "bg-urgent text-on-primary",
-  urgent: "bg-urgent text-on-primary",
+  promo: "bg-urgent text-on-accent",
+  flash: "bg-urgent text-on-accent",
+  urgent: "bg-urgent text-on-accent",
   trust: "bg-surface-2 text-fg",
   new: "bg-surface-2 text-fg",
   premium: "bg-surface-2 text-fg",
-  success: "bg-success text-on-primary",
+  success: "bg-success text-on-accent",
   neutral: "bg-surface-2 text-fg",
   verified: "px-0 text-success",
   category: "bg-surface-2 text-fg",

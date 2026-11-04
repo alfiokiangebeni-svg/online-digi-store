@@ -42,7 +42,7 @@ export function BottomNav({
               className={cn(
                 "relative flex min-h-16 flex-col items-center justify-center gap-[3px] px-0.5 text-[11px]",
                 item.active
-                  ? "font-semibold text-primary [&_svg]:stroke-[2.4]"
+                  ? "font-semibold text-primary-text [&_svg]:stroke-[2.4]"
                   : "font-medium text-muted hover:text-fg",
               )}
             >

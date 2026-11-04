@@ -140,7 +140,7 @@
     "newNav": "New bottom bar",
     "priceSample": "Prices: tabular, bold, larger",
     "usage": {
-      "primary": "Primary actions, active tab",
+      "primary": "Action buttons, logo badge",
       "primaryPressed": "Pressed state",
       "background": "App background",
       "surface": "Cards, sheets, bottom bar",
@@ -155,7 +155,9 @@
       "premium": "Sponsored, premium, best sellers, stars",
       "success": "Payment done, “Delivered”, sent, verified seller",
       "urgentText": "Same red as small text: struck price, errors",
-      "star": "Rating stars only"
+      "star": "Rating stars only",
+      "primaryText": "Readable green on light background: active tab, links, chips",
+      "onAccent": "White text on red and success green"
     }
   },
   "nav": {
@@ -252,7 +254,8 @@
     "bannersLabel": "Featured",
     "allCategories": "All",
     "newCategories": "New categories",
-    "newCategoriesBody": "The first listings are coming: be the first to post."
+    "newCategoriesBody": "The first listings are coming: be the first to post.",
+    "tabsLabel": "Departments"
   },
   "product": {
     "kinds": {

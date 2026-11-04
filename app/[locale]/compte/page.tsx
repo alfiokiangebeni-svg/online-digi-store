@@ -55,7 +55,7 @@ export default async function AccountPage({ params }: PageProps<"/[locale]/compt
               href={localePath(locale, "bibliotheque")}
               className="card pressable flex min-h-16 items-center gap-3 px-3.5 py-2 hover:bg-surface-2"
             >
-              <span className="grid size-10 shrink-0 place-items-center rounded-full bg-surface-2 text-primary">
+              <span className="grid size-10 shrink-0 place-items-center rounded-full bg-surface-2 text-primary-text">
                 <IconDownload size={20} />
               </span>
               <span className="flex flex-1 flex-col">

@@ -5,18 +5,20 @@
  */
 export const COLORS = {
   primary: "#b6f23a",
-  primaryPressed: "#9bd61f",
-  background: "#1c1f1e",
-  surface: "#262a28",
-  surfaceHigh: "#323735",
-  border: "#3e4441",
-  textPrimary: "#f2f5f3",
-  textSecondary: "#a3aca7",
+  primaryPressed: "#a2dc24",
+  primaryText: "#3a6200",
+  background: "#f3f4f2",
+  surface: "#ffffff",
+  surfaceHigh: "#eaece9",
+  border: "#d8dcd7",
+  textPrimary: "#141816",
+  textSecondary: "#555d58",
   onPrimary: "#0e100f",
-  urgent: "#ff4d5e",
-  urgentText: "#ff5e6d",
-  star: "#ffc53d",
-  success: "#2ed3a0",
+  onAccent: "#ffffff",
+  urgent: "#d42b3a",
+  urgentText: "#c41f2e",
+  star: "#b07a00",
+  success: "#0a7655",
 } as const;
 
 /** Les 7 catégories (sans couleur propre : icônes en gris, palette minimale). */

@@ -133,7 +133,7 @@ export function PaymentFlow({
         onClose();
       }}
       onCancel={(e) => busy && e.preventDefault()}
-      className="m-0 mt-auto w-full max-w-none rounded-t-2xl bg-surface p-0 text-fg backdrop:bg-background/80 sm:m-auto sm:max-w-md sm:rounded-2xl"
+      className="m-0 mt-auto w-full max-w-none rounded-t-2xl bg-surface p-0 text-fg backdrop:bg-fg/50 sm:m-auto sm:max-w-md sm:rounded-2xl"
     >
       <div className="flex min-h-80 flex-col gap-4 p-5 pb-[calc(1.25rem+env(safe-area-inset-bottom))]">
         <div className="flex items-start justify-between gap-4">
@@ -188,7 +188,7 @@ export function PaymentFlow({
           {step === "waiting" ? (
             <>
               <div className="flex items-center gap-3">
-                <span className="grid size-12 shrink-0 animate-beat place-items-center rounded-full bg-surface-2 text-primary">
+                <span className="grid size-12 shrink-0 animate-beat place-items-center rounded-full bg-surface-2 text-primary-text">
                   <IconPhone />
                 </span>
                 <div>

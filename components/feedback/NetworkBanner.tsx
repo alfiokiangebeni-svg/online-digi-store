@@ -33,7 +33,7 @@ export function NetworkBanner({ text, retry }: { text: string; retry: string }) 
       <button
         type="button"
         onClick={() => window.location.reload()}
-        className="shrink-0 py-1.5 font-semibold text-primary"
+        className="shrink-0 py-1.5 font-semibold text-primary-text"
       >
         {retry}
       </button>

@@ -57,7 +57,7 @@ export function Countdown({
   const [h, m, s] = remaining === null ? ["--", "--", "--"] : split(remaining);
 
   return (
-    <p className="inline-flex items-center gap-2 rounded-[6px] bg-urgent px-2.5 py-1 text-xs font-semibold text-on-primary">
+    <p className="inline-flex items-center gap-2 rounded-[6px] bg-urgent px-2.5 py-1 text-xs font-semibold text-on-accent">
       <span>{ended ? endedLabel : label}</span>
       {!ended ? (
         <time

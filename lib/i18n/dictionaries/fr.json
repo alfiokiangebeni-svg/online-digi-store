@@ -140,7 +140,7 @@
     "newNav": "Nouvelle barre du bas",
     "priceSample": "Prix : chiffres tabulaires, gras, plus grands",
     "usage": {
-      "primary": "Actions principales, onglet actif",
+      "primary": "Boutons d'action, pastille du logo",
       "primaryPressed": "État pressé",
       "background": "Fond général",
       "surface": "Cartes, feuilles, barre du bas",
@@ -155,7 +155,9 @@
       "premium": "Sponsorisé, premium, meilleures ventes, étoiles",
       "success": "Paiement réussi, « Livré », envoyé, vendeur vérifié",
       "urgentText": "Même rouge en petit texte : prix barré, erreurs",
-      "star": "Étoiles de note uniquement"
+      "star": "Étoiles de note uniquement",
+      "primaryText": "Vert lisible sur fond clair : onglet actif, liens, puces",
+      "onAccent": "Texte blanc sur le rouge et le vert succès"
     }
   },
   "nav": {
@@ -252,7 +254,8 @@
     "bannersLabel": "À la une",
     "allCategories": "Toutes",
     "newCategories": "Nouvelles catégories",
-    "newCategoriesBody": "Les premières annonces arrivent : sois le premier à publier."
+    "newCategoriesBody": "Les premières annonces arrivent : sois le premier à publier.",
+    "tabsLabel": "Rayons"
   },
   "product": {
     "kinds": {

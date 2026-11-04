@@ -95,7 +95,7 @@ export function LibraryView({
     <div className="flex flex-col gap-3">
       {showBanner ? (
         <div role="status" className="flex items-start gap-3 card p-3.5">
-          <span className="grid size-7 shrink-0 place-items-center rounded-full bg-success text-on-primary">
+          <span className="grid size-7 shrink-0 place-items-center rounded-full bg-success text-on-accent">
             <IconCheck size={15} />
           </span>
           <div className="flex-1">
@@ -121,7 +121,7 @@ export function LibraryView({
       <div
         role="group"
         aria-label={t.tabsLabel}
-        className="scroll-rail -mx-3 flex gap-2 overflow-x-auto px-3"
+        className="scroll-rail -mx-4 flex gap-2 overflow-x-auto px-4"
       >
         {(Object.keys(t.tabs) as Tab[]).map((id) => (
           <Chip key={id} selected={tab === id} onClick={() => setTab(id)}>

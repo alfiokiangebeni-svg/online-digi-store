@@ -85,7 +85,7 @@ export function SearchTools({
           aria-label={t.voice}
           aria-pressed={listening}
           onClick={onVoice}
-          className={cn(btn, listening && "animate-beat text-primary")}
+          className={cn(btn, listening && "animate-beat text-primary-text")}
         >
           <IconMic size={20} />
         </button>

@@ -72,17 +72,20 @@ const SWATCH: Record<keyof typeof COLORS, string> = {
   surface: "bg-surface text-fg",
   surfaceHigh: "bg-surface-high text-fg",
   border: "bg-border text-fg",
-  textPrimary: "bg-text-primary text-on-primary",
-  textSecondary: "bg-text-secondary text-on-primary",
-  onPrimary: "bg-on-primary text-fg border border-line",
-  urgent: "bg-urgent text-on-primary",
-  urgentText: "bg-urgent-text text-on-primary",
-  star: "bg-star text-on-primary",
-  success: "bg-success text-on-primary",
+  primaryText: "bg-primary-text text-on-accent",
+  textPrimary: "bg-text-primary text-on-accent",
+  textSecondary: "bg-text-secondary text-on-accent",
+  onPrimary: "bg-on-primary text-on-accent",
+  onAccent: "bg-on-accent text-fg border border-line",
+  urgent: "bg-urgent text-on-accent",
+  urgentText: "bg-urgent-text text-on-accent",
+  star: "bg-star text-on-accent",
+  success: "bg-success text-on-accent",
 };
 const BASE = [
   "primary",
   "primaryPressed",
+  "primaryText",
   "background",
   "surface",
   "surfaceHigh",
@@ -90,6 +93,7 @@ const BASE = [
   "textPrimary",
   "textSecondary",
   "onPrimary",
+  "onAccent",
 ] as const;
 const MARKETING = ["urgent", "urgentText", "star", "success"] as const;
 

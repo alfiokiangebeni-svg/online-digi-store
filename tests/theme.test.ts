@@ -47,14 +47,17 @@ const PAIRS: Array<[string, string, string, number]> = [
   ["texte secondaire / relief", C.textSecondary, C.surfaceHigh, 4.5],
   ["bouton principal", C.onPrimary, C.primary, 4.5],
   ["bouton principal pressé", C.onPrimary, C.primaryPressed, 4.5],
-  ["onglet actif (vert) / barre du bas", C.primary, C.surface, 4.5],
-  ["onglet / puce active (vert) / relief", C.primary, C.surfaceHigh, 4.5],
+  ["logo dans la pastille vert citron", C.textPrimary, C.primary, 4.5],
+  ["onglet actif (vert lisible) / barre du bas", C.primaryText, C.surface, 4.5],
+  ["puce active (vert lisible) / relief", C.primaryText, C.surfaceHigh, 4.5],
+  ["contour de focus / fond", C.primaryText, C.background, 3],
   ["rouge (petit texte) / carte", C.urgentText, C.surface, 4.5],
   ["rouge (petit texte) / fond", C.urgentText, C.background, 4.5],
-  ["badge rouge (texte foncé)", C.onPrimary, C.urgent, 4.5],
+  ["badge rouge (texte blanc)", C.onAccent, C.urgent, 4.5],
   ["étoiles / carte (non textuel)", C.star, C.surface, 3],
   ["succès (texte) / carte", C.success, C.surface, 4.5],
-  ["badge succès (texte foncé)", C.onPrimary, C.success, 4.5],
+  ["succès (texte) / relief", C.success, C.surfaceHigh, 4.5],
+  ["badge succès (texte blanc)", C.onAccent, C.success, 4.5],
 ];
 
 describe("contrastes AA de la charte di.si store", () => {

@@ -97,7 +97,7 @@ export function ExplorerView({
         <div
           role="group"
           aria-label={t.typeLabel}
-          className="scroll-rail -mx-3 flex gap-2 overflow-x-auto px-3"
+          className="scroll-rail -mx-4 flex gap-2 overflow-x-auto px-4"
         >
           <Chip selected={!type} onClick={() => setSearchParams({ type: null })}>
             {t.all}

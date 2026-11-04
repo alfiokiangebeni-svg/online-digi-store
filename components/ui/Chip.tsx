@@ -10,7 +10,7 @@ function classes(selected: boolean | undefined) {
   return cn(
     base,
     selected
-      ? "border-primary bg-surface-2 text-primary"
+      ? "border-primary bg-surface-2 text-primary-text"
       : "border-transparent bg-surface-2 text-fg hover:border-line",
   );
 }

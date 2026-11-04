@@ -174,7 +174,7 @@ export function TrackList({
               }}
               className={cn(
                 "grid size-11 shrink-0 place-items-center rounded-[var(--radius-sm)] hover:bg-surface-2",
-                inList ? "text-primary" : "text-muted",
+                inList ? "text-primary-text" : "text-muted",
               )}
             >
               {inList ? <IconCheck size={18} /> : <IconPlus size={18} />}
