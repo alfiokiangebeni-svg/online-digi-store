@@ -1,0 +1,20 @@
+{
+  "fr": {
+    "title": "Oups, cet écran n'a pas pu s'afficher.",
+    "body": "Vérifie ta connexion puis réessaie. Tes achats et ton panier sont conservés.",
+    "retry": "Réessayer",
+    "home": "Accueil"
+  },
+  "ln": {
+    "title": "Lokasa oyo ekoki komonana te.",
+    "body": "Tala réseau na yo mpe meka lisusu. Bisombi mpe panier na yo ebatelami.",
+    "retry": "Meka lisusu",
+    "home": "Ebandeli"
+  },
+  "en": {
+    "title": "Oops, this screen couldn't load.",
+    "body": "Check your connection and try again. Your purchases and cart are safe.",
+    "retry": "Try again",
+    "home": "Home"
+  }
+}
