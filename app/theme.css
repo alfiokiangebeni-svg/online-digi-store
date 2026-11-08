@@ -11,23 +11,26 @@
   /* ── Couleurs de base (thème clair « Lumière ») ───────────────────────── */
   --color-primary: #b6f23a; /* vert citron : boutons d'action, pastille du logo */
   --color-primary-pressed: #a2dc24; /* état pressé / survol */
-  --color-primary-text: #3a6200; /* vert lisible sur fond clair : onglet actif, liens, puces */
-  --color-background: #f3f4f2; /* fond général, gris très clair */
-  --color-surface: #ffffff; /* cartes, feuilles modales, barres */
-  --color-surface-high: #eaece9; /* champs, puces, éléments en relief */
-  --color-border: #d8dcd7; /* séparateurs, contours */
+  --color-primary-text: #365b00; /* vert lisible sur fond clair : onglet actif, liens, puces */
+  --color-background: #dcdfdb; /* fond général, gris clair adouci */
+  --color-surface: #eef0ec; /* cartes, feuilles modales, barres (blanc cassé) */
+  --color-surface-high: #e1e4df; /* champs, puces, éléments en relief */
+  --color-border: #c5cac4; /* séparateurs, contours */
   --color-text-primary: #141816; /* titres et textes */
-  --color-text-secondary: #555d58; /* descriptions, métadonnées */
+  --color-text-secondary: #4c544f; /* descriptions, métadonnées */
   --color-on-primary: #0e100f; /* texte sur le vert citron (jamais de blanc) */
-  --color-on-accent: #ffffff; /* texte sur le rouge et le vert succès */
+  --color-on-accent: #ffffff; /* texte blanc sur les bannières sombres */
 
   /* ── Couleurs d'appoint (minimum : pas de surcharge) ─────────────────────
    * Rouge = remises, ventes flash, urgences, erreurs. Doré = étoiles. Vert = succès.
+   * Couleurs adoucies : badges en teinte pâle avec texte foncé (seul le vert citron reste vif).
    * Aucune autre couleur : pas de bleu, d'orange ni de rose ; catégories en gris. */
-  --color-urgent: #d42b3a; /* fonds : −30 %, vente flash, « Plus que 3 », date limite (texte blanc) */
-  --color-urgent-text: #c41f2e; /* même sens en petit texte (prix barré, erreurs) */
-  --color-star: #b07a00; /* étoiles de note uniquement */
-  --color-success: #0a7655; /* paiement réussi, « Livré », candidature envoyée, vendeur vérifié */
+  --color-urgent: #e07a83; /* rouge adouci : barre « x % vendus », traits et repères */
+  --color-urgent-soft: #f4d3d6; /* fond pâle des badges −30 %, ventes flash, compte à rebours */
+  --color-urgent-text: #9e2430; /* texte rouge : badges, prix barré, erreurs */
+  --color-star: #a8780f; /* étoiles de note uniquement (doré adouci) */
+  --color-success: #24704f; /* texte et icônes de succès : « Livré », envoyé, vérifié */
+  --color-success-soft: #d2e9dc; /* fond pâle des badges de succès */
 
   /* ── Typographie ───────────────────────────────────────────────────────── */
   --font-display: var(--font-jakarta), system-ui, Roboto, sans-serif; /* titres, prix, logo */

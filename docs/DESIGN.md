@@ -14,7 +14,7 @@ Toutes les couleurs, polices, rayons et animations sont définis dans **`app/the
 2. que tous les couples texte/fond utilisés atteignent le contraste **AA** ;
 3. qu'**aucune couleur n'est écrite en dur** dans les écrans et composants (`app/`, `components/`) : ni hexadécimal, ni `white`/`black`, ni `rgb()`, ni variante `dark:`, ni ancien nom de couleur.
 
-Ambiance : ergonomie des applications mobiles Amazon et AliExpress (recherche en haut, grille de catégories, ventes flash, double action d'achat), en version **claire et aérée** (thème « Lumière » : cartes blanches sur fond gris très clair, grands espacements) avec le **vert citron** comme seule couleur forte. Le logo « di.si store » est posé dans une **grande pastille vert citron**.
+Ambiance : ergonomie des applications mobiles Amazon et AliExpress (recherche en haut, grille de catégories, ventes flash, double action d'achat), en version **claire, adoucie et aérée** (thème « Lumière » : cartes blanc cassé sur fond gris clair, grands espacements, luminosité réduite) avec le **vert citron** comme seule couleur forte. Le logo « di.si store » est posé dans une **grande pastille vert citron**.
 
 ## Couleurs de base (thème clair « Lumière »)
 
@@ -22,15 +22,15 @@ Ambiance : ergonomie des applications mobiles Amazon et AliExpress (recherche en
 | -------------- | --------- | ------------------------------------ | ---------------------------------------------------------------------------- |
 | primary        | `#B6F23A` | `bg-primary`                         | Boutons d'action (Acheter, Payer, Postuler, Soumissionner), pastille du logo |
 | primaryPressed | `#A2DC24` | `bg-primary-pressed`                 | État pressé / survol                                                         |
-| primaryText    | `#3A6200` | `text-primary-text`                  | Vert **lisible sur fond clair** : onglet actif, puces actives, liens, focus  |
-| background     | `#F3F4F2` | `bg-background` / `bg-bg`            | Fond général (gris très clair)                                               |
-| surface        | `#FFFFFF` | `bg-surface`                         | Cartes, en-tête, feuilles modales, barre du bas                              |
-| surfaceHigh    | `#EAECE9` | `bg-surface-high` / `bg-surface-2`   | Champs, puces, éléments en relief                                            |
-| border         | `#D8DCD7` | `border-border` / `border-line`      | Séparateurs, contours                                                        |
+| primaryText    | `#365B00` | `text-primary-text`                  | Vert **lisible sur fond clair** : onglet actif, puces actives, liens, focus  |
+| background     | `#DCDFDB` | `bg-background` / `bg-bg`            | Fond général (gris clair adouci)                                             |
+| surface        | `#EEF0EC` | `bg-surface`                         | Cartes, en-tête, feuilles modales, barre du bas (blanc cassé)                |
+| surfaceHigh    | `#E1E4DF` | `bg-surface-high` / `bg-surface-2`   | Champs, puces, éléments en relief                                            |
+| border         | `#C5CAC4` | `border-border` / `border-line`      | Séparateurs, contours                                                        |
 | textPrimary    | `#141816` | `text-text-primary` / `text-fg`      | Titres et textes ; fond des bannières sombres de l'accueil                   |
-| textSecondary  | `#555D58` | `text-text-secondary` / `text-muted` | Descriptions, métadonnées                                                    |
+| textSecondary  | `#4C544F` | `text-text-secondary` / `text-muted` | Descriptions, métadonnées                                                    |
 | onPrimary      | `#0E100F` | `text-on-primary`                    | Texte sur le vert citron (**jamais de blanc sur le vert citron**)            |
-| onAccent       | `#FFFFFF` | `text-on-accent`                     | Texte blanc sur le rouge et le vert succès, et sur les bannières sombres     |
+| onAccent       | `#FFFFFF` | `text-on-accent`                     | Texte blanc sur les bannières sombres et le bouton loupe                     |
 
 Ombre très légère des cartes : `--shadow-card` (la seule ombre de l'application).
 
@@ -39,15 +39,17 @@ Ombre très légère des cartes : `--shadow-card` (la seule ombre de l'applicati
 Demande du propriétaire : **vert citron fort, fond gris, pas de surcharge de couleurs**.
 Le vert citron est la **seule couleur d'action** ; trois couleurs d'appoint seulement, chacune avec un sens unique :
 
-| Token      | Hex       | Sens                                                                                                              |
-| ---------- | --------- | ----------------------------------------------------------------------------------------------------------------- |
-| urgent     | `#D42B3A` | Un seul rouge : remises (−30 %), ventes flash, compte à rebours, « Plus que 3 », date limite (fonds, texte blanc) |
-| urgentText | `#C41F2E` | Le même rouge **en petit texte** (prix barré, messages d'erreur)                                                  |
-| star       | `#B07A00` | **Étoiles de note uniquement** (doré foncé, lisible sur blanc)                                                    |
-| success    | `#0A7655` | Paiement réussi, « Livré », candidature envoyée, vendeur vérifié                                                  |
+| Token       | Hex       | Sens                                                                                        |
+| ----------- | --------- | ------------------------------------------------------------------------------------------- |
+| urgent      | `#E07A83` | Rouge adouci : barre « x % vendus », repères                                                |
+| urgentSoft  | `#F4D3D6` | Fond pâle des badges −30 %, ventes flash, compte à rebours, date limite (texte rouge foncé) |
+| urgentText  | `#9E2430` | Texte rouge : badges, prix barré, erreurs                                                   |
+| star        | `#A8780F` | **Étoiles de note uniquement** (doré adouci)                                                |
+| success     | `#24704F` | Texte et icônes de succès : « Livré », envoyé, vendeur vérifié                              |
+| successSoft | `#D2E9DC` | Fond pâle des badges de succès (texte vert)                                                 |
 
 Pas de bleu, d'orange ni de rose. « Nouveau », « Sponsorisé », « Meilleure vente » : badges **neutres** (fond en relief, texte clair).
-Sur un fond rouge ou vert succès, le texte est blanc (`onAccent`, ≥ 4,9:1) ; sur le vert citron, il est toujours foncé (`onPrimary`).
+Couleurs d'appoint **adoucies** : les badges rouges et verts sont des teintes pâles avec un texte foncé de la même couleur (≥ 4,6:1). Seul le **vert citron reste vif** ; sur lui, le texte est toujours foncé (`onPrimary`).
 
 ## Catégories
 

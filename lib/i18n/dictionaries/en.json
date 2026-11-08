@@ -157,7 +157,9 @@
       "urgentText": "Same red as small text: struck price, errors",
       "star": "Rating stars only",
       "primaryText": "Readable green on light background: active tab, links, chips",
-      "onAccent": "White text on red and success green"
+      "onAccent": "White text on red and success green",
+      "urgentSoft": "Pale background of red badges (dark red text)",
+      "successSoft": "Pale background of success badges (green text)"
     }
   },
   "nav": {

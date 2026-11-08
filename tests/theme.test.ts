@@ -53,11 +53,12 @@ const PAIRS: Array<[string, string, string, number]> = [
   ["contour de focus / fond", C.primaryText, C.background, 3],
   ["rouge (petit texte) / carte", C.urgentText, C.surface, 4.5],
   ["rouge (petit texte) / fond", C.urgentText, C.background, 4.5],
-  ["badge rouge (texte blanc)", C.onAccent, C.urgent, 4.5],
+  ["badge rouge pâle (texte rouge)", C.urgentText, C.urgentSoft, 4.5],
+  ["bannière sombre (texte blanc)", C.onAccent, C.textPrimary, 4.5],
   ["étoiles / carte (non textuel)", C.star, C.surface, 3],
   ["succès (texte) / carte", C.success, C.surface, 4.5],
   ["succès (texte) / relief", C.success, C.surfaceHigh, 4.5],
-  ["badge succès (texte blanc)", C.onAccent, C.success, 4.5],
+  ["badge succès pâle (texte vert)", C.success, C.successSoft, 4.5],
 ];
 
 describe("contrastes AA de la charte di.si store", () => {

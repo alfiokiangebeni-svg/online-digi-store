@@ -95,7 +95,7 @@ export function LibraryView({
     <div className="flex flex-col gap-3">
       {showBanner ? (
         <div role="status" className="flex items-start gap-3 card p-3.5">
-          <span className="grid size-7 shrink-0 place-items-center rounded-full bg-success text-on-accent">
+          <span className="grid size-7 shrink-0 place-items-center rounded-full bg-success-soft text-success">
             <IconCheck size={15} />
           </span>
           <div className="flex-1">

@@ -37,7 +37,7 @@ export function PreviewButton({
       aria-pressed={playing}
       className={cn(
         "relative grid size-11 shrink-0 place-items-center rounded-[6px] transition-colors",
-        playing ? "bg-success text-on-accent" : "bg-surface-2 text-primary-text hover:bg-line",
+        playing ? "bg-success-soft text-success" : "bg-surface-2 text-primary-text hover:bg-line",
       )}
     >
       {playing ? <IconPause size={16} /> : <IconPlay size={16} />}
@@ -46,7 +46,7 @@ export function PreviewButton({
           {[0, 1, 2].map((i) => (
             <span
               key={i}
-              className="h-1.5 w-1 animate-beat bg-on-accent"
+              className="h-1.5 w-1 animate-beat bg-success"
               style={{ animationDelay: `${i * 0.15}s` }}
             />
           ))}

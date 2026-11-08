@@ -77,10 +77,12 @@ const SWATCH: Record<keyof typeof COLORS, string> = {
   textSecondary: "bg-text-secondary text-on-accent",
   onPrimary: "bg-on-primary text-on-accent",
   onAccent: "bg-on-accent text-fg border border-line",
-  urgent: "bg-urgent text-on-accent",
+  urgent: "bg-urgent text-fg",
+  urgentSoft: "bg-urgent-soft text-urgent-text",
   urgentText: "bg-urgent-text text-on-accent",
   star: "bg-star text-on-accent",
   success: "bg-success text-on-accent",
+  successSoft: "bg-success-soft text-success",
 };
 const BASE = [
   "primary",
@@ -95,7 +97,7 @@ const BASE = [
   "onPrimary",
   "onAccent",
 ] as const;
-const MARKETING = ["urgent", "urgentText", "star", "success"] as const;
+const MARKETING = ["urgent", "urgentSoft", "urgentText", "star", "success", "successSoft"] as const;
 
 export default async function DesignPage({ params }: PageProps<"/[locale]/design">) {
   const locale = await resolveLocale(params);

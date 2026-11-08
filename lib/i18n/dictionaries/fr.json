@@ -157,7 +157,9 @@
       "urgentText": "Même rouge en petit texte : prix barré, erreurs",
       "star": "Étoiles de note uniquement",
       "primaryText": "Vert lisible sur fond clair : onglet actif, liens, puces",
-      "onAccent": "Texte blanc sur le rouge et le vert succès"
+      "onAccent": "Texte blanc sur le rouge et le vert succès",
+      "urgentSoft": "Fond pâle des badges rouges (texte rouge foncé)",
+      "successSoft": "Fond pâle des badges de succès (texte vert)"
     }
   },
   "nav": {

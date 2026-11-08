@@ -157,7 +157,9 @@
       "urgentText": "Motane moko na makomi mike : motuya ya kala, mabunga",
       "star": "Minzoto ya nota kaka",
       "primaryText": "Langi ya vert oyo etangamaka malamu",
-      "onAccent": "Makomi ya pembe na motane mpe vert"
+      "onAccent": "Makomi ya pembe na motane mpe vert",
+      "urgentSoft": "Langi pole ya ba-badge motane",
+      "successSoft": "Langi pole ya ba-badge ya elonga"
     }
   },
   "nav": {
