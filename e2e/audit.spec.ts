@@ -86,9 +86,13 @@ for (const path of SCREENS) {
       // masqués visuellement (sr-only) ou passés sous la barre d'achat fixe.
       await el.evaluate((e) => e.scrollIntoView({ block: "center" }));
       await el.click({ timeout: 2_000 }).catch(() => el.evaluate((e) => (e as HTMLElement).click()));
-      await p.waitForTimeout(600);
-      const after = await snap();
-      const changed = (await popup) !== null || JSON.stringify(before) !== JSON.stringify(after);
+      // Attend une réaction jusqu'à 2 s (machine chargée), sans ralentir les cas rapides.
+      let changed = false;
+      for (let t = 0; t < 10 && !changed; t++) {
+        await p.waitForTimeout(200);
+        changed = JSON.stringify(before) !== JSON.stringify(await snap());
+      }
+      changed ||= (await popup) !== null;
       if (!changed && !selected) silent.push(label || `(bouton ${i})`);
       await ctx.close();
     }
