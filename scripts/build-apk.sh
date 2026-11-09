@@ -21,6 +21,13 @@ restore_web_build() { rm -rf .next; if [ -d .next-web ]; then mv .next-web .next
 trap restore_web_build EXIT
 BUILD_TARGET=apk npx next build --webpack
 
+echo "→ Allègement de l'export"
+# Pages inutiles dans l'application : vitrine du thème et page hors ligne (pas de service worker).
+for l in fr ln en; do rm -rf "out-apk/$l/design" "out-apk/$l/hors-ligne"; done
+# __next._full.txt est une copie exacte de index.txt, jamais demandée par la navigation.
+find out-apk -name "__next._full.txt" -delete
+du -sh out-apk
+
 echo "→ Copie dans l'application Android"
 WWW=android/app/src/main/assets/www
 rm -rf "$WWW"
@@ -28,6 +35,9 @@ mkdir -p "$(dirname "$WWW")"
 cp -R out-apk "$WWW"
 
 echo "→ Gradle assembleDebug"
+# Repart d'un APK neuf : la mise à jour « sur place » de Gradle laisse sinon l'espace
+# des anciennes versions de fichiers dans l'APK (plusieurs Mo perdus).
+rm -f android/app/build/outputs/apk/debug/app-debug.apk
 echo "sdk.dir=$ANDROID_HOME" > android/local.properties
 (cd android && "$GRADLE" --no-daemon -q assembleDebug)
 

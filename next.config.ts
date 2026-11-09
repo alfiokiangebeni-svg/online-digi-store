@@ -26,8 +26,9 @@ const nextConfig: NextConfig = {
   experimental: {
     // Vraie page 404 de la boutique pour toute adresse inconnue (app/global-not-found.tsx).
     globalNotFound: true,
-    // CSS (≈ 6 Ko) intégré au HTML : une requête bloquante de moins sur réseau lent.
-    inlineCss: true,
+    // Site web : CSS intégré au HTML (une requête bloquante de moins sur réseau lent).
+    // APK : fichiers déjà sur le téléphone, le CSS (≈ 45 Ko) n'est pas recopié dans chaque page.
+    inlineCss: !isApk,
   },
   images: {
     unoptimized: isApk,
