@@ -68,6 +68,7 @@ function Section({
 const SWATCH: Record<keyof typeof COLORS, string> = {
   primary: "bg-primary text-on-primary",
   primaryPressed: "bg-primary-pressed text-on-primary",
+  primaryLight: "bg-primary-light text-on-primary",
   background: "bg-background text-fg border border-line",
   surface: "bg-surface text-fg",
   surfaceHigh: "bg-surface-high text-fg",
@@ -95,6 +96,7 @@ const SWATCH: Record<keyof typeof COLORS, string> = {
 const BASE = [
   "primary",
   "primaryPressed",
+  "primaryLight",
   "primaryText",
   "background",
   "surface",

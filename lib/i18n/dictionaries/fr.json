@@ -167,7 +167,8 @@
       "terre": "Terre : icônes des rayons et des avantages",
       "terreSoft": "Fond pâle des visuels produits et des ronds de catégories",
       "terreDeep": "Texte et icônes sur le fond terre pâle",
-      "terreStrong": "Fond de la bannière terre (texte blanc), identique en clair et en sombre"
+      "terreStrong": "Fond de la bannière terre (texte blanc), identique en clair et en sombre",
+      "primaryLight": "Début du dégradé des boutons d'action"
     }
   },
   "nav": {
@@ -511,8 +512,18 @@
     "purchases": "Mes achats",
     "purchasesBody": "Tes contenus achetés et gratuits, disponibles hors-ligne",
     "themeAuto": "Automatique",
-    "themeHint": "« Automatique » suit le réglage clair / sombre du téléphone.",
-    "themeSaved": "Thème appliqué"
+    "themeHint": "« Automatique » : Lumière le jour, Nuit si le téléphone est en mode sombre.",
+    "themeSaved": "Thème appliqué",
+    "themeNames": {
+      "auto": "Automatique",
+      "light": "Lumière",
+      "dark": "Nuit",
+      "amethyste": "Améthyste",
+      "emeraude": "Émeraude",
+      "ocean": "Océan",
+      "braise": "Braise"
+    },
+    "themeButton": "Changer de thème"
   },
   "common": {
     "demo": "Démo"

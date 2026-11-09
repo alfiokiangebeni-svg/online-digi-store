@@ -56,8 +56,9 @@
 
   /* Bouton principal vert citron (un seul par écran ou par carte). */
   .btn-primary {
-    background: var(--color-primary);
+    background: linear-gradient(100deg, var(--color-primary-light), var(--color-primary) 70%);
     color: var(--color-on-primary);
+    box-shadow: 0 4px 16px var(--color-glow);
   }
   .btn-primary:hover,
   .btn-primary:active {

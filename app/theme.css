@@ -3,9 +3,8 @@
  *  di.si store — thème (fichier unique de tokens)
  *  Toute couleur, police, rayon ou mouvement de l'application vient d'ici.
  *  Aucune couleur n'est écrite en dur dans les écrans (vérifié par tests/theme.test.ts).
- *  Deux thèmes : clair (« Lumière », par défaut) et sombre (« Nuit »). Le sombre suit le
- *  réglage du téléphone, ou le choix fait dans Compte › Réglages (attribut data-theme).
- *  Miroir pour le code et les tests : lib/theme.ts (COLORS et COLORS_DARK, identiques au CSS).
+ *  Six thèmes au choix (Lumière, Nuit, Améthyste, Émeraude, Océan, Braise), voir en bas.
+ *  Miroir pour le code et les tests : lib/theme.ts (THEMES, identique au CSS).
  * ─────────────────────────────────────────────────────────────────────────────
  */
 
@@ -13,6 +12,8 @@
   /* ── Couleurs de base (thème clair « Lumière ») ───────────────────────── */
   --color-primary: #b6f23a; /* vert citron : boutons d'action, pastille du logo */
   --color-primary-pressed: #a2dc24; /* état pressé / survol */
+  --color-primary-light: #dcff9a; /* début du dégradé des boutons d'action */
+  --color-glow: rgb(182 242 58 / 0.35); /* halo léger des boutons d'action */
   --color-primary-text: #365b00; /* vert lisible sur fond clair : onglet actif, liens, puces */
   --color-background: #dfe2e6; /* fond général, gris argent clair */
   --color-surface: #f3f4f6; /* cartes, feuilles modales, barres (blanc argenté) */
@@ -146,30 +147,34 @@
 }
 
 /*
- * Thème sombre « Nuit » : même identité (vert citron, Terre, bleu nuit et or), sur fond
- * bleu nuit. Appliqué si le téléphone est en mode sombre (sauf choix « Clair »), ou si
- * l'utilisateur choisit « Sombre ». Les deux blocs doivent rester identiques.
+ * ── Thèmes au choix (Compte › Réglages › Thème, ou bouton de l'en-tête) ─────────
+ * Inspirés des thèmes de l'outil « Alerte Trading » : chaque thème teinte toute
+ * l'application (fond, cartes, sélection, bouton principal en dégradé avec halo).
+ * Sans choix (« Automatique ») : Lumière, ou Nuit si le téléphone est en mode sombre.
+ * Les sélecteurs [data-theme] valent aussi pour les aperçus du sélecteur de thème.
+ * Généré depuis lib/theme.ts (THEMES) : les deux doivent rester identiques (tests).
  */
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --color-background: #0f141c; /* fond général, bleu nuit très sombre */
-    --color-surface: #172030; /* cartes, feuilles, barres */
-    --color-surface-high: #212b3b; /* champs, puces, relief */
-    --color-border: #465366; /* contours visibles des cartes */
-    --color-text-primary: #e9edf2; /* titres et textes */
-    --color-text-secondary: #a3afbf; /* descriptions, métadonnées */
-    --color-primary: #b6f23a; /* vert citron (inchangé) */
+  :root:not([data-theme]) {
+    --color-primary: #b6f23a;
     --color-primary-pressed: #a2dc24;
-    --color-primary-text: #b6f23a; /* sur fond sombre, le vert citron se lit directement */
+    --color-primary-light: #dcff9a;
+    --color-primary-text: #b6f23a;
+    --color-background: #0f141c;
+    --color-surface: #172030;
+    --color-surface-high: #212b3b;
+    --color-border: #465366;
+    --color-text-primary: #e9edf2;
+    --color-text-secondary: #a3afbf;
     --color-on-primary: #0e100f;
     --color-on-accent: #ffffff;
-    --color-night: #24314a; /* bleu nuit des bannières, plus clair que le fond */
+    --color-night: #24314a;
     --color-champagne: #d9c28c;
-    --color-gold: #e3c47a; /* or clair, texte sur fond sombre */
+    --color-gold: #e3c47a;
     --color-gold-soft: #33290f;
     --color-terre: #e58a5c;
     --color-terre-soft: #3b2519;
-    --color-terre-deep: #f4b893; /* texte terre clair sur fond terre sombre */
+    --color-terre-deep: #f4b893;
     --color-terre-strong: #8a3d17;
     --color-urgent: #e07a83;
     --color-urgent-soft: #3c1d22;
@@ -177,31 +182,70 @@
     --color-star: #f0be4f;
     --color-success: #5bd3a6;
     --color-success-soft: #133229;
+    --color-glow: rgb(182 242 58 / 0.3);
     --color-scrim: rgb(0 0 0 / 0.7);
     --color-scrim-strong: rgb(0 0 0 / 0.92);
     --shadow-card: 0 1px 2px rgb(0 0 0 / 0.45);
     color-scheme: dark;
   }
 }
-:root[data-theme="dark"] {
-  --color-background: #0f141c; /* fond général, bleu nuit très sombre */
-  --color-surface: #172030; /* cartes, feuilles, barres */
-  --color-surface-high: #212b3b; /* champs, puces, relief */
-  --color-border: #465366; /* contours visibles des cartes */
-  --color-text-primary: #e9edf2; /* titres et textes */
-  --color-text-secondary: #a3afbf; /* descriptions, métadonnées */
-  --color-primary: #b6f23a; /* vert citron (inchangé) */
+
+/* Lumière */
+[data-theme="light"] {
+  --color-primary: #b6f23a;
   --color-primary-pressed: #a2dc24;
-  --color-primary-text: #b6f23a; /* sur fond sombre, le vert citron se lit directement */
+  --color-primary-light: #dcff9a;
+  --color-primary-text: #365b00;
+  --color-background: #dfe2e6;
+  --color-surface: #f3f4f6;
+  --color-surface-high: #e6e8ec;
+  --color-border: #959ca6;
+  --color-text-primary: #141821;
+  --color-text-secondary: #4a515b;
   --color-on-primary: #0e100f;
   --color-on-accent: #ffffff;
-  --color-night: #24314a; /* bleu nuit des bannières, plus clair que le fond */
+  --color-night: #1c2333;
   --color-champagne: #d9c28c;
-  --color-gold: #e3c47a; /* or clair, texte sur fond sombre */
+  --color-gold: #7d5f1a;
+  --color-gold-soft: #f0e5c8;
+  --color-terre: #c8602f;
+  --color-terre-soft: #f6dccd;
+  --color-terre-deep: #8a3d17;
+  --color-terre-strong: #8a3d17;
+  --color-urgent: #e07a83;
+  --color-urgent-soft: #f4d3d6;
+  --color-urgent-text: #9e2430;
+  --color-star: #a8780f;
+  --color-success: #24704f;
+  --color-success-soft: #d2e9dc;
+  --color-glow: rgb(182 242 58 / 0.35);
+  --color-scrim: rgb(20 24 33 / 0.55);
+  --color-scrim-strong: rgb(20 24 33 / 0.9);
+  --shadow-card: 0 1px 2px rgb(20 24 33 / 0.08);
+  color-scheme: light;
+}
+
+/* Nuit */
+[data-theme="dark"] {
+  --color-primary: #b6f23a;
+  --color-primary-pressed: #a2dc24;
+  --color-primary-light: #dcff9a;
+  --color-primary-text: #b6f23a;
+  --color-background: #0f141c;
+  --color-surface: #172030;
+  --color-surface-high: #212b3b;
+  --color-border: #465366;
+  --color-text-primary: #e9edf2;
+  --color-text-secondary: #a3afbf;
+  --color-on-primary: #0e100f;
+  --color-on-accent: #ffffff;
+  --color-night: #24314a;
+  --color-champagne: #d9c28c;
+  --color-gold: #e3c47a;
   --color-gold-soft: #33290f;
   --color-terre: #e58a5c;
   --color-terre-soft: #3b2519;
-  --color-terre-deep: #f4b893; /* texte terre clair sur fond terre sombre */
+  --color-terre-deep: #f4b893;
   --color-terre-strong: #8a3d17;
   --color-urgent: #e07a83;
   --color-urgent-soft: #3c1d22;
@@ -209,6 +253,147 @@
   --color-star: #f0be4f;
   --color-success: #5bd3a6;
   --color-success-soft: #133229;
+  --color-glow: rgb(182 242 58 / 0.3);
+  --color-scrim: rgb(0 0 0 / 0.7);
+  --color-scrim-strong: rgb(0 0 0 / 0.92);
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.45);
+  color-scheme: dark;
+}
+
+/* Améthyste */
+[data-theme="amethyste"] {
+  --color-primary: #a78bfa;
+  --color-primary-pressed: #9472f0;
+  --color-primary-light: #e6dcff;
+  --color-primary-text: #c9b6ff;
+  --color-background: #120d1f;
+  --color-surface: #1b1430;
+  --color-surface-high: #261d40;
+  --color-border: #4a3c70;
+  --color-text-primary: #f1edfa;
+  --color-text-secondary: #b6abcf;
+  --color-on-primary: #160d2b;
+  --color-on-accent: #ffffff;
+  --color-night: #2c2050;
+  --color-champagne: #d9c28c;
+  --color-gold: #e3c47a;
+  --color-gold-soft: #33290f;
+  --color-terre: #b69cff;
+  --color-terre-soft: #2d2050;
+  --color-terre-deep: #ddd0ff;
+  --color-terre-strong: #45288a;
+  --color-urgent: #e07a83;
+  --color-urgent-soft: #3c1d22;
+  --color-urgent-text: #ff9ba3;
+  --color-star: #f0be4f;
+  --color-success: #5bd3a6;
+  --color-success-soft: #133229;
+  --color-glow: rgb(139 92 246 / 0.4);
+  --color-scrim: rgb(0 0 0 / 0.7);
+  --color-scrim-strong: rgb(0 0 0 / 0.92);
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.45);
+  color-scheme: dark;
+}
+
+/* Émeraude */
+[data-theme="emeraude"] {
+  --color-primary: #34d399;
+  --color-primary-pressed: #22c08a;
+  --color-primary-light: #b5f7da;
+  --color-primary-text: #6ee7b7;
+  --color-background: #08150f;
+  --color-surface: #0e2119;
+  --color-surface-high: #153025;
+  --color-border: #2c4d40;
+  --color-text-primary: #e8f5ef;
+  --color-text-secondary: #a3c2b5;
+  --color-on-primary: #04291b;
+  --color-on-accent: #ffffff;
+  --color-night: #11382a;
+  --color-champagne: #d9c28c;
+  --color-gold: #e3c47a;
+  --color-gold-soft: #33290f;
+  --color-terre: #5fd6a6;
+  --color-terre-soft: #123a2b;
+  --color-terre-deep: #a7f3d0;
+  --color-terre-strong: #0f5a40;
+  --color-urgent: #e07a83;
+  --color-urgent-soft: #3c1d22;
+  --color-urgent-text: #ff9ba3;
+  --color-star: #f0be4f;
+  --color-success: #5bd3a6;
+  --color-success-soft: #133229;
+  --color-glow: rgb(16 185 129 / 0.38);
+  --color-scrim: rgb(0 0 0 / 0.7);
+  --color-scrim-strong: rgb(0 0 0 / 0.92);
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.45);
+  color-scheme: dark;
+}
+
+/* Océan */
+[data-theme="ocean"] {
+  --color-primary: #38bdf8;
+  --color-primary-pressed: #22a8e6;
+  --color-primary-light: #c7ecff;
+  --color-primary-text: #7dd3fc;
+  --color-background: #09111f;
+  --color-surface: #0f1a2e;
+  --color-surface-high: #16243d;
+  --color-border: #2e4263;
+  --color-text-primary: #e8eef8;
+  --color-text-secondary: #a5b4cc;
+  --color-on-primary: #03203a;
+  --color-on-accent: #ffffff;
+  --color-night: #132a4c;
+  --color-champagne: #d9c28c;
+  --color-gold: #e3c47a;
+  --color-gold-soft: #33290f;
+  --color-terre: #6cc4f5;
+  --color-terre-soft: #12304d;
+  --color-terre-deep: #bae6fd;
+  --color-terre-strong: #0b4a75;
+  --color-urgent: #e07a83;
+  --color-urgent-soft: #3c1d22;
+  --color-urgent-text: #ff9ba3;
+  --color-star: #f0be4f;
+  --color-success: #5bd3a6;
+  --color-success-soft: #133229;
+  --color-glow: rgb(14 165 233 / 0.38);
+  --color-scrim: rgb(0 0 0 / 0.7);
+  --color-scrim-strong: rgb(0 0 0 / 0.92);
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.45);
+  color-scheme: dark;
+}
+
+/* Braise */
+[data-theme="braise"] {
+  --color-primary: #f08a4b;
+  --color-primary-pressed: #e07a3c;
+  --color-primary-light: #ffd5b8;
+  --color-primary-text: #ffb184;
+  --color-background: #160d09;
+  --color-surface: #22140e;
+  --color-surface-high: #2e1c14;
+  --color-border: #523a2d;
+  --color-text-primary: #f7ece6;
+  --color-text-secondary: #c9ae9f;
+  --color-on-primary: #2a1206;
+  --color-on-accent: #ffffff;
+  --color-night: #3a2015;
+  --color-champagne: #d9c28c;
+  --color-gold: #e3c47a;
+  --color-gold-soft: #33290f;
+  --color-terre: #f0a070;
+  --color-terre-soft: #3b2519;
+  --color-terre-deep: #f4b893;
+  --color-terre-strong: #8a3d17;
+  --color-urgent: #e07a83;
+  --color-urgent-soft: #3c1d22;
+  --color-urgent-text: #ff9ba3;
+  --color-star: #f0be4f;
+  --color-success: #5bd3a6;
+  --color-success-soft: #133229;
+  --color-glow: rgb(232 116 58 / 0.38);
   --color-scrim: rgb(0 0 0 / 0.7);
   --color-scrim-strong: rgb(0 0 0 / 0.92);
   --shadow-card: 0 1px 2px rgb(0 0 0 / 0.45);

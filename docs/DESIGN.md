@@ -16,32 +16,24 @@ Toutes les couleurs, polices, rayons et animations sont définis dans **`app/the
 
 Ambiance : ergonomie des applications mobiles Amazon et AliExpress (recherche en haut, grille de catégories, ventes flash, double action d'achat), en version **claire, adoucie et aérée** (thème « Lumière » : fond gris argent clair, cartes à contour visible, touches de bleu nuit et d'or, grands espacements) avec le **vert citron** comme seule couleur forte. Le logo « di.si store » est posé dans une **grande pastille vert citron**.
 
-## Deux thèmes : « Lumière » (clair) et « Nuit » (sombre)
+## Six thèmes au choix
 
-Comme l'outil « Alerte Trading » : un thème clair et un thème sombre aux mêmes noms de couleurs.
-**Compte › Réglages › Thème** : _Automatique_ (suit le réglage clair / sombre du téléphone, par défaut), _Clair_ ou _Sombre_.
-Le choix est gardé sur le téléphone (`ds-theme`) et appliqué avant l'affichage (pas de clignotement) par l'attribut `data-theme` de `<html>`.
-Dans l'APK, le thème Android de nuit (`values-night`) fait passer la page en sombre quand le téléphone l'est.
+Inspirés des thèmes de l'outil « Alerte Trading » : chaque thème **teinte toute l'application** (fond, cartes, sélection entourée de la couleur du thème, bouton d'action en dégradé avec un léger halo, pastille du logo).
 
-| Token                         | Clair                             | Sombre « Nuit »                   |
-| ----------------------------- | --------------------------------- | --------------------------------- |
-| background                    | `#DFE2E6`                         | `#0F141C`                         |
-| surface                       | `#F3F4F6`                         | `#172030`                         |
-| surfaceHigh                   | `#E6E8EC`                         | `#212B3B`                         |
-| border                        | `#959CA6`                         | `#465366`                         |
-| textPrimary                   | `#141821`                         | `#E9EDF2`                         |
-| textSecondary                 | `#4A515B`                         | `#A3AFBF`                         |
-| primary                       | `#B6F23A`                         | `#B6F23A`                         |
-| primaryText                   | `#365B00`                         | `#B6F23A`                         |
-| night                         | `#1C2333`                         | `#24314A`                         |
-| gold / goldSoft               | `#7D5F1A` / `#F0E5C8`             | `#E3C47A` / `#33290F`             |
-| terre / terreSoft / terreDeep | `#C8602F` / `#F6DCCD` / `#8A3D17` | `#E58A5C` / `#3B2519` / `#F4B893` |
-| terreStrong (bannière)        | `#8A3D17`                         | `#8A3D17`                         |
-| urgentSoft / urgentText       | `#F4D3D6` / `#9E2430`             | `#3C1D22` / `#FF9BA3`             |
-| success / successSoft         | `#24704F` / `#D2E9DC`             | `#5BD3A6` / `#133229`             |
-| star                          | `#A8780F`                         | `#F0BE4F`                         |
+| Thème     | Fond      | Couleur d'action | Caractère                     |
+| --------- | --------- | ---------------- | ----------------------------- |
+| Lumière   | `#DFE2E6` | `#B6F23A`        | Clair, argent, vert citron    |
+| Nuit      | `#0F141C` | `#B6F23A`        | Sombre bleu nuit, vert citron |
+| Améthyste | `#120D1F` | `#A78BFA`        | Violet                        |
+| Émeraude  | `#08150F` | `#34D399`        | Vert émeraude                 |
+| Océan     | `#09111F` | `#38BDF8`        | Bleu                          |
+| Braise    | `#160D09` | `#F08A4B`        | Terre cuite chaude            |
 
-Les contrastes AA des deux thèmes sont vérifiés par `tests/theme.test.ts`.
+- **Choisir** : bouton de thème (cercle à moitié plein) dans l'en-tête, ou **Compte › Réglages › Thème** ; chaque choix montre un aperçu aux vraies couleurs du thème.
+- **Automatique** (par défaut) : Lumière, ou Nuit si le téléphone est en mode sombre (dans l'APK, thème Android `values-night`).
+- Le choix est gardé (`ds-theme`) et appliqué avant l'affichage par l'attribut `data-theme` de `<html>` ; les aperçus utilisent le même attribut.
+- Mêmes noms de couleurs dans tous les thèmes (`app/theme.css`, miroir `THEMES` dans `lib/theme.ts`) ; les contrastes AA de **chaque** thème sont vérifiés par `tests/theme.test.ts`.
+- Dans les thèmes colorés, la couleur « Terre » des visuels prend la teinte du thème ; le rouge des promotions, l'or et les étoiles restent les mêmes.
 
 ## Couleurs de base (thème clair « Lumière »)
 

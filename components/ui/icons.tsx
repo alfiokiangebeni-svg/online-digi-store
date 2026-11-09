@@ -273,3 +273,10 @@ export const IconTrash = (p: IconProps) => (
     <path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6" />
   </Base>
 );
+/** Thème (cercle à moitié plein), comme le bouton de thème d'« Alerte Trading ». */
+export const IconTheme = (p: IconProps) => (
+  <Base {...p}>
+    <circle cx="12" cy="12" r="8.5" />
+    <path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor" stroke="none" />
+  </Base>
+);

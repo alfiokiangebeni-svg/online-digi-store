@@ -6,8 +6,10 @@ import { favoritesStore, libraryStore, parentalStore } from "@/lib/client/shop";
 import { useStore } from "@/lib/client/store";
 import { toast } from "@/lib/client/toast";
 import { useFeedbackTexts } from "@/components/feedback/FeedbackProvider";
-import { setCurrency, setTheme, useCurrency, useTheme } from "@/lib/client/prefs";
+import { setCurrency, useCurrency } from "@/lib/client/prefs";
+import { ThemePicker } from "@/components/ui/ThemePicker";
 import type { Locale } from "@/lib/i18n/config";
+import type { ThemeChoice } from "@/lib/theme";
 import { format } from "@/lib/i18n/format";
 import { Button } from "@/components/ui/Button";
 import { Field } from "@/components/ui/Field";
@@ -42,6 +44,7 @@ export interface AccountLabels {
   themeDark: string;
   themeLight: string;
   themeAuto: string;
+  themeNames: Record<ThemeChoice, string>;
   themeHint: string;
   themeSaved: string;
   lite: string;
@@ -71,7 +74,6 @@ export function AccountView({
   const parental = useStore(parentalStore);
   const fb = useFeedbackTexts();
   const currency = useCurrency();
-  const theme = useTheme();
   const [pin, setPin] = useState("");
   const [pinMsg, setPinMsg] = useState<{ ok: boolean; text: string }>();
 
@@ -249,21 +251,7 @@ export function AccountView({
         </div>
         <div className="flex flex-col gap-2 text-sm">
           <span>{t.theme}</span>
-          <Segmented
-            label={t.theme}
-            value={theme}
-            className="self-start"
-            options={[
-              { value: "auto", label: t.themeAuto },
-              { value: "light", label: t.themeLight },
-              { value: "dark", label: t.themeDark },
-            ]}
-            onChange={(v) => {
-              setTheme(v);
-              toast({ tone: "success", message: t.themeSaved });
-            }}
-          />
-          <span className="text-xs text-muted">{t.themeHint}</span>
+          <ThemePicker label={t.theme} names={t.themeNames} hint={t.themeHint} saved={t.themeSaved} />
         </div>
         <LiteToggle label={t.lite} hint={t.liteHint} onText={t.liteOn} offText={t.liteOff} />
       </section>

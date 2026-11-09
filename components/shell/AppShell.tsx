@@ -19,6 +19,7 @@ import { BackButton, NavDepthTracker } from "./BackButton";
 import { FeedbackProvider } from "@/components/feedback/FeedbackProvider";
 import { CurrencyToggle } from "@/components/ui/CurrencyToggle";
 import { NotificationsButton } from "./NotificationsButton";
+import { ThemeButton } from "./ThemeButton";
 import { MiniPlayer } from "./MiniPlayer";
 import { SearchTools } from "./SearchTools";
 
@@ -103,6 +104,14 @@ export function AppShell({
           )}
           <div role="group" aria-label={dict.a11y.settings} className="flex items-center gap-0.5">
             <CurrencyToggle label={dict.header.currency} onDark />
+            <ThemeButton
+              label={dict.account.themeButton}
+              title={dict.account.theme}
+              closeLabel={dict.sheet.close}
+              names={dict.account.themeNames}
+              hint={dict.account.themeHint}
+              saved={dict.account.themeSaved}
+            />
             <NotificationsButton
               label={dict.header.notifications}
               title={dict.header.notificationsTitle}

@@ -167,7 +167,8 @@
       "terre": "Mabele : bilembo ya ba-rayon",
       "terreSoft": "Langi pole ya bilili ya biloko",
       "terreDeep": "Makomi na langi ya mabele",
-      "terreStrong": "Langi ya bannière mabele"
+      "terreStrong": "Langi ya bannière mabele",
+      "primaryLight": "Ebandeli ya langi ya ba-bouton"
     }
   },
   "nav": {
@@ -511,8 +512,18 @@
     "purchases": "Biloko nasombi",
     "purchasesBody": "Biloko osombi mpe ya ofele, ezali hors-ligne",
     "themeAuto": "Yango moko",
-    "themeHint": "« Yango moko » elandaka ndenge telefone ebongisami.",
-    "themeSaved": "Langi ebongisami"
+    "themeHint": "« Yango moko » : Pole na moi, Butu soki telefone ezali na molili.",
+    "themeSaved": "Langi ebongisami",
+    "themeNames": {
+      "auto": "Yango moko",
+      "light": "Pole",
+      "dark": "Butu",
+      "amethyste": "Améthyste",
+      "emeraude": "Émeraude",
+      "ocean": "Mbu",
+      "braise": "Moto"
+    },
+    "themeButton": "Bongola langi"
   },
   "common": {
     "demo": "Ndakisa"

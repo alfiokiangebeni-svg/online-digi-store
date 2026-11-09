@@ -1,7 +1,7 @@
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
-import { COLORS as C, COLORS_DARK as D } from "@/lib/theme";
+import { THEMES, THEME_IDS, type ColorName } from "@/lib/theme";
 
 const css = readFileSync("app/theme.css", "utf8");
 const camel = (s: string) => s.replace(/-([a-z])/g, (_, c: string) => c.toUpperCase());
@@ -24,24 +24,26 @@ const hexes = (block: string) =>
   Object.fromEntries(
     [...block.matchAll(/--color-([a-z-]+):\s*(#[0-9a-f]{6})/g)].map(([, n, hex]) => [n, hex]),
   );
-const lightBlock = css.slice(css.indexOf("@theme {"), css.indexOf("@theme inline"));
-const mediaBlock = css.slice(
-  css.indexOf("@media (prefers-color-scheme: dark)"),
-  css.indexOf(':root[data-theme="dark"]'),
-);
-const darkBlock = css.slice(css.indexOf(':root[data-theme="dark"]'));
+/** Bloc CSS qui commence à `marker` et se termine à l'accolade fermante correspondante. */
+function blockAt(marker: string) {
+  const start = css.indexOf(marker);
+  if (start < 0) return "";
+  let depth = 0;
+  for (let i = css.indexOf("{", start); i < css.length; i++) {
+    if (css[i] === "{") depth++;
+    else if (css[i] === "}" && --depth === 0) return css.slice(start, i + 1);
+  }
+  return "";
+}
+const kebabOf = (name: string) => name.replace(/[A-Z]/g, (c) => "-" + c.toLowerCase());
 
-describe.each([
-  ["clair", lightBlock, C],
-  ["sombre", darkBlock, D],
-] as const)("tokens du thème %s : app/theme.css et lib/theme.ts sont identiques", (_, block, mirror) => {
-  const defined = hexes(block);
-  it.each(Object.entries(mirror))("%s", (name, hex) => {
-    const cssName = name.replace(/[A-Z]/g, (c) => "-" + c.toLowerCase());
-    expect(defined[cssName]).toBe(hex);
+describe.each(THEME_IDS)("thème %s : app/theme.css et lib/theme.ts sont identiques", (id) => {
+  const defined = hexes(blockAt(`[data-theme="${id}"]`));
+  it.each(Object.entries(THEMES[id]))("%s", (name, hex) => {
+    expect(defined[kebabOf(name)]).toBe(hex);
   });
   it("aucune couleur du CSS n'est absente du miroir", () => {
-    const known = new Set<string>(Object.keys(mirror));
+    const known = new Set<string>(Object.keys(THEMES[id]));
     expect(
       Object.keys(defined)
         .map(camel)
@@ -50,12 +52,19 @@ describe.each([
   });
 });
 
-it("le thème sombre automatique et le thème sombre choisi sont identiques", () => {
-  expect(hexes(mediaBlock)).toEqual(hexes(darkBlock));
+it("le thème par défaut (@theme) est Lumière", () => {
+  const defined = hexes(blockAt("@theme {"));
+  for (const [name, hex] of Object.entries(THEMES.light)) expect(defined[kebabOf(name)], name).toBe(hex);
+});
+
+it("le sombre automatique (téléphone en mode sombre) est Nuit", () => {
+  expect(hexes(blockAt("@media (prefers-color-scheme: dark)"))).toEqual(
+    hexes(blockAt('[data-theme="dark"]')),
+  );
 });
 
 /** Couples texte / fond réellement utilisés (AA : 4,5 ; icônes et grands textes : 3). */
-const pairs = (C: Record<keyof typeof D, string>): Array<[string, string, string, number]> => [
+const pairs = (C: Record<ColorName, string>): Array<[string, string, string, number]> => [
   ["texte principal / fond", C.textPrimary, C.background, 4.5],
   ["texte principal / carte", C.textPrimary, C.surface, 4.5],
   ["texte principal / relief", C.textPrimary, C.surfaceHigh, 4.5],
@@ -64,6 +73,7 @@ const pairs = (C: Record<keyof typeof D, string>): Array<[string, string, string
   ["texte secondaire / relief", C.textSecondary, C.surfaceHigh, 4.5],
   ["bouton principal", C.onPrimary, C.primary, 4.5],
   ["bouton principal pressé", C.onPrimary, C.primaryPressed, 4.5],
+  ["bouton principal (début du dégradé)", C.onPrimary, C.primaryLight, 4.5],
   ["logo dans la pastille vert citron", C.onPrimary, C.primary, 4.5],
   ["onglet actif (vert lisible) / barre du bas", C.primaryText, C.surface, 4.5],
   ["puce active (vert lisible) / relief", C.primaryText, C.surfaceHigh, 4.5],
@@ -86,11 +96,8 @@ const pairs = (C: Record<keyof typeof D, string>): Array<[string, string, string
   ["badge succès pâle (texte vert)", C.success, C.successSoft, 4.5],
 ];
 
-describe.each([
-  ["clair", C],
-  ["sombre", D],
-] as const)("contrastes AA du thème %s", (_, palette) => {
-  it.each(pairs(palette))("%s", (_, fg, bg, min) => {
+describe.each(THEME_IDS)("contrastes AA du thème %s", (id) => {
+  it.each(pairs(THEMES[id]))("%s", (_, fg, bg, min) => {
     expect(ratio(fg, bg)).toBeGreaterThanOrEqual(min);
   });
 });

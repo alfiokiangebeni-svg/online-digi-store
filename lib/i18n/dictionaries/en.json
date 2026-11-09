@@ -167,7 +167,8 @@
       "terre": "Terracotta: rail and perk icons",
       "terreSoft": "Pale background of product visuals and category circles",
       "terreDeep": "Text and icons on pale terracotta",
-      "terreStrong": "Terracotta banner background (white text), same in light and dark"
+      "terreStrong": "Terracotta banner background (white text), same in light and dark",
+      "primaryLight": "Start of the action button gradient"
     }
   },
   "nav": {
@@ -511,8 +512,18 @@
     "purchases": "My purchases",
     "purchasesBody": "Your bought and free content, available offline",
     "themeAuto": "Automatic",
-    "themeHint": "“Automatic” follows the phone’s light / dark setting.",
-    "themeSaved": "Theme applied"
+    "themeHint": "“Automatic”: Light by day, Night when the phone is in dark mode.",
+    "themeSaved": "Theme applied",
+    "themeNames": {
+      "auto": "Automatic",
+      "light": "Light",
+      "dark": "Night",
+      "amethyste": "Amethyst",
+      "emeraude": "Emerald",
+      "ocean": "Ocean",
+      "braise": "Ember"
+    },
+    "themeButton": "Change theme"
   },
   "common": {
     "demo": "Demo"

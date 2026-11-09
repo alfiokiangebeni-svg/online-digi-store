@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "../globals.css";
 import { BootScript } from "@/components/shell/BootScript";
 import { fontVariables } from "@/lib/fonts";
-import { COLORS, COLORS_DARK } from "@/lib/theme";
+import { THEMES } from "@/lib/theme";
 import { LOCALES } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n";
 import { layoutLocale, localeStaticParams } from "@/lib/i18n/params";
@@ -29,8 +29,8 @@ export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Pr
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: COLORS.surface },
-    { media: "(prefers-color-scheme: dark)", color: COLORS_DARK.surface },
+    { media: "(prefers-color-scheme: light)", color: THEMES.light.surface },
+    { media: "(prefers-color-scheme: dark)", color: THEMES.dark.surface },
   ],
   width: "device-width",
   initialScale: 1,
