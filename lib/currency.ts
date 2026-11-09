@@ -29,7 +29,12 @@ export function usdCentsToCdf(
   return Math.round(raw / rounding) * rounding;
 }
 
-const INTL_TAG: Record<Locale, string> = { fr: "fr-CD", ln: "ln-CD", en: "en-US" };
+/**
+ * Format des nombres. Le lingala reprend l'écriture française (« 4,99 $ ») : les navigateurs
+ * des téléphones n'ont pas les règles « ln-CD », le serveur oui — le texte différerait entre
+ * le rendu serveur et le navigateur (erreur d'hydratation).
+ */
+const INTL_TAG: Record<Locale, string> = { fr: "fr-CD", ln: "fr-CD", en: "en-US" };
 
 /** Formate un montant : cents pour USD, unités entières pour CDF. */
 export function formatMoney(amount: number, currency: Currency, locale: Locale): string {
