@@ -163,7 +163,10 @@
       "night": "Midnight blue (luxury): banners, search button, avatar",
       "champagne": "Champagne gold on midnight blue: banner trim and kickers",
       "gold": "Dark gold: best-seller badges, coupons",
-      "goldSoft": "Pale gold background of badges and coupons"
+      "goldSoft": "Pale gold background of badges and coupons",
+      "terre": "Terracotta: rail and perk icons",
+      "terreSoft": "Pale background of product visuals and category circles",
+      "terreDeep": "Text on pale terracotta; flash sale banner"
     }
   },
   "nav": {

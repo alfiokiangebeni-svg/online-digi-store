@@ -162,8 +162,8 @@ export function ListingsView({
               key={i.slug}
               href={i.href}
               media={
-                <span className="grid size-14 shrink-0 place-items-center rounded-[var(--radius-sm)] bg-surface-2">
-                  <CategoryIcon id={category} size={22} className="text-muted" />
+                <span className="grid size-14 shrink-0 place-items-center rounded-[var(--radius-sm)] bg-terre-soft">
+                  <CategoryIcon id={category} size={22} className="text-terre-deep" />
                 </span>
               }
               title={i.title}

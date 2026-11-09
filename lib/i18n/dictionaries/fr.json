@@ -163,7 +163,10 @@
       "night": "Bleu nuit (luxe) : bannières, bouton de recherche, avatar",
       "champagne": "Or champagne sur le bleu nuit : liseré et titres des bannières",
       "gold": "Or foncé : texte des badges « Meilleure vente », coupons",
-      "goldSoft": "Fond pâle doré des badges et coupons"
+      "goldSoft": "Fond pâle doré des badges et coupons",
+      "terre": "Terre : icônes des rayons et des avantages",
+      "terreSoft": "Fond pâle des visuels produits et des ronds de catégories",
+      "terreDeep": "Texte sur le fond terre pâle ; bannière « Ventes flash »"
     }
   },
   "nav": {

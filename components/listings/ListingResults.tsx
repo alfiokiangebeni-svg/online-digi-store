@@ -33,8 +33,8 @@ export function ListingResults({ items, title }: { items: ListingHit[]; title: s
             key={i.slug}
             href={i.href}
             media={
-              <span className="grid size-12 shrink-0 place-items-center rounded-[var(--radius-sm)] bg-surface-2">
-                <CategoryIcon id={i.category} size={20} className="text-muted" />
+              <span className="grid size-12 shrink-0 place-items-center rounded-[var(--radius-sm)] bg-terre-soft">
+                <CategoryIcon id={i.category} size={20} className="text-terre-deep" />
               </span>
             }
             title={i.title}

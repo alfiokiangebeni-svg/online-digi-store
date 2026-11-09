@@ -164,14 +164,14 @@
     align-items: flex-end;
     overflow: hidden;
     padding: 0.75rem;
-    background: var(--color-surface-high);
-    color: var(--color-text-primary);
+    background: var(--color-terre-soft);
+    color: var(--color-terre-deep);
   }
   .cover-icon {
     position: absolute;
     right: 0.75rem;
     top: 0.75rem;
-    color: var(--cat, var(--color-text-secondary));
+    color: var(--color-terre-deep);
   }
   .cover-title {
     position: relative;
@@ -303,9 +303,9 @@
   }
 }
 
-/* Catégories : repère neutre (palette minimale, pas de couleur par catégorie). */
+/* Catégories : toutes en Terre (une seule couleur chaude, pas de couleur par catégorie). */
 [class*="cat-"] {
-  --cat: var(--color-text-secondary);
+  --cat: var(--color-terre-deep);
 }
 
 /* Devise d'affichage : les deux prix sont rendus, l'attribut de <html> choisit. */

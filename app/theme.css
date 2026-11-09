@@ -29,6 +29,12 @@
   --color-gold: #7d5f1a; /* or foncé, texte et icônes sur fond clair */
   --color-gold-soft: #f0e5c8; /* fond pâle des badges et coupons dorés */
 
+  /* ── Terre : la couleur chaude de l'application (vie, chaleur) ────────────
+   * Visuels des produits et annonces, ronds des catégories, icônes des rayons. */
+  --color-terre: #c8602f; /* terracotta : icônes */
+  --color-terre-soft: #f6dccd; /* fond pâle des visuels et des ronds de catégories */
+  --color-terre-deep: #8a3d17; /* texte et icônes sur le fond pâle ; bannière terre */
+
   /* ── Couleurs d'appoint (minimum : pas de surcharge) ─────────────────────
    * Rouge = remises, ventes flash, urgences, erreurs. Doré = étoiles. Vert = succès.
    * Couleurs adoucies : badges en teinte pâle avec texte foncé (seul le vert citron reste vif).

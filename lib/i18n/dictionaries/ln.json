@@ -163,7 +163,10 @@
       "night": "Bleu ya butu : ba-bannière, bouton ya koluka",
       "champagne": "Wolo champagne na bleu ya butu",
       "gold": "Wolo : badge « Meilleure vente », ba-coupon",
-      "goldSoft": "Langi pole ya wolo"
+      "goldSoft": "Langi pole ya wolo",
+      "terre": "Mabele : bilembo ya ba-rayon",
+      "terreSoft": "Langi pole ya bilili ya biloko",
+      "terreDeep": "Makomi na langi ya mabele"
     }
   },
   "nav": {

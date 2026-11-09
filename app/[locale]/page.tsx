@@ -96,7 +96,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
         </p>
       ),
     },
-    { ...bFlash, href: explore("?tri=priceAsc"), extra: null },
+    { ...bFlash, href: explore("?tri=priceAsc"), extra: null, terre: true },
     { ...bSell, href: localePath(locale, "vendre"), extra: null },
   ];
 
@@ -129,7 +129,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
               <Link
                 href={b.href}
                 prefetch={false}
-                className="pressable relative flex h-full min-h-[11rem] flex-col gap-2 rounded-[var(--radius-lg)] bg-night p-5 text-on-accent ring-1 ring-champagne/70 [&_.price-old]:text-on-accent/60 [&_.price-tag]:text-on-accent"
+                className={`pressable relative flex h-full min-h-[11rem] flex-col gap-2 rounded-[var(--radius-lg)] p-5 text-on-accent ring-1 ring-champagne/70 ${"terre" in b ? "bg-terre-deep" : "bg-night"} [&_.price-old]:text-on-accent/60 [&_.price-tag]:text-on-accent`}
               >
                 <span className="text-xs font-bold uppercase tracking-[0.8px] text-champagne">
                   {b.kicker}
@@ -151,15 +151,15 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
       {/* Avantages */}
       <ul className="mt-3 flex justify-around px-1 py-1 text-[11px] font-semibold text-muted">
         <li className="inline-flex items-center gap-1">
-          <IconDownload size={14} />
+          <IconDownload size={14} className="text-terre" />
           {dict.home.trustDelivery}
         </li>
         <li className="inline-flex items-center gap-1">
-          <IconPhone size={14} />
+          <IconPhone size={14} className="text-terre" />
           {dict.home.trustPay}
         </li>
         <li className="inline-flex items-center gap-1">
-          <IconChat size={14} />
+          <IconChat size={14} className="text-terre" />
           {dict.home.trustSupport}
         </li>
       </ul>
@@ -173,7 +173,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
             prefetch={false}
             className="pressable flex min-h-11 flex-col items-center gap-1.5 text-center text-[11px] font-medium leading-tight"
           >
-            <span className="grid size-14 place-items-center rounded-full bg-surface-2 text-fg">
+            <span className="grid size-14 place-items-center rounded-full bg-terre-soft text-terre-deep">
               <CategoryIcon id={id} />
             </span>
             {dict.categories[id]}
@@ -249,7 +249,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
             title={
               id in dict.homeRails ? dict.homeRails[id as keyof typeof dict.homeRails] : dict.categories[id]
             }
-            icon={<CategoryIcon id={id} size={18} className="text-muted" />}
+            icon={<CategoryIcon id={id} size={18} className="text-terre" />}
             href={category(id)}
             seeAll={dict.home.seeAll}
           />
@@ -272,7 +272,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
         <SectionHead
           id="rail-music"
           title={dict.homeRails.music}
-          icon={<CategoryIcon id="music" size={18} className="text-muted" />}
+          icon={<CategoryIcon id="music" size={18} className="text-terre" />}
           href={category("music")}
           seeAll={dict.home.seeAll}
         />

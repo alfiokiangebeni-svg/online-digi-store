@@ -45,6 +45,18 @@ Ombre très légère des cartes : `--shadow-card` (la seule ombre de l'applicati
 
 Jamais pour une action : le vert citron reste la seule couleur des boutons d'action.
 
+## Terre — la couleur chaude
+
+Une seule couleur chaude pour donner vie à l'application (choix du propriétaire parmi Terre, Mangue et Fleuve) :
+
+| Token     | Hex       | Usage                                                                                       |
+| --------- | --------- | ------------------------------------------------------------------------------------------- |
+| terre     | `#C8602F` | Icônes des rayons et des avantages (livraison, Mobile Money, WhatsApp)                      |
+| terreSoft | `#F6DCCD` | Fond pâle des visuels produits et annonces, ronds des catégories, vignettes                 |
+| terreDeep | `#8A3D17` | Texte et icônes sur le fond terre pâle ; fond de la bannière « Ventes flash » (texte blanc) |
+
+Toutes les catégories partagent la même couleur Terre : l'icône seule les distingue.
+
 ## Couleurs d'appoint — palette minimale
 
 Demande du propriétaire : **vert citron fort, fond gris, pas de surcharge de couleurs**.
@@ -65,7 +77,7 @@ Couleurs d'appoint **adoucies** : les badges rouges et verts sont des teintes p�
 ## Catégories
 
 Les 7 catégories (Livres, Applications, Immobilier, Offres d'emploi, Musique, Images, Appels d'offres) n'ont **pas de couleur propre** :
-icônes au trait en gris (`textSecondary`), sur fond en relief. Seule l'icône les distingue.
+icônes au trait en terre foncée sur fond terre pâle. Seule l'icône les distingue.
 
 ## Règles
 
@@ -73,7 +85,7 @@ icônes au trait en gris (`textSecondary`), sur fond en relief. Seule l'icône l
 - Boutons secondaires **en contour** (`variant="outline"` : bordure `border`, texte `textPrimary`) ; actions tertiaires en **liens texte** (`variant="ghost"`).
 - Onglets et filtres actifs : contour vert citron et texte vert lisible (`primaryText`), sans fond plein.
 - Mise en page aérée : marges de 16 px, 20 px entre les sections de l'accueil, cartes produit plus larges ; recherche en pastille à bord vert citron, onglets de rayons sous la recherche, bannières sombres, fil « Recommandé pour vous » en 2 colonnes.
-- Cartes produit : pas de bandeau ni de teinte de catégorie ; visuel en gris relief avec icône neutre.
+- Cartes produit : visuel sur fond terre pâle avec icône et titre en terre foncée (même teinte pour toutes les catégories).
 - Contraste **AA** partout (vérifié par les tests).
 - **Interdits** : dégradés violet-bleu, effet verre flou, mises en page « template IA », emoji en guise d'icônes.
 

@@ -142,7 +142,7 @@ function PublishForm({ x }: { x: SellTexts }) {
                 onClick={() => pick(id)}
                 className="card pressable flex min-h-[5.5rem] w-full flex-col justify-between gap-2 p-3 text-left hover:bg-surface-2"
               >
-                <span className="grid size-10 place-items-center rounded-full bg-surface-2">
+                <span className="grid size-10 place-items-center rounded-full bg-terre-soft text-terre-deep">
                   <CategoryIcon id={id} size={20} />
                 </span>
                 <span className="flex items-center justify-between gap-2 text-sm font-semibold">
@@ -476,7 +476,7 @@ function MyListings({ x, locale }: { x: SellTexts; locale: string }) {
         return (
           <li key={l.id} className="card flex flex-col gap-3 p-3.5">
             <div className="flex items-start gap-3">
-              <span className="grid size-11 shrink-0 place-items-center rounded-[var(--radius-sm)] bg-surface-2">
+              <span className="grid size-11 shrink-0 place-items-center rounded-[var(--radius-sm)] bg-terre-soft text-terre-deep">
                 <CategoryIcon id={l.category} size={20} />
               </span>
               <div className="flex min-w-0 flex-1 flex-col gap-1">

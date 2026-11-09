@@ -18,7 +18,7 @@ export default async function CategoriesPage({ params }: PageProps<"/[locale]/ca
   const t = dict.categoriesPage;
   const explore = (q: string) => `${localePath(locale, "explorer")}${q}`;
   const icon = (node: React.ReactNode) => (
-    <span className="grid size-11 place-items-center rounded-[var(--radius-sm)] bg-surface-2 text-fg">
+    <span className="grid size-11 place-items-center rounded-[var(--radius-sm)] bg-terre-soft text-terre-deep">
       {node}
     </span>
   );
