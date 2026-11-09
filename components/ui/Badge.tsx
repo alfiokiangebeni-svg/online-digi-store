@@ -24,7 +24,7 @@ const TONES: Record<BadgeTone, string> = {
   urgent: "bg-urgent-soft text-urgent-text",
   trust: "bg-surface-2 text-fg",
   new: "bg-surface-2 text-fg",
-  premium: "bg-surface-2 text-fg",
+  premium: "bg-gold-soft text-gold",
   success: "bg-success-soft text-success",
   neutral: "bg-surface-2 text-fg",
   verified: "px-0 text-success",

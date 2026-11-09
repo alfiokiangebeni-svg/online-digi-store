@@ -88,7 +88,7 @@ export function AppShell({
         {dict.a11y.skipToContent}
       </a>
       <NavDepthTracker />
-      <header className="sticky top-0 z-30 bg-surface text-fg shadow-[var(--shadow-card)]">
+      <header className="sticky top-0 z-30 border-b border-line bg-surface text-fg shadow-[var(--shadow-card)]">
         <div className="mx-auto flex max-w-5xl items-center justify-between gap-2 px-4 pt-2.5">
           {back ? (
             <BackButton fallback={back} label={dict.product.back} />

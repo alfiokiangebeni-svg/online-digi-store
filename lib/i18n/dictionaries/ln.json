@@ -159,7 +159,11 @@
       "primaryText": "Langi ya vert oyo etangamaka malamu",
       "onAccent": "Makomi ya pembe na motane mpe vert",
       "urgentSoft": "Langi pole ya ba-badge motane",
-      "successSoft": "Langi pole ya ba-badge ya elonga"
+      "successSoft": "Langi pole ya ba-badge ya elonga",
+      "night": "Bleu ya butu : ba-bannière, bouton ya koluka",
+      "champagne": "Wolo champagne na bleu ya butu",
+      "gold": "Wolo : badge « Meilleure vente », ba-coupon",
+      "goldSoft": "Langi pole ya wolo"
     }
   },
   "nav": {

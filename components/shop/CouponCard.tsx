@@ -23,8 +23,8 @@ export function CouponCard({
   const claimed = useStore(couponStore) === code;
   const t = useFeedbackTexts();
   return (
-    <div className="flex min-w-[15rem] shrink-0 items-stretch overflow-hidden rounded-[8px] border border-dashed border-promo bg-surface">
-      <div className="grid w-20 shrink-0 place-items-center bg-urgent-soft px-1 text-center text-lg font-extrabold leading-tight text-urgent-text">
+    <div className="flex min-w-[15rem] shrink-0 items-stretch overflow-hidden rounded-[8px] border border-dashed border-gold bg-surface">
+      <div className="grid w-20 shrink-0 place-items-center bg-gold-soft px-1 text-center text-lg font-extrabold leading-tight text-gold">
         {value}
       </div>
       <div className="flex flex-1 flex-col justify-center gap-1 px-3 py-2.5">

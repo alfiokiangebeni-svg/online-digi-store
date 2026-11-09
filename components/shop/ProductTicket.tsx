@@ -6,6 +6,9 @@ import { format, type Dictionary } from "@/lib/i18n";
 import { productHref } from "./labels";
 import { QuickAdd } from "./QuickAdd";
 
+/** Ventes à partir desquelles un produit porte le badge doré « Meilleure vente ». */
+const BEST_SELLER_SALES = 2000;
+
 /** Part vendue affichée sur les ventes flash (démo : dérivée des ventes). */
 export function soldPercent(p: Pick<Product, "sales">) {
   return Math.min(96, 38 + (p.sales % 57));
@@ -41,6 +44,8 @@ export function ProductTicket({
       badges={
         percent > 0 ? (
           <Badge tone="promo">{format(dict.product.discount, { percent })}</Badge>
+        ) : p.sales >= BEST_SELLER_SALES ? (
+          <Badge tone="premium">{dict.badges.bestSeller}</Badge>
         ) : p.isNew ? (
           <Badge tone="new">{dict.product.new}</Badge>
         ) : null

@@ -12,14 +12,22 @@
   --color-primary: #b6f23a; /* vert citron : boutons d'action, pastille du logo */
   --color-primary-pressed: #a2dc24; /* état pressé / survol */
   --color-primary-text: #365b00; /* vert lisible sur fond clair : onglet actif, liens, puces */
-  --color-background: #dcdfdb; /* fond général, gris clair adouci */
-  --color-surface: #eef0ec; /* cartes, feuilles modales, barres (blanc cassé) */
-  --color-surface-high: #e1e4df; /* champs, puces, éléments en relief */
-  --color-border: #c5cac4; /* séparateurs, contours */
-  --color-text-primary: #141816; /* titres et textes */
-  --color-text-secondary: #4c544f; /* descriptions, métadonnées */
+  --color-background: #dfe2e6; /* fond général, gris argent clair */
+  --color-surface: #f3f4f6; /* cartes, feuilles modales, barres (blanc argenté) */
+  --color-surface-high: #e6e8ec; /* champs, puces, éléments en relief */
+  --color-border: #959ca6; /* contours visibles des cartes, séparateurs */
+  --color-text-primary: #141821; /* titres et textes */
+  --color-text-secondary: #4a515b; /* descriptions, métadonnées */
   --color-on-primary: #0e100f; /* texte sur le vert citron (jamais de blanc) */
-  --color-on-accent: #ffffff; /* texte blanc sur les bannières sombres */
+  --color-on-accent: #ffffff; /* texte blanc sur le bleu nuit */
+
+  /* ── Couleurs « luxe » (avec parcimonie) ──────────────────────────────────
+   * Bleu nuit : bannières, bouton de recherche, avatar. Or : liseré des bannières,
+   * badges « Meilleure vente » / « Sponsorisé », coupons. Jamais pour les actions. */
+  --color-night: #1c2333; /* bleu nuit profond */
+  --color-champagne: #d9c28c; /* or champagne, sur le bleu nuit */
+  --color-gold: #7d5f1a; /* or foncé, texte et icônes sur fond clair */
+  --color-gold-soft: #f0e5c8; /* fond pâle des badges et coupons dorés */
 
   /* ── Couleurs d'appoint (minimum : pas de surcharge) ─────────────────────
    * Rouge = remises, ventes flash, urgences, erreurs. Doré = étoiles. Vert = succès.
@@ -46,7 +54,7 @@
   --radius-ticket: 12px;
 
   /* ── Ombres (très légères, thème clair) ────────────────────────────────── */
-  --shadow-card: 0 1px 2px rgb(20 24 22 / 0.06), 0 0 0 1px rgb(20 24 22 / 0.04);
+  --shadow-card: 0 1px 2px rgb(20 24 33 / 0.08);
 
   /* ── Mouvement (désactivé si « réduire les animations ») ───────────────── */
   --animate-stamp: stamp 520ms cubic-bezier(0.2, 0.9, 0.3, 1.35) both;

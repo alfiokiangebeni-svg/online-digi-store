@@ -45,7 +45,7 @@ export function SearchField({
       <button
         type="submit"
         aria-label={submitLabel}
-        className="grid h-9 w-11 shrink-0 place-items-center rounded-full bg-text-primary text-on-accent hover:opacity-90"
+        className="grid h-9 w-11 shrink-0 place-items-center rounded-full bg-night text-on-accent hover:opacity-90"
       >
         <IconSearch size={18} />
       </button>

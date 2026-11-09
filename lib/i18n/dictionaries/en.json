@@ -159,7 +159,11 @@
       "primaryText": "Readable green on light background: active tab, links, chips",
       "onAccent": "White text on red and success green",
       "urgentSoft": "Pale background of red badges (dark red text)",
-      "successSoft": "Pale background of success badges (green text)"
+      "successSoft": "Pale background of success badges (green text)",
+      "night": "Midnight blue (luxury): banners, search button, avatar",
+      "champagne": "Champagne gold on midnight blue: banner trim and kickers",
+      "gold": "Dark gold: best-seller badges, coupons",
+      "goldSoft": "Pale gold background of badges and coupons"
     }
   },
   "nav": {

@@ -14,7 +14,7 @@ Toutes les couleurs, polices, rayons et animations sont définis dans **`app/the
 2. que tous les couples texte/fond utilisés atteignent le contraste **AA** ;
 3. qu'**aucune couleur n'est écrite en dur** dans les écrans et composants (`app/`, `components/`) : ni hexadécimal, ni `white`/`black`, ni `rgb()`, ni variante `dark:`, ni ancien nom de couleur.
 
-Ambiance : ergonomie des applications mobiles Amazon et AliExpress (recherche en haut, grille de catégories, ventes flash, double action d'achat), en version **claire, adoucie et aérée** (thème « Lumière » : cartes blanc cassé sur fond gris clair, grands espacements, luminosité réduite) avec le **vert citron** comme seule couleur forte. Le logo « di.si store » est posé dans une **grande pastille vert citron**.
+Ambiance : ergonomie des applications mobiles Amazon et AliExpress (recherche en haut, grille de catégories, ventes flash, double action d'achat), en version **claire, adoucie et aérée** (thème « Lumière » : fond gris argent clair, cartes à contour visible, touches de bleu nuit et d'or, grands espacements) avec le **vert citron** comme seule couleur forte. Le logo « di.si store » est posé dans une **grande pastille vert citron**.
 
 ## Couleurs de base (thème clair « Lumière »)
 
@@ -23,16 +23,27 @@ Ambiance : ergonomie des applications mobiles Amazon et AliExpress (recherche en
 | primary        | `#B6F23A` | `bg-primary`                         | Boutons d'action (Acheter, Payer, Postuler, Soumissionner), pastille du logo |
 | primaryPressed | `#A2DC24` | `bg-primary-pressed`                 | État pressé / survol                                                         |
 | primaryText    | `#365B00` | `text-primary-text`                  | Vert **lisible sur fond clair** : onglet actif, puces actives, liens, focus  |
-| background     | `#DCDFDB` | `bg-background` / `bg-bg`            | Fond général (gris clair adouci)                                             |
-| surface        | `#EEF0EC` | `bg-surface`                         | Cartes, en-tête, feuilles modales, barre du bas (blanc cassé)                |
-| surfaceHigh    | `#E1E4DF` | `bg-surface-high` / `bg-surface-2`   | Champs, puces, éléments en relief                                            |
-| border         | `#C5CAC4` | `border-border` / `border-line`      | Séparateurs, contours                                                        |
-| textPrimary    | `#141816` | `text-text-primary` / `text-fg`      | Titres et textes ; fond des bannières sombres de l'accueil                   |
-| textSecondary  | `#4C544F` | `text-text-secondary` / `text-muted` | Descriptions, métadonnées                                                    |
+| background     | `#DFE2E6` | `bg-background` / `bg-bg`            | Fond général (gris argent clair)                                             |
+| surface        | `#F3F4F6` | `bg-surface`                         | Cartes, en-tête, feuilles modales, barre du bas (blanc argenté)              |
+| surfaceHigh    | `#E6E8EC` | `bg-surface-high` / `bg-surface-2`   | Champs, puces, éléments en relief                                            |
+| border         | `#959CA6` | `border-border` / `border-line`      | Contours **visibles** de toutes les cartes, séparateurs                      |
+| textPrimary    | `#141821` | `text-text-primary` / `text-fg`      | Titres et textes ; fond des bannières sombres de l'accueil                   |
+| textSecondary  | `#4A515B` | `text-text-secondary` / `text-muted` | Descriptions, métadonnées                                                    |
 | onPrimary      | `#0E100F` | `text-on-primary`                    | Texte sur le vert citron (**jamais de blanc sur le vert citron**)            |
-| onAccent       | `#FFFFFF` | `text-on-accent`                     | Texte blanc sur les bannières sombres et le bouton loupe                     |
+| onAccent       | `#FFFFFF` | `text-on-accent`                     | Texte blanc sur le bleu nuit                                                 |
 
 Ombre très légère des cartes : `--shadow-card` (la seule ombre de l'application).
+
+## Couleurs « luxe » (avec parcimonie)
+
+| Token     | Hex       | Usage                                                                   |
+| --------- | --------- | ----------------------------------------------------------------------- |
+| night     | `#1C2333` | Bleu nuit : bannières de l'accueil, bouton de recherche, avatar         |
+| champagne | `#D9C28C` | Or champagne sur le bleu nuit : liseré et sur-titres des bannières      |
+| gold      | `#7D5F1A` | Or foncé (texte) : badges « Meilleure vente » / « Sponsorisé », coupons |
+| goldSoft  | `#F0E5C8` | Fond pâle des badges et coupons dorés                                   |
+
+Jamais pour une action : le vert citron reste la seule couleur des boutons d'action.
 
 ## Couleurs d'appoint — palette minimale
 

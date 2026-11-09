@@ -83,7 +83,7 @@ export function AccountView({
       <section className="flex items-center gap-3 pb-1 pt-2">
         <span
           aria-hidden="true"
-          className="grid size-[52px] shrink-0 place-items-center rounded-full bg-surface-2 text-lg font-semibold text-primary-text"
+          className="grid size-[52px] shrink-0 place-items-center rounded-full bg-night text-lg font-semibold text-champagne ring-2 ring-champagne/60"
         >
           DS
         </span>

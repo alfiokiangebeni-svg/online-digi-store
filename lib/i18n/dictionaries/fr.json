@@ -159,7 +159,11 @@
       "primaryText": "Vert lisible sur fond clair : onglet actif, liens, puces",
       "onAccent": "Texte blanc sur le rouge et le vert succès",
       "urgentSoft": "Fond pâle des badges rouges (texte rouge foncé)",
-      "successSoft": "Fond pâle des badges de succès (texte vert)"
+      "successSoft": "Fond pâle des badges de succès (texte vert)",
+      "night": "Bleu nuit (luxe) : bannières, bouton de recherche, avatar",
+      "champagne": "Or champagne sur le bleu nuit : liseré et titres des bannières",
+      "gold": "Or foncé : texte des badges « Meilleure vente », coupons",
+      "goldSoft": "Fond pâle doré des badges et coupons"
     }
   },
   "nav": {
