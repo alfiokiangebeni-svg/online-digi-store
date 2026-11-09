@@ -40,6 +40,8 @@ for (const path of SCREENS) {
     test.slow();
     await seed(page, SEED);
     await page.goto(path);
+    // Attend l'hydratation : certains boutons (micro, scan) n'apparaissent qu'ensuite.
+    await page.waitForLoadState("networkidle");
     // Rien ne dépasse la largeur de l'écran (pas de défilement horizontal).
     const widths = await page.evaluate(() => [document.documentElement.scrollWidth, window.innerWidth]);
     expect(widths[0], "défilement horizontal").toBeLessThanOrEqual(widths[1]);
@@ -59,6 +61,7 @@ for (const path of SCREENS) {
         sessionStorage.setItem("seeded", "1");
       }, SEED);
       await p.goto(path);
+      await p.waitForLoadState("networkidle");
       const el = p.locator(SELECTOR).nth(i);
       if (!(await el.isVisible())) {
         await ctx.close();
