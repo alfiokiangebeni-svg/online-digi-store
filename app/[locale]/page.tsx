@@ -129,7 +129,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
               <Link
                 href={b.href}
                 prefetch={false}
-                className={`pressable relative flex h-full min-h-[11rem] flex-col gap-2 rounded-[var(--radius-lg)] p-5 text-on-accent ring-1 ring-champagne/70 ${"terre" in b ? "bg-terre-deep" : "bg-night"} [&_.price-old]:text-on-accent/60 [&_.price-tag]:text-on-accent`}
+                className={`pressable relative flex h-full min-h-[11rem] flex-col gap-2 rounded-[var(--radius-lg)] p-5 text-on-accent ring-1 ring-champagne/70 ${"terre" in b ? "bg-terre-strong" : "bg-night"} [&_.price-old]:text-on-accent/60 [&_.price-tag]:text-on-accent`}
               >
                 <span className="text-xs font-bold uppercase tracking-[0.8px] text-champagne">
                   {b.kicker}

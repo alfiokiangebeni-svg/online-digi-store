@@ -63,7 +63,7 @@ export function PreviewGallery({
           .replace("{n}", String(index + 1))
           .replace("{total}", String(slides.length))}
         onClick={(e) => e.target === ref.current && ref.current.close()}
-        className="m-auto w-full max-w-lg bg-transparent p-3 backdrop:bg-fg/90"
+        className="m-auto w-full max-w-lg bg-transparent p-3 backdrop:bg-scrim-strong"
       >
         <div className="flex flex-col gap-3">
           <div className="flex items-center justify-between text-sm text-on-accent">

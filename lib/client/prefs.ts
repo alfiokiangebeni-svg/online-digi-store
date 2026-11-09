@@ -2,6 +2,7 @@
 
 import { useSyncExternalStore } from "react";
 import type { Currency } from "@/lib/currency";
+import { COLORS, COLORS_DARK, type ThemeChoice } from "@/lib/theme";
 
 /**
  * Préférences portées par des attributs de <html> (posés avant le rendu par le
@@ -46,5 +47,26 @@ export function setLite(on: boolean) {
   if (on) document.documentElement.setAttribute("data-lite", "");
   else document.documentElement.removeAttribute("data-lite");
   save("ds-lite", on ? "1" : "0");
+  notify();
+}
+
+/** Thème : automatique (réglage du téléphone), clair ou sombre (attribut data-theme). */
+export function useTheme(): ThemeChoice {
+  return useSyncExternalStore(
+    subscribe,
+    () => (document.documentElement.dataset.theme as ThemeChoice | undefined) ?? "auto",
+    () => "auto" as ThemeChoice,
+  );
+}
+export function setTheme(t: ThemeChoice) {
+  const root = document.documentElement;
+  if (t === "auto") delete root.dataset.theme;
+  else root.dataset.theme = t;
+  save("ds-theme", t);
+  // Couleur de la barre du navigateur / de l'application.
+  const dark = t === "dark" || (t === "auto" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+  document.querySelectorAll('meta[name="theme-color"]').forEach((m) => {
+    m.setAttribute("content", (dark ? COLORS_DARK : COLORS).surface);
+  });
   notify();
 }

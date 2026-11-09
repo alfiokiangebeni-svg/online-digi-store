@@ -1,7 +1,7 @@
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
-import { COLORS as C } from "@/lib/theme";
+import { COLORS as C, COLORS_DARK as D } from "@/lib/theme";
 
 const css = readFileSync("app/theme.css", "utf8");
 const camel = (s: string) => s.replace(/-([a-z])/g, (_, c: string) => c.toUpperCase());
@@ -19,16 +19,29 @@ const ratio = (a: string, b: string) => {
   return (hi + 0.05) / (lo + 0.05);
 };
 
-describe("tokens : app/theme.css et lib/theme.ts sont identiques", () => {
-  const defined = Object.fromEntries(
-    [...css.matchAll(/--color-([a-z-]+):\s*(#[0-9a-f]{6})/g)].map(([, name, hex]) => [name, hex]),
+/** Couleurs hexadécimales déclarées dans un bloc du CSS. */
+const hexes = (block: string) =>
+  Object.fromEntries(
+    [...block.matchAll(/--color-([a-z-]+):\s*(#[0-9a-f]{6})/g)].map(([, n, hex]) => [n, hex]),
   );
-  it.each(Object.entries(C))("%s", (name, hex) => {
+const lightBlock = css.slice(css.indexOf("@theme {"), css.indexOf("@theme inline"));
+const mediaBlock = css.slice(
+  css.indexOf("@media (prefers-color-scheme: dark)"),
+  css.indexOf(':root[data-theme="dark"]'),
+);
+const darkBlock = css.slice(css.indexOf(':root[data-theme="dark"]'));
+
+describe.each([
+  ["clair", lightBlock, C],
+  ["sombre", darkBlock, D],
+] as const)("tokens du thème %s : app/theme.css et lib/theme.ts sont identiques", (_, block, mirror) => {
+  const defined = hexes(block);
+  it.each(Object.entries(mirror))("%s", (name, hex) => {
     const cssName = name.replace(/[A-Z]/g, (c) => "-" + c.toLowerCase());
     expect(defined[cssName]).toBe(hex);
   });
   it("aucune couleur du CSS n'est absente du miroir", () => {
-    const known = new Set<string>(Object.keys(C));
+    const known = new Set<string>(Object.keys(mirror));
     expect(
       Object.keys(defined)
         .map(camel)
@@ -37,8 +50,12 @@ describe("tokens : app/theme.css et lib/theme.ts sont identiques", () => {
   });
 });
 
+it("le thème sombre automatique et le thème sombre choisi sont identiques", () => {
+  expect(hexes(mediaBlock)).toEqual(hexes(darkBlock));
+});
+
 /** Couples texte / fond réellement utilisés (AA : 4,5 ; icônes et grands textes : 3). */
-const PAIRS: Array<[string, string, string, number]> = [
+const pairs = (C: Record<keyof typeof D, string>): Array<[string, string, string, number]> => [
   ["texte principal / fond", C.textPrimary, C.background, 4.5],
   ["texte principal / carte", C.textPrimary, C.surface, 4.5],
   ["texte principal / relief", C.textPrimary, C.surfaceHigh, 4.5],
@@ -47,7 +64,7 @@ const PAIRS: Array<[string, string, string, number]> = [
   ["texte secondaire / relief", C.textSecondary, C.surfaceHigh, 4.5],
   ["bouton principal", C.onPrimary, C.primary, 4.5],
   ["bouton principal pressé", C.onPrimary, C.primaryPressed, 4.5],
-  ["logo dans la pastille vert citron", C.textPrimary, C.primary, 4.5],
+  ["logo dans la pastille vert citron", C.onPrimary, C.primary, 4.5],
   ["onglet actif (vert lisible) / barre du bas", C.primaryText, C.surface, 4.5],
   ["puce active (vert lisible) / relief", C.primaryText, C.surfaceHigh, 4.5],
   ["contour de focus / fond", C.primaryText, C.background, 3],
@@ -61,16 +78,19 @@ const PAIRS: Array<[string, string, string, number]> = [
   ["badge doré (texte or)", C.gold, C.goldSoft, 4.5],
   ["visuel terre (texte foncé / fond pâle)", C.terreDeep, C.terreSoft, 4.5],
   ["icône terre / carte (non textuel)", C.terre, C.surface, 3],
-  ["bannière terre (texte blanc)", C.onAccent, C.terreDeep, 4.5],
-  ["bannière terre (bouton vert citron)", C.primary, C.terreDeep, 3],
+  ["bannière terre (texte blanc)", C.onAccent, C.terreStrong, 4.5],
+  ["bannière terre (bouton vert citron)", C.primary, C.terreStrong, 3],
   ["étoiles / carte (non textuel)", C.star, C.surface, 3],
   ["succès (texte) / carte", C.success, C.surface, 4.5],
   ["succès (texte) / relief", C.success, C.surfaceHigh, 4.5],
   ["badge succès pâle (texte vert)", C.success, C.successSoft, 4.5],
 ];
 
-describe("contrastes AA de la charte di.si store", () => {
-  it.each(PAIRS)("%s", (_, fg, bg, min) => {
+describe.each([
+  ["clair", C],
+  ["sombre", D],
+] as const)("contrastes AA du thème %s", (_, palette) => {
+  it.each(pairs(palette))("%s", (_, fg, bg, min) => {
     expect(ratio(fg, bg)).toBeGreaterThanOrEqual(min);
   });
 });

@@ -3,7 +3,9 @@
  *  di.si store — thème (fichier unique de tokens)
  *  Toute couleur, police, rayon ou mouvement de l'application vient d'ici.
  *  Aucune couleur n'est écrite en dur dans les écrans (vérifié par tests/theme.test.ts).
- *  Miroir pour le code et les tests : lib/theme.ts (doit rester identique).
+ *  Deux thèmes : clair (« Lumière », par défaut) et sombre (« Nuit »). Le sombre suit le
+ *  réglage du téléphone, ou le choix fait dans Compte › Réglages (attribut data-theme).
+ *  Miroir pour le code et les tests : lib/theme.ts (COLORS et COLORS_DARK, identiques au CSS).
  * ─────────────────────────────────────────────────────────────────────────────
  */
 
@@ -33,7 +35,8 @@
    * Visuels des produits et annonces, ronds des catégories, icônes des rayons. */
   --color-terre: #c8602f; /* terracotta : icônes */
   --color-terre-soft: #f6dccd; /* fond pâle des visuels et des ronds de catégories */
-  --color-terre-deep: #8a3d17; /* texte et icônes sur le fond pâle ; bannière terre */
+  --color-terre-deep: #8a3d17; /* texte et icônes sur le fond terre pâle */
+  --color-terre-strong: #8a3d17; /* fond de la bannière terre (texte blanc), identique en sombre */
 
   /* ── Couleurs d'appoint (minimum : pas de surcharge) ─────────────────────
    * Rouge = remises, ventes flash, urgences, erreurs. Doré = étoiles. Vert = succès.
@@ -59,8 +62,10 @@
   --radius-card: 12px;
   --radius-ticket: 12px;
 
-  /* ── Ombres (très légères, thème clair) ────────────────────────────────── */
+  /* ── Ombres et voiles (très légers) ───────────────────────────────────── */
   --shadow-card: 0 1px 2px rgb(20 24 33 / 0.08);
+  --color-scrim: rgb(20 24 33 / 0.55); /* voile derrière les feuilles modales */
+  --color-scrim-strong: rgb(20 24 33 / 0.9); /* voile de la galerie d'images */
 
   /* ── Mouvement (désactivé si « réduire les animations ») ───────────────── */
   --animate-stamp: stamp 520ms cubic-bezier(0.2, 0.9, 0.3, 1.35) both;
@@ -138,4 +143,74 @@
   --color-premium: var(--color-star);
   --color-accent: var(--color-text-primary);
   --color-price-fg: var(--color-text-primary);
+}
+
+/*
+ * Thème sombre « Nuit » : même identité (vert citron, Terre, bleu nuit et or), sur fond
+ * bleu nuit. Appliqué si le téléphone est en mode sombre (sauf choix « Clair »), ou si
+ * l'utilisateur choisit « Sombre ». Les deux blocs doivent rester identiques.
+ */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-background: #0f141c; /* fond général, bleu nuit très sombre */
+    --color-surface: #172030; /* cartes, feuilles, barres */
+    --color-surface-high: #212b3b; /* champs, puces, relief */
+    --color-border: #465366; /* contours visibles des cartes */
+    --color-text-primary: #e9edf2; /* titres et textes */
+    --color-text-secondary: #a3afbf; /* descriptions, métadonnées */
+    --color-primary: #b6f23a; /* vert citron (inchangé) */
+    --color-primary-pressed: #a2dc24;
+    --color-primary-text: #b6f23a; /* sur fond sombre, le vert citron se lit directement */
+    --color-on-primary: #0e100f;
+    --color-on-accent: #ffffff;
+    --color-night: #24314a; /* bleu nuit des bannières, plus clair que le fond */
+    --color-champagne: #d9c28c;
+    --color-gold: #e3c47a; /* or clair, texte sur fond sombre */
+    --color-gold-soft: #33290f;
+    --color-terre: #e58a5c;
+    --color-terre-soft: #3b2519;
+    --color-terre-deep: #f4b893; /* texte terre clair sur fond terre sombre */
+    --color-terre-strong: #8a3d17;
+    --color-urgent: #e07a83;
+    --color-urgent-soft: #3c1d22;
+    --color-urgent-text: #ff9ba3;
+    --color-star: #f0be4f;
+    --color-success: #5bd3a6;
+    --color-success-soft: #133229;
+    --color-scrim: rgb(0 0 0 / 0.7);
+    --color-scrim-strong: rgb(0 0 0 / 0.92);
+    --shadow-card: 0 1px 2px rgb(0 0 0 / 0.45);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --color-background: #0f141c; /* fond général, bleu nuit très sombre */
+  --color-surface: #172030; /* cartes, feuilles, barres */
+  --color-surface-high: #212b3b; /* champs, puces, relief */
+  --color-border: #465366; /* contours visibles des cartes */
+  --color-text-primary: #e9edf2; /* titres et textes */
+  --color-text-secondary: #a3afbf; /* descriptions, métadonnées */
+  --color-primary: #b6f23a; /* vert citron (inchangé) */
+  --color-primary-pressed: #a2dc24;
+  --color-primary-text: #b6f23a; /* sur fond sombre, le vert citron se lit directement */
+  --color-on-primary: #0e100f;
+  --color-on-accent: #ffffff;
+  --color-night: #24314a; /* bleu nuit des bannières, plus clair que le fond */
+  --color-champagne: #d9c28c;
+  --color-gold: #e3c47a; /* or clair, texte sur fond sombre */
+  --color-gold-soft: #33290f;
+  --color-terre: #e58a5c;
+  --color-terre-soft: #3b2519;
+  --color-terre-deep: #f4b893; /* texte terre clair sur fond terre sombre */
+  --color-terre-strong: #8a3d17;
+  --color-urgent: #e07a83;
+  --color-urgent-soft: #3c1d22;
+  --color-urgent-text: #ff9ba3;
+  --color-star: #f0be4f;
+  --color-success: #5bd3a6;
+  --color-success-soft: #133229;
+  --color-scrim: rgb(0 0 0 / 0.7);
+  --color-scrim-strong: rgb(0 0 0 / 0.92);
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.45);
+  color-scheme: dark;
 }

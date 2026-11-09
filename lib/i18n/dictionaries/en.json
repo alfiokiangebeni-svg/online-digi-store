@@ -166,7 +166,8 @@
       "goldSoft": "Pale gold background of badges and coupons",
       "terre": "Terracotta: rail and perk icons",
       "terreSoft": "Pale background of product visuals and category circles",
-      "terreDeep": "Text on pale terracotta; flash sale banner"
+      "terreDeep": "Text and icons on pale terracotta",
+      "terreStrong": "Terracotta banner background (white text), same in light and dark"
     }
   },
   "nav": {
@@ -508,7 +509,10 @@
     "favoritesEmpty": "Tap the heart on a product page to find it here.",
     "soon": "Soon",
     "purchases": "My purchases",
-    "purchasesBody": "Your bought and free content, available offline"
+    "purchasesBody": "Your bought and free content, available offline",
+    "themeAuto": "Automatic",
+    "themeHint": "“Automatic” follows the phone’s light / dark setting.",
+    "themeSaved": "Theme applied"
   },
   "common": {
     "demo": "Demo"

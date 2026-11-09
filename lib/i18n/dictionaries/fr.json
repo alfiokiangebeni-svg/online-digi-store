@@ -166,7 +166,8 @@
       "goldSoft": "Fond pâle doré des badges et coupons",
       "terre": "Terre : icônes des rayons et des avantages",
       "terreSoft": "Fond pâle des visuels produits et des ronds de catégories",
-      "terreDeep": "Texte sur le fond terre pâle ; bannière « Ventes flash »"
+      "terreDeep": "Texte et icônes sur le fond terre pâle",
+      "terreStrong": "Fond de la bannière terre (texte blanc), identique en clair et en sombre"
     }
   },
   "nav": {
@@ -508,7 +509,10 @@
     "favoritesEmpty": "Touche le cœur sur une fiche produit pour la retrouver ici.",
     "soon": "Bientôt",
     "purchases": "Mes achats",
-    "purchasesBody": "Tes contenus achetés et gratuits, disponibles hors-ligne"
+    "purchasesBody": "Tes contenus achetés et gratuits, disponibles hors-ligne",
+    "themeAuto": "Automatique",
+    "themeHint": "« Automatique » suit le réglage clair / sombre du téléphone.",
+    "themeSaved": "Thème appliqué"
   },
   "common": {
     "demo": "Démo"

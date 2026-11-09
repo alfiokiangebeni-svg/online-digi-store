@@ -166,7 +166,8 @@
       "goldSoft": "Langi pole ya wolo",
       "terre": "Mabele : bilembo ya ba-rayon",
       "terreSoft": "Langi pole ya bilili ya biloko",
-      "terreDeep": "Makomi na langi ya mabele"
+      "terreDeep": "Makomi na langi ya mabele",
+      "terreStrong": "Langi ya bannière mabele"
     }
   },
   "nav": {
@@ -491,7 +492,7 @@
     "language": "Lokota",
     "theme": "Langi",
     "themeDark": "Molili",
-    "themeLight": "Mwinda",
+    "themeLight": "Pole",
     "liteHint": "Bilili mike, eloko ebandaka yango moko te.",
     "devices": "Bisaleli endimami",
     "devicesValue": "1 na 5",
@@ -508,7 +509,10 @@
     "favoritesEmpty": "Simba motema na lokasa ya eloko mpo na kozwa yango awa.",
     "soon": "Kala te",
     "purchases": "Biloko nasombi",
-    "purchasesBody": "Biloko osombi mpe ya ofele, ezali hors-ligne"
+    "purchasesBody": "Biloko osombi mpe ya ofele, ezali hors-ligne",
+    "themeAuto": "Yango moko",
+    "themeHint": "« Yango moko » elandaka ndenge telefone ebongisami.",
+    "themeSaved": "Langi ebongisami"
   },
   "common": {
     "demo": "Ndakisa"

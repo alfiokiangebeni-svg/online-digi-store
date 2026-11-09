@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Téléphone en mode sombre : thème « Nuit » (la page suit prefers-color-scheme: dark). -->
+    <style name="Theme.DigiStore" parent="android:Theme.Material.NoActionBar">
+        <item name="android:statusBarColor">#172030</item>
+        <item name="android:navigationBarColor">#172030</item>
+        <item name="android:windowBackground">#0F141C</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>
