@@ -71,4 +71,6 @@ Allègement (`scripts/build-apk.sh`, `next.config.ts`, `android/app/build.gradle
 3. **Code Android réduit par R8** (le pont `DisiNative` est conservé, `proguard-rules.pro`).
 4. **Fichiers inutiles retirés de l'APK** : `/design`, page hors ligne, copies `__next._full.txt` (identiques à `index.txt`, jamais demandées).
 
-Vérifié sur le site embarqué : 140 pages sans erreur, styles chargés, navigation sans rechargement, thèmes.
+**Correctif important** : Android ignore par défaut les dossiers qui commencent par « _ ». Le dossier `_next` (JavaScript et CSS du site) n'était donc **dans aucun APK** : les pages s'affichaient grâce au CSS recopié, mais les boutons qui ont besoin du JavaScript ne pouvaient pas fonctionner sur le téléphone. `ignoreAssetsPattern` l'inclut désormais, et `scripts/build-apk.sh` **échoue** si un fichier de l'export manque dans l'APK.
+
+Vérifié sur le site **extrait de l'APK lui-même** : 140 pages sans erreur, styles chargés, navigation sans rechargement, panier, thèmes, feuille de visite, formulaire Vendre.

@@ -36,6 +36,9 @@ android {
     // Le site exporté (out-apk/) est copié dans assets/www par scripts/build-apk.sh.
     androidResources {
         noCompress += ["woff2"]
+        // Par défaut, Android ignore les dossiers qui commencent par « _ » : le dossier _next
+        // (JavaScript et CSS du site) n'était pas dans l'APK. Même liste, sans « <dir>_* ».
+        ignoreAssetsPattern = "!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~"
     }
 }
 

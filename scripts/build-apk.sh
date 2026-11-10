@@ -41,6 +41,17 @@ rm -f android/app/build/outputs/apk/debug/app-debug.apk
 echo "sdk.dir=$ANDROID_HOME" > android/local.properties
 (cd android && "$GRADLE" --no-daemon -q assembleDebug)
 
+echo "→ Vérification du contenu de l'APK"
+APK=android/app/build/outputs/apk/debug/app-debug.apk
+# Chaque fichier de l'export doit être dans l'APK (JavaScript et CSS de _next compris).
+expected=$(cd out-apk && find . -type f | sed 's|^\./|assets/www/|' | sort)
+packed=$(unzip -Z1 "$APK" | grep '^assets/www/' | sort)
+missing=$(comm -23 <(echo "$expected") <(echo "$packed"))
+if [ -n "$missing" ]; then
+  echo "✗ Fichiers absents de l'APK :"; echo "$missing" | head -20; exit 1
+fi
+echo "✓ $(echo "$packed" | wc -l) fichiers du site dans l'APK, dont $(echo "$packed" | grep -c '_next/') dans _next"
+
 mkdir -p dist
-cp android/app/build/outputs/apk/debug/app-debug.apk dist/DigiStore-demo.apk
+cp "$APK" dist/DigiStore-demo.apk
 echo "✓ dist/DigiStore-demo.apk ($(du -h dist/DigiStore-demo.apk | cut -f1))"
