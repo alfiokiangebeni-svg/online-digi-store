@@ -1,0 +1,16 @@
+.next
+node_modules
+coverage
+.lighthouseci
+package-lock.json
+public/sw.js
+docs/PROMPT-CLAUDE-CODE.md
+docs/PAIEMENT-MOBILE-MONEY.md
+docs/ROADMAP.md
+out-apk
+android/app/build
+android/app/src/main/assets
+dist
+.next-web
+test-results
+playwright-report

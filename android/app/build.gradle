@@ -1,0 +1,50 @@
+plugins {
+    id "com.android.application"
+}
+
+android {
+    namespace "cd.digistore.app"
+    compileSdk 35
+
+    defaultConfig {
+        applicationId "cd.digistore.app"
+        minSdk 24
+        targetSdk 35
+        versionCode 1
+        versionName "0.1.0-demo"
+    }
+
+    buildTypes {
+        // APK de test (debug) : code et ressources réduits par R8, comme en production.
+        debug {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+        }
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    // Le site exporté (out-apk/) est copié dans assets/www par scripts/build-apk.sh.
+    androidResources {
+        noCompress += ["woff2"]
+        // Par défaut, Android ignore les dossiers qui commencent par « _ » : le dossier _next
+        // (JavaScript et CSS du site) n'était pas dans l'APK. Même liste, sans « <dir>_* ».
+        ignoreAssetsPattern = "!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~"
+    }
+}
+
+dependencies {
+    implementation "androidx.webkit:webkit:1.12.1"
+    // Lecteur de codes Google (QR, codes-barres) : interface fournie par les services Google Play,
+    // sans permission caméra ni modèle embarqué dans l'APK.
+    implementation "com.google.android.gms:play-services-code-scanner:16.1.0"
+}

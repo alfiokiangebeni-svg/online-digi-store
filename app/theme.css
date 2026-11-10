@@ -1,0 +1,401 @@
+/*
+ * ─────────────────────────────────────────────────────────────────────────────
+ *  di.si store — thème (fichier unique de tokens)
+ *  Toute couleur, police, rayon ou mouvement de l'application vient d'ici.
+ *  Aucune couleur n'est écrite en dur dans les écrans (vérifié par tests/theme.test.ts).
+ *  Six thèmes au choix (Lumière, Nuit, Améthyste, Émeraude, Océan, Braise), voir en bas.
+ *  Miroir pour le code et les tests : lib/theme.ts (THEMES, identique au CSS).
+ * ─────────────────────────────────────────────────────────────────────────────
+ */
+
+@theme {
+  /* ── Couleurs de base (thème clair « Lumière ») ───────────────────────── */
+  --color-primary: #b6f23a; /* vert citron : boutons d'action, pastille du logo */
+  --color-primary-pressed: #a2dc24; /* état pressé / survol */
+  --color-primary-light: #dcff9a; /* début du dégradé des boutons d'action */
+  --color-glow: rgb(182 242 58 / 0.35); /* halo léger des boutons d'action */
+  --color-primary-text: #365b00; /* vert lisible sur fond clair : onglet actif, liens, puces */
+  --color-background: #dfe2e6; /* fond général, gris argent clair */
+  --color-surface: #f3f4f6; /* cartes, feuilles modales, barres (blanc argenté) */
+  --color-surface-high: #e6e8ec; /* champs, puces, éléments en relief */
+  --color-border: #959ca6; /* contours visibles des cartes, séparateurs */
+  --color-text-primary: #141821; /* titres et textes */
+  --color-text-secondary: #4a515b; /* descriptions, métadonnées */
+  --color-on-primary: #0e100f; /* texte sur le vert citron (jamais de blanc) */
+  --color-on-accent: #ffffff; /* texte blanc sur le bleu nuit */
+
+  /* ── Couleurs « luxe » (avec parcimonie) ──────────────────────────────────
+   * Bleu nuit : bannières, bouton de recherche, avatar. Or : liseré des bannières,
+   * badges « Meilleure vente » / « Sponsorisé », coupons. Jamais pour les actions. */
+  --color-night: #1c2333; /* bleu nuit profond */
+  --color-champagne: #d9c28c; /* or champagne, sur le bleu nuit */
+  --color-gold: #7d5f1a; /* or foncé, texte et icônes sur fond clair */
+  --color-gold-soft: #f0e5c8; /* fond pâle des badges et coupons dorés */
+
+  /* ── Terre : la couleur chaude de l'application (vie, chaleur) ────────────
+   * Visuels des produits et annonces, ronds des catégories, icônes des rayons. */
+  --color-terre: #c8602f; /* terracotta : icônes */
+  --color-terre-soft: #f6dccd; /* fond pâle des visuels et des ronds de catégories */
+  --color-terre-deep: #8a3d17; /* texte et icônes sur le fond terre pâle */
+  --color-terre-strong: #8a3d17; /* fond de la bannière terre (texte blanc), identique en sombre */
+
+  /* ── Couleurs d'appoint (minimum : pas de surcharge) ─────────────────────
+   * Rouge = remises, ventes flash, urgences, erreurs. Doré = étoiles. Vert = succès.
+   * Couleurs adoucies : badges en teinte pâle avec texte foncé (seul le vert citron reste vif).
+   * Aucune autre couleur : pas de bleu, d'orange ni de rose ; catégories en gris. */
+  --color-urgent: #e07a83; /* rouge adouci : barre « x % vendus », traits et repères */
+  --color-urgent-soft: #f4d3d6; /* fond pâle des badges −30 %, ventes flash, compte à rebours */
+  --color-urgent-text: #9e2430; /* texte rouge : badges, prix barré, erreurs */
+  --color-star: #a8780f; /* étoiles de note uniquement (doré adouci) */
+  --color-success: #24704f; /* texte et icônes de succès : « Livré », envoyé, vérifié */
+  --color-success-soft: #d2e9dc; /* fond pâle des badges de succès */
+
+  /* ── Typographie ───────────────────────────────────────────────────────── */
+  --font-display: var(--font-jakarta), system-ui, Roboto, sans-serif; /* titres, prix, logo */
+  --font-sans: var(--font-dmsans), system-ui, Roboto, sans-serif; /* texte */
+  --font-mono: var(--font-dmsans), system-ui, Roboto, sans-serif;
+
+  /* ── Formes ────────────────────────────────────────────────────────────── */
+  --radius-sm: 8px; /* puces, champs, petits boutons */
+  --radius-md: 10px; /* boutons */
+  --radius-lg: 12px; /* cartes, feuilles */
+  --radius-control: 10px;
+  --radius-card: 12px;
+  --radius-ticket: 12px;
+
+  /* ── Ombres et voiles (très légers) ───────────────────────────────────── */
+  --shadow-card: 0 1px 2px rgb(20 24 33 / 0.08);
+  --color-scrim: rgb(20 24 33 / 0.55); /* voile derrière les feuilles modales */
+  --color-scrim-strong: rgb(20 24 33 / 0.9); /* voile de la galerie d'images */
+
+  /* ── Mouvement (désactivé si « réduire les animations ») ───────────────── */
+  --animate-stamp: stamp 520ms cubic-bezier(0.2, 0.9, 0.3, 1.35) both;
+  --animate-beat: beat 1s ease-in-out infinite;
+  --animate-shimmer: shimmer 1.4s linear infinite;
+  --animate-toast-in: toast-in 220ms ease-out both;
+  --animate-pop: pop 380ms cubic-bezier(0.2, 0.9, 0.3, 1.4) both;
+
+  @keyframes stamp {
+    0% {
+      opacity: 0;
+      transform: scale(2.4) rotate(-4deg);
+    }
+    60% {
+      opacity: 1;
+      transform: scale(0.94) rotate(-13deg);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) rotate(-12deg);
+    }
+  }
+  @keyframes beat {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    15% {
+      transform: scale(1.12);
+    }
+    30% {
+      transform: scale(1);
+    }
+  }
+  @keyframes shimmer {
+    from {
+      background-position: 200% 0;
+    }
+    to {
+      background-position: -200% 0;
+    }
+  }
+  @keyframes toast-in {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes pop {
+    0% {
+      opacity: 0;
+      transform: scale(0.6);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+
+/* Noms courts utilisés par les composants (mêmes valeurs). */
+@theme inline {
+  --color-bg: var(--color-background);
+  --color-fg: var(--color-text-primary);
+  --color-muted: var(--color-text-secondary);
+  --color-line: var(--color-border);
+  --color-surface-2: var(--color-surface-high);
+  /* Anciens rôles marketing ramenés à la palette minimale */
+  --color-promo: var(--color-urgent);
+  --color-trust: var(--color-success);
+  --color-premium: var(--color-star);
+  --color-accent: var(--color-text-primary);
+  --color-price-fg: var(--color-text-primary);
+}
+
+/*
+ * ── Thèmes au choix (Compte › Réglages › Thème, ou bouton de l'en-tête) ─────────
+ * Inspirés des thèmes de l'outil « Alerte Trading » : chaque thème teinte toute
+ * l'application (fond, cartes, sélection, bouton principal en dégradé avec halo).
+ * Sans choix (« Automatique ») : Lumière, ou Nuit si le téléphone est en mode sombre.
+ * Les sélecteurs [data-theme] valent aussi pour les aperçus du sélecteur de thème.
+ * Généré depuis lib/theme.ts (THEMES) : les deux doivent rester identiques (tests).
+ */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --color-primary: #b6f23a;
+    --color-primary-pressed: #a2dc24;
+    --color-primary-light: #dcff9a;
+    --color-primary-text: #b6f23a;
+    --color-background: #0f141c;
+    --color-surface: #172030;
+    --color-surface-high: #212b3b;
+    --color-border: #465366;
+    --color-text-primary: #e9edf2;
+    --color-text-secondary: #a3afbf;
+    --color-on-primary: #0e100f;
+    --color-on-accent: #ffffff;
+    --color-night: #24314a;
+    --color-champagne: #d9c28c;
+    --color-gold: #e3c47a;
+    --color-gold-soft: #33290f;
+    --color-terre: #e58a5c;
+    --color-terre-soft: #3b2519;
+    --color-terre-deep: #f4b893;
+    --color-terre-strong: #8a3d17;
+    --color-urgent: #e07a83;
+    --color-urgent-soft: #3c1d22;
+    --color-urgent-text: #ff9ba3;
+    --color-star: #f0be4f;
+    --color-success: #5bd3a6;
+    --color-success-soft: #133229;
+    --color-glow: rgb(182 242 58 / 0.3);
+    --color-scrim: rgb(0 0 0 / 0.7);
+    --color-scrim-strong: rgb(0 0 0 / 0.92);
+    --shadow-card: 0 1px 2px rgb(0 0 0 / 0.45);
+    color-scheme: dark;
+  }
+}
+
+/* Lumière */
+[data-theme="light"] {
+  --color-primary: #b6f23a;
+  --color-primary-pressed: #a2dc24;
+  --color-primary-light: #dcff9a;
+  --color-primary-text: #365b00;
+  --color-background: #dfe2e6;
+  --color-surface: #f3f4f6;
+  --color-surface-high: #e6e8ec;
+  --color-border: #959ca6;
+  --color-text-primary: #141821;
+  --color-text-secondary: #4a515b;
+  --color-on-primary: #0e100f;
+  --color-on-accent: #ffffff;
+  --color-night: #1c2333;
+  --color-champagne: #d9c28c;
+  --color-gold: #7d5f1a;
+  --color-gold-soft: #f0e5c8;
+  --color-terre: #c8602f;
+  --color-terre-soft: #f6dccd;
+  --color-terre-deep: #8a3d17;
+  --color-terre-strong: #8a3d17;
+  --color-urgent: #e07a83;
+  --color-urgent-soft: #f4d3d6;
+  --color-urgent-text: #9e2430;
+  --color-star: #a8780f;
+  --color-success: #24704f;
+  --color-success-soft: #d2e9dc;
+  --color-glow: rgb(182 242 58 / 0.35);
+  --color-scrim: rgb(20 24 33 / 0.55);
+  --color-scrim-strong: rgb(20 24 33 / 0.9);
+  --shadow-card: 0 1px 2px rgb(20 24 33 / 0.08);
+  color-scheme: light;
+}
+
+/* Nuit */
+[data-theme="dark"] {
+  --color-primary: #b6f23a;
+  --color-primary-pressed: #a2dc24;
+  --color-primary-light: #dcff9a;
+  --color-primary-text: #b6f23a;
+  --color-background: #0f141c;
+  --color-surface: #172030;
+  --color-surface-high: #212b3b;
+  --color-border: #465366;
+  --color-text-primary: #e9edf2;
+  --color-text-secondary: #a3afbf;
+  --color-on-primary: #0e100f;
+  --color-on-accent: #ffffff;
+  --color-night: #24314a;
+  --color-champagne: #d9c28c;
+  --color-gold: #e3c47a;
+  --color-gold-soft: #33290f;
+  --color-terre: #e58a5c;
+  --color-terre-soft: #3b2519;
+  --color-terre-deep: #f4b893;
+  --color-terre-strong: #8a3d17;
+  --color-urgent: #e07a83;
+  --color-urgent-soft: #3c1d22;
+  --color-urgent-text: #ff9ba3;
+  --color-star: #f0be4f;
+  --color-success: #5bd3a6;
+  --color-success-soft: #133229;
+  --color-glow: rgb(182 242 58 / 0.3);
+  --color-scrim: rgb(0 0 0 / 0.7);
+  --color-scrim-strong: rgb(0 0 0 / 0.92);
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.45);
+  color-scheme: dark;
+}
+
+/* Améthyste */
+[data-theme="amethyste"] {
+  --color-primary: #a78bfa;
+  --color-primary-pressed: #9472f0;
+  --color-primary-light: #e6dcff;
+  --color-primary-text: #c9b6ff;
+  --color-background: #120d1f;
+  --color-surface: #1b1430;
+  --color-surface-high: #261d40;
+  --color-border: #4a3c70;
+  --color-text-primary: #f1edfa;
+  --color-text-secondary: #b6abcf;
+  --color-on-primary: #160d2b;
+  --color-on-accent: #ffffff;
+  --color-night: #2c2050;
+  --color-champagne: #d9c28c;
+  --color-gold: #e3c47a;
+  --color-gold-soft: #33290f;
+  --color-terre: #b69cff;
+  --color-terre-soft: #2d2050;
+  --color-terre-deep: #ddd0ff;
+  --color-terre-strong: #45288a;
+  --color-urgent: #e07a83;
+  --color-urgent-soft: #3c1d22;
+  --color-urgent-text: #ff9ba3;
+  --color-star: #f0be4f;
+  --color-success: #5bd3a6;
+  --color-success-soft: #133229;
+  --color-glow: rgb(139 92 246 / 0.4);
+  --color-scrim: rgb(0 0 0 / 0.7);
+  --color-scrim-strong: rgb(0 0 0 / 0.92);
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.45);
+  color-scheme: dark;
+}
+
+/* Émeraude */
+[data-theme="emeraude"] {
+  --color-primary: #34d399;
+  --color-primary-pressed: #22c08a;
+  --color-primary-light: #b5f7da;
+  --color-primary-text: #6ee7b7;
+  --color-background: #08150f;
+  --color-surface: #0e2119;
+  --color-surface-high: #153025;
+  --color-border: #2c4d40;
+  --color-text-primary: #e8f5ef;
+  --color-text-secondary: #a3c2b5;
+  --color-on-primary: #04291b;
+  --color-on-accent: #ffffff;
+  --color-night: #11382a;
+  --color-champagne: #d9c28c;
+  --color-gold: #e3c47a;
+  --color-gold-soft: #33290f;
+  --color-terre: #5fd6a6;
+  --color-terre-soft: #123a2b;
+  --color-terre-deep: #a7f3d0;
+  --color-terre-strong: #0f5a40;
+  --color-urgent: #e07a83;
+  --color-urgent-soft: #3c1d22;
+  --color-urgent-text: #ff9ba3;
+  --color-star: #f0be4f;
+  --color-success: #5bd3a6;
+  --color-success-soft: #133229;
+  --color-glow: rgb(16 185 129 / 0.38);
+  --color-scrim: rgb(0 0 0 / 0.7);
+  --color-scrim-strong: rgb(0 0 0 / 0.92);
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.45);
+  color-scheme: dark;
+}
+
+/* Océan */
+[data-theme="ocean"] {
+  --color-primary: #38bdf8;
+  --color-primary-pressed: #22a8e6;
+  --color-primary-light: #c7ecff;
+  --color-primary-text: #7dd3fc;
+  --color-background: #09111f;
+  --color-surface: #0f1a2e;
+  --color-surface-high: #16243d;
+  --color-border: #2e4263;
+  --color-text-primary: #e8eef8;
+  --color-text-secondary: #a5b4cc;
+  --color-on-primary: #03203a;
+  --color-on-accent: #ffffff;
+  --color-night: #132a4c;
+  --color-champagne: #d9c28c;
+  --color-gold: #e3c47a;
+  --color-gold-soft: #33290f;
+  --color-terre: #6cc4f5;
+  --color-terre-soft: #12304d;
+  --color-terre-deep: #bae6fd;
+  --color-terre-strong: #0b4a75;
+  --color-urgent: #e07a83;
+  --color-urgent-soft: #3c1d22;
+  --color-urgent-text: #ff9ba3;
+  --color-star: #f0be4f;
+  --color-success: #5bd3a6;
+  --color-success-soft: #133229;
+  --color-glow: rgb(14 165 233 / 0.38);
+  --color-scrim: rgb(0 0 0 / 0.7);
+  --color-scrim-strong: rgb(0 0 0 / 0.92);
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.45);
+  color-scheme: dark;
+}
+
+/* Braise */
+[data-theme="braise"] {
+  --color-primary: #f08a4b;
+  --color-primary-pressed: #e07a3c;
+  --color-primary-light: #ffd5b8;
+  --color-primary-text: #ffb184;
+  --color-background: #160d09;
+  --color-surface: #22140e;
+  --color-surface-high: #2e1c14;
+  --color-border: #523a2d;
+  --color-text-primary: #f7ece6;
+  --color-text-secondary: #c9ae9f;
+  --color-on-primary: #2a1206;
+  --color-on-accent: #ffffff;
+  --color-night: #3a2015;
+  --color-champagne: #d9c28c;
+  --color-gold: #e3c47a;
+  --color-gold-soft: #33290f;
+  --color-terre: #f0a070;
+  --color-terre-soft: #3b2519;
+  --color-terre-deep: #f4b893;
+  --color-terre-strong: #8a3d17;
+  --color-urgent: #e07a83;
+  --color-urgent-soft: #3c1d22;
+  --color-urgent-text: #ff9ba3;
+  --color-star: #f0be4f;
+  --color-success: #5bd3a6;
+  --color-success-soft: #133229;
+  --color-glow: rgb(232 116 58 / 0.38);
+  --color-scrim: rgb(0 0 0 / 0.7);
+  --color-scrim-strong: rgb(0 0 0 / 0.92);
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.45);
+  color-scheme: dark;
+}
